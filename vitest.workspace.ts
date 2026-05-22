@@ -12,13 +12,13 @@ export default defineWorkspace([
 			pool: 'threads',
 		},
 	},
-	// UI package - jsdom environment for React component testing
+	// UI package - happy-dom environment for React component testing (default for component tests)
 	{
 		test: {
 			name: 'packages-ui',
 			include: ['packages/ui/**/*.test.ts', 'packages/ui/**/*.test.tsx'],
 			exclude: ['**/node_modules/**', '**/dist/**', '**/.next/**'],
-			environment: 'jsdom',
+			environment: 'happy-dom',
 			globals: true,
 			pool: 'vmThreads',
 			setupFiles: ['./packages/ui/src/test/setup.ts'],
@@ -36,7 +36,7 @@ export default defineWorkspace([
 			pool: 'vmThreads',
 		},
 	},
-	// Browser tests - Full browser API compatibility with jsdom
+	// Browser tests - Full browser API compatibility with jsdom (when needed)
 	{
 		test: {
 			name: 'browser-tests',

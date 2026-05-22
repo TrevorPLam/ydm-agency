@@ -240,11 +240,13 @@ Add test:ui, test:coverage, and test:watch tasks. Configure test:ui with cache: 
 
 ---
 
-### F-003.9: Install happy-dom
+### F-003.9: Install happy-dom ✅
 
 **Target**: Root package.json
 
 Install happy-dom as dev dependency. Add to catalog. Configure as default environment for component tests. Keep jsdom for full browser API compatibility when needed.
+
+**Note**: Installed happy-dom 15.11.7 via catalog (^15.0.0). Configured as default environment for component tests (packages-ui and apps projects). jsdom retained for browser-tests project when full browser API compatibility is needed.
 
 ---
 
