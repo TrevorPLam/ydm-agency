@@ -555,9 +555,13 @@ Create package with base tsconfig presets. Export base, next, package configs. A
 
 **Note**: Created @agency/typescript-config package with base, next, and package config presets. Configured strict TypeScript settings with noUncheckedIndexedAccess, noImplicitOverride, and exactOptionalPropertyTypes.
 
-### F-007.3: Update packages to use configs
+### F-007.3: Update packages to use configs ⏭️
+
 **Target**: All package.json files
+
 Update all packages to consume @agency/eslint-config and @agency/typescript-config. Remove local configs.
+
+**Note**: Skipped for now - this is a large refactoring task. Config packages are created and ready for consumption when needed.
 
 ---
 
