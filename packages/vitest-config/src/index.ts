@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitest/config'
 
+export * from './fixtures'
+
 export interface VitestConfigOptions {
 	globals?: boolean
 	environment?: 'node' | 'jsdom' | 'happy-dom' | 'edge-runtime'
