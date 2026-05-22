@@ -137,7 +137,7 @@ Test build, lint, test, dev pipelines. Verify caching works. Fix any pipeline is
 
 ## F-003: Install Vitest
 
-[ ] Status: Pending
+[x] Status: Completed
 
 **Related Files**: All package.json files, vitest.config.ts
 
@@ -171,21 +171,32 @@ Test build, lint, test, dev pipelines. Verify caching works. Fix any pipeline is
 **Depends On**: F-002
 **Blocks**: All domain package tasks
 
-### F-003.1: Install Vitest
+### F-003.1: Install Vitest ✅
 **Target**: Root package.json
 Install vitest as dev dependency. Add to all packages via catalog or workspace.
 
-### F-003.2: Configure project mode
+**Note**: Installed vitest and @vitest/ui in root package.json using catalog versions (2.0.0). All packages inherit via workspace.
+
+### F-003.2: Configure project mode ✅
 **Target**: vitest.config.ts
 Create shared vitest.config with project mode. Configure workspace discovery. Add coverage settings.
 
-### F-003.3: Add test script
+**Note**: Created vitest.config.ts with node environment, coverage thresholds (80%), and proper test discovery patterns.
+
+### F-003.3: Add test script ✅
 **Target**: All package.json files
 Add test script to all packages. Configure turbo.json for test pipeline with caching.
 
-### F-003.4: Write example tests
+**Note**: Added test, test:ui, test:coverage scripts to all packages. Added typecheck script. Updated turbo.json with typecheck and test tasks.
+
+### F-003.4: Write example tests ✅
 **Target**: packages/core/src/
 Write example unit tests for core package. Demonstrate TDD pattern. Verify coverage.
+
+**Note**: Created constants.test.ts (6 tests) and types.test.ts (5 tests) for core package. All tests passing (11 total).
+
+**Issues Discovered**:
+- Pre-existing TypeScript configuration issues in @agency/ui package (missing JSX and module resolution settings) causing typecheck failures. This is not related to Vitest installation and should be addressed in a separate task.
 
 ---
 
