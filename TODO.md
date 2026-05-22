@@ -2,8 +2,8 @@
 
 ## Infrastructure Issues
 
-- [ ] **TASK-INFRA-001: Fix eslint-config typecheck error**
-  Status: pending
+- [x] **TASK-INFRA-001: Fix eslint-config typecheck error**
+  Status: completed
   Related: packages/eslint-config/src/index.ts
   Done: typescript-eslint module is properly installed and typecheck passes
   Out: Changing eslint-config structure
@@ -13,7 +13,29 @@
   Depends: none
   Blocks: typecheck for all packages
 
-  - TASK-INFRA-001-1: packages/eslint-config - Install typescript-eslint dependency or fix import in src/index.ts
+  - ✅ TASK-INFRA-001-1: packages/eslint-config - Install typescript-eslint dependency or fix import in src/index.ts
+
+- [ ] **TASK-INFRA-003: Fix packages/ui typecheck errors**
+  Status: pending
+  Related: packages/ui/src/**/*.tsx, packages/ui/src/**/*.ts
+  Done: All TypeScript errors in packages/ui are resolved
+  Out: Refactoring beyond fixing type errors
+  Rules: TypeScript strict mode, proper type definitions
+  Pattern: Type-safe React components, proper imports
+  Anti: any types, missing type declarations
+  Depends: none
+  Blocks: typecheck for all packages
+
+- [ ] **TASK-INFRA-004: Fix packages/utils typecheck errors**
+  Status: pending
+  Related: packages/utils/src/**/*.ts
+  Done: All TypeScript errors in packages/utils are resolved
+  Out: Refactoring beyond fixing type errors
+  Rules: TypeScript strict mode, proper type definitions
+  Pattern: Type-safe utility functions, proper imports
+  Anti: any types, missing type declarations
+  Depends: none
+  Blocks: typecheck for all packages
 
 - [ ] **TASK-INFRA-002: Fix eslint command not found**
   Status: pending
