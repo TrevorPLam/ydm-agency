@@ -14,8 +14,29 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["^build"],
-      "outputs": []
+      "dependsOn": ["^build", "@agency/vitest-config#build"],
+      "outputs": ["coverage/**", ".vitest-results/**"],
+      "env": ["VITEST_POOL", "CI"]
+    },
+    "test:watch": {
+      "dependsOn": ["@agency/vitest-config#build"],
+      "cache": false,
+      "persistent": true
+    },
+    "test:ui": {
+      "dependsOn": ["@agency/vitest-config#build"],
+      "cache": false,
+      "persistent": true
+    },
+    "test:bench": {
+      "dependsOn": ["@agency/vitest-config#build"],
+      "cache": false,
+      "outputs": [".vitest-results/bench.json"]
+    },
+    "test:coverage": {
+      "dependsOn": ["^build", "@agency/vitest-config#build"],
+      "outputs": ["coverage/**", ".vitest-results/**"],
+      "env": ["VITEST_POOL", "CI"]
     },
     "dev": {
       "cache": false,

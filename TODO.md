@@ -230,11 +230,13 @@ Create workspace configuration using defineWorkspace. Configure projects for pac
 
 ---
 
-### F-003.8: Update turbo.json tasks
+### F-003.8: Update turbo.json tasks ✅
 
 **Target**: turbo.json
 
 Add test:ui, test:coverage, and test:watch tasks. Configure test:ui with cache: false and persistent: true. Configure test:coverage with coverage/** outputs. Add dependency on @agency/vitest-config#build.
+
+**Note**: test:ui, test:coverage, and test:watch tasks were already configured correctly. Added @agency/vitest-config#build dependency to all test tasks (test, test:watch, test:ui, test:bench, test:coverage) to ensure shared config is built before running tests.
 
 ---
 
