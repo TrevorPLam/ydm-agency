@@ -137,7 +137,7 @@ Test build, lint, test, dev pipelines. Verify caching works. Fix any pipeline is
 
 ## F-003: Install Vitest
 
-[x] Status: Completed
+[ n] Status: In Progress
 
 **Related Files**: All package.json files, vitest.config.ts
 
@@ -197,6 +197,74 @@ Write example unit tests for core package. Demonstrate TDD pattern. Verify cover
 
 **Issues Discovered**:
 - Pre-existing TypeScript configuration issues in @agency/ui package (missing JSX and module resolution settings) causing typecheck failures. This is not related to Vitest installation and should be addressed in a separate task.
+
+---
+
+### F-003.5: Upgrade to Vitest 4.0 ✅
+
+**Target**: pnpm-workspace.yaml
+
+Update Vitest from 2.0.0 to 4.0.0 in catalog. Review migration guide for breaking changes. Update browser mode if used. Test existing test suite.
+
+**Note**: Upgraded vitest and @vitest/ui to 4.0.0 in catalog. Added vite 6.0.0 to catalog (required by Vitest 4.0). Updated vitest.config.ts to add coverage.include (coverage.all removed in v4). Core package tests passing (11 tests). Other packages have no test files (expected).
+
+---
+
+### F-003.6: Create @agency/vitest-config package
+
+**Target**: packages/vitest-config/
+
+Create shared Vitest configuration package. Export sharedConfig with globals, environment, setupFiles, pool, experimental.fsModuleCache, and coverage settings. Add to pnpm workspace.
+
+---
+
+### F-003.7: Create vitest.workspace.ts
+
+**Target**: vitest.workspace.ts
+
+Create workspace configuration using defineWorkspace. Configure projects for packages/* and apps/*. Add browser-tests project with happy-dom environment. Enable workspace-aware test discovery.
+
+---
+
+### F-003.8: Update turbo.json tasks
+
+**Target**: turbo.json
+
+Add test:ui, test:coverage, and test:watch tasks. Configure test:ui with cache: false and persistent: true. Configure test:coverage with coverage/** outputs. Add dependency on @agency/vitest-config#build.
+
+---
+
+### F-003.9: Install happy-dom
+
+**Target**: Root package.json
+
+Install happy-dom as dev dependency. Add to catalog. Configure as default environment for component tests. Keep jsdom for full browser API compatibility when needed.
+
+---
+
+### F-003.10: Configure GitHub Actions with sharding
+
+**Target**: .github/workflows/test.yml
+
+Create GitHub Actions workflow with test sharding. Configure matrix strategy for parallel execution. Use --reporter=blob and --shard flags. Add blob report upload and merge-reports job.
+
+---
+
+### F-003.11: Add test scripts to Next.js apps
+
+**Target**: All apps/*/package.json
+
+Add test, test:ui, test:coverage, and test:watch scripts to all Next.js apps. Configure vitest.config.ts for each app. Add React Testing Library for component testing.
+
+---
+
+### F-003.12: Implement fixtures pattern
+
+**Target**: packages/vitest-config/src/fixtures.ts
+
+Create reusable fixtures using builder pattern. Implement database, user, and tempFile fixtures with onCleanup. Export extended test object with type inference.
+
+---
 
 ---
 

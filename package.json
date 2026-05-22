@@ -17,6 +17,7 @@
   "devDependencies": {
     "prettier": "^3.4.2",
     "turbo": "catalog:",
+    "vite": "catalog:",
     "vitest": "catalog:",
     "@vitest/ui": "catalog:"
   },

@@ -14,6 +14,7 @@ export default defineConfig({
       branches: 80,
       functions: 80,
       lines: 80,
+      include: ['packages/**/src/**.{js,jsx,ts,tsx}'],
       exclude: [
         'node_modules/',
         'dist/',
