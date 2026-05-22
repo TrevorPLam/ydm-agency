@@ -31,6 +31,12 @@
     "check:fix": {
       "outputs": []
     },
+    "syncpack:lint": {
+      "outputs": []
+    },
+    "syncpack:fix": {
+      "outputs": []
+    },
     "test": {
       "dependsOn": ["^build", "@agency/vitest-config#build"],
       "outputs": ["coverage/**", ".vitest-results/**"],

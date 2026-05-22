@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "eslint": "^9",
+    "eslint": ">=9",
     "typescript": "catalog:"
   },
   "peerDependencies": {

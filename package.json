@@ -15,6 +15,8 @@
     "lint:biome:fix": "biome lint --write .",
     "check": "biome check .",
     "check:fix": "biome check --write .",
+    "syncpack:lint": "syncpack lint",
+    "syncpack:fix": "syncpack fix-mismatches",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
     "test:ui": "turbo run test:ui",
@@ -31,6 +33,7 @@
     "lefthook": "catalog:",
     "nyc": "^15.1.0",
     "prettier": "^3.4.2",
+    "syncpack": "catalog:",
     "turbo": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
