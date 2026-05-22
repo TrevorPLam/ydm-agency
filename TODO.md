@@ -210,11 +210,13 @@ Update Vitest from 2.0.0 to 4.0.0 in catalog. Review migration guide for breakin
 
 ---
 
-### F-003.6: Create @agency/vitest-config package
+### F-003.6: Create @agency/vitest-config package ✅
 
 **Target**: packages/vitest-config/
 
 Create shared Vitest configuration package. Export sharedConfig with globals, environment, setupFiles, pool, experimental.fsModuleCache, and coverage settings. Add to pnpm workspace.
+
+**Note**: Created @agency/vitest-config package with sharedConfig export. Added tsup to catalog for building. Configured with globals, environment, setupFiles, pool, and coverage settings (using thresholds). Package builds successfully with ESM and DTS outputs.
 
 ---
 
