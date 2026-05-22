@@ -319,25 +319,45 @@ Create reusable fixtures using builder pattern. Implement database, user, and te
 **Depends On**: F-002
 **Blocks**: F-005, F-007
 
-### F-004.1: Install Biome
+### F-004.1: Install Biome ✅
+
 **Target**: package.json
+
 Install @biomejs/biome as dev dependency. Add biome.json configuration.
 
-### F-004.2: Configure Biome
+**Note**: Biome was already installed via catalog. Created biome.json with formatter and linter configuration. Updated package.json scripts to use Biome for formatting (format, format:check, lint:biome, lint:biome:fix, check, check:fix). Added corresponding tasks to turbo.json.
+
+### F-004.2: Configure Biome ✅
+
 **Target**: biome.json
+
 Configure formatter and linter. Enable TypeScript support. Set rules matching project style.
 
-### F-004.3: Create minimal ESLint config
+**Note**: Configured biome.json with formatter (tab indentation, 100 char line width, single quotes) and linter (recommended rules + customizations). Enabled TypeScript support with unsafe parameter decorators. Set up organizeImports for automatic import organization.
+
+### F-004.3: Create minimal ESLint config ✅
+
 **Target**: packages/eslint-config/
+
 Create shared ESLint flat config for rules Biome doesn't cover. Export as @agency/eslint-config.
 
-### F-004.4: Add format and lint scripts
+**Note**: Created @agency/eslint-config package with flat config using typescript-eslint. Configured rules for TypeScript-specific linting that Biome doesn't cover (floating promises, misused promises, type assertions, nullish coalescing, optional chain). Added tsconfig.json for the config package.
+
+### F-004.4: Add format and lint scripts ✅
+
 **Target**: All package.json files
+
 Add format and lint scripts. Configure turbo.json pipelines. Enable caching.
 
-### F-004.5: Run initial format
+**Note**: Format and lint scripts already added to root package.json (format, format:check, lint:biome, lint:biome:fix, check, check:fix). Turbo.json tasks configured for all Biome-related scripts with caching disabled for format tasks.
+
+### F-004.5: Run initial format ✅
+
 **Target**: All files
+
 Run biome format --write on all files. Fix any formatting issues.
+
+**Note**: Ran biome format --write on all files. Biome formatted the codebase according to the configured rules (tab indentation, 100 char line width, single quotes).
 
 ---
 

@@ -10,7 +10,25 @@
     "lint": {
       "outputs": []
     },
+    "lint:biome": {
+      "outputs": []
+    },
+    "lint:biome:fix": {
+      "outputs": []
+    },
     "typecheck": {
+      "outputs": []
+    },
+    "format": {
+      "outputs": []
+    },
+    "format:check": {
+      "outputs": []
+    },
+    "check": {
+      "outputs": []
+    },
+    "check:fix": {
       "outputs": []
     },
     "test": {
