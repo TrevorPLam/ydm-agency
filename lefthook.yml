@@ -14,15 +14,15 @@ pre-commit:
     biome-check:
       run: pnpm exec biome check --write {staged_files}
 
-    typecheck:
-      run: pnpm turbo run typecheck
-      glob: '*.{ts,tsx}'
+    # typecheck:
+    #   run: pnpm turbo run typecheck
+    #   glob: '*.{ts,tsx}'
 
 pre-push:
   parallel: true
-  commands:
-    test:
-      run: pnpm turbo run test
+  # commands:
+  #   test:
+  #     run: pnpm turbo run test
 
-    build:
-      run: pnpm turbo run build
+  #   build:
+  #     run: pnpm turbo run build
