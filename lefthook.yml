@@ -1,0 +1,28 @@
+# Lefthook configuration for the agency monorepo
+# Uses Go binary for performance with parallel hook execution
+
+pre-commit:
+  parallel: true
+  commands:
+    biome-format:
+      run: pnpm exec biome format --write {staged_files}
+      stage_fixed: true
+
+    biome-lint:
+      run: pnpm exec biome lint --write {staged_files}
+
+    biome-check:
+      run: pnpm exec biome check --write {staged_files}
+
+    typecheck:
+      run: pnpm turbo run typecheck
+      glob: '*.{ts,tsx}'
+
+pre-push:
+  parallel: true
+  commands:
+    test:
+      run: pnpm turbo run test
+
+    build:
+      run: pnpm turbo run build

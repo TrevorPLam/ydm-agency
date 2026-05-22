@@ -5,16 +5,22 @@ packages:
 allowBuilds:
   core-js: true
   esbuild: false
+  lefthook: true
 
 catalog:
   # Core dependencies
+  '@testing-library/jest-dom': ^6.0.0
+  '@testing-library/react': ^16.0.0
   '@types/node': ^22.0.0
   '@types/react': ^19.0.0
   '@types/react-dom': ^19.0.0
+  '@vitest/coverage-v8': ^4.0.0
   '@vitest/ui': ^4.0.0
 
   # Linting
   biome: ^0.3.3
+  'happy-dom': ^15.0.0
+  lefthook: ^1.8.0
   next: ^16.0.0
   react: ^19.2.4
   react-dom: ^19.2.4
@@ -29,7 +35,3 @@ catalog:
 
   # Testing
   vitest: ^4.0.0
-  '@vitest/coverage-v8': ^4.0.0
-  'happy-dom': ^15.0.0
-  '@testing-library/react': ^16.0.0
-  '@testing-library/jest-dom': ^6.0.0

@@ -28,6 +28,7 @@
     "@vitest/ui": "catalog:",
     "biome": "catalog:",
     "happy-dom": "catalog:",
+    "lefthook": "catalog:",
     "nyc": "^15.1.0",
     "prettier": "^3.4.2",
     "turbo": "catalog:",
