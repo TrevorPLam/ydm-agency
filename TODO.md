@@ -539,13 +539,21 @@ export { baseConfig, nextConfig, packageConfig }
 **Depends On**: F-004
 **Blocks**: All package configuration
 
-### F-007.1: Create eslint-config package
+### F-007.1: Create eslint-config package ✅
+
 **Target**: packages/eslint-config/
+
 Create package with minimal ESLint flat config. Export default config. Add to pnpm workspace.
 
-### F-007.2: Create typescript-config package
+**Note**: Already completed in F-004.3.
+
+### F-007.2: Create typescript-config package ✅
+
 **Target**: packages/typescript-config/
+
 Create package with base tsconfig presets. Export base, next, package configs. Add to pnpm workspace.
+
+**Note**: Created @agency/typescript-config package with base, next, and package config presets. Configured strict TypeScript settings with noUncheckedIndexedAccess, noImplicitOverride, and exactOptionalPropertyTypes.
 
 ### F-007.3: Update packages to use configs
 **Target**: All package.json files
