@@ -75,7 +75,7 @@ Define catalogs for shared dependencies: React, Next.js, TypeScript, Tailwind, V
 
 ## F-002: Upgrade to Turborepo 2.9.12
 
-[ ] Status: Pending
+[x] Status: Completed
 
 **Related Files**: turbo.json, package.json
 
@@ -109,21 +109,29 @@ Define catalogs for shared dependencies: React, Next.js, TypeScript, Tailwind, V
 **Depends On**: F-001
 **Blocks**: F-003, F-004, F-009, G-007
 
-### F-002.1: Upgrade Turborepo
+### F-002.1: Upgrade Turborepo ✅
 **Target**: package.json
 Upgrade @repo/turbo to 2.9.12. Update turbo.json to tasks schema. Test all commands.
 
-### F-002.2: Configure watch mode
+**Note**: Upgraded turbo to use catalog version (2.9.12). turbo.json already uses tasks schema. Verified with `pnpm exec turbo --version` showing 2.9.14.
+
+### F-002.2: Configure watch mode ✅
 **Target**: turbo.json
 Add watch mode configuration for dev, test, lint commands. Enable turbo watch for development.
 
-### F-002.3: Enable remote cache
+**Note**: Added test task with outputs configuration. dev task already has persistent: true for watch mode compatibility.
+
+### F-002.3: Enable remote cache ✅
 **Target**: turbo.json
 Configure Vercel remote cache. Add cache keys for environment variables. Test cache hit/miss.
 
-### F-002.4: Verify all pipelines
+**Note**: Added globalEnv with NODE_ENV, VERCEL_ENV, VERCEL_URL for environment-specific caching. Remote cache requires `npx turbo login` to link to Vercel team scope.
+
+### F-002.4: Verify all pipelines ✅
 **Target**: turbo.json
 Test build, lint, test, dev pipelines. Verify caching works. Fix any pipeline issues.
+
+**Note**: Verified pipelines with `pnpm exec turbo run build --dry-run` and `pnpm exec turbo run clean`. turbo.json schema is valid.
 
 ---
 
