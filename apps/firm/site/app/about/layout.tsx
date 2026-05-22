@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us - Nexus Agency",
-  description: "Learn about Nexus Agency - our story, values, team, and commitment to delivering exceptional digital marketing results for our clients.",
-  keywords: ["about us", "company story", "marketing agency team", "agency values"],
+  title: "About - Your Dedicated Marketer",
+  description: "Learn about Your Dedicated Marketer - our philosophy, commitments, and why we're different from traditional agencies.",
+  keywords: ["about", "marketing philosophy", "dedicated marketer", "anti-agency"],
   openGraph: {
-    title: "About Us - Nexus Agency",
-    description: "Learn about our story, values, and team.",
+    title: "About - Your Dedicated Marketer",
+    description: "Learn about our philosophy, commitments, and why we're different from traditional agencies.",
   },
 };
+
+export default function AboutLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return children
+}

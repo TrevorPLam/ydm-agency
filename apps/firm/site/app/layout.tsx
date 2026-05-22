@@ -1,32 +1,39 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rajdhani, Orbitron, Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const rajdhani = Rajdhani({
+  variable: "--font-rajdhani",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Nexus Agency - Digital Marketing Excellence",
-  description: "Transform your brand with data-driven digital marketing strategies. We deliver measurable results through innovative SEO, content, and performance marketing solutions.",
-  keywords: ["digital marketing", "SEO", "content marketing", "brand strategy", "performance marketing", "social media", "web design"],
-  authors: [{ name: "Nexus Agency" }],
+  title: "Your Dedicated Marketer - Web Design That Builds Your Business",
+  description: "Custom websites, transparent SEO, and analytics tied to your revenue. No generic AI fluff, no vanity metrics, no creepy tracking. Just a dedicated marketer in your corner.",
+  keywords: ["web design", "SEO", "analytics", "digital marketing", "revenue-focused marketing", "small business marketing"],
+  authors: [{ name: "Your Dedicated Marketer" }],
   openGraph: {
-    title: "Nexus Agency - Digital Marketing Excellence",
-    description: "Transform your brand with data-driven digital marketing strategies.",
+    title: "Your Dedicated Marketer - Web Design That Builds Your Business",
+    description: "Custom websites, transparent SEO, and analytics tied to your revenue. No generic AI fluff, no vanity metrics, no creepy tracking.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nexus Agency - Digital Marketing Excellence",
-    description: "Transform your brand with data-driven digital marketing strategies.",
+    title: "Your Dedicated Marketer - Web Design That Builds Your Business",
+    description: "Custom websites, transparent SEO, and analytics tied to your revenue. No generic AI fluff, no vanity metrics, no creepy tracking.",
   },
   robots: {
     index: true,
@@ -42,9 +49,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${rajdhani.variable} ${orbitron.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
 }

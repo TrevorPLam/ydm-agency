@@ -1,156 +1,324 @@
-import { Section, SectionHeader, PortfolioCard, Container } from "@agency/ui"
-import { Sparkles, Calendar, Users, BarChart3, ArrowRight } from "lucide-react"
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { ArrowRight, Monitor, Zap, FileText, Target, BarChart3, Sparkles, ExternalLink } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
+import { Navigation } from "@/components/navigation"
+import { AnimateOnScroll } from "@agency/ui"
 
 export default function WorkPage() {
+  const [industryFilter, setIndustryFilter] = useState("All")
+  const [serviceFilter, setServiceFilter] = useState("All")
+
+  const industries = ["All", "Healthcare", "Legal", "SaaS/Tech", "Home Services", "E-commerce", "Hospitality", "Professional Services", "Real Estate", "Nonprofit"]
+  const serviceTypes = ["All", "Web Design", "Brand Identity", "SEO/AIEO", "Full System"]
+
   const projects = [
     {
-      title: "Day Care Management System",
-      description: "Complete booking and scheduling platform for childcare centers with real-time availability management, parent portal, and automated notifications.",
-      metrics: "340%",
-      metricLabel: "ROI Increase",
+      id: 1,
+      name: "Modern Dental Practice",
+      industry: "Healthcare",
+      serviceType: "Web Design",
+      stat: "+142% Mobile Conversion",
+      blurb: "A dated, non-responsive site was costing this dental practice new patient bookings. We rebuilt with a mobile-first, appointment-optimized experience.",
       href: "/demo/day-care",
-      tags: ["Booking", "Scheduling", "Parent Portal"]
+      demoHref: "https://demo.example.com/dental"
     },
     {
-      title: "Hair Salon Platform",
-      description: "Stylist scheduling and appointment booking system with service catalog, client management, and payment processing integration.",
-      metrics: "2.5M",
-      metricLabel: "Appointments Booked",
-      href: "/demo/hair-salor",
-      tags: ["Scheduling", "Service Catalog", "Payments"]
-    },
-    {
-      title: "Tax Firm Portal",
-      description: "Client management and document tracking system for tax preparation firms with secure workflows, document sharing, and deadline tracking.",
-      metrics: "98%",
-      metricLabel: "On-Time Filing",
+      id: 2,
+      name: "Boutique Law Group",
+      industry: "Legal",
+      serviceType: "Full System",
+      stat: "Organic Traffic +87%",
+      blurb: "This law firm had zero online visibility. We built a trust-focused site with local SEO that drove qualified consultation requests.",
       href: "/demo/tax-firm",
-      tags: ["Document Management", "Security", "Compliance"]
+      demoHref: "https://demo.example.com/law"
     },
     {
-      title: "Project Management Suite",
-      description: "Industry-agnostic project management system featuring Kanban boards, email triage, time tracking, and template-based workflows.",
-      metrics: "50k+",
-      metricLabel: "Tasks Managed",
+      id: 3,
+      name: "SaaS Startup Dashboard",
+      industry: "SaaS/Tech",
+      serviceType: "Web Design",
+      stat: "Page Speed: 98/100",
+      blurb: "Slow load times were killing conversions. We optimized every asset and implemented lazy loading for instant page renders.",
       href: "/business-applications/project-management",
-      tags: ["Kanban", "Email Triage", "Time Tracking"]
+      demoHref: "https://demo.example.com/saas"
+    },
+    {
+      id: 4,
+      name: "Hair Salon Platform",
+      industry: "Home Services",
+      serviceType: "Full System",
+      stat: "2.5M Appointments Booked",
+      blurb: "Manual booking was a nightmare. We created an automated scheduling system that increased bookings by 340%.",
+      href: "/demo/hair-salor",
+      demoHref: "https://demo.example.com/salon"
+    },
+    {
+      id: 5,
+      name: "Luxury Hotel Chain",
+      industry: "Hospitality",
+      serviceType: "Brand Identity",
+      stat: "Direct Bookings +65%",
+      blurb: "OTA fees were eating margins. We built a direct booking engine with a premium brand experience.",
+      href: "/demo/hotel",
+      demoHref: "https://demo.example.com/hotel"
+    },
+    {
+      id: 6,
+      name: "Accounting Firm",
+      industry: "Professional Services",
+      serviceType: "SEO/AIEO",
+      stat: "First-Page Rankings: 5",
+      blurb: "Invisible in search results. We implemented a comprehensive SEO strategy that put them on page one for target keywords.",
+      href: "/demo/accounting",
+      demoHref: "https://demo.example.com/accounting"
     }
   ]
 
+  const filteredProjects = projects.filter(project => {
+    const industryMatch = industryFilter === "All" || project.industry === industryFilter
+    const serviceMatch = serviceFilter === "All" || project.serviceType === serviceFilter
+    return industryMatch && serviceMatch
+  })
+
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Sparkles className="h-5 w-5 text-primary-foreground" />
+    <div className="min-h-screen bg-black text-white">
+      <Navigation />
+
+      {/* Section 1: Header */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-[#1E1E1E] to-black">
+        <div className="container mx-auto max-w-4xl text-center">
+          <AnimateOnScroll>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-orbitron">
+              Real Work, Real Results.
+            </h1>
+            <p className="text-xl text-gray-400 mb-6 font-inter max-w-3xl mx-auto">
+              Every project below was built from a strategic brief, designed for conversion, and optimized for performance. Explore the case studies. Judge the work. Then let's talk about your business.
+            </p>
+            <p className="text-sm text-gray-500 font-inter">
+              Projects labeled 'Concept/Demo' were self-initiated to demonstrate capability across industries. No client was involved. The strategy, design, and simulated results are all ours.
+            </p>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
+      {/* Section 2: Filter Bar */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-black border-b border-white/10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+            <div className="flex-1">
+              <p className="text-sm text-gray-400 mb-3 font-inter">Industry</p>
+              <div className="flex flex-wrap gap-2">
+                {industries.map((industry) => (
+                  <button
+                    key={industry}
+                    onClick={() => setIndustryFilter(industry)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                      industryFilter === industry
+                        ? "bg-[#0080FF] text-white"
+                        : "bg-[#121212] border border-white/10 text-gray-400 hover:border-[#0080FF]"
+                    }`}
+                  >
+                    {industry}
+                  </button>
+                ))}
               </div>
-              <span className="text-xl font-bold">Nexus Agency</span>
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
-              <Link href="/services" className="text-sm font-medium hover:text-primary transition-colors">Services</Link>
-              <Link href="/work" className="text-sm font-medium text-primary">Work</Link>
-              <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">About</Link>
-              <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</Link>
+            </div>
+            <div className="flex-1">
+              <p className="text-sm text-gray-400 mb-3 font-inter">Service Type</p>
+              <div className="flex flex-wrap gap-2">
+                {serviceTypes.map((service) => (
+                  <button
+                    key={service}
+                    onClick={() => setServiceFilter(service)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                      serviceFilter === service
+                        ? "bg-[#0080FF] text-white"
+                        : "bg-[#121212] border border-white/10 text-gray-400 hover:border-[#0080FF]"
+                    }`}
+                  >
+                    {service}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </nav>
+      </section>
 
-      {/* Hero Section */}
-      <Section>
-        <div className="text-center space-y-8">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            Our Work
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore our portfolio of successful projects. Each case study demonstrates our commitment to delivering measurable results and innovative solutions.
-          </p>
+      {/* Section 3: Project Grid */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[280px]">
+            {filteredProjects.map((project, index) => {
+              const isLarge = index === 0 || index === 3
+              const isWide = index === 2 || index === 5
+              
+              return (
+                <AnimateOnScroll key={project.id} delay={index * 80}>
+                  <Card className={`
+                    bg-[#121212] border border-white/10 
+                    hover:border-[#0080FF] transition-all duration-300 
+                    hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,128,255,0.12)]
+                    h-full
+                    ${isLarge ? 'md:col-span-2 md:row-span-2' : ''}
+                    ${isWide ? 'md:col-span-2' : ''}
+                  `}>
+                    <CardContent className="p-6 h-full flex flex-col">
+                      <div className="h-48 bg-[#1E1E1E] rounded-lg mb-4 flex items-center justify-center flex-grow">
+                        <Monitor className="h-16 w-16 text-gray-600" />
+                      </div>
+                      <div className="text-[#0080FF] text-xs font-medium mb-2">{project.industry}</div>
+                      <h3 className="text-xl font-bold mb-2 font-rajdhani">{project.name}</h3>
+                      <div className="text-2xl font-bold text-[#0080FF] mb-3 font-rajdhani">{project.stat}</div>
+                      <p className="text-gray-400 text-sm mb-6 font-inter">{project.blurb}</p>
+                      <div className="flex flex-col gap-2 mt-auto">
+                        <Link href={project.href}>
+                          <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                            View Case Study <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </Link>
+                        <a
+                          href={project.demoHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center text-sm text-gray-400 hover:text-[#0080FF] transition-colors"
+                        >
+                          See Live Site <ExternalLink className="ml-1 h-3 w-3" />
+                        </a>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </AnimateOnScroll>
+              )
+            })}
+          </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Stats Section */}
-      <Section variant="muted">
-        <div className="grid md:grid-cols-4 gap-8">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">150+</div>
-            <div className="text-sm text-muted-foreground">Projects Delivered</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">$50M+</div>
-            <div className="text-sm text-muted-foreground">Client Revenue</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">98%</div>
-            <div className="text-sm text-muted-foreground">Client Satisfaction</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">15+</div>
-            <div className="text-sm text-muted-foreground">Industry Awards</div>
-          </div>
-        </div>
-      </Section>
-
-      {/* Projects Grid */}
-      <Section>
-        <SectionHeader
-          title="Featured Projects"
-          description="Live demos and case studies showcasing our capabilities"
-        />
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <a
-              key={project.title}
-              href={project.href}
-              className="group block p-6 rounded-lg border bg-card hover:shadow-lg transition-all"
-            >
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary/5 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">{project.metrics}</div>
-                  <div className="text-sm text-muted-foreground">{project.metricLabel}</div>
+      {/* Section 4: Featured Case Study */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+        <div className="container mx-auto max-w-6xl">
+          <Card className="bg-black border border-white/10 p-8 md:p-12">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="h-80 bg-[#1E1E1E] rounded-lg flex items-center justify-center">
+                <Monitor className="h-24 w-24 text-gray-600" />
+              </div>
+              <div>
+                <div className="text-[#0080FF] text-sm font-medium mb-2">Featured Case Study</div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 font-orbitron">How We Turned an Outdated Site into a Lead-Generating Engine</h2>
+                <p className="text-gray-400 mb-6 font-inter">
+                  A complete rebuild of a dental practice website that transformed their online presence from invisible to industry leader.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center space-x-2">
+                    <Zap className="h-5 w-5 text-[#0080FF]" />
+                    <span className="text-gray-300">Mobile speed improved by 300%</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Zap className="h-5 w-5 text-[#0080FF]" />
+                    <span className="text-gray-300">Contact form conversions up 85%</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <Zap className="h-5 w-5 text-[#0080FF]" />
+                    <span className="text-gray-300">First-page Google ranking for 5 target keywords</span>
+                  </li>
+                </ul>
+                <div className="flex gap-4">
+                  <Link href="/demo/day-care">
+                    <Button className="bg-[#0080FF] hover:bg-[#0080FF]/90">
+                      Read Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                  <a
+                    href="https://demo.example.com/dental"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="outline" className="border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                      See Live Demo <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                  </a>
                 </div>
               </div>
-              <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <div className="flex items-center text-sm font-medium text-primary">
-                View Live Demo
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </a>
-          ))}
+            </div>
+          </Card>
         </div>
-      </Section>
+      </section>
 
-      {/* CTA Section */}
-      <Section variant="muted">
-        <Container size="sm">
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl font-bold">Have a Project in Mind?</h2>
-            <p className="text-muted-foreground">
-              Let's discuss how we can help bring your vision to life.
-            </p>
-            <Link href="/contact">
-              <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
-                Start Your Project
-              </button>
-            </Link>
+      {/* Section 5: How I Work */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">From Demo to Your Business: The Same Rigor, Applied to You.</h2>
+          <p className="text-gray-400 mb-12 font-inter max-w-3xl">
+            The same strategic process that built these demos will build your website.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <Card className="bg-[#121212] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
+                <FileText className="h-6 w-6 text-[#0080FF]" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 font-rajdhani">Strategic Brief</h3>
+              <p className="text-gray-400 font-inter">Every project starts with a deep understanding of your audience, goals, and competitive landscape—demo or not.</p>
+            </Card>
+
+            <Card className="bg-[#121212] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
+                <Target className="h-6 w-6 text-[#0080FF]" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 font-rajdhani">Custom Build</h3>
+              <p className="text-gray-400 font-inter">No templates. No shortcuts. Your site is built to your brand and optimized for performance.</p>
+            </Card>
+
+            <Card className="bg-[#121212] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
+                <BarChart3 className="h-6 w-6 text-[#0080FF]" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 font-rajdhani">Results Tracking</h3>
+              <p className="text-gray-400 font-inter">We define success metrics before launch and track real business outcomes after.</p>
+            </Card>
           </div>
-        </Container>
-      </Section>
+
+          <Link href="/contact">
+            <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8">
+              Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Section 6: Testimonial Placeholder */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+        <div className="container mx-auto max-w-4xl">
+          <Card className="bg-black border-l-4 border-l-[#0080FF] border-y border-r border-white/10 p-8 md:p-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 font-orbitron">Building Our Success Stories</h2>
+            <p className="text-gray-300 font-inter leading-relaxed">
+              We're building our library of client success stories right now. In the meantime, the demos above represent the same strategic rigor and design quality you'll receive. Want to be our first case study? Let's make it a good one.
+            </p>
+          </Card>
+        </div>
+      </section>
+
+      {/* Section 7: Final CTA */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[#0080FF]/20">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">See a Project You Like? Let's Build Yours.</h2>
+          <p className="text-xl text-gray-400 mb-8 font-inter">
+            Every business deserves a website that works as hard as they do. Let's talk about yours. Free 30-minute consultation, no pressure.
+          </p>
+          <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8 mb-4">
+            Book Your Free Strategy Call
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+          <p className="text-gray-400 text-sm font-inter">
+            Or chat with me now — I'm real, and I'll answer.
+          </p>
+        </div>
+      </section>
     </div>
   )
 }

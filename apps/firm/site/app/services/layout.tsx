@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services - Nexus Agency",
-  description: "Comprehensive digital marketing services including digital strategy, brand marketing, SEO, content, creative design, performance marketing, and social media management.",
-  keywords: ["digital marketing services", "SEO services", "brand marketing", "content marketing", "performance marketing"],
+  title: "Services - Your Dedicated Marketer",
+  description: "Complete marketing operating system built around your website. Custom web design, SEO, content, social media, email, and analytics—all transparent, no lock-in.",
+  keywords: ["web design services", "SEO services", "digital marketing", "content marketing", "brand identity", "CRM management"],
   openGraph: {
-    title: "Services - Nexus Agency",
-    description: "Comprehensive digital marketing services tailored to your business goals.",
+    title: "Services - Your Dedicated Marketer",
+    description: "Complete marketing operating system built around your website. Custom web design, SEO, content, social media, email, and analytics.",
   },
 };
+
+export default function ServicesLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return children;
+}

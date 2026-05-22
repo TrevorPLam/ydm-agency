@@ -15,10 +15,14 @@
 
 # testing
 /coverage
+**/coverage
+**/.vitest-results
 
 # next.js
 /.next/
 /out/
+**/.next/
+**/out/
 
 # production
 /build
@@ -36,6 +40,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# infisical secrets
+.infisical/
+
 # vercel
 .vercel
 
@@ -48,7 +55,13 @@ next-env.d.ts
 
 # build outputs
 dist/
+**/dist/
 *.log
+
+# cache directories
+.eslintcache
+.swc/
+.parcel-cache/
 
 # IDE
 .vscode/
@@ -66,3 +79,9 @@ Desktop.ini
 *.tmp
 *.temp
 .cache/
+
+# biome
+.biome-cache/
+
+# lefthook
+lefthook.checksum

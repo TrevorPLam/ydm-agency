@@ -1,240 +1,308 @@
-import { Section, SectionHeader, Container } from "@agency/ui"
-import { Sparkles, Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react"
-import Link from "next/link"
+"use client"
+
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
+import { ArrowRight, Zap, MessageSquare, Calendar, Mail, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react"
+import Link from "next/link"
+import { useState } from "react"
 
 export default function ContactPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index)
+  }
+
+  const faqs = [
+    {
+      question: "Is there any cost for the initial call?",
+      answer: "Absolutely not. It's a free, no-obligation conversation to see if we're a good fit."
+    },
+    {
+      question: "Will I be working with you or a junior team member?",
+      answer: "You'll work directly with me, the founder. I handle strategy and execution personally."
+    },
+    {
+      question: "Do you take on every project?",
+      answer: "No. I'm selective about who I work with to ensure I can give each client the attention they deserve. The first call helps us both decide if it's the right match."
+    }
+  ]
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-50">
+      <nav className="border-b border-white/10 bg-black/95 backdrop-blur supports-backdrop-filter:bg-black/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Sparkles className="h-5 w-5 text-primary-foreground" />
+              <div className="h-8 w-8 rounded-lg bg-[#0080FF] flex items-center justify-center">
+                <Zap className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold">Nexus Agency</span>
+              <span className="text-xl font-bold font-rajdhani">Your Dedicated Marketer</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
-              <Link href="/services" className="text-sm font-medium hover:text-primary transition-colors">Services</Link>
-              <Link href="/work" className="text-sm font-medium hover:text-primary transition-colors">Work</Link>
-              <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">About</Link>
-              <Link href="/contact" className="text-sm font-medium text-primary">Contact</Link>
+              <Link href="/" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Home</Link>
+              <Link href="/services" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Services</Link>
+              <Link href="/work" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Portfolio</Link>
+              <Link href="/about" className="text-sm font-medium hover:text-[#0080FF] transition-colors">About</Link>
+              <Link href="/blog" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Blog</Link>
+              <Link href="/contact" className="text-sm font-medium text-[#0080FF]">Contact</Link>
             </div>
+            <Button className="bg-[#0080FF] hover:bg-[#0080FF]/90">Book Consultation</Button>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <Section>
-        <div className="text-center space-y-8">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            Get in Touch
+      {/* Section 1: Header */}
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-[#1E1E1E] to-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,128,255,0.1),transparent_50%)]" />
+        
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 py-20">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-orbitron leading-tight">
+            Let's Talk About Your Business.
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to transform your marketing? Reach out for a free consultation and let's discuss how we can help you achieve your goals.
+          <p className="text-xl text-gray-400 max-w-4xl mx-auto font-inter">
+            You'll reach me directly—no forms that vanish into a ticket queue, no "somebody will get back to you." Just a real conversation about how we can grow your business.
           </p>
-        </div>
-      </Section>
-
-      {/* Contact Info & Form */}
-      <Section variant="muted">
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
-              <p className="text-muted-foreground">
-                We'd love to hear from you. Fill out the form or reach out directly using any of the methods below.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Email</h3>
-                  <p className="text-sm text-muted-foreground">hello@nexusagency.com</p>
-                  <p className="text-sm text-muted-foreground">support@nexusagency.com</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Phone</h3>
-                  <p className="text-sm text-muted-foreground">+1 (555) 123-4567</p>
-                  <p className="text-sm text-muted-foreground">Mon-Fri 9am-6pm EST</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Office</h3>
-                  <p className="text-sm text-muted-foreground">
-                    123 Marketing Street<br />
-                    Suite 456<br />
-                    San Francisco, CA 94102
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Clock className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Business Hours</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Monday - Friday: 9am - 6pm EST<br />
-                    Saturday: 10am - 4pm EST<br />
-                    Sunday: Closed
-                  </p>
-                </div>
-              </div>
+          <div className="flex justify-center">
+            <div className="h-12 w-12 rounded-full bg-[#0080FF]/10 flex items-center justify-center animate-pulse">
+              <MessageSquare className="h-6 w-6 text-[#0080FF]" />
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Contact Form */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Send us a message</CardTitle>
-              <CardDescription>
-                Fill out the form below and we'll get back to you within 24 hours.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form className="space-y-4">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">Name</label>
-                    <input
-                      id="name"
-                      type="text"
-                      placeholder="John Doe"
-                      className="w-full px-3 py-2 border rounded-md bg-background"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">Email</label>
-                    <input
-                      id="email"
-                      type="email"
-                      placeholder="john@example.com"
-                      className="w-full px-3 py-2 border rounded-md bg-background"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="company" className="text-sm font-medium">Company</label>
-                  <input
-                    id="company"
-                    type="text"
-                    placeholder="Your Company"
-                    className="w-full px-3 py-2 border rounded-md bg-background"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="service" className="text-sm font-medium">Service Interest</label>
-                  <select
-                    id="service"
-                    className="w-full px-3 py-2 border rounded-md bg-background"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="digital-strategy">Digital Strategy</option>
-                    <option value="brand-marketing">Brand Marketing</option>
-                    <option value="seo-content">SEO & Content</option>
-                    <option value="creative-design">Creative Design</option>
-                    <option value="performance-marketing">Performance Marketing</option>
-                    <option value="social-media">Social Media</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">Message</label>
-                  <textarea
-                    id="message"
-                    placeholder="Tell us about your project..."
-                    rows={4}
-                    className="w-full px-3 py-2 border rounded-md bg-background"
-                    required
-                  />
-                </div>
-                <Button type="submit" className="w-full">
-                  Send Message
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </form>
-            </CardContent>
+      {/* Section 2: Contact Form */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+        <div className="container mx-auto max-w-2xl">
+          <Card className="bg-[#121212] border-l-4 border-l-[#0080FF] border-y border-r border-white/10 p-8 md:p-12">
+            <h2 className="text-2xl font-bold mb-8 font-orbitron">Send Me a Message</h2>
+            
+            <form className="space-y-6">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-sm font-medium text-gray-300">Full Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Your name"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-medium text-gray-300">Work Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="you@company.com"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="company" className="text-sm font-medium text-gray-300">Company / Website <span className="text-gray-500">(optional)</span></label>
+                <input
+                  id="company"
+                  type="text"
+                  placeholder="yourcompany.com"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="interest" className="text-sm font-medium text-gray-300">What Are You Interested In? <span className="text-gray-500">(optional)</span></label>
+                <select
+                  id="interest"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors"
+                >
+                  <option value="">Select a topic...</option>
+                  <option value="web-design">Web Design / Redesign</option>
+                  <option value="seo">SEO & AIEO</option>
+                  <option value="brand">Brand Identity & Kit</option>
+                  <option value="blog">Blog & Content Management</option>
+                  <option value="social">Social Media Management</option>
+                  <option value="email">Newsletter & Email Marketing</option>
+                  <option value="crm">CRM & Automation</option>
+                  <option value="ppc">Paid Media (PPC)</option>
+                  <option value="analytics">Analytics & CRO</option>
+                  <option value="reputation">Reputation Management</option>
+                  <option value="partnership">Full Partnership Package</option>
+                  <option value="other">Something Else / Not Sure Yet</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="message" className="text-sm font-medium text-gray-300">Tell Me About Your Project or Goals</label>
+                <textarea
+                  id="message"
+                  placeholder="What are you trying to achieve? What challenges are you facing?"
+                  rows={5}
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors resize-none"
+                  required
+                />
+              </div>
+
+              <Button type="submit" size="lg" className="w-full bg-[#0080FF] hover:bg-[#0080FF]/90 text-base">
+                Send Message
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </form>
+
+            <div className="mt-6 space-y-3">
+              <p className="text-sm text-gray-400 font-inter">
+                I read every message personally. No auto-responders, no canned replies. You'll hear back from me, usually within 24 hours on business days.
+              </p>
+              <p className="text-xs text-gray-500 font-inter">
+                Your information is never shared, sold, or used for spam. I hate that too. <Link href="/privacy" className="text-[#0080FF] hover:underline">Privacy Policy</Link>
+              </p>
+            </div>
           </Card>
         </div>
-      </Section>
+      </section>
 
-      {/* FAQ Section */}
-      <Section>
-        <SectionHeader
-          title="Frequently Asked Questions"
-          description="Common questions about working with us"
-        />
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <div className="p-4 rounded-lg border bg-card">
-              <h3 className="font-semibold mb-2">How quickly do you respond to inquiries?</h3>
-              <p className="text-sm text-muted-foreground">
-                We typically respond within 24 hours during business days. For urgent matters, please call us directly.
+      {/* Section 3: Alternative Ways to Reach Me */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">Prefer Another Way? You've Got Options.</h2>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="bg-black border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
+                <Calendar className="h-6 w-6 text-[#0080FF]" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 font-rajdhani">Book a Call Directly</h3>
+              <p className="text-gray-400 mb-6 font-inter">
+                Skip the back-and-forth. Grab a time that works for you on my calendar. Free 30-minute strategy call, no pressure.
               </p>
-            </div>
-            <div className="p-4 rounded-lg border bg-card">
-              <h3 className="font-semibold mb-2">Do you offer free consultations?</h3>
-              <p className="text-sm text-muted-foreground">
-                Yes! We offer a complimentary 30-minute consultation to discuss your needs and how we can help.
+              <Link href="/contact">
+                <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                  Book Your Free Call
+                </Button>
+              </Link>
+            </Card>
+
+            <Card className="bg-black border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
+                <Mail className="h-6 w-6 text-[#0080FF]" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 font-rajdhani">Write Me Directly</h3>
+              <p className="text-gray-400 mb-6 font-inter">
+                If you prefer to email, reach me at <a href="mailto:hello@yourdedicatedmarketer.com" className="text-[#0080FF] hover:underline">hello@yourdedicatedmarketer.com</a>. It comes straight to my inbox—not a shared team mailbox.
               </p>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <div className="p-4 rounded-lg border bg-card">
-              <h3 className="font-semibold mb-2">What industries do you work with?</h3>
-              <p className="text-sm text-muted-foreground">
-                We work with businesses across various industries including technology, healthcare, retail, and professional services.
+            </Card>
+
+            <Card className="bg-black border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
+                <MessageSquare className="h-6 w-6 text-[#0080FF]" />
+              </div>
+              <h3 className="text-xl font-bold mb-4 font-rajdhani">Real-Time Chat</h3>
+              <p className="text-gray-400 mb-6 font-inter">
+                Look for the chat icon in the bottom corner. If I'm available, I'll answer live. If not, leave a message and I'll get back to you quickly.
               </p>
-            </div>
-            <div className="p-4 rounded-lg border bg-card">
-              <h3 className="font-semibold mb-2">What's your typical project timeline?</h3>
-              <p className="text-sm text-muted-foreground">
-                Project timelines vary based on scope, but most projects range from 4-12 weeks. We'll provide a detailed timeline during our consultation.
-              </p>
-            </div>
+            </Card>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* CTA Section */}
-      <Section variant="muted">
-        <Container size="sm">
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl font-bold">Prefer to Call?</h2>
-            <p className="text-muted-foreground">
-              Give us a ring at +1 (555) 123-4567 and we'll be happy to chat.
-            </p>
-            <Button size="lg">
-              <Phone className="mr-2 h-4 w-4" />
-              Call Us Now
-            </Button>
+      {/* Section 4: What Happens Next? */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">What Happens After You Reach Out.</h2>
+          
+          <Card className="bg-[#121212] border border-white/10 p-8 md:p-12">
+            <div className="space-y-8">
+              <div className="flex items-start space-x-4">
+                <div className="h-10 w-10 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold">1</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2 font-rajdhani">You send a message or book a call.</h3>
+                  <p className="text-gray-400 font-inter">No gatekeepers, no forms disappearing into the void.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="h-10 w-10 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold">2</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2 font-rajdhani">I review and reply within 24 hours (often faster).</h3>
+                  <p className="text-gray-400 font-inter">If you booked a call, you'll get a confirmation with details.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="h-10 w-10 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold">3</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2 font-rajdhani">We talk — openly, honestly, no pitch decks.</h3>
+                  <p className="text-gray-400 font-inter">We discuss your business, your challenges, and whether we're a good fit. If we are, great. If not, I'll tell you honestly and point you in the right direction.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="h-10 w-10 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold">4</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2 font-rajdhani">You get a clear, transparent proposal if we move forward.</h3>
+                  <p className="text-gray-400 font-inter">No hidden fees, no surprise charges. Everything scoped and agreed upon before any work begins.</p>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* Section 5: FAQ Snippet */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">Common Questions</h2>
+
+          <div className="space-y-4">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index
+              return (
+                <Card key={index} className="bg-black border border-white/10">
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full p-6 text-left flex items-center justify-between"
+                  >
+                    <span className="font-semibold font-rajdhani">{faq.question}</span>
+                    {isOpen ? (
+                      <ChevronUp className="h-5 w-5 text-[#0080FF]" />
+                    ) : (
+                      <ChevronDown className="h-5 w-5 text-gray-400" />
+                    )}
+                  </button>
+                  {isOpen && (
+                    <div className="px-6 pb-6">
+                      <p className="text-gray-400 font-inter">{faq.answer}</p>
+                    </div>
+                  )}
+                </Card>
+              )
+            })}
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
+
+      {/* Section 6: Final CTA (Emergency Option) */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-black to-[#0080FF]/20">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Need Something Urgent? Use the Chat.</h2>
+          <p className="text-xl text-gray-400 mb-8 font-inter">
+            If you're up against a deadline or have a quick question, the live chat is your fastest path. I'll answer if I'm at my desk.
+          </p>
+          <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8">
+            Start Chat
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      </section>
     </div>
   )
 }

@@ -1,245 +1,266 @@
-import { Section, SectionHeader, StatCard, Container } from "@agency/ui"
-import { Sparkles, CheckCircle2, Award, Users, Target, Lightbulb, Heart } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { ArrowRight, Zap, Link2, Search, Bot, User, Shield, FileCheck, CheckCircle2, MessageSquare, Calendar } from "lucide-react"
 import Link from "next/link"
+import { Navigation } from "@/components/navigation"
+import { AnimateOnScroll } from "@agency/ui"
 
 export default function AboutPage() {
-  const team = [
-    {
-      name: "Alex Thompson",
-      role: "Founder & CEO",
-      bio: "15+ years in digital marketing and brand strategy"
-    },
-    {
-      name: "Sarah Chen",
-      role: "Creative Director",
-      bio: "Award-winning designer with Fortune 500 experience"
-    },
-    {
-      name: "Michael Roberts",
-      role: "Head of Strategy",
-      bio: "Data-driven marketing specialist and analytics expert"
-    },
-    {
-      name: "Emily Watson",
-      role: "Technical Lead",
-      bio: "Full-stack developer and systems architect"
-    }
-  ]
-
-  const values = [
-    {
-      icon: Target,
-      title: "Results-First",
-      description: "Every strategy is designed to deliver measurable business outcomes that matter."
-    },
-    {
-      icon: Lightbulb,
-      title: "Innovation",
-      description: "We embrace cutting-edge technology and creative approaches to stay ahead."
-    },
-    {
-      icon: Heart,
-      title: "Partnership",
-      description: "We work as an extension of your team, committed to your success."
-    }
-  ]
-
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Sparkles className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold">Nexus Agency</span>
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
-              <Link href="/services" className="text-sm font-medium hover:text-primary transition-colors">Services</Link>
-              <Link href="/work" className="text-sm font-medium hover:text-primary transition-colors">Work</Link>
-              <Link href="/about" className="text-sm font-medium text-primary">About</Link>
-              <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-black text-white">
+      <Navigation />
 
-      {/* Hero Section */}
-      <Section>
-        <div className="text-center space-y-8">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            About Nexus Agency
+      {/* Section 1: Header */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-[#1E1E1E] to-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,128,255,0.15),transparent_50%)]" />
+        
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 py-20">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-orbitron leading-tight">
+            Marketing Shouldn't Be This Hard.<br />
+            <span className="text-[#0080FF]">We're Here to Change That.</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            We're not just another marketing agency. We're your strategic partner in growth, combining creativity with data-driven insights to deliver exceptional results.
+          <p className="text-xl text-gray-400 max-w-4xl mx-auto font-inter">
+            The industry is full of agencies that overpromise, underdeliver, and hide behind vanity metrics. Your Dedicated Marketer was built to be the opposite: transparent, human-led, and relentlessly focused on what actually grows your business.
           </p>
         </div>
-      </Section>
+      </section>
 
-      {/* Our Story */}
-      <Section variant="muted">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold">Our Story</h2>
-            <p className="text-muted-foreground">
-              Founded in 2016, Nexus Agency started with a simple mission: to help businesses navigate the complex digital landscape with confidence. What began as a small team of passionate marketers has grown into a full-service agency serving clients across industries.
-            </p>
-            <p className="text-muted-foreground">
-              Our approach has always been different. We believe that great marketing isn't about tricks or shortcuts—it's about understanding your business, your audience, and your goals, then crafting strategies that deliver real, measurable results.
-            </p>
-            <p className="text-muted-foreground">
-              Today, we're proud to have helped over 150 clients achieve their marketing goals, generating $50M+ in revenue and earning recognition as one of the region's top digital agencies.
+      {/* Section 2: The Problem — Why We Exist */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">The Way Marketing Is Sold Is Broken.</h2>
+          
+          <Card className="bg-[#121212] border border-white/10 p-8 md:p-12 mb-8">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="space-y-4">
+                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center">
+                  <Link2 className="h-6 w-6 text-[#0080FF]" />
+                </div>
+                <h3 className="text-xl font-bold font-rajdhani">The "Average Trap"</h3>
+                <p className="text-gray-400 font-inter">
+                  AI has made it easy to churn out generic, synthetic-feeling content and templated websites. Many agencies now all sound, look, and perform exactly the same. Your brand deserves better than a copy-paste solution.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center">
+                  <Search className="h-6 w-6 text-[#0080FF]" />
+                </div>
+                <h3 className="text-xl font-bold font-rajdhani">Vanity Metrics, Not Business Results</h3>
+                <p className="text-gray-400 font-inter">
+                  Clicks, impressions, and "engagement" don't pay the bills. Yet agencies often report these numbers while ignoring the metrics that matter most: leads, sales, and customer value. We report on what moves your bottom line.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center">
+                  <Bot className="h-6 w-6 text-[#0080FF]" />
+                </div>
+                <h3 className="text-xl font-bold font-rajdhani">Fragmented Accountability</h3>
+                <p className="text-gray-400 font-inter">
+                  When your website, SEO, social, and ads are handled by different vendors, who takes responsibility when the strategy fails? Everyone points fingers. We're a single, dedicated partner who owns the entire outcome.
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <p className="text-center text-lg text-gray-300 font-inter italic">
+            Your business deserves a marketing partner who is as invested in your success as you are—not a vendor who disappears after the invoice is paid.
+          </p>
+        </div>
+      </section>
+
+      {/* Section 3: Our Philosophy — The Human-AI Symbiosis */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">Technology Is a Tool. Humans Are the Strategy.</h2>
+          
+          <div className="text-center mb-12">
+            <p className="text-xl text-gray-300 max-w-4xl mx-auto font-inter">
+              We believe the best marketing comes from a tight collaboration between human creativity, empathy, and strategic judgment—and the speed and analytical power of AI. We use AI as an accelerator, never as a replacement for the thinking, feeling, and nuanced decision-making that only a human can provide.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-4">
-              <div className="p-6 rounded-lg border bg-card text-center">
-                <StatCard value="10+" label="Years Experience" />
-              </div>
-              <div className="p-6 rounded-lg border bg-card text-center">
-                <StatCard value="40+" label="Team Members" />
-              </div>
-            </div>
-            <div className="space-y-4 mt-8">
-              <div className="p-6 rounded-lg border bg-card text-center">
-                <StatCard value="15+" label="Industry Awards" />
-              </div>
-              <div className="p-6 rounded-lg border bg-card text-center">
-                <StatCard value="150+" label="Happy Clients" />
-              </div>
-            </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="bg-black border border-white/10 p-8">
+              <h3 className="text-xl font-bold mb-6 font-rajdhani text-[#0080FF]">What AI Does Here</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Data analysis</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Research acceleration</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Content drafting assistance</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Performance pattern detection</span>
+                </li>
+              </ul>
+            </Card>
+
+            <Card className="bg-black border border-white/10 p-8">
+              <h3 className="text-xl font-bold mb-6 font-rajdhani text-[#0080FF]">What Humans Do Here</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Brand strategy</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Creative direction</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Empathy-driven copy</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Ethical judgment</span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <span className="text-gray-300 font-inter">Relationship building</span>
+                </li>
+              </ul>
+            </Card>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Our Values */}
-      <Section>
-        <SectionHeader
-          title="Our Values"
-          description="The principles that guide everything we do"
-        />
-        <div className="grid md:grid-cols-3 gap-8">
-          {values.map((value) => (
-            <div key={value.title} className="text-center space-y-4">
-              <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-                <value.icon className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="font-semibold text-xl">{value.title}</h3>
-              <p className="text-sm text-muted-foreground">{value.description}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
+      {/* Section 4: Our Commitments — What You Can Expect */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+        <div className="container mx-auto max-w-6xl">
+          <AnimateOnScroll>
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">This Is How We Work. No Exceptions.</h2>
+          </AnimateOnScroll>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <AnimateOnScroll delay={0}>
+              <Card className="bg-[#121212] border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
+                  <Shield className="h-6 w-6 text-[#0080FF]" />
+                </div>
+                <h3 className="text-xl font-bold mb-4 font-rajdhani">Radical Transparency</h3>
+                <p className="text-gray-400 font-inter">
+                  You'll always know what we're doing, why we're doing it, and what it costs. Our reports are clear, jargon-free, and tied directly to your business goals. No smoke. No mirrors.
+                </p>
+              </Card>
+            </AnimateOnScroll>
 
-      {/* Why Choose Us */}
-      <Section variant="muted">
-        <SectionHeader
-          title="Why Choose Nexus?"
-          description="What sets us apart from other agencies"
-        />
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Cross-Disciplinary Team</h3>
-                <p className="text-sm text-muted-foreground">Experts in strategy, creative, technology, and analytics working together.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Data-Driven Approach</h3>
-                <p className="text-sm text-muted-foreground">Every decision backed by data and continuous optimization.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Transparent Communication</h3>
-                <p className="text-sm text-muted-foreground">Real-time reporting and collaborative processes keep you informed.</p>
-              </div>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Agile Methodology</h3>
-                <p className="text-sm text-muted-foreground">Flexible processes that adapt to your changing needs.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Industry Expertise</h3>
-                <p className="text-sm text-muted-foreground">Deep experience across multiple industries and business models.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Long-Term Partnership</h3>
-                <p className="text-sm text-muted-foreground">We're invested in your success for the long haul.</p>
-              </div>
-            </div>
+            <AnimateOnScroll delay={100}>
+              <Card className="bg-[#121212] border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
+                  <FileCheck className="h-6 w-6 text-[#0080FF]" />
+                </div>
+                <h3 className="text-xl font-bold mb-4 font-rajdhani">You Own Everything</h3>
+                <p className="text-gray-400 font-inter">
+                  Your website, your data, your brand assets—they belong to you, period. No proprietary lock-in, no hostage situations. Cancel anytime and take it all with you.
+                </p>
+              </Card>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={200}>
+              <Card className="bg-[#121212] border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
+                  <Search className="h-6 w-6 text-[#0080FF]" />
+                </div>
+                <h3 className="text-xl font-bold mb-4 font-rajdhani">Metrics That Matter</h3>
+                <p className="text-gray-400 font-inter">
+                  We don't celebrate a spike in "likes" unless it correlates to leads or revenue. We define success metrics with you during onboarding and report against them relentlessly.
+                </p>
+              </Card>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={300}>
+              <Card className="bg-[#121212] border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
+                  <User className="h-6 w-6 text-[#0080FF]" />
+                </div>
+                <h3 className="text-xl font-bold mb-4 font-rajdhani">One Person, Full Accountability</h3>
+                <p className="text-gray-400 font-inter">
+                  You work directly with me—the founder and strategist. No junior account managers, no handoffs, no phone tag. When you have a question, I answer. When something breaks, I fix it.
+                </p>
+              </Card>
+            </AnimateOnScroll>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Team Section */}
-      <Section>
-        <SectionHeader
-          title="Meet Our Team"
-          description="The talented people behind our success"
-        />
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {team.map((member) => (
-            <div key={member.name} className="p-6 rounded-lg border bg-card text-center space-y-4">
-              <div className="h-24 w-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
-                <Users className="h-12 w-12 text-primary" />
+      {/* Section 5: Who Is Behind This? (Minimal Founder Note) */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+        <div className="container mx-auto max-w-4xl">
+          <Card className="bg-black border border-white/10 p-8 md:p-12">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
+              <div className="h-24 w-24 rounded-full bg-[#0080FF]/10 flex items-center justify-center shrink-0">
+                <User className="h-12 w-12 text-[#0080FF]" />
               </div>
-              <div>
-                <h3 className="font-semibold">{member.name}</h3>
-                <p className="text-sm text-primary">{member.role}</p>
-                <p className="text-xs text-muted-foreground mt-2">{member.bio}</p>
+              <div className="space-y-4">
+                <h2 className="text-2xl md:text-3xl font-bold font-orbitron">Hello. I'm [Your Name].</h2>
+                <p className="text-gray-300 font-inter leading-relaxed">
+                  I've spent my career leading marketing and strategy across three very different industries. That experience taught me one universal truth: businesses don't fail because they lack options—they fail because they lack a dedicated partner who can cut through the noise and execute. I started Your Dedicated Marketer to be that partner for businesses that are tired of the agency runaround. No fluff. No ego. Just good work that gets results.
+                </p>
               </div>
             </div>
-          ))}
+          </Card>
         </div>
-      </Section>
+      </section>
 
-      {/* CTA Section */}
-      <Section variant="muted">
-        <Container size="sm">
-          <div className="text-center space-y-6">
-            <h2 className="text-3xl font-bold">Ready to Work Together?</h2>
-            <p className="text-muted-foreground">
-              Let's discuss how our team can help you achieve your goals.
-            </p>
-            <Link href="/contact">
-              <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8">
-                Get in Touch
-              </button>
-            </Link>
-          </div>
-        </Container>
-      </Section>
+      {/* Section 6: Who This Is For */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">We Work Best With Businesses That...</h2>
+          
+          <Card className="bg-[#121212] border border-white/10 p-8 md:p-12">
+            <ul className="space-y-4">
+              <li className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <span className="text-gray-300 font-inter">Are tired of managing multiple freelancers and agencies.</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <span className="text-gray-300 font-inter">Value transparency and direct communication over polished pitches.</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <span className="text-gray-300 font-inter">Want a long-term marketing partner, not a one-off project vendor.</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <span className="text-gray-300 font-inter">Understand that real growth takes strategy, not just tactics.</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <span className="text-gray-300 font-inter">Are ready to invest in a website and marketing engine that actually performs.</span>
+              </li>
+            </ul>
+          </Card>
+        </div>
+      </section>
+
+      {/* Section 7: Final CTA */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-black to-[#0080FF]/20">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Let's Leave the Agency Nonsense Behind.</h2>
+          <p className="text-xl text-gray-400 mb-8 font-inter">
+            If you're looking for a marketing partner who takes full accountability, tells you the truth, and obsesses over your growth—let's talk. Free 30-minute strategy call, no pressure, no pitch deck.
+          </p>
+          <Link href="/contact">
+            <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8 mb-4">
+              Book Your Free Strategy Call
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+          <p className="text-gray-400 text-sm font-inter">
+            Prefer to write? Send me a message directly—I read every one.
+          </p>
+        </div>
+      </section>
     </div>
   )
 }

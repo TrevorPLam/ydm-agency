@@ -11,8 +11,8 @@ catalog:
   # Core dependencies
   '@testing-library/jest-dom': ^6.0.0
   '@testing-library/react': ^16.0.0
-  '@types/node': ^22.0.0
-  '@types/react': ^19.0.0
+  '@types/node': ^22.19.19
+  '@types/react': ^19.2.15
   '@types/react-dom': ^19.0.0
   '@vitest/coverage-v8': ^4.0.0
   '@vitest/ui': ^4.0.0
@@ -24,15 +24,15 @@ catalog:
   next: ^16.0.0
   react: ^19.2.4
   react-dom: ^19.2.4
+  syncpack: ^12.0.0
   tsup: ^8.0.0
 
   # Build tools
   turbo: ^2.9.12
 
   # TypeScript
-  typescript: ^5.6.0
+  typescript: ^5.9.3
   vite: ^6.0.0
 
   # Testing
   vitest: ^4.0.0
-  syncpack: ^12.0.0
