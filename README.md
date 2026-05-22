@@ -98,8 +98,61 @@ Located in `apps/demo/` - Demo applications showcasing platform capabilities:
 ## Technology Stack
 
 - **Frontend**: React 19, Next.js 16, TypeScript, Tailwind CSS
-- **Build**: Turborepo, npm workspaces
+- **Build**: Turborepo, pnpm workspaces
 - **UI**: shadcn/ui components
+- **Testing**: Vitest 4.0 with v8 coverage provider
+
+## Testing
+
+### Running Tests
+
+```bash
+# Run all tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with UI
+pnpm test:ui
+
+# Run tests with coverage
+pnpm test:coverage
+```
+
+### Test Configuration
+
+- **Pool**: threads (for better performance)
+- **Coverage Provider**: v8
+- **Coverage Thresholds**: 90% (lines, branches, functions, statements)
+- **Per-file Thresholds**: Enabled
+- **Reporters**: verbose, json, junit
+
+### CI Sharding
+
+For large test suites, use Vitest sharding to parallelize test execution across multiple CI machines:
+
+```yaml
+# Example GitHub Actions configuration
+strategy:
+  matrix:
+    shardIndex: [1, 2, 3, 4]
+    shardTotal: [4]
+
+steps:
+  - name: Run tests
+    run: pnpm test --reporter=blob --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+
+  - name: Upload blob report
+    uses: actions/upload-artifact@v4
+    with:
+      name: blob-report-${{ matrix.shardIndex }}
+      path: .vitest-reports/*
+
+# Merge reports from all shards
+- name: Merge reports
+  run: npx vitest --merge-reports
+```
 
 ## Documentation
 

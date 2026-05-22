@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="12" failures="0" errors="0" time="0.0147657">
+    <testsuite name="src/imap-client.test.ts" timestamp="2026-05-22T17:56:21.449Z" hostname="thepc" tests="7" failures="0" errors="0" skipped="0" time="0.006489">
+        <testcase classname="src/imap-client.test.ts" name="IMAPClient &gt; constructor &gt; should create an instance with config" time="0.0018986">
+        </testcase>
+        <testcase classname="src/imap-client.test.ts" name="IMAPClient &gt; constructor &gt; should store config" time="0.0002761">
+        </testcase>
+        <testcase classname="src/imap-client.test.ts" name="IMAPClient &gt; connect &gt; should connect without throwing" time="0.000972">
+        </testcase>
+        <testcase classname="src/imap-client.test.ts" name="IMAPClient &gt; connect &gt; should return a promise" time="0.0002511">
+        </testcase>
+        <testcase classname="src/imap-client.test.ts" name="IMAPClient &gt; fetchMessages &gt; should return an array" time="0.000316">
+        </testcase>
+        <testcase classname="src/imap-client.test.ts" name="IMAPClient &gt; fetchMessages &gt; should return empty array initially" time="0.0007746">
+        </testcase>
+        <testcase classname="src/imap-client.test.ts" name="IMAPClient &gt; fetchMessages &gt; should return a promise" time="0.0001571">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/mail-parser.test.ts" timestamp="2026-05-22T17:56:21.456Z" hostname="thepc" tests="5" failures="0" errors="0" skipped="0" time="0.0082767">
+        <testcase classname="src/mail-parser.test.ts" name="mail parser &gt; EmailMessage type &gt; should accept valid email message object" time="0.0027319">
+        </testcase>
+        <testcase classname="src/mail-parser.test.ts" name="mail parser &gt; EmailMessage type &gt; should accept multiple recipients" time="0.0008886">
+        </testcase>
+        <testcase classname="src/mail-parser.test.ts" name="mail parser &gt; parseEmail &gt; should return an EmailMessage object" time="0.0004719">
+        </testcase>
+        <testcase classname="src/mail-parser.test.ts" name="mail parser &gt; parseEmail &gt; should handle empty string input" time="0.0001458">
+        </testcase>
+        <testcase classname="src/mail-parser.test.ts" name="mail parser &gt; parseEmail &gt; should handle null-like input" time="0.0001349">
+        </testcase>
+    </testsuite>
+</testsuites>

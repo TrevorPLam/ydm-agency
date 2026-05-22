@@ -260,11 +260,13 @@ Create GitHub Actions workflow with test sharding. Configure matrix strategy for
 
 ---
 
-### F-003.11: Add test scripts to Next.js apps
+### F-003.11: Add test scripts to Next.js apps ✅
 
 **Target**: All apps/*/package.json
 
 Add test, test:ui, test:coverage, and test:watch scripts to all Next.js apps. Configure vitest.config.ts for each app. Add React Testing Library for component testing.
+
+**Note**: Added test scripts to all 9 Next.js apps. Added @testing-library/react and @testing-library/jest-dom to catalog. Created vitest.config.ts for each app with happy-dom environment. Created src/test/setup.ts files for jest-dom imports.
 
 ---
 

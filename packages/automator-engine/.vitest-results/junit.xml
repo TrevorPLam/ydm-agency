@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="19" failures="0" errors="0" time="0.0458608">
+    <testsuite name="src/engine.test.ts" timestamp="2026-05-22T17:56:21.026Z" hostname="thepc" tests="8" failures="0" errors="0" skipped="0" time="0.0394735">
+        <testcase classname="src/engine.test.ts" name="AutomatorEngine &gt; constructor &gt; should create an instance" time="0.0030507">
+        </testcase>
+        <testcase classname="src/engine.test.ts" name="AutomatorEngine &gt; constructor &gt; should initialize with an engine" time="0.0003416">
+        </testcase>
+        <testcase classname="src/engine.test.ts" name="AutomatorEngine &gt; addRule &gt; should add a rule without throwing" time="0.0009189">
+        </testcase>
+        <testcase classname="src/engine.test.ts" name="AutomatorEngine &gt; addRule &gt; should accept rule with valid structure" time="0.0003647">
+        </testcase>
+        <testcase classname="src/engine.test.ts" name="AutomatorEngine &gt; evaluate &gt; should return an array" time="0.000362">
+        </testcase>
+        <testcase classname="src/engine.test.ts" name="AutomatorEngine &gt; evaluate &gt; should return empty array for no rules" time="0.0007971">
+        </testcase>
+        <testcase classname="src/engine.test.ts" name="AutomatorEngine &gt; evaluate &gt; should accept facts object" time="0.0003498">
+        </testcase>
+        <testcase classname="src/engine.test.ts" name="AutomatorEngine &gt; evaluate &gt; should handle empty facts" time="0.0001938">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/types.test.ts" timestamp="2026-05-22T17:56:21.099Z" hostname="thepc" tests="11" failures="0" errors="0" skipped="0" time="0.0063873">
+        <testcase classname="src/types.test.ts" name="automator types &gt; AutomatorRule &gt; should accept valid rule object" time="0.0026123">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; AutomatorRule &gt; should accept multiple conditions" time="0.0002894">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; AutomatorRule &gt; should accept multiple actions" time="0.0002585">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; Condition &gt; should accept valid condition object" time="0.0002721">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; Condition &gt; should accept numeric values" time="0.0001618">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; Condition &gt; should accept boolean values" time="0.000131">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; Action &gt; should accept change-status action" time="0.0001973">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; Action &gt; should accept send-notification action" time="0.0001872">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; Action &gt; should accept create-task action" time="0.0001668">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; Action &gt; should accept assign-user action" time="0.0002252">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="automator types &gt; Action &gt; should accept all valid action types" time="0.0001938">
+        </testcase>
+    </testsuite>
+</testsuites>

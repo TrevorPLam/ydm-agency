@@ -1,16 +1,18 @@
 import { describe, it, expect } from 'vitest';
 import type { User, Workspace, WorkItem } from './types';
+import {
+	buildUser,
+	buildAdminUser,
+	buildWorkspace,
+	buildWorkItem,
+	buildInProgressWorkItem,
+} from './test-factories';
 
-describe('types', () => {
+describe('types', { tags: ['unit'] }, () => {
   describe('User', () => {
-    it('should accept valid user object', () => {
-      const user: User = {
-        id: '1',
-        email: 'test@example.com',
-        name: 'Test User',
-        role: 'admin',
-      };
-      expect(user.id).toBe('1');
+    it('should accept valid user object from factory', () => {
+      const user = buildUser({ role: 'admin' });
+      expect(user.id).toBeDefined();
       expect(user.email).toBe('test@example.com');
       expect(user.name).toBe('Test User');
       expect(user.role).toBe('admin');
@@ -20,41 +22,45 @@ describe('types', () => {
       const roles: Array<User['role']> = ['owner', 'admin', 'member', 'client'];
       expect(roles).toHaveLength(4);
     });
+
+    it('should create admin user with correct role', () => {
+      const admin = buildAdminUser();
+      expect(admin.role).toBe('admin');
+    });
   });
 
   describe('Workspace', () => {
-    it('should accept valid workspace object', () => {
-      const workspace: Workspace = {
-        id: '1',
-        name: 'Test Workspace',
-        slug: 'test-workspace',
-      };
-      expect(workspace.id).toBe('1');
+    it('should accept valid workspace object from factory', () => {
+      const workspace = buildWorkspace();
+      expect(workspace.id).toBeDefined();
       expect(workspace.name).toBe('Test Workspace');
       expect(workspace.slug).toBe('test-workspace');
+    });
+
+    it('should accept workspace with custom values', () => {
+      const workspace = buildWorkspace({
+        name: 'Custom Workspace',
+        slug: 'custom-workspace',
+      });
+      expect(workspace.name).toBe('Custom Workspace');
+      expect(workspace.slug).toBe('custom-workspace');
     });
   });
 
   describe('WorkItem', () => {
-    it('should accept valid work item object', () => {
-      const workItem: WorkItem = {
-        id: '1',
-        title: 'Test Task',
-        status: 'todo',
-      };
-      expect(workItem.id).toBe('1');
+    it('should accept valid work item object from factory', () => {
+      const workItem = buildWorkItem();
+      expect(workItem.id).toBeDefined();
       expect(workItem.title).toBe('Test Task');
       expect(workItem.status).toBe('todo');
     });
 
     it('should accept work item with optional fields', () => {
-      const workItem: WorkItem = {
-        id: '1',
-        title: 'Test Task',
-        status: 'in-progress',
+      const workItem = buildInProgressWorkItem({
         assigneeId: '2',
         templateId: '3',
-      };
+      });
+      expect(workItem.status).toBe('in-progress');
       expect(workItem.assigneeId).toBe('2');
       expect(workItem.templateId).toBe('3');
     });

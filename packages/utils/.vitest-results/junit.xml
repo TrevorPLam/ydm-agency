@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="34" failures="0" errors="0" time="0.0719499">
+    <testsuite name="src/date.test.ts" timestamp="2026-05-22T17:56:21.389Z" hostname="thepc" tests="14" failures="0" errors="0" skipped="0" time="0.0329533">
+        <testcase classname="src/date.test.ts" name="date utilities &gt; formatDate &gt; should format a date to ISO string (YYYY-MM-DD)" time="0.0246675">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; formatDate &gt; should handle dates at midnight" time="0.0002583">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; formatDate &gt; should handle dates at end of day" time="0.0001751">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; addDays &gt; should add positive days to a date" time="0.0002112">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; addDays &gt; should add negative days to a date" time="0.0001724">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; addDays &gt; should not mutate the original date" time="0.0001565">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; addDays &gt; should handle adding zero days" time="0.000147">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; addDays &gt; should handle month boundaries" time="0.0001527">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; addDays &gt; should handle year boundaries" time="0.0001767">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; isSameDay &gt; should return true for same day" time="0.0002415">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; isSameDay &gt; should return false for different days" time="0.000132">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; isSameDay &gt; should return false for different months" time="0.0000971">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; isSameDay &gt; should return false for different years" time="0.0000917">
+        </testcase>
+        <testcase classname="src/date.test.ts" name="date utilities &gt; isSameDay &gt; should handle different times on same day" time="0.000089">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/format.test.ts" timestamp="2026-05-22T17:56:21.407Z" hostname="thepc" tests="20" failures="0" errors="0" skipped="0" time="0.0389966">
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatCurrency &gt; should format USD currency correctly" time="0.0272821">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatCurrency &gt; should format zero correctly" time="0.0006322">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatCurrency &gt; should format negative numbers correctly" time="0.0002945">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatCurrency &gt; should handle large numbers" time="0.0002925">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatCurrency &gt; should format with custom currency" time="0.0004153">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatCurrency &gt; should format with GBP currency" time="0.0007284">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatCurrency &gt; should handle decimal precision" time="0.0021278">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatNumber &gt; should format numbers with commas" time="0.0005823">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatNumber &gt; should format zero correctly" time="0.0003681">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatNumber &gt; should format negative numbers" time="0.000742">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatNumber &gt; should handle decimal numbers" time="0.0003073">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatNumber &gt; should format small numbers" time="0.0001877">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; formatNumber &gt; should handle very large numbers" time="0.0002785">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; truncate &gt; should truncate string longer than length" time="0.0002215">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; truncate &gt; should not truncate string shorter than length" time="0.0001193">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; truncate &gt; should not truncate string equal to length" time="0.0000953">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; truncate &gt; should handle empty string" time="0.0000793">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; truncate &gt; should handle length of zero" time="0.0000795">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; truncate &gt; should handle unicode characters" time="0.0000793">
+        </testcase>
+        <testcase classname="src/format.test.ts" name="format utilities &gt; truncate &gt; should preserve original string when not truncated" time="0.0000862">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -31,3 +31,5 @@ catalog:
   vitest: ^4.0.0
   '@vitest/coverage-v8': ^4.0.0
   'happy-dom': ^15.0.0
+  '@testing-library/react': ^16.0.0
+  '@testing-library/jest-dom': ^6.0.0

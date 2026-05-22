@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="32" failures="0" errors="0" time="0.032382">
+    <testsuite name="src/aggregators.test.ts" timestamp="2026-05-22T17:56:21.389Z" hostname="thepc" tests="20" failures="0" errors="0" skipped="0" time="0.0245113">
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; sum &gt; should sum positive numbers" time="0.0172087">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; sum &gt; should sum negative numbers" time="0.0001991">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; sum &gt; should sum mixed positive and negative numbers" time="0.0001471">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; sum &gt; should return 0 for empty array" time="0.000167">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; sum &gt; should handle single element" time="0.0001444">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; sum &gt; should handle decimal numbers" time="0.0001253">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; sum &gt; should handle zeros" time="0.0001299">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; average &gt; should calculate average of positive numbers" time="0.0001786">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; average &gt; should calculate average of negative numbers" time="0.0001675">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; average &gt; should calculate average of mixed numbers" time="0.0001967">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; average &gt; should return 0 for empty array" time="0.0001115">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; average &gt; should handle single element" time="0.0000888">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; average &gt; should handle decimal numbers" time="0.0000866">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; average &gt; should handle identical numbers" time="0.0000936">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; count &gt; should count array elements" time="0.0001095">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; count &gt; should return 0 for empty array" time="0.0000785">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; count &gt; should count single element" time="0.0000863">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; count &gt; should count string array" time="0.0000759">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; count &gt; should count mixed array" time="0.0000808">
+        </testcase>
+        <testcase classname="src/aggregators.test.ts" name="aggregators &gt; count &gt; should count object array" time="0.0000832">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-builder.test.ts" timestamp="2026-05-22T17:56:21.403Z" hostname="thepc" tests="12" failures="0" errors="0" skipped="0" time="0.0078707">
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; constructor &gt; should create an instance" time="0.0020647">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; constructor &gt; should initialize with empty filters" time="0.0008086">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; addFilter &gt; should add a filter" time="0.0010371">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; addFilter &gt; should chain multiple filters" time="0.0003058">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; addFilter &gt; should return this for chaining" time="0.0002937">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; addFilter &gt; should handle numeric values" time="0.0001585">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; addFilter &gt; should handle boolean values" time="0.0001448">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; addFilter &gt; should handle null values" time="0.00014">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; build &gt; should return object with filters array" time="0.0003237">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; build &gt; should include all added filters" time="0.0002733">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; build &gt; should return empty filters when none added" time="0.0001409">
+        </testcase>
+        <testcase classname="src/query-builder.test.ts" name="QueryBuilder &gt; build &gt; should return updated filters after adding more" time="0.0003179">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -8,15 +8,19 @@
     "lint": "eslint . --ext .ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
+    "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "test:bench": "vitest bench"
   },
   "dependencies": {
     "nodemailer": "^6.9.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "catalog:",
     "@types/nodemailer": "^6.4.0",
-    "typescript": "^5"
+    "@vitest/coverage-v8": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

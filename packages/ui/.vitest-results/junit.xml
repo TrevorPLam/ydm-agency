@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="11" failures="0" errors="0" time="0.0179291">
+    <testsuite name="src/utils.test.ts" timestamp="2026-05-22T17:56:21.463Z" hostname="thepc" tests="11" failures="0" errors="0" skipped="0" time="0.0179291">
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should merge class names" time="0.011438">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle conditional classes" time="0.0002922">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle undefined and null" time="0.0004845">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle empty strings" time="0.0003371">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle arrays" time="0.0003123">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle objects with boolean values" time="0.000186">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle Tailwind class conflicts" time="0.0008762">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle complex Tailwind conflicts" time="0.0002972">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle no arguments" time="0.000379">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle single class" time="0.0002292">
+        </testcase>
+        <testcase classname="src/utils.test.ts" name="cn utility &gt; should handle duplicate classes" time="0.0001751">
+        </testcase>
+    </testsuite>
+</testsuites>

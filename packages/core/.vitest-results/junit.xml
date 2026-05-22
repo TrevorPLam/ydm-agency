@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="11" failures="0" errors="0" time="0.0122107">
+    <testsuite name="src/constants.test.ts" timestamp="2026-05-22T17:56:20.922Z" hostname="thepc" tests="6" failures="0" errors="0" skipped="0" time="0.0059042">
+        <testcase classname="src/constants.test.ts" name="constants &gt; APP_NAME &gt; should be defined" time="0.001808">
+        </testcase>
+        <testcase classname="src/constants.test.ts" name="constants &gt; APP_NAME &gt; should be a string" time="0.0004286">
+        </testcase>
+        <testcase classname="src/constants.test.ts" name="constants &gt; APP_NAME &gt; should equal &quot;Agency Platform&quot;" time="0.0001719">
+        </testcase>
+        <testcase classname="src/constants.test.ts" name="constants &gt; API_VERSION &gt; should be defined" time="0.0002523">
+        </testcase>
+        <testcase classname="src/constants.test.ts" name="constants &gt; API_VERSION &gt; should be a string" time="0.0003523">
+        </testcase>
+        <testcase classname="src/constants.test.ts" name="constants &gt; API_VERSION &gt; should equal &quot;v1&quot;" time="0.0001452">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/types.test.ts" timestamp="2026-05-22T17:56:20.927Z" hostname="thepc" tests="5" failures="0" errors="0" skipped="0" time="0.0063065">
+        <testcase classname="src/types.test.ts" name="types &gt; User &gt; should accept valid user object" time="0.0018628">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="types &gt; User &gt; should accept all valid roles" time="0.0008641">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="types &gt; Workspace &gt; should accept valid workspace object" time="0.000283">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="types &gt; WorkItem &gt; should accept valid work item object" time="0.0002322">
+        </testcase>
+        <testcase classname="src/types.test.ts" name="types &gt; WorkItem &gt; should accept work item with optional fields" time="0.0002586">
+        </testcase>
+    </testsuite>
+</testsuites>
