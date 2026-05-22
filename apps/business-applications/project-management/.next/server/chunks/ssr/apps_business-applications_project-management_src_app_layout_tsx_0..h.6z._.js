@@ -1,0 +1,3 @@
+module.exports=[899,a=>{"use strict";var b=a.i(9693);a.s(["default",0,function({children:a}){return(0,b.jsx)("html",{lang:"en",children:(0,b.jsx)("body",{children:a})})},"metadata",0,{title:"Project Management",description:"Industry-agnostic project management system"}])},34527,a=>{a.n(a.i(899))}];
+
+//# sourceMappingURL=apps_business-applications_project-management_src_app_layout_tsx_0..h.6z._.js.map

@@ -1,0 +1,5 @@
+release-notes:
+  generate: true
+  template: |
+    ## Release {{ version }}
+    {{ changes }}

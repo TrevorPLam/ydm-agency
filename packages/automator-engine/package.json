@@ -1,0 +1,17 @@
+{
+  "name": "@agency/automator-engine",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "json-rules-engine": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}

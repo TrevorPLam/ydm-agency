@@ -1,0 +1,22 @@
+pre-commit:
+  parallel: true
+  commands:
+    biome-check:
+      run: pnpm biome check --write {staged_files}
+      stage_fixed: true
+    biome-format:
+      run: pnpm biome format --write {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    test:
+      run: pnpm test
+    build:
+      run: pnpm build
+
+commit-msg:
+  commands:
+    lint-commit:
+      run: npx commitlint --edit $1

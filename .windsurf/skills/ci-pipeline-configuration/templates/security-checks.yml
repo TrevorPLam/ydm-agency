@@ -1,0 +1,6 @@
+security:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - run: pnpm audit
+    - uses: github/codeql-action/analyze@v3

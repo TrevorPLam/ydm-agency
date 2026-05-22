@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+# pnpm
+# pnpm-lock.yaml is committed (see pnpm-usage.md)
+
 # testing
 /coverage
 
@@ -39,3 +42,27 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# turbo
+.turbo
+
+# build outputs
+dist/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# temporary files
+*.tmp
+*.temp
+.cache/

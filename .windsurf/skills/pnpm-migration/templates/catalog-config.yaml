@@ -1,0 +1,29 @@
+# Catalog configuration for shared dependencies
+# Use this to normalize versions across workspaces
+
+catalog:
+  # Core dependencies
+  react:
+    version: ^18.3.0
+  react-dom:
+    version: ^18.3.0
+  next:
+    version: ^15.0.0
+  
+  # TypeScript
+  typescript:
+    version: ^5.6.0
+  @types/react:
+    version: ^18.3.0
+  @types/node:
+    version: ^22.0.0
+  
+  # Testing
+  vitest:
+    version: ^2.0.0
+  @vitest/ui:
+    version: ^2.0.0
+  
+  # Linting
+  biome:
+    version: ^1.8.0

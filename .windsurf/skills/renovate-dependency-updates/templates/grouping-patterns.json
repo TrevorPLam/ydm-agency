@@ -1,0 +1,16 @@
+{
+  "packageRules": [
+    {
+      "groupName": "React ecosystem",
+      "matchPackageNames": ["react", "react-dom", "@types/react"]
+    },
+    {
+      "groupName": "Next.js",
+      "matchPackageNames": ["next", "@next/*"]
+    },
+    {
+      "groupName": "TypeScript",
+      "matchPackageNames": ["typescript", "@types/*"]
+    }
+  ]
+}

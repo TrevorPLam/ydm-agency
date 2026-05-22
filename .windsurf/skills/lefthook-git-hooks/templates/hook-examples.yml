@@ -1,0 +1,27 @@
+# Example hook configurations
+
+# Fast checks for pre-commit
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.{js,jsx,ts,tsx}"
+      run: pnpm biome check --write {staged_files}
+    format:
+      glob: "*.{js,jsx,ts,tsx,json,md}"
+      run: pnpm biome format --write {staged_files}
+
+# Slow checks for pre-push
+pre-push:
+  parallel: true
+  commands:
+    test:
+      run: pnpm test
+    type-check:
+      run: pnpm tsc --noEmit
+
+# Commit message validation
+commit-msg:
+  commands:
+    conventional-commits:
+      run: npx commitlint --edit $1

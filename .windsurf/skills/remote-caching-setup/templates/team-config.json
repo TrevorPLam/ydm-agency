@@ -1,0 +1,8 @@
+# Team Scope Setup Guide
+
+1. Create a Vercel team
+2. Add team members to the team
+3. Link project to team: `npx vercel link --scope <team-name>`
+4. Configure turbo.json to use team remote cache
+5. Set environment variable: TURBO_TOKEN
+6. Set environment variable: TURBO_TEAM

@@ -1,0 +1,4 @@
+publishing:
+  registry: https://registry.npmjs.org
+  token: ${{ secrets.NPM_TOKEN }}
+  access: restricted
