@@ -468,23 +468,23 @@
   - ✅ TASK-020-4: apps/firm/site/app/about/page.tsx - Added "Trusted By" tile with client logo placeholders using Building2 icon
   - ✅ TASK-020-5: apps/firm/site/app/about/page.tsx - Added exaggerated corner rounding (rounded-2xl) and varied background opacities (surface-2 for featured, surface-3 for others)
 
-- [ ] **TASK-021: Enhance Founder Section with Personal Touch**
-  Status: pending
-  Related: apps/firm/site/app/about/page.tsx
+- [x] **TASK-021: Enhance Founder Section with Personal Touch**
+  Status: completed
+  Related: apps/firm/site/app/about/page.tsx, apps/firm/site/app/globals.css
   Done: Founder section has photo placeholder, handwritten accent, career timeline
   Out: Changing founder content
   Rules: Personal branding, handwritten accents, timeline elements
   Pattern: Photo frames, handwritten typography, career timeline
   Anti: Basic card layout, no personalization
-  Imports: none (CSS)
+  Imports: Zap from lucide-react, Caveat font from Google Fonts
   Exports: Updated about page
   Depends: TASK-004
   Blocks: none
 
-  - TASK-021-1: apps/firm/site/app/about/page.tsx - Add photo placeholder with stylized frame (rounded corners, subtle shadow)
-  - TASK-021-2: apps/firm/site/app/about/page.tsx - Add handwritten-style accent for "why I started" quote (different font family)
-  - TASK-021-3: apps/firm/site/app/about/page.tsx - Add subtle timeline of career with milestone markers
-  - TASK-021-4: apps/firm/site/app/about/page.tsx - Make it feel more personal with asymmetrical layout
+  - ✅ TASK-021-1: apps/firm/site/app/about/page.tsx - Added photo placeholder with stylized frame (aspect-[3/4], rounded-xl, shadow-2xl, accent glow)
+  - ✅ TASK-021-2: apps/firm/site/app/about/page.tsx - Added handwritten-style accent using Caveat font from Google Fonts for quote and signature
+  - ✅ TASK-021-3: apps/firm/site/app/about/page.tsx - Added career timeline with milestone markers (4 steps with accent circles, final step with glow)
+  - ✅ TASK-021-4: apps/firm/site/app/about/page.tsx - Created asymmetrical bento layout (2x2 grid with photo spanning 2 rows, quote and timeline as 1x1 tiles)
 
 ## Phase 7: Lower Priority Pages
 
