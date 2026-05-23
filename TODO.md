@@ -293,8 +293,8 @@
 
 ## Phase 4: Work Page Enhancement
 
-- [ ] **TASK-012: Enhance Work Page Bento Layout**
-  Status: pending
+- [x] **TASK-012: Enhance Work Page Bento Layout**
+  Status: completed
   Related: apps/firm/site/app/work/page.tsx
   Done: Project grid uses more dramatic bento variations with actual screenshots
   Out: Adding new projects, changing project content
@@ -306,12 +306,12 @@
   Depends: TASK-004
   Blocks: TASK-013
 
-  - TASK-012-1: apps/firm/site/app/work/page.tsx - Enhance existing bento with more dramatic size variations
-  - TASK-012-2: apps/firm/site/app/work/page.tsx - Add more 2x2 featured tiles, more 1x2 and 2x1 tiles
-  - TASK-012-3: apps/firm/site/app/work/page.tsx - Add "featured" badge to first project with accent color and glow
-  - TASK-012-4: apps/firm/site/app/work/page.tsx - Replace Monitor icon placeholders with actual project screenshots or stylized mockups
-  - TASK-012-5: apps/firm/site/app/work/page.tsx - Enhance hover effects: image zoom (scale-110), overlay with project details slide-up
-  - TASK-012-6: apps/firm/site/app/work/page.tsx - Add subtle parallax on scroll to project cards
+  - ✅ TASK-012-1: apps/firm/site/app/work/page.tsx - Enhanced bento with md:grid-cols-3 md:grid-rows-3 for more dramatic variations
+  - ✅ TASK-012-2: apps/firm/site/app/work/page.tsx - Added varied tile sizes: 2x2 featured, 2x1 wide, 1x2 tall, 1x1 standard
+  - ✅ TASK-012-3: apps/firm/site/app/work/page.tsx - Added featured badge to first project with accent color and shadow-[0_0_20px_rgba(0,128,255,0.5)] glow
+  - ✅ TASK-012-4: apps/firm/site/app/work/page.tsx - Replaced Monitor icons with stylized mockups using gradient backgrounds and industry initials
+  - ✅ TASK-012-5: apps/firm/site/app/work/page.tsx - Enhanced hover effects: scale-110 image zoom, overlay with project details slide-up (translate-y)
+  - ✅ TASK-012-6: apps/firm/site/app/work/page.tsx - Added subtle parallax on scroll using timeline-parallax class from globals.css
 
 - [ ] **TASK-013: Modernize Filter Bar**
   Status: pending
