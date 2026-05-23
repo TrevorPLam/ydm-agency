@@ -7,8 +7,15 @@ import Link from "next/link"
 import { Navigation } from "@/components/navigation"
 import { AnimateOnScroll } from "@agency/ui"
 import * as Accordion from "@radix-ui/react-accordion"
+import { useState } from "react"
 
 export default function ServicesPage() {
+  const [isAnnual, setIsAnnual] = useState(false)
+  const [expandedFeatures, setExpandedFeatures] = useState<{ [key: string]: boolean }>({})
+
+  const toggleFeatures = (tier: string) => {
+    setExpandedFeatures(prev => ({ ...prev, [tier]: !prev[tier] }))
+  }
 
   const faqs = [
     {
@@ -190,17 +197,44 @@ export default function ServicesPage() {
         <div className="container mx-auto max-w-6xl">
           <AnimateOnScroll>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Full-Service Partnership Packages</h2>
-            <p className="text-gray-400 mb-12 font-inter max-w-3xl">
+            <p className="text-gray-400 mb-8 font-inter max-w-3xl">
               For businesses that want a dedicated marketing team without the overhead. One partner, one invoice, no finger-pointing.
             </p>
           </AnimateOnScroll>
+
+          {/* Monthly/Annual Toggle */}
+          <div className="flex items-center justify-center mb-12">
+            <div className="bg-black border border-white/10 rounded-full p-1 flex items-center">
+              <button
+                onClick={() => setIsAnnual(false)}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  !isAnnual
+                    ? 'bg-[var(--accent)] text-white'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setIsAnnual(true)}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  isAnnual
+                    ? 'bg-[var(--accent)] text-white'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                Annual
+                <span className="ml-1 text-xs opacity-75">(Save 20%)</span>
+              </button>
+            </div>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <AnimateOnScroll delay={0}>
               <Card className="bg-black border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
                 <h3 className="text-2xl font-bold mb-2 font-rajdhani">Foundation</h3>
                 <p className="text-[var(--accent)] font-medium mb-6">Launch & Establish</p>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-6">
                   <li className="flex items-start space-x-2">
                     <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Website design & build (core)</span>
@@ -213,17 +247,43 @@ export default function ServicesPage() {
                     <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Email & CRM setup (basic)</span>
                   </li>
-                  <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">Monthly blog post (1x)</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">Quarterly analytics report</span>
-                  </li>
                 </ul>
+                <button
+                  onClick={() => toggleFeatures('foundation')}
+                  className="text-[var(--accent)] text-sm font-medium mb-6 hover:text-[var(--accent)]/80 flex items-center"
+                >
+                  {expandedFeatures.foundation ? (
+                    <>
+                      <ChevronUp className="h-4 w-4 mr-1" />
+                      Show less
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="h-4 w-4 mr-1" />
+                      View all features
+                    </>
+                  )}
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    expandedFeatures.foundation ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-300">Monthly blog post (1x)</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-300">Quarterly analytics report</span>
+                    </li>
+                  </ul>
+                </div>
                 <div className="mb-6">
-                  <p className="text-2xl font-bold font-rajdhani">Starting at $____/month</p>
+                  <p className="text-2xl font-bold font-rajdhani">
+                    Starting at ${isAnnual ? '____' : '____'}/month
+                  </p>
                   <p className="text-xs text-gray-400">after initial build fee</p>
                 </div>
                 <Link href="/contact">
@@ -235,13 +295,13 @@ export default function ServicesPage() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
-              <Card className="bg-black border-2 border-[var(--accent)] p-8 relative ring-2 ring-[var(--accent)]">
+              <Card className="bg-black border-2 border-[var(--accent)] p-8 relative ring-2 ring-[var(--accent)] transform md:-translate-y-4">
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[var(--accent)] text-white text-xs font-bold px-3 py-1 rounded-full">
                   POPULAR
                 </div>
                 <h3 className="text-2xl font-bold mb-2 font-rajdhani">Growth</h3>
                 <p className="text-[var(--accent)] font-medium mb-6">Expand Your Reach</p>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-6">
                   <li className="flex items-start space-x-2">
                     <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Everything in Foundation, plus:</span>
@@ -254,21 +314,47 @@ export default function ServicesPage() {
                     <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Social media (2 platforms, 3 posts/week)</span>
                   </li>
-                  <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">Newsletter design & send (bi-weekly)</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">Landing pages & lead magnet design</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">Monthly performance review call</span>
-                  </li>
                 </ul>
+                <button
+                  onClick={() => toggleFeatures('growth')}
+                  className="text-[var(--accent)] text-sm font-medium mb-6 hover:text-[var(--accent)]/80 flex items-center"
+                >
+                  {expandedFeatures.growth ? (
+                    <>
+                      <ChevronUp className="h-4 w-4 mr-1" />
+                      Show less
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="h-4 w-4 mr-1" />
+                      View all features
+                    </>
+                  )}
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    expandedFeatures.growth ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-300">Newsletter design & send (bi-weekly)</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-300">Landing pages & lead magnet design</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-300">Monthly performance review call</span>
+                    </li>
+                  </ul>
+                </div>
                 <div className="mb-6">
-                  <p className="text-2xl font-bold font-rajdhani">Starting at $____/month</p>
+                  <p className="text-2xl font-bold font-rajdhani">
+                    Starting at ${isAnnual ? '____' : '____'}/month
+                  </p>
                 </div>
                 <Link href="/contact">
                   <Button className="w-full bg-[var(--accent)] hover:bg-[var(--accent)]/90">
@@ -282,7 +368,7 @@ export default function ServicesPage() {
               <Card className="bg-black border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
                 <h3 className="text-2xl font-bold mb-2 font-rajdhani">Scale</h3>
                 <p className="text-[var(--accent)] font-medium mb-6">Full-Funnel Domination</p>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-6">
                   <li className="flex items-start space-x-2">
                     <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Everything in Growth, plus:</span>
@@ -295,21 +381,47 @@ export default function ServicesPage() {
                     <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Reputation management & reviews</span>
                   </li>
-                  <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">Advanced CRM automation & lead scoring</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">Bi-weekly A/B testing & CRO</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">Dedicated Slack/Teams channel & weekly strategy</span>
-                  </li>
                 </ul>
+                <button
+                  onClick={() => toggleFeatures('scale')}
+                  className="text-[var(--accent)] text-sm font-medium mb-6 hover:text-[var(--accent)]/80 flex items-center"
+                >
+                  {expandedFeatures.scale ? (
+                    <>
+                      <ChevronUp className="h-4 w-4 mr-1" />
+                      Show less
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="h-4 w-4 mr-1" />
+                      View all features
+                    </>
+                  )}
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    expandedFeatures.scale ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-300">Advanced CRM automation & lead scoring</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-300">Bi-weekly A/B testing & CRO</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-300">Dedicated Slack/Teams channel & weekly strategy</span>
+                    </li>
+                  </ul>
+                </div>
                 <div className="mb-6">
-                  <p className="text-2xl font-bold font-rajdhani">Starting at $____/month</p>
+                  <p className="text-2xl font-bold font-rajdhani">
+                    Starting at ${isAnnual ? '____' : '____'}/month
+                  </p>
                 </div>
                 <Link href="/contact">
                   <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
@@ -318,6 +430,28 @@ export default function ServicesPage() {
                 </Link>
               </Card>
             </AnimateOnScroll>
+          </div>
+
+          {/* FAQ Section - Moved closer to pricing */}
+          <div className="mt-24">
+            <AnimateOnScroll>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Frequently Asked Questions</h2>
+              <p className="text-gray-400 mb-12 font-inter">Common questions about pricing and packages</p>
+            </AnimateOnScroll>
+
+            <Accordion.Root type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <Accordion.Item key={index} value={`item-${index}`} className="bg-black border border-white/10 rounded-lg">
+                  <Accordion.Trigger className="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors focus:outline-none">
+                    <span className="font-semibold font-rajdhani">{faq.question}</span>
+                    <ChevronDown className="h-5 w-5 text-[var(--accent)] transition-transform duration-200 data-[state=open]:rotate-180" />
+                  </Accordion.Trigger>
+                  <Accordion.Content className="px-6 pb-6 pt-0">
+                    <p className="text-gray-400 font-inter">{faq.answer}</p>
+                  </Accordion.Content>
+                </Accordion.Item>
+              ))}
+            </Accordion.Root>
           </div>
         </div>
       </section>
@@ -483,29 +617,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Section 6: Frequently Asked Questions */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
-        <div className="container mx-auto max-w-4xl">
-          <AnimateOnScroll>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Frequently Asked Questions</h2>
-            <p className="text-gray-400 mb-12 font-inter">Common questions about working together</p>
-          </AnimateOnScroll>
-
-          <Accordion.Root type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <Accordion.Item key={index} value={`item-${index}`} className="bg-black border border-white/10 rounded-lg">
-                <Accordion.Trigger className="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors focus:outline-none">
-                  <span className="font-semibold font-rajdhani">{faq.question}</span>
-                  <ChevronDown className="h-5 w-5 text-[var(--accent)] transition-transform duration-200 data-[state=open]:rotate-180" />
-                </Accordion.Trigger>
-                <Accordion.Content className="px-6 pb-6 pt-0">
-                  <p className="text-gray-400 font-inter">{faq.answer}</p>
-                </Accordion.Content>
-              </Accordion.Item>
-            ))}
-          </Accordion.Root>
-        </div>
-      </section>
 
       {/* Section 7: Final CTA */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[var(--accent)]/20">

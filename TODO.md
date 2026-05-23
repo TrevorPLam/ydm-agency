@@ -232,8 +232,8 @@
 
 ## Phase 3: Services Page Transformation
 
-- [ ] **TASK-009: Modernize Pricing Table**
-  Status: pending
+- [x] **TASK-009: Modernize Pricing Table**
+  Status: completed
   Related: apps/firm/site/app/services/page.tsx
   Done: Pricing section has toggle, concise features, expandable details, FAQ
   Out: Changing pricing structure, adding new tiers
@@ -245,12 +245,12 @@
   Depends: TASK-004
   Blocks: TASK-010
 
-  - TASK-009-1: apps/firm/site/app/services/page.tsx - Add monthly/annual pricing toggle with useState
-  - TASK-009-2: apps/firm/site/app/services/page.tsx - Show 2-3 main features per tier, add "View all features" expandable button
-  - TASK-009-3: apps/firm/site/app/services/page.tsx - Implement expandable feature list with smooth height animation
-  - TASK-009-4: apps/firm/site/app/services/page.tsx - Add FAQ accordion below pricing section (already has FAQ, move closer to pricing)
-  - TASK-009-5: apps/firm/site/app/services/page.tsx - Consider staggered layout: elevate middle tier slightly (transform: translateY)
-  - TASK-009-6: apps/firm/site/app/services/page.tsx - Ensure mobile responsiveness: stack tiers vertically on small screens
+  - ✅ TASK-009-1: apps/firm/site/app/services/page.tsx - Added monthly/annual pricing toggle with useState, shows "Save 20%" on annual option
+  - ✅ TASK-009-2: apps/firm/site/app/services/page.tsx - Show 2-3 main features per tier, added "View all features" expandable button for each tier
+  - ✅ TASK-009-3: apps/firm/site/app/services/page.tsx - Implemented expandable feature list with smooth height animation (max-h-96, opacity transition)
+  - ✅ TASK-009-4: apps/firm/site/app/services/page.tsx - Moved FAQ accordion below pricing section within same section for better context
+  - ✅ TASK-009-5: apps/firm/site/app/services/page.tsx - Added staggered layout: elevated middle tier with transform md:-translate-y-4
+  - ✅ TASK-009-6: apps/firm/site/app/services/page.tsx - Ensured mobile responsiveness: tiers stack vertically on small screens (grid-cols-1 on mobile, md:grid-cols-3)
 
 - [ ] **TASK-010: Transform Core Web Design Section to Bento Grid**
   Status: pending
