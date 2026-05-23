@@ -332,8 +332,8 @@
   - ✅ TASK-013-4: apps/firm/site/app/work/page.tsx - Add sticky positioning to filter bar (sticky top-16 z-40)
   - ✅ TASK-013-5: apps/firm/site/app/work/page.tsx - Add result count indicator showing "X projects"
 
-- [ ] **TASK-014: Transform Featured Case Study to Immersive Layout**
-  Status: pending
+- [x] **TASK-014: Transform Featured Case Study to Immersive Layout**
+  Status: completed
   Related: apps/firm/site/app/work/page.tsx
   Done: Featured case study uses full-width bento with multiple content tiles
   Out: Changing case study content
@@ -345,11 +345,11 @@
   Depends: TASK-004, TASK-012
   Blocks: none
 
-  - TASK-014-1: apps/firm/site/app/work/page.tsx - Transform standard split layout to full-width bento
-  - TASK-014-2: apps/firm/site/app/work/page.tsx - Add stat tiles as individual bento boxes (+142%, +87%, etc.)
-  - TASK-014-3: apps/firm/site/app/work/page.tsx - Add testimonial tile with quote and attribution
-  - TASK-014-4: apps/firm/site/app/work/page.tsx - Add "key learnings" tile with bullet points
-  - TASK-014-5: apps/firm/site/app/work/page.tsx - Make it feel like mini case study within the page
+  - ✅ TASK-014-1: apps/firm/site/app/work/page.tsx - Transformed standard split layout to full-width bento using md:grid-cols-3 md:grid-rows-2
+  - ✅ TASK-014-2: apps/firm/site/app/work/page.tsx - Added stat tiles as individual bento boxes (+142% Mobile Conversion, +85% Form Conversions, 5 First-Page Rankings)
+  - ✅ TASK-014-3: apps/firm/site/app/work/page.tsx - Added testimonial tile with quote and attribution (Dr. Sarah Mitchell)
+  - ✅ TASK-014-4: apps/firm/site/app/work/page.tsx - Added "key learnings" tile with bullet points and Sparkles icons
+  - ✅ TASK-014-5: apps/firm/site/app/work/page.tsx - Made it feel like mini case study with varied tile sizes, hover effects, and visual hierarchy
 
 ## Phase 5: Contact Page Transformation
 
