@@ -27,7 +27,7 @@ commit-msg:
       install: pnpm add -D @commitlint/cli @commitlint/config-conventional
 
 pre-push:
-  parallel: true
+  parallel: false
   skip_on_merge: true
   commands:
     typecheck:
@@ -37,8 +37,3 @@ pre-push:
     syncpack:
       run: pnpm run syncpack:lint
       glob: "package.json"
-
-    # Run fast tests only on push, full test suite in CI
-    test:fast:
-      run: pnpm turbo run test:fast --if-present
-      glob: "*.test.{ts,tsx}"
