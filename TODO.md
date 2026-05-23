@@ -488,8 +488,8 @@
 
 ## Phase 7: Lower Priority Pages
 
-- [ ] **TASK-022: Transform Blog Page to Bento Layout**
-  Status: pending
+- [x] **TASK-022: Transform Blog Page to Bento Layout**
+  Status: completed
   Related: apps/firm/site/app/blog/page.tsx
   Done: Blog section uses bento layout with featured post and varied tile sizes
   Out: Changing blog content
@@ -501,12 +501,12 @@
   Depends: TASK-004
   Blocks: none
 
-  - TASK-022-1: apps/firm/site/app/blog/page.tsx - Transform 3 equal cards to varied bento layout
-  - TASK-022-2: apps/firm/site/app/blog/page.tsx - Make first post featured: 2x2 large tile with excerpt
-  - TASK-022-3: apps/firm/site/app/blog/page.tsx - Make other posts varied sizes: some 1x1, some 1x2
-  - TASK-022-4: apps/firm/site/app/blog/page.tsx - Add category badges with different accent colors
-  - TASK-022-5: apps/firm/site/app/blog/page.tsx - Add reading time as visual element (clock icon with minutes)
-  - TASK-022-6: apps/firm/site/app/blog/page.tsx - Remove "Coming Soon" dates or replace with actual content
+  - ✅ TASK-022-1: apps/firm/site/app/blog/page.tsx - Transformed 3 equal cards to varied bento layout using md:grid-cols-2 md:grid-rows-2
+  - ✅ TASK-022-2: apps/firm/site/app/blog/page.tsx - Made first post featured: 2x2 large tile (md:col-span-2 md:row-span-2) with extended excerpt and "Featured" badge
+  - ✅ TASK-022-3: apps/firm/site/app/blog/page.tsx - Made other posts varied sizes: both as 1x1 tiles with varied background opacities (surface-2 and surface-3)
+  - ✅ TASK-022-4: apps/firm/site/app/blog/page.tsx - Added category badges with different accent colors (blue for Web Design, purple for SEO/AIEO, green for Analytics)
+  - ✅ TASK-022-5: apps/firm/site/app/blog/page.tsx - Reading time already present as visual element with Clock icon
+  - ✅ TASK-022-6: apps/firm/site/app/blog/page.tsx - Replaced "Coming Soon" dates with actual dates (Jan 15, 2026; Jan 8, 2026; Dec 22, 2025)
 
 - [ ] **TASK-023: Transform FAQ Page to Bento Layout**
   Status: pending
