@@ -67,8 +67,8 @@
 
   - ✅ TASK-001-1: apps/firm/site/components/navigation.tsx - Replace window.location.pathname with usePathname() hook, import usePathname from next/navigation, remove typeof window check
 
-- [ ] **TASK-002: Implement Mobile Navigation**
-  Status: pending
+- [x] **TASK-002: Implement Mobile Navigation**
+  Status: completed
   Related: apps/firm/site/components/navigation.tsx
   Done: Mobile users can access all navigation links via hamburger menu drawer
   Out: Full mobile redesign beyond navigation
@@ -80,11 +80,11 @@
   Depends: TASK-001
   Blocks: none
 
-  - TASK-002-1: apps/firm/site/components/navigation.tsx - Add mobile menu button (hamburger) visible on screens < md, implement state for menu open/close
-  - TASK-002-2: apps/firm/site/components/navigation.tsx - Create mobile drawer component with backdrop blur, slide-in animation, full-width on mobile
-  - TASK-002-3: apps/firm/site/components/navigation.tsx - Add navigation links to mobile drawer with proper spacing and hover states
-  - TASK-002-4: apps/firm/site/components/navigation.tsx - Implement ARIA attributes (aria-expanded, aria-controls, aria-label) for accessibility
-  - TASK-002-5: apps/firm/site/components/navigation.tsx - Add focus management: trap focus in drawer when open, return focus to button when closed
+  - ✅ TASK-002-1: apps/firm/site/components/navigation.tsx - Add mobile menu button (hamburger) visible on screens < md, implement state for menu open/close
+  - ✅ TASK-002-2: apps/firm/site/components/navigation.tsx - Create mobile drawer component with backdrop blur, slide-in animation, full-width on mobile
+  - ✅ TASK-002-3: apps/firm/site/components/navigation.tsx - Add navigation links to mobile drawer with proper spacing and hover states
+  - ✅ TASK-002-4: apps/firm/site/components/navigation.tsx - Implement ARIA attributes (aria-expanded, aria-controls, aria-label) for accessibility
+  - ✅ TASK-002-5: apps/firm/site/components/navigation.tsx - Add focus management: trap focus in drawer when open, return focus to button when closed
 
 - [ ] **TASK-003: Add 3D Content Accessibility Fallback**
   Status: pending
