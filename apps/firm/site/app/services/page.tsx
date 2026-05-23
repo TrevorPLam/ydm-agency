@@ -12,6 +12,7 @@ import { useState } from "react"
 export default function ServicesPage() {
   const [isAnnual, setIsAnnual] = useState(false)
   const [expandedFeatures, setExpandedFeatures] = useState<{ [key: string]: boolean }>({})
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
 
   const toggleFeatures = (tier: string) => {
     setExpandedFeatures(prev => ({ ...prev, [tier]: !prev[tier] }))
@@ -456,101 +457,168 @@ export default function ServicesPage() {
             Already have a website? Just need CRM help or social management? No problem. All services are available as standalone engagements.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+          <div className="grid md:grid-cols-2 md:grid-rows-4 gap-6">
+            {/* Content Group - 2x1 tile */}
+            <Card
+              className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-all duration-300 md:col-span-2 md:row-span-1 group"
+              onMouseEnter={() => setHoveredCard('content')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="flex items-start gap-4">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                  <FileText className="h-6 w-6 text-[var(--accent)]" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-lg font-bold font-rajdhani">Content Suite</h3>
+                    <span className="text-xs bg-[var(--accent)]/20 text-[var(--accent)] px-2 py-0.5 rounded-full">2 services</span>
+                  </div>
+                  <p className="text-gray-400 text-sm mb-3 font-inter">Strategy, writing, and publishing that fuels your SEO and authority.</p>
+                  <div className={`overflow-hidden transition-all duration-300 ${hoveredCard === 'content' ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <p className="text-gray-500 text-xs mb-3">Includes: Blog & Resource Management, Newsletter & Email Marketing</p>
+                  </div>
+                  <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
+                    I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </Card>
+
+            {/* Brand Identity - 1x1 tile */}
+            <Card
+              className="bg-[var(--surface-3)] border border-white/10 p-6 hover:border-[var(--accent)] transition-all duration-300 md:col-span-1 md:row-span-1 group"
+              onMouseEnter={() => setHoveredCard('brand')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <Palette className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Brand Identity & Marketing Kit</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">From logo systems to presentation templates, get a cohesive visual brand that builds trust.</p>
-              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
-                I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
-              </Link>
-            </Card>
-
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
-                <FileText className="h-6 w-6 text-[var(--accent)]" />
+              <div className={`overflow-hidden transition-all duration-300 ${hoveredCard === 'brand' ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <p className="text-gray-500 text-xs mb-3">Deliverables: Logo, style guide, templates, brand guidelines</p>
               </div>
-              <h3 className="text-lg font-bold mb-2 font-rajdhani">Blog & Resource Management</h3>
-              <p className="text-gray-400 text-sm mb-4 font-inter">Strategy, writing, and publishing that fuels your SEO and authority.</p>
               <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
-                <Mail className="h-6 w-6 text-[var(--accent)]" />
-              </div>
-              <h3 className="text-lg font-bold mb-2 font-rajdhani">Newsletter & Email Marketing</h3>
-              <p className="text-gray-400 text-sm mb-4 font-inter">Convert subscribers into customers with beautifully designed, automated sequences.</p>
-              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
-                I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
-              </Link>
-            </Card>
-
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+            {/* Social Media - 1x1 tile */}
+            <Card
+              className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-all duration-300 md:col-span-1 md:row-span-1 group"
+              onMouseEnter={() => setHoveredCard('social')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <Share2 className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Social Media Management</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Done-for-you content creation, scheduling, and engagement on the platforms that matter.</p>
+              <div className={`overflow-hidden transition-all duration-300 ${hoveredCard === 'social' ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <p className="text-gray-500 text-xs mb-3">Platforms: LinkedIn, Twitter/X, Instagram, Facebook</p>
+              </div>
               <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+            {/* Analytics Group - 2x1 tile */}
+            <Card
+              className="bg-[var(--surface-3)] border border-white/10 p-6 hover:border-[var(--accent)] transition-all duration-300 md:col-span-2 md:row-span-1 group"
+              onMouseEnter={() => setHoveredCard('analytics')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="flex items-start gap-4">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="h-6 w-6 text-[var(--accent)]" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-lg font-bold font-rajdhani">Analytics & Optimization</h3>
+                    <span className="text-xs bg-[var(--accent)]/20 text-[var(--accent)] px-2 py-0.5 rounded-full">2 services</span>
+                  </div>
+                  <p className="text-gray-400 text-sm mb-3 font-inter">Turn data into decisions; improve what's working and fix what's not.</p>
+                  <div className={`overflow-hidden transition-all duration-300 ${hoveredCard === 'analytics' ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <p className="text-gray-500 text-xs mb-3">Includes: Analytics & CRO, SEO & AIEO</p>
+                  </div>
+                  <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
+                    I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </Card>
+
+            {/* CRM - 1x1 tile */}
+            <Card
+              className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-all duration-300 md:col-span-1 md:row-span-1 group"
+              onMouseEnter={() => setHoveredCard('crm')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <Users className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">CRM Management</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Setup, automation, data hygiene—so your leads never fall through the cracks.</p>
+              <div className={`overflow-hidden transition-all duration-300 ${hoveredCard === 'crm' ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <p className="text-gray-500 text-xs mb-3">Tools: HubSpot, Salesforce, Pipedrive, custom integrations</p>
+              </div>
               <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+            {/* PPC - 1x1 tile */}
+            <Card
+              className="bg-[var(--surface-3)] border border-white/10 p-6 hover:border-[var(--accent)] transition-all duration-300 md:col-span-1 md:row-span-1 group"
+              onMouseEnter={() => setHoveredCard('ppc')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <CreditCard className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">PPC & Paid Media</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Strategic ad buying and optimization tied to real revenue, not just clicks.</p>
-              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
-                I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
-              </Link>
-            </Card>
-
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
-                <Search className="h-6 w-6 text-[var(--accent)]" />
+              <div className={`overflow-hidden transition-all duration-300 ${hoveredCard === 'ppc' ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <p className="text-gray-500 text-xs mb-3">Channels: Google Ads, Meta Ads, LinkedIn Ads, retargeting</p>
               </div>
-              <h3 className="text-lg font-bold mb-2 font-rajdhani">SEO & AIEO</h3>
-              <p className="text-gray-400 text-sm mb-4 font-inter">Organic visibility on Google and AI answer engines—ethical, data-driven, transparent.</p>
               <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
-                <TrendingUp className="h-6 w-6 text-[var(--accent)]" />
-              </div>
-              <h3 className="text-lg font-bold mb-2 font-rajdhani">Analytics & CRO</h3>
-              <p className="text-gray-400 text-sm mb-4 font-inter">Turn data into decisions; improve what's working and fix what's not.</p>
-              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
-                I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
-              </Link>
-            </Card>
-
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+            {/* Reputation - 1x2 tile */}
+            <Card
+              className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-all duration-300 md:col-span-1 md:row-span-2 group"
+              onMouseEnter={() => setHoveredCard('reputation')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <MessageSquare className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Reputation Management</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Monitor, manage, and generate reviews that build social proof.</p>
+              <div className={`overflow-hidden transition-all duration-300 ${hoveredCard === 'reputation' ? 'max-h-32 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <p className="text-gray-500 text-xs mb-3">Features: Review monitoring, response management, review generation campaigns, sentiment analysis</p>
+              </div>
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
+                I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
+              </Link>
+            </Card>
+
+            {/* SEO - 1x1 tile */}
+            <Card
+              className="bg-[var(--surface-3)] border border-white/10 p-6 hover:border-[var(--accent)] transition-all duration-300 md:col-span-1 md:row-span-1 group"
+              onMouseEnter={() => setHoveredCard('seo')}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Search className="h-6 w-6 text-[var(--accent)]" />
+              </div>
+              <h3 className="text-lg font-bold mb-2 font-rajdhani">SEO & AIEO</h3>
+              <p className="text-gray-400 text-sm mb-4 font-inter">Organic visibility on Google and AI answer engines—ethical, data-driven, transparent.</p>
+              <div className={`overflow-hidden transition-all duration-300 ${hoveredCard === 'seo' ? 'max-h-16 opacity-100' : 'max-h-0 opacity-0'}`}>
+                <p className="text-gray-500 text-xs mb-3">Focus: Technical SEO, content optimization, AI engine optimization</p>
+              </div>
               <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>

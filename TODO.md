@@ -252,8 +252,8 @@
   - ✅ TASK-009-5: apps/firm/site/app/services/page.tsx - Added staggered layout: elevated middle tier with transform md:-translate-y-4
   - ✅ TASK-009-6: apps/firm/site/app/services/page.tsx - Ensured mobile responsiveness: tiers stack vertically on small screens (grid-cols-1 on mobile, md:grid-cols-3)
 
-- [ ] **TASK-010: Transform Core Web Design Section to Bento Grid**
-  Status: pending
+- [x] **TASK-010: Transform Core Web Design Section to Bento Grid**
+  Status: completed
   Related: apps/firm/site/app/services/page.tsx
   Done: Core section uses bento layout with varied tile sizes
   Out: Changing core service content
@@ -265,15 +265,15 @@
   Depends: TASK-004, TASK-009
   Blocks: TASK-011
 
-  - TASK-010-1: apps/firm/site/app/services/page.tsx - Transform 4 equal cards to bento layout
-  - TASK-010-2: apps/firm/site/app/services/page.tsx - Make "Custom, Not Template-Driven" span 2 columns, 1 row (md:col-span-2)
-  - TASK-010-3: apps/firm/site/app/services/page.tsx - Make other 3 cards 1x1 each
-  - TASK-010-4: apps/firm/site/app/services/page.tsx - Transform process timeline to horizontal bento strip (4 steps in row)
-  - TASK-010-5: apps/firm/site/app/services/page.tsx - Make deliverables a checklist bento tile with accent checkmarks
-  - TASK-010-6: apps/firm/site/app/services/page.tsx - Add exaggerated corner rounding and varied background opacities
+  - ✅ TASK-010-1: apps/firm/site/app/services/page.tsx - Transformed 4 equal cards to bento layout
+  - ✅ TASK-010-2: apps/firm/site/app/services/page.tsx - Made "Custom, Not Template-Driven" span 2 columns, 1 row (md:col-span-2)
+  - ✅ TASK-010-3: apps/firm/site/app/services/page.tsx - Made other 3 cards 1x1 each
+  - ✅ TASK-010-4: apps/firm/site/app/services/page.tsx - Transformed process timeline to horizontal bento strip (4 steps in row)
+  - ✅ TASK-010-5: apps/firm/site/app/services/page.tsx - Made deliverables a checklist bento tile with accent checkmarks
+  - ✅ TASK-010-6: apps/firm/site/app/services/page.tsx - Added exaggerated corner rounding (rounded-2xl) and varied background opacities (surface-2 and surface-3)
 
-- [ ] **TASK-011: Transform Modular Add-Ons to Enhanced Grid**
-  Status: pending
+- [x] **TASK-011: Transform Modular Add-Ons to Enhanced Grid**
+  Status: completed
   Related: apps/firm/site/app/services/page.tsx
   Done: Add-ons section uses varied bento layout with grouped services
   Out: Changing add-on services
@@ -285,11 +285,11 @@
   Depends: TASK-004, TASK-010
   Blocks: none
 
-  - TASK-011-1: apps/firm/site/app/services/page.tsx - Transform 8 equal cards to varied bento layout
-  - TASK-011-2: apps/firm/site/app/services/page.tsx - Group related services: content (Blog, Email) together, analytics (Analytics, CRO) together
-  - TASK-011-3: apps/firm/site/app/services/page.tsx - Use different tile sizes: some 2x1, some 1x1, some 1x2
-  - TASK-011-4: apps/firm/site/app/services/page.tsx - Add hover states that reveal additional info (height transition)
-  - TASK-011-5: apps/firm/site/app/services/page.tsx - Add visual grouping with subtle background variations
+  - ✅ TASK-011-1: apps/firm/site/app/services/page.tsx - Transformed 8 equal cards to varied bento layout using md:grid-cols-2 md:grid-rows-4
+  - ✅ TASK-011-2: apps/firm/site/app/services/page.tsx - Grouped related services: Content Suite (Blog, Email), Analytics & Optimization (Analytics, CRO, SEO)
+  - ✅ TASK-011-3: apps/firm/site/app/services/page.tsx - Used different tile sizes: 2x1 (Content Suite, Analytics), 1x1 (Brand, Social, CRM, PPC, SEO), 1x2 (Reputation)
+  - ✅ TASK-011-4: apps/firm/site/app/services/page.tsx - Added hover states that reveal additional info with height transition (max-h-0 to max-h-16/20/32)
+  - ✅ TASK-011-5: apps/firm/site/app/services/page.tsx - Added visual grouping with subtle background variations (surface-2 and surface-3 alternating)
 
 ## Phase 4: Work Page Enhancement
 
