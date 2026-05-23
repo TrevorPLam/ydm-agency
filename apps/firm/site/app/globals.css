@@ -366,8 +366,171 @@ body {
 }
 
 /* Handwritten font accent for personal touches */
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap');
-
 .font-handwritten {
-  font-family: 'Caveat', cursive;
+  font-family: var(--font-caveat), cursive;
+}
+
+/* ===== Noise texture overlay (desktop only) ===== */
+@media (min-width: 769px) {
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+}
+/* On mobile, use a static pre-rendered noise PNG for performance */
+@media (max-width: 768px) {
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url('/texture/noise-512.png');
+    background-size: 256px;
+  }
+}
+
+/* ===== Scroll-driven animation primitives ===== */
+/* Elements with this class will fade in when they enter the viewport */
+@supports (animation-timeline: view()) {
+  .animate-in-view {
+    animation: fade-in-up 0.6s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+  .animate-in-view:nth-child(2) { animation-range: entry 5% entry 35%; }
+  .animate-in-view:nth-child(3) { animation-range: entry 10% entry 40%; }
+}
+/* Fallback: use IntersectionObserver (via AnimateOnScroll) for browsers without animation-timeline */
+@supports not (animation-timeline: view()) {
+  .animate-in-view {
+    animation: fade-in-up 0.6s ease-out forwards;
+    animation-play-state: paused;
+  }
+  .animate-in-view.is-visible {
+    animation-play-state: running;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Magnetic button (desktop only) ===== */
+@media (hover: hover) and (pointer: fine) {
+  .magnetic-button {
+    transition: transform 0.15s ease-out;
+  }
+}
+
+/* ===== Tap feedback for touch devices ===== */
+.touch-feedback {
+  touch-action: manipulation;
+  transition: transform 0.1s ease;
+}
+.touch-feedback:active {
+  transform: scale(0.97);
+}
+
+/* ===== Shake animation for form validation ===== */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* ===== Ripple effect for form validation success ===== */
+@keyframes ripple {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  100% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+}
+.animate-ripple {
+  animation: ripple 0.6s ease-out;
+}
+
+/* ===== Scroll-driven progress bar (used in timeline sections) ===== */
+.progress-bar-scroll {
+  height: 4px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar-scroll-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+}
+@supports (animation-timeline: scroll()) {
+  .progress-bar-scroll-fill {
+    animation: fill-progress linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0% 80%;
+  }
+}
+@keyframes fill-progress {
+  to { width: 100%; }
+}
+
+/* ===== Spring easing for smooth toggles ===== */
+.ease-spring {
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== Hero font weight animation ===== */
+@keyframes heroWeight {
+  0% { font-weight: 100; }
+  100% { font-weight: 900; }
+}
+
+@supports (animation-timeline: view()) {
+  .animate-heroWeight {
+    animation: heroWeight linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+  
+  .animate-heroWeight-delay-1 {
+    animation: heroWeight linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 85%;
+  }
+  
+  .animate-heroWeight-delay-2 {
+    animation: heroWeight linear both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 90%;
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .animate-heroWeight {
+    animation: heroWeight 1s ease-out forwards;
+  }
+  
+  .animate-heroWeight-delay-1 {
+    animation: heroWeight 1s ease-out forwards;
+    animation-delay: 0.1s;
+  }
+  
+  .animate-heroWeight-delay-2 {
+    animation: heroWeight 1s ease-out forwards;
+    animation-delay: 0.2s;
+  }
 }

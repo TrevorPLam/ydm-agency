@@ -10,3 +10,5 @@ export * from './components/animate-on-scroll';
 export * from './components/image-trail';
 export * from './components/testimonial-card';
 export * from './components/portfolio-card';
+export * from './components/button';
+export * from './components/card';

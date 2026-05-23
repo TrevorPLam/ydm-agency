@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Rajdhani, Orbitron, Inter } from "next/font/google";
+import { Rajdhani, Orbitron, Inter, Caveat } from "next/font/google";
 import "./globals.css";
 
 const rajdhani = Rajdhani({
@@ -17,6 +17,12 @@ const orbitron = Orbitron({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -49,7 +55,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${rajdhani.variable} ${orbitron.variable} ${inter.variable} h-full antialiased`}
+      className={`${rajdhani.variable} ${orbitron.variable} ${inter.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>

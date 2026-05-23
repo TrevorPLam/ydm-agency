@@ -16,9 +16,12 @@ function getAllCodeFiles(dir: string, files: string[] = []): string[] {
 
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
-
+    
     if (entry.isDirectory()) {
-      getAllCodeFiles(fullPath, files);
+      // Skip node_modules and .next directories
+      if (entry.name !== 'node_modules' && entry.name !== '.next') {
+        getAllCodeFiles(fullPath, files);
+      }
     } else if (entry.isFile() && isCodeFile(fullPath)) {
       files.push(fullPath);
     }
@@ -31,31 +34,76 @@ function getRelativePath(filePath: string, baseDir: string): string {
   return path.relative(baseDir, filePath).replace(/\\/g, '/');
 }
 
-function consolidateCodeFiles(): void {
-  const appFiles = getAllCodeFiles(APP_DIR);
-  const componentFiles = getAllCodeFiles(COMPONENTS_DIR);
-  const codeFiles = [...appFiles, ...componentFiles];
-  const relativeDir = getRelativePath(APP_DIR, path.join(__dirname));
-
-  let markdown = '# Code Consolidation\n\n';
-  markdown += `Generated from: app and components directories\n\n`;
-  markdown += `Total files: ${codeFiles.length}\n\n`;
-  markdown += '---\n\n';
-
-  for (const file of codeFiles) {
-    const relativePath = getRelativePath(file, path.join(__dirname));
-    const content = fs.readFileSync(file, 'utf-8');
-    const ext = path.extname(file).replace('.', '');
-
-    markdown += `## ${relativePath}\n\n`;
-    markdown += '```' + ext + '\n';
-    markdown += content;
-    markdown += '\n```\n\n';
-    markdown += '---\n\n';
-  }
-
-  fs.writeFileSync(OUTPUT_FILE, markdown, 'utf-8');
-  console.log(`✅ Consolidated ${codeFiles.length} files into ${OUTPUT_FILE}`);
+function getLanguageFromFile(filePath: string): string {
+  const ext = path.extname(filePath);
+  const languageMap: Record<string, string> = {
+    '.ts': 'typescript',
+    '.tsx': 'typescript',
+    '.js': 'javascript',
+    '.jsx': 'javascript',
+    '.css': 'css',
+    '.json': 'json'
+  };
+  return languageMap[ext] || 'text';
 }
 
-consolidateCodeFiles();
+function generateMarkdown(): string {
+  let markdown = '# UI Code Consolidation\n\n';
+  markdown += 'This document contains all UI-related code files from the firm site.\n\n';
+  markdown += '---\n\n';
+
+  // Process app directory
+  if (fs.existsSync(APP_DIR)) {
+    markdown += '## App Directory\n\n';
+    const appFiles = getAllCodeFiles(APP_DIR);
+    const sortedAppFiles = appFiles.sort();
+
+    for (const file of sortedAppFiles) {
+      const relativePath = getRelativePath(file, __dirname);
+      const language = getLanguageFromFile(file);
+      const content = fs.readFileSync(file, 'utf-8');
+
+      markdown += `### ${relativePath}\n\n`;
+      markdown += '```' + language + '\n';
+      markdown += content;
+      markdown += '\n```\n\n';
+      markdown += '---\n\n';
+    }
+  }
+
+  // Process components directory
+  if (fs.existsSync(COMPONENTS_DIR)) {
+    markdown += '## Components Directory\n\n';
+    const componentFiles = getAllCodeFiles(COMPONENTS_DIR);
+    const sortedComponentFiles = componentFiles.sort();
+
+    for (const file of sortedComponentFiles) {
+      const relativePath = getRelativePath(file, __dirname);
+      const language = getLanguageFromFile(file);
+      const content = fs.readFileSync(file, 'utf-8');
+
+      markdown += `### ${relativePath}\n\n`;
+      markdown += '```' + language + '\n';
+      markdown += content;
+      markdown += '\n```\n\n';
+      markdown += '---\n\n';
+    }
+  }
+
+  return markdown;
+}
+
+function main() {
+  console.log('Consolidating UI code files...');
+  
+  try {
+    const markdown = generateMarkdown();
+    fs.writeFileSync(OUTPUT_FILE, markdown, 'utf-8');
+    console.log(`Successfully consolidated code to ${OUTPUT_FILE}`);
+  } catch (error) {
+    console.error('Error consolidating code:', error);
+    process.exit(1);
+  }
+}
+
+main();
