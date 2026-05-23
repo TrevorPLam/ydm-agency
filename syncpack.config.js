@@ -1,5 +1,7 @@
 /** @type {import('syncpack').SyncpackConfig} */
 module.exports = {
+	// Disable formatting checks since we use Biome for formatting
+	checkFormat: false,
 	versionGroups: [
 		{
 			label: 'Core dependencies',
@@ -59,6 +61,8 @@ module.exports = {
 		'workspace:*',
 		'workspace:^',
 		'workspace:~',
+		// Ignore catalog protocol dependencies
+		'catalog:',
 	],
 	// Ensure semantic versioning consistency
 	semverRange: '^',

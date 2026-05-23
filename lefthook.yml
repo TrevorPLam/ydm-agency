@@ -4,7 +4,6 @@
 
 pre-commit:
   parallel: true
-  skip_on_merge: true
   commands:
     biome-format:
       run: pnpm exec biome format --write {staged_files}
@@ -24,16 +23,10 @@ commit-msg:
   commands:
     conventional-commits:
       run: pnpm exec commitlint --edit {1}
-      install: pnpm add -D @commitlint/cli @commitlint/config-conventional
 
 pre-push:
   parallel: false
-  skip_on_merge: true
   commands:
     typecheck:
       run: pnpm turbo run typecheck
       glob: "*.{ts,tsx}"
-
-    syncpack:
-      run: pnpm run syncpack:lint
-      glob: "package.json"
