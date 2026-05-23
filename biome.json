@@ -3,7 +3,8 @@
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
-		"useIgnoreFile": true
+		"useIgnoreFile": true,
+		"root": "."
 	},
 	"files": {
 		"ignoreUnknown": false,
@@ -14,7 +15,10 @@
 			"coverage",
 			".vitest-results",
 			"*.min.js",
-			"*.min.css"
+			"*.min.css",
+			"pnpm-lock.yaml",
+			"turbo.json",
+			".turbo"
 		]
 	},
 	"formatter": {
@@ -35,23 +39,31 @@
 			"correctness": {
 				"noUnusedVariables": "error",
 				"useExhaustiveDependencies": "warn",
-				"useHookAtTopLevel": "error"
+				"useHookAtTopLevel": "error",
+				"noUnusedImports": "error"
 			},
 			"style": {
 				"noNonNullAssertion": "warn",
 				"useConst": "error",
-				"useTemplate": "warn"
+				"useTemplate": "warn",
+				"useImportType": "error",
+				"noVar": "error"
 			},
 			"suspicious": {
 				"noExplicitAny": "warn",
-				"noArrayIndexKey": "warn"
+				"noArrayIndexKey": "warn",
+				"noConsoleLog": "warn"
 			},
 			"complexity": {
 				"noForEach": "off",
-				"useLiteralKeys": "warn"
+				"useLiteralKeys": "warn",
+				"noUselessConstructor": "error"
 			},
 			"performance": {
 				"noDelete": "warn"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "warn"
 			}
 		}
 	},
@@ -74,6 +86,18 @@
 			"javascript": {
 				"parser": {
 					"unsafeParameterDecoratorsEnabled": true
+				}
+			}
+		},
+		{
+			"include": ["packages/*/src/**"],
+			"javascript": {
+				"linter": {
+					"rules": {
+						"suspicious": {
+							"noExplicitAny": "error"
+						}
+					}
 				}
 			}
 		}

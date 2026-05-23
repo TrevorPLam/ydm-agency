@@ -1,28 +1,44 @@
 # Lefthook configuration for the agency monorepo
 # Uses Go binary for performance with parallel hook execution
+# 2026 best practices: fast checks pre-commit, medium checks pre-push, slow checks in CI
 
 pre-commit:
   parallel: true
+  skip_on_merge: true
   commands:
     biome-format:
       run: pnpm exec biome format --write {staged_files}
       stage_fixed: true
+      glob: "*.{js,jsx,ts,tsx,json,css,md}"
 
     biome-lint:
       run: pnpm exec biome lint --write {staged_files}
+      glob: "*.{js,jsx,ts,tsx,json,css,md}"
 
     biome-check:
       run: pnpm exec biome check --write {staged_files}
+      glob: "*.{js,jsx,ts,tsx,json,css,md}"
 
-    # typecheck:
-    #   run: pnpm turbo run typecheck
-    #   glob: '*.{ts,tsx}'
+commit-msg:
+  parallel: false
+  commands:
+    conventional-commits:
+      run: pnpm exec commitlint --edit {1}
+      install: pnpm add -D @commitlint/cli @commitlint/config-conventional
 
 pre-push:
   parallel: true
-  # commands:
-  #   test:
-  #     run: pnpm turbo run test
+  skip_on_merge: true
+  commands:
+    typecheck:
+      run: pnpm turbo run typecheck
+      glob: "*.{ts,tsx}"
 
-  #   build:
-  #     run: pnpm turbo run build
+    syncpack:
+      run: pnpm run syncpack:lint
+      glob: "package.json"
+
+    # Run fast tests only on push, full test suite in CI
+    test:fast:
+      run: pnpm turbo run test:fast --if-present
+      glob: "*.test.{ts,tsx}"

@@ -1,73 +1,91 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
-  "globalEnv": ["NODE_ENV", "VERCEL_ENV", "VERCEL_URL"],
+  "globalDependencies": ["**/.env.*local", "pnpm-lock.yaml"],
+  "globalEnv": ["NODE_ENV", "VERCEL_ENV", "VERCEL_URL", "CI", "GITHUB_ACTIONS"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", ".turbo/**"],
+      "inputs": ["src/**", "public/**", "package.json"]
     },
     "lint": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["src/**", "*.config.*", "package.json"]
     },
     "lint:biome": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["src/**", "*.config.*", "package.json"]
     },
     "lint:biome:fix": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["src/**", "*.config.*", "package.json"]
     },
     "typecheck": {
-      "outputs": []
+      "outputs": ["*.tsbuildinfo"],
+      "inputs": ["src/**", "*.ts", "*.tsx", "package.json", "tsconfig.json"]
     },
     "format": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["src/**", "*.config.*", "package.json"]
     },
     "format:check": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["src/**", "*.config.*", "package.json"]
     },
     "check": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["src/**", "*.config.*", "package.json"]
     },
     "check:fix": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["src/**", "*.config.*", "package.json"]
     },
     "syncpack:lint": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["package.json", "pnpm-workspace.yaml"]
     },
     "syncpack:fix": {
-      "outputs": []
+      "outputs": [],
+      "inputs": ["package.json", "pnpm-workspace.yaml"]
     },
     "test": {
       "dependsOn": ["^build", "@agency/vitest-config#build"],
       "outputs": ["coverage/**", ".vitest-results/**"],
-      "env": ["VITEST_POOL", "CI"]
+      "env": ["VITEST_POOL", "CI", "GITHUB_ACTIONS"],
+      "inputs": ["src/**", "test/**", "*.test.*", "package.json"]
     },
     "test:watch": {
       "dependsOn": ["@agency/vitest-config#build"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "inputs": ["src/**", "test/**", "*.test.*", "package.json"]
     },
     "test:ui": {
       "dependsOn": ["@agency/vitest-config#build"],
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "inputs": ["src/**", "test/**", "*.test.*", "package.json"]
     },
     "test:bench": {
       "dependsOn": ["@agency/vitest-config#build"],
       "cache": false,
-      "outputs": [".vitest-results/bench.json"]
+      "outputs": [".vitest-results/bench.json"],
+      "inputs": ["src/**", "bench/**", "*.bench.*", "package.json"]
     },
     "test:coverage": {
       "dependsOn": ["^build", "@agency/vitest-config#build"],
       "outputs": ["coverage/**", ".vitest-results/**"],
-      "env": ["VITEST_POOL", "CI"]
+      "env": ["VITEST_POOL", "CI", "GITHUB_ACTIONS"],
+      "inputs": ["src/**", "test/**", "*.test.*", "package.json"]
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "inputs": ["src/**", "public/**", "package.json"]
     },
     "clean": {
-      "cache": false
+      "cache": false,
+      "outputs": ["dist/**", ".next/**", "coverage/**", ".vitest-results/**", "*.tsbuildinfo"]
     }
   }
 }

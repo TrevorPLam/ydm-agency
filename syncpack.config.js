@@ -23,8 +23,8 @@ module.exports = {
 			dependencyTypes: ['devDependencies'],
 		},
 		{
-			label: 'Linting',
-			dependencies: ['biome', 'lefthook'],
+			label: 'Linting & Formatting',
+			dependencies: ['biome', 'lefthook', 'typescript-eslint'],
 			dependencyTypes: ['devDependencies'],
 		},
 		{
@@ -47,5 +47,19 @@ module.exports = {
 			dependencies: ['react', 'react-dom', 'next'],
 			dependencyTypes: ['dependencies', 'devDependencies'],
 		},
+		{
+			label: 'Dependency Management',
+			dependencies: ['syncpack'],
+			dependencyTypes: ['devDependencies'],
+		},
 	],
+	// Additional 2026 best practices
+	ignore: [
+		// Ignore workspace protocol dependencies
+		'workspace:*',
+		'workspace:^',
+		'workspace:~',
+	],
+	// Ensure semantic versioning consistency
+	semverRange: '^',
 };

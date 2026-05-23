@@ -101,6 +101,12 @@ export default defineConfig({
 				},
 			},
 		},
+		// 2026 best practices: add test timeout configuration
+		testTimeout: 10_000,
+		hookTimeout: 10_000,
+		teardownTimeout: 10_000,
+		// Add isolate mode for better test isolation
+		isolate: true,
 	},
 	resolve: {
 		alias: {

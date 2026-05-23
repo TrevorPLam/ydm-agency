@@ -2,6 +2,7 @@
   "name": "agency",
   "version": "0.1.0",
   "private": true,
+  "description": "Agency monorepo - Modern web development platform",
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
@@ -18,6 +19,7 @@
     "syncpack:lint": "syncpack lint",
     "syncpack:fix": "syncpack fix-mismatches",
     "test": "turbo run test",
+    "test:fast": "turbo run test:fast --if-present",
     "test:watch": "turbo run test:watch",
     "test:ui": "turbo run test:ui",
     "test:coverage": "turbo run test:coverage",
@@ -27,16 +29,21 @@
     "test:coverage:merge": "turbo run test:coverage && nyc merge coverage coverage/merged-coverage.json && nyc report --reporter=lcov --reporter=text --reporter=html"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@vitest/ui": "catalog:",
     "biome": "catalog:",
     "happy-dom": "catalog:",
     "lefthook": "catalog:",
     "nyc": "^15.1.0",
-    "prettier": "^3.4.2",
     "syncpack": "catalog:",
     "turbo": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
-  "packageManager": "pnpm@11.0.0"
+  "packageManager": "pnpm@11.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=11.0.0"
+  }
 }
