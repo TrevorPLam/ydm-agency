@@ -19,7 +19,7 @@ describe('StatCard', () => {
 	it('handles empty string values', () => {
 		render(<StatCard value="" label="Empty" />);
 		expect(screen.getByText('Empty')).toBeInTheDocument();
-		expect(screen.getByText('')).toBeInTheDocument();
+		expect(screen.getByTestId('stat-value')).toHaveTextContent('');
 	});
 
 	it('handles numeric values converted to string', () => {

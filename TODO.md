@@ -2,8 +2,8 @@
 
 ## Infrastructure Issues
 
-- [ ] **TASK-INFRA-005: Fix packages/ui test failure**
-  Status: pending
+- [x] **TASK-INFRA-005: Fix packages/ui test failure**
+  Status: completed
   Related: packages/ui/src/components/stat-card.test.tsx
   Done: All tests in packages/ui pass
   Out: Changing test infrastructure
@@ -13,7 +13,7 @@
   Depends: none
   Blocks: none
 
-  - TASK-INFRA-005-1: packages/ui/src/components/stat-card.test.tsx - Fix test that queries for empty string which matches multiple elements
+  - ✅ TASK-INFRA-005-1: packages/ui/src/components/stat-card.test.tsx - Fixed test by replacing ambiguous empty string query with specific test ID query (data-testid="stat-value")
 
 - [x] **TASK-INFRA-001: Fix eslint-config typecheck error**
   Status: completed
