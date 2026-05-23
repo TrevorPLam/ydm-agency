@@ -372,8 +372,8 @@
   - ✅ TASK-015-4: apps/firm/site/app/contact/page.tsx - Added "I read every message personally" reassurance near submit button with CheckCircle2 icon
   - ✅ TASK-015-5: apps/firm/site/app/contact/page.tsx - Added "preferred contact method" toggle with Email, Phone, and Chat buttons with active state styling
 
-- [ ] **TASK-016: Transform Alternative Methods to Bento Layout**
-  Status: pending
+- [x] **TASK-016: Transform Alternative Methods to Bento Layout**
+  Status: completed
   Related: apps/firm/site/app/contact/page.tsx
   Done: Alternative methods use varied bento layout with availability indicators
   Out: Changing contact methods
@@ -385,11 +385,11 @@
   Depends: TASK-004, TASK-015
   Blocks: TASK-017
 
-  - TASK-016-1: apps/firm/site/app/contact/page.tsx - Transform 3 equal cards to varied bento layout
-  - TASK-016-2: apps/firm/site/app/contact/page.tsx - Make "Book a Call" span 2 columns, 1 row (md:col-span-2)
-  - TASK-016-3: apps/firm/site/app/contact/page.tsx - Make "Email Direct" and "Live Chat" 1x1 each
-  - TASK-016-4: apps/firm/site/app/contact/page.tsx - Add availability indicators (green dot for available, gray for offline)
-  - TASK-016-5: apps/firm/site/app/contact/page.tsx - Add exaggerated corner rounding and varied background opacities
+  - ✅ TASK-016-1: apps/firm/site/app/contact/page.tsx - Transformed 3 equal cards to varied bento layout using md:grid-cols-2
+  - ✅ TASK-016-2: apps/firm/site/app/contact/page.tsx - Made "Book a Call" span 2 columns, 1 row (md:col-span-2)
+  - ✅ TASK-016-3: apps/firm/site/app/contact/page.tsx - Made "Email Direct" and "Live Chat" 1x1 each
+  - ✅ TASK-016-4: apps/firm/site/app/contact/page.tsx - Added availability indicators (green dot with animate-pulse for available, gray for offline)
+  - ✅ TASK-016-5: apps/firm/site/app/contact/page.tsx - Added exaggerated corner rounding (rounded-2xl) and varied background opacities (surface-3 for featured, black for others)
 
 - [ ] **TASK-017: Transform What Happens Next to Visual Timeline**
   Status: pending
