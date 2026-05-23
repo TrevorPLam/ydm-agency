@@ -75,14 +75,14 @@ function MorphingCore() {
 
 export default function HeroScene() {
   return (
-    <div className="absolute inset-0 -z-10" aria-hidden="true">
+    <div className="absolute inset-0 -z-10" aria-label="Interactive 3D particle field with morphing geometric core">
       <Canvas
         camera={{ position: [0, -0.2, 3.8], fov: 50 }}
         dpr={[1, 1.5]}
-        gl={{ 
-          antialias: false, 
+        gl={{
+          antialias: false,
           powerPreference: 'high-performance',
-          alpha: true 
+          alpha: true
         }}
         performance={{ min: 0.5 }}
       >

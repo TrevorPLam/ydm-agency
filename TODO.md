@@ -86,8 +86,8 @@
   - ✅ TASK-002-4: apps/firm/site/components/navigation.tsx - Implement ARIA attributes (aria-expanded, aria-controls, aria-label) for accessibility
   - ✅ TASK-002-5: apps/firm/site/components/navigation.tsx - Add focus management: trap focus in drawer when open, return focus to button when closed
 
-- [ ] **TASK-003: Add 3D Content Accessibility Fallback**
-  Status: pending
+- [x] **TASK-003: Add 3D Content Accessibility Fallback**
+  Status: completed
   Related: apps/firm/site/components/hero-scene.tsx, apps/firm/site/components/hero-scene-wrapper.tsx
   Done: Users who cannot see 3D content get meaningful alternative
   Out: Complete 3D redesign, adding new 3D features
@@ -99,10 +99,10 @@
   Depends: none
   Blocks: none
 
-  - TASK-003-1: apps/firm/site/components/hero-scene-wrapper.tsx - Wrap Canvas in Suspense with loading indicator (progress bar or spinner)
-  - TASK-003-2: apps/firm/site/components/hero-scene-wrapper.tsx - Add error boundary to catch Three.js failures, display fallback message
-  - TASK-003-3: apps/firm/site/components/hero-scene-wrapper.tsx - Add aria-label to Canvas describing 3D content purpose
-  - TASK-003-4: apps/firm/site/components/hero-scene-wrapper.tsx - Add prefers-reduced-motion check to disable animations when requested
+  - ✅ TASK-003-1: apps/firm/site/components/hero-scene-wrapper.tsx - Wrap Canvas in Suspense with loading indicator (progress bar or spinner)
+  - ✅ TASK-003-2: apps/firm/site/components/hero-scene-wrapper.tsx - Add error boundary to catch Three.js failures, display fallback message
+  - ✅ TASK-003-3: apps/firm/site/components/hero-scene-wrapper.tsx - Add aria-label to Canvas describing 3D content purpose
+  - ✅ TASK-003-4: apps/firm/site/components/hero-scene-wrapper.tsx - Add prefers-reduced-motion check to disable animations when requested
 
 - [ ] **TASK-004: Replace Hardcoded Colors with CSS Variables**
   Status: pending
