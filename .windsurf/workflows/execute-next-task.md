@@ -8,6 +8,13 @@ This workflow systematically executes the first incomplete task from TODO.md wit
 
 ## Steps
 
+0. **Pre-Flight Baseline**
+   - Verify the working tree is clean: `git status`
+   - Run typecheck and capture results: `pnpm -r run typecheck 2>&1 | tee /tmp/baseline-typecheck.txt`
+   - Run tests and capture results: `pnpm -r --if-present run test:fast 2>&1 | tee /tmp/baseline-tests.txt`
+   - Note any pre-existing failures — these are not regressions you introduced
+   - Do not proceed if the working tree has uncommitted changes; stash or commit first
+
 1. **Read AGENTS.md and TODO.md**
    - Read the `AGENTS.md` and `TODO.md` files at the repository root
    - Identify the first task with status `[ ]` (incomplete)
@@ -29,7 +36,7 @@ This workflow systematically executes the first incomplete task from TODO.md wit
 4. **Validate Task Relevance**
    - Assess whether the task is still relevant given current codebase state
    - Check if the task description accurately reflects what needs to be done
-   - Determine if different actions should be taken instead (e.g., task already completed, approach needs adjustment)
+   - Determine if different actions should be taken instead (e.g., task already completed, approach needs adjusted)
    - If task needs modification, update TODO.md before proceeding
 
 5. **Execute the Task**
@@ -43,49 +50,64 @@ This workflow systematically executes the first incomplete task from TODO.md wit
    - Adhere to AGENTS.md conventions
    - Make minimal, focused changes
 
-6. **Quality Assurance Assessment**
+6. **Update or Create Tests**
+   - Add or update unit tests for any new or modified logic
+   - Add or update integration tests for any changed module boundaries or API contracts
+   - Ensure error paths are explicitly tested — not just the happy path
+   - Remove or fix any tests invalidated by the task's changes
+   - Confirm test coverage does not regress from the baseline captured in Step 0
+
+7. **Add or Improve Error Handling**
+   - Identify all failure modes introduced or exposed by the task (network, I/O, parsing, auth, etc.)
+   - Ensure errors are caught at the appropriate boundary and not swallowed silently
+   - Use typed errors or result types consistent with existing codebase patterns
+   - Verify error messages are actionable and safe (no leaked secrets or stack traces in user-facing output)
+   - Confirm error paths are exercised by the tests added in Step 6
+
+8. **Quality Assurance Assessment**
    - Run type checking: `pnpm -r run typecheck`
    - Run linting: `pnpm run lint`
    - Run tests incrementally on changed packages:
 
-     ```bash
+```bash
      # Get the previous commit SHA
      PREV_SHA=$(git rev-parse HEAD~1)
      # Run tests only on packages that changed since last commit
      pnpm --filter="...[$PREV_SHA]" --if-present run test:fast || pnpm -r --if-present run test:fast
-     ```
+```
 
+   - Compare results against the baseline captured in Step 0 — any new failures are regressions to fix
    - Verify the definition of done criteria from the task are met
    - Check that no anti-patterns from the task were introduced
    - Ensure code follows the advanced coding patterns specified
    - Make corrections if any issues are found
 
-7. **Mark Task Complete**
+9. **Mark Task Complete**
    - Update the task status from `[ ]` to `[x]` in TODO.md
    - Add implementation notes under the task if needed
    - Mark all subtasks as complete with ✅
    - Add any lessons learned or observations
 
-8. **Verify Issues in TODO.md**
-   - Review any issues discovered during the workflow (e.g., pre-existing test failures, typecheck errors, infrastructure problems)
-   - Check if these issues exist as open tasks in TODO.md
-   - If issues do not exist in TODO.md, add them following the current task format
-   - Include appropriate status (Pending, Blocked, etc.), priority, and related file paths
-   - Document the issue clearly with context for future resolution
+10. **Verify Issues in TODO.md**
+    - Review any issues discovered during the workflow (e.g., pre-existing test failures, typecheck errors, infrastructure problems)
+    - Check if these issues exist as open tasks in TODO.md
+    - If issues do not exist in TODO.md, add them following the current task format
+    - Include appropriate status (Pending, Blocked, etc.), priority, and related file paths
+    - Document the issue clearly with context for future resolution
 
-9. **Commit and Push**
-   - Stage all changes: `git add .`
-   - Create a conventional commit message following the task context (e.g., `feat:`, `fix:`, `refactor:`)
-   - Include task ID in commit message (e.g., `fix: TASK-021 fix frontend type assertions`)
-   - Commit the changes
-   - Push to GitHub: `git push`
-   - If push fails due to conflicts, pull first then push
+11. **Commit and Push**
+    - Stage all changes: `git add .`
+    - Create a conventional commit message following the task context (e.g., `feat:`, `fix:`, `refactor:`)
+    - Include task ID in commit message (e.g., `fix: TASK-021 fix frontend type assertions`)
+    - Commit the changes
+    - Push to GitHub: `git push`
+    - If push fails due to conflicts, pull first then push
 
 ## Notes
 
 - This workflow focuses on the FIRST incomplete task only
 - Always verify the task is still relevant before executing
 - Research should inform implementation, not delay it unnecessarily
-- Quality assurance is critical - don't skip it
+- Quality assurance is critical — don't skip it
 - Commit messages should be clear and follow conventional commit format
 - If the task is blocked or cannot be completed, mark it as `[!]` and document why
