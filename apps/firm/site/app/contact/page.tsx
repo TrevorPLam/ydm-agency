@@ -2,15 +2,64 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Zap, MessageSquare, Calendar, Mail, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react"
+import { ArrowRight, Zap, MessageSquare, Calendar, Mail, CheckCircle2, ChevronDown, ChevronUp, Phone, XCircle } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
 export default function ContactPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    interest: '',
+    message: '',
+    preferredContact: 'email'
+  })
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    message: false
+  })
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index)
+  }
+
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return re.test(email)
+  }
+
+  const validateName = (name: string) => {
+    return name.trim().length >= 2
+  }
+
+  const validateMessage = (message: string) => {
+    return message.trim().length >= 10
+  }
+
+  const isEmailValid = formData.email === '' || validateEmail(formData.email)
+  const isNameValid = formData.name === '' || validateName(formData.name)
+  const isMessageValid = formData.message === '' || validateMessage(formData.message)
+
+  const requiredFields = ['name', 'email', 'message']
+  const filledRequiredFields = requiredFields.filter(field => {
+    if (field === 'name') return validateName(formData.name)
+    if (field === 'email') return validateEmail(formData.email)
+    if (field === 'message') return validateMessage(formData.message)
+    return false
+  }).length
+
+  const progress = (filledRequiredFields / requiredFields.length) * 100
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleBlur = (field: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }))
   }
 
   const faqs = [
@@ -79,42 +128,167 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold mb-8 font-orbitron">Send Me a Message</h2>
             
             <form className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium text-gray-300">Full Name</label>
+              {/* Progress Indicator */}
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-gray-400 font-inter">Form Completion</span>
+                  <span className="text-sm font-medium text-[var(--accent)] font-inter">{Math.round(progress)}%</span>
+                </div>
+                <div className="h-2 bg-black rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-[var(--accent)] transition-all duration-300 ease-out"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Preferred Contact Method */}
+              <div className="space-y-3">
+                <label className="text-sm font-medium text-gray-300">Preferred Contact Method</label>
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, preferredContact: 'email' }))}
+                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-md border transition-all ${
+                      formData.preferredContact === 'email'
+                        ? 'bg-[var(--accent)] border-[var(--accent)] text-white'
+                        : 'bg-black border-white/20 text-gray-400 hover:border-white/40'
+                    }`}
+                  >
+                    <Mail className="h-4 w-4" />
+                    <span className="text-sm font-medium">Email</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, preferredContact: 'phone' }))}
+                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-md border transition-all ${
+                      formData.preferredContact === 'phone'
+                        ? 'bg-[var(--accent)] border-[var(--accent)] text-white'
+                        : 'bg-black border-white/20 text-gray-400 hover:border-white/40'
+                    }`}
+                  >
+                    <Phone className="h-4 w-4" />
+                    <span className="text-sm font-medium">Phone</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormData(prev => ({ ...prev, preferredContact: 'chat' }))}
+                    className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-md border transition-all ${
+                      formData.preferredContact === 'chat'
+                        ? 'bg-[var(--accent)] border-[var(--accent)] text-white'
+                        : 'bg-black border-white/20 text-gray-400 hover:border-white/40'
+                    }`}
+                  >
+                    <MessageSquare className="h-4 w-4" />
+                    <span className="text-sm font-medium">Chat</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Name Input with Floating Label */}
+              <div className="relative">
                 <input
                   id="name"
+                  name="name"
                   type="text"
-                  placeholder="Your name"
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  onBlur={() => handleBlur('name')}
+                  placeholder=" "
+                  className={`w-full px-4 py-3 bg-black border rounded-md text-white focus:outline-none focus:ring-1 transition-colors peer ${
+                    touched.name && !isNameValid
+                      ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                      : touched.name && isNameValid
+                      ? 'border-green-500 focus:border-green-500 focus:ring-green-500'
+                      : 'border-white/20 focus:border-[var(--accent)] focus:ring-[var(--accent)]'
+                  }`}
                   required
                 />
+                <label
+                  htmlFor="name"
+                  className="absolute left-4 top-3 text-gray-500 transition-all duration-200 pointer-events-none peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-[-10px] peer-focus:text-xs peer-focus:text-[var(--accent)] peer-focus:bg-black peer-focus:px-1 peer-[&:not(:placeholder-shown)]:top-[-10px] peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-[var(--accent)] peer-[&:not(:placeholder-shown)]:bg-black peer-[&:not(:placeholder-shown)]:px-1"
+                >
+                  Full Name
+                </label>
+                {touched.name && formData.name && (
+                  <div className="absolute right-3 top-3">
+                    {isNameValid ? (
+                      <CheckCircle2 className="h-5 w-5 text-green-500" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-500" />
+                    )}
+                  </div>
+                )}
+                {touched.name && !isNameValid && (
+                  <p className="text-red-500 text-xs mt-1">Please enter at least 2 characters</p>
+                )}
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium text-gray-300">Work Email</label>
+              {/* Email Input with Floating Label */}
+              <div className="relative">
                 <input
                   id="email"
+                  name="email"
                   type="email"
-                  placeholder="you@company.com"
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  onBlur={() => handleBlur('email')}
+                  placeholder=" "
+                  className={`w-full px-4 py-3 bg-black border rounded-md text-white focus:outline-none focus:ring-1 transition-colors peer ${
+                    touched.email && !isEmailValid
+                      ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                      : touched.email && isEmailValid
+                      ? 'border-green-500 focus:border-green-500 focus:ring-green-500'
+                      : 'border-white/20 focus:border-[var(--accent)] focus:ring-[var(--accent)]'
+                  }`}
                   required
                 />
+                <label
+                  htmlFor="email"
+                  className="absolute left-4 top-3 text-gray-500 transition-all duration-200 pointer-events-none peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-[-10px] peer-focus:text-xs peer-focus:text-[var(--accent)] peer-focus:bg-black peer-focus:px-1 peer-[&:not(:placeholder-shown)]:top-[-10px] peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-[var(--accent)] peer-[&:not(:placeholder-shown)]:bg-black peer-[&:not(:placeholder-shown)]:px-1"
+                >
+                  Work Email
+                </label>
+                {touched.email && formData.email && (
+                  <div className="absolute right-3 top-3">
+                    {isEmailValid ? (
+                      <CheckCircle2 className="h-5 w-5 text-green-500" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-500" />
+                    )}
+                  </div>
+                )}
+                {touched.email && !isEmailValid && (
+                  <p className="text-red-500 text-xs mt-1">Please enter a valid email address</p>
+                )}
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="company" className="text-sm font-medium text-gray-300">Company / Website <span className="text-gray-500">(optional)</span></label>
+              {/* Company Input with Floating Label */}
+              <div className="relative">
                 <input
                   id="company"
+                  name="company"
                   type="text"
-                  placeholder="yourcompany.com"
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors"
+                  value={formData.company}
+                  onChange={handleInputChange}
+                  placeholder=" "
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors peer"
                 />
+                <label
+                  htmlFor="company"
+                  className="absolute left-4 top-3 text-gray-500 transition-all duration-200 pointer-events-none peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-[-10px] peer-focus:text-xs peer-focus:text-[var(--accent)] peer-focus:bg-black peer-focus:px-1 peer-[&:not(:placeholder-shown)]:top-[-10px] peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-[var(--accent)] peer-[&:not(:placeholder-shown)]:bg-black peer-[&:not(:placeholder-shown)]:px-1"
+                >
+                  Company / Website <span className="text-gray-500 font-normal">(optional)</span>
+                </label>
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="interest" className="text-sm font-medium text-gray-300">What Are You Interested In? <span className="text-gray-500">(optional)</span></label>
+              {/* Interest Select with Floating Label */}
+              <div className="relative">
                 <select
                   id="interest"
+                  name="interest"
+                  value={formData.interest}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors"
                 >
                   <option value="">Select a topic...</option>
@@ -131,20 +305,62 @@ export default function ContactPage() {
                   <option value="partnership">Full Partnership Package</option>
                   <option value="other">Something Else / Not Sure Yet</option>
                 </select>
+                <label htmlFor="interest" className="text-sm font-medium text-gray-300 block mb-2">
+                  What Are You Interested In? <span className="text-gray-500">(optional)</span>
+                </label>
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-gray-300">Tell Me About Your Project or Goals</label>
+              {/* Message Input with Floating Label */}
+              <div className="relative">
                 <textarea
                   id="message"
-                  placeholder="What are you trying to achieve? What challenges are you facing?"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  onBlur={() => handleBlur('message')}
+                  placeholder=" "
                   rows={5}
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors resize-none"
+                  className={`w-full px-4 py-3 bg-black border rounded-md text-white focus:outline-none focus:ring-1 transition-colors resize-none peer ${
+                    touched.message && !isMessageValid
+                      ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                      : touched.message && isMessageValid
+                      ? 'border-green-500 focus:border-green-500 focus:ring-green-500'
+                      : 'border-white/20 focus:border-[var(--accent)] focus:ring-[var(--accent)]'
+                  }`}
                   required
                 />
+                <label
+                  htmlFor="message"
+                  className="absolute left-4 top-3 text-gray-500 transition-all duration-200 pointer-events-none peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-[-10px] peer-focus:text-xs peer-focus:text-[var(--accent)] peer-focus:bg-black peer-focus:px-1 peer-[&:not(:placeholder-shown)]:top-[-10px] peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-[var(--accent)] peer-[&:not(:placeholder-shown)]:bg-black peer-[&:not(:placeholder-shown)]:px-1"
+                >
+                  Tell Me About Your Project or Goals
+                </label>
+                {touched.message && formData.message && (
+                  <div className="absolute right-3 top-3">
+                    {isMessageValid ? (
+                      <CheckCircle2 className="h-5 w-5 text-green-500" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-500" />
+                    )}
+                  </div>
+                )}
+                {touched.message && !isMessageValid && (
+                  <p className="text-red-500 text-xs mt-1">Please enter at least 10 characters</p>
+                )}
               </div>
 
-              <Button type="submit" size="lg" className="w-full bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base">
+              {/* Personal Reassurance Near Submit */}
+              <div className="flex items-center gap-2 text-sm text-gray-400 bg-black/50 px-4 py-3 rounded-md border border-white/10">
+                <CheckCircle2 className="h-4 w-4 text-[var(--accent)]" />
+                <span className="font-inter">I read every message personally</span>
+              </div>
+
+              <Button 
+                type="submit" 
+                size="lg" 
+                className="w-full bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base"
+                disabled={!isNameValid || !isEmailValid || !isMessageValid}
+              >
                 Send Message
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

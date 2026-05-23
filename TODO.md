@@ -353,8 +353,8 @@
 
 ## Phase 5: Contact Page Transformation
 
-- [ ] **TASK-015: Modernize Contact Form**
-  Status: pending
+- [x] **TASK-015: Modernize Contact Form**
+  Status: completed
   Related: apps/firm/site/app/contact/page.tsx
   Done: Form has real-time validation, modern input design, progress indicator
   Out: Changing form fields, adding new fields
@@ -366,11 +366,11 @@
   Depends: TASK-004
   Blocks: TASK-016
 
-  - TASK-015-1: apps/firm/site/app/contact/page.tsx - Add real-time validation feedback (green check for valid, red for invalid)
-  - TASK-015-2: apps/firm/site/app/contact/page.tsx - Implement floating labels or modern input design (label moves up on focus)
-  - TASK-015-3: apps/firm/site/app/contact/page.tsx - Add progress indicator showing form completion (e.g., "Step 1 of 3" or progress bar)
-  - TASK-015-4: apps/firm/site/app/contact/page.tsx - Add "I read every message personally" reassurance near submit button
-  - TASK-015-5: apps/firm/site/app/contact/page.tsx - Add "preferred contact method" toggle (email vs phone vs chat)
+  - ✅ TASK-015-1: apps/firm/site/app/contact/page.tsx - Added real-time validation feedback with green check (CheckCircle2) for valid, red X (XCircle) for invalid, and error messages
+  - ✅ TASK-015-2: apps/firm/site/app/contact/page.tsx - Implemented floating labels using peer CSS pattern with placeholder=" " and label transitions
+  - ✅ TASK-015-3: apps/firm/site/app/contact/page.tsx - Added progress indicator with percentage display and animated progress bar
+  - ✅ TASK-015-4: apps/firm/site/app/contact/page.tsx - Added "I read every message personally" reassurance near submit button with CheckCircle2 icon
+  - ✅ TASK-015-5: apps/firm/site/app/contact/page.tsx - Added "preferred contact method" toggle with Email, Phone, and Chat buttons with active state styling
 
 - [ ] **TASK-016: Transform Alternative Methods to Bento Layout**
   Status: pending
