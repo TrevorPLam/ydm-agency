@@ -131,8 +131,8 @@
 
 ## Phase 2: Homepage Transformation
 
-- [ ] **TASK-005: Transform Hero to Oversized Typography**
-  Status: pending
+- [x] **TASK-005: Transform Hero to Oversized Typography**
+  Status: completed
   Related: apps/firm/site/components/hero-text.tsx, apps/firm/site/app/page.tsx
   Done: Hero uses viewport-spanning type with clipping, no glass card backdrop
   Out: Complete hero redesign beyond typography changes
@@ -144,13 +144,13 @@
   Depends: TASK-004
   Blocks: TASK-006
 
-  - TASK-005-1: apps/firm/site/components/hero-text.tsx - Remove glass card backdrop (bg-[rgba(13,13,13,0.55)], backdrop-blur, border, shadow)
-  - TASK-005-2: apps/firm/site/components/hero-text.tsx - Make headline span full viewport width with text-clip utility or overflow-hidden
-  - TASK-005-3: apps/firm/site/components/hero-text.tsx - Split headline: "Web Design That Builds Your Business" (text-6xl lg:text-7xl), "—Without the Agency Nonsense" (text-2xl lg:text-3xl, accent color)
-  - TASK-005-4: apps/firm/site/components/hero-text.tsx - Add variable font weight animation on scroll using CSS scroll-driven animations
-  - TASK-005-5: apps/firm/site/components/hero-text.tsx - Move secondary CTA below fold or make it less prominent
-  - TASK-005-6: apps/firm/site/app/globals.css - Add text-reveal animation keyframes if not present
-  - TASK-005-7: apps/firm/site/app/globals.css - Add fluid typography utilities for responsive text scaling
+  - ✅ TASK-005-1: apps/firm/site/components/hero-text.tsx - Remove glass card backdrop (bg-[rgba(13,13,13,0.55)], backdrop-blur, border, shadow)
+  - ✅ TASK-005-2: apps/firm/site/components/hero-text.tsx - Make headline span full viewport width with text-clip utility or overflow-hidden
+  - ✅ TASK-005-3: apps/firm/site/components/hero-text.tsx - Split headline: "Web Design That Builds Your Business" (text-6xl lg:text-7xl), "—Without the Agency Nonsense" (text-2xl lg:text-3xl, accent color)
+  - ✅ TASK-005-4: apps/firm/site/components/hero-text.tsx - Add variable font weight animation on scroll using CSS scroll-driven animations
+  - ✅ TASK-005-5: apps/firm/site/components/hero-text.tsx - Move secondary CTA below fold or make it less prominent
+  - ✅ TASK-005-6: apps/firm/site/app/globals.css - Add text-reveal animation keyframes if not present
+  - ✅ TASK-005-7: apps/firm/site/app/globals.css - Add fluid typography utilities for responsive text scaling
 
 - [ ] **TASK-006: Transform Services Section to Bento Grid**
   Status: pending

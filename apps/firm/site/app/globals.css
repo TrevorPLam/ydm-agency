@@ -188,3 +188,60 @@ body {
     grid-row: span 1;
   }
 }
+
+/* Fluid typography utilities */
+.text-fluid-xl {
+  font-size: clamp(1.25rem, 2vw + 0.75rem, 1.5rem);
+}
+
+.text-fluid-2xl {
+  font-size: clamp(1.5rem, 2.5vw + 0.75rem, 1.875rem);
+}
+
+.text-fluid-3xl {
+  font-size: clamp(1.875rem, 3vw + 0.75rem, 2.25rem);
+}
+
+.text-fluid-4xl {
+  font-size: clamp(2.25rem, 4vw + 0.75rem, 3rem);
+}
+
+.text-fluid-5xl {
+  font-size: clamp(3rem, 5vw + 1rem, 4.5rem);
+}
+
+.text-fluid-6xl {
+  font-size: clamp(3.75rem, 6vw + 1rem, 6rem);
+}
+
+.text-fluid-7xl {
+  font-size: clamp(4.5rem, 8vw + 1rem, 7.5rem);
+}
+
+.text-fluid-8xl {
+  font-size: clamp(5rem, 10vw + 1rem, 9rem);
+}
+
+/* Scroll-driven font weight animation */
+@keyframes font-weight-scroll {
+  0% {
+    font-weight: 400;
+  }
+  100% {
+    font-weight: 700;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .animate-font-weight-scroll {
+    animation: font-weight-scroll linear both;
+    animation-timeline: view();
+    animation-range: 0% 50%;
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  .animate-font-weight-scroll {
+    animation: font-weight-scroll 1s ease-out forwards;
+  }
+}
