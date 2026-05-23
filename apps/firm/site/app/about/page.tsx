@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Zap, Link2, Search, Bot, User, Shield, FileCheck, CheckCircle2, MessageSquare, Calendar } from "lucide-react"
+import { ArrowRight, Zap, Link2, Search, Bot, User, Shield, FileCheck, CheckCircle2, MessageSquare, Calendar, Award, Building2 } from "lucide-react"
 import Link from "next/link"
 import { Navigation } from "@/components/navigation"
 import { AnimateOnScroll } from "@agency/ui"
@@ -152,9 +152,9 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">This Is How We Work. No Exceptions.</h2>
           </AnimateOnScroll>
           
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 md:grid-rows-3 gap-6">
             <AnimateOnScroll delay={0}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors rounded-2xl md:col-span-2">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
                   <Shield className="h-6 w-6 text-[var(--accent)]" />
                 </div>
@@ -166,38 +166,71 @@ export default function AboutPage() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+              <Card className="bg-[var(--surface-3)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors rounded-2xl">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
                   <FileCheck className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">You Own Everything</h3>
                 <p className="text-gray-400 font-inter">
-                  Your website, your data, your brand assets—they belong to you, period. No proprietary lock-in, no hostage situations. Cancel anytime and take it all with you.
+                  Your website, your data, your brand assets—they belong to you, period. No proprietary lock-in, no hostage situations.
                 </p>
               </Card>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={200}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+              <Card className="bg-[var(--surface-3)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors rounded-2xl">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
                   <Search className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">Metrics That Matter</h3>
                 <p className="text-gray-400 font-inter">
-                  We don't celebrate a spike in "likes" unless it correlates to leads or revenue. We define success metrics with you during onboarding and report against them relentlessly.
+                  We don't celebrate vanity metrics. We define success metrics with you during onboarding and report against them relentlessly.
                 </p>
               </Card>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={300}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+              <Card className="bg-[var(--surface-3)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors rounded-2xl">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
                   <User className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">One Person, Full Accountability</h3>
                 <p className="text-gray-400 font-inter">
-                  You work directly with me—the founder and strategist. No junior account managers, no handoffs, no phone tag. When you have a question, I answer. When something breaks, I fix it.
+                  You work directly with me—the founder and strategist. No junior account managers, no handoffs, no phone tag.
                 </p>
+              </Card>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={400}>
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors rounded-2xl">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <Award className="h-6 w-6 text-[var(--accent)]" />
+                </div>
+                <h3 className="text-xl font-bold mb-4 font-rajdhani">Trust Signals</h3>
+                <p className="text-gray-400 font-inter mb-4">
+                  Industry certifications and partnerships coming soon.
+                </p>
+                <div className="flex gap-2 flex-wrap">
+                  <span className="px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] text-sm rounded-full">GDPR Compliant</span>
+                  <span className="px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] text-sm rounded-full">SOC 2 Ready</span>
+                </div>
+              </Card>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={500}>
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors rounded-2xl">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <Building2 className="h-6 w-6 text-[var(--accent)]" />
+                </div>
+                <h3 className="text-xl font-bold mb-4 font-rajdhani">Trusted By</h3>
+                <p className="text-gray-400 font-inter mb-4">
+                  Client logos coming soon.
+                </p>
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="h-12 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 text-xs">Logo 1</div>
+                  <div className="h-12 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 text-xs">Logo 2</div>
+                  <div className="h-12 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 text-xs">Logo 3</div>
+                </div>
               </Card>
             </AnimateOnScroll>
           </div>
