@@ -43,12 +43,12 @@ export default function ServicesPage() {
           <AnimateOnScroll>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-orbitron leading-tight">
               A Complete Marketing Operating System,<br />
-              <span className="text-[#0080FF]">Built Around Your Website.</span>
+              <span className="text-[var(--accent)]">Built Around Your Website.</span>
             </h1>
             <p className="text-xl text-gray-400 mb-8 font-inter max-w-3xl mx-auto">
               Your website is the hub. Everything else—SEO, content, social, email, ads, CRM—connects back to it. We build, launch, and orchestrate it all so you don't have to juggle five different vendors.
             </p>
-            <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8">
+            <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8">
               Book a Free Strategy Call
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -65,33 +65,33 @@ export default function ServicesPage() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <Card className="bg-[#121212] border border-white/10 p-6">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Layout className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Layout className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-2 font-rajdhani">Custom, Not Template-Driven</h3>
               <p className="text-gray-400 font-inter">Every site is built from strategy, not copied from a theme marketplace.</p>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Zap className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Zap className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-2 font-rajdhani">Performance-First</h3>
               <p className="text-gray-400 font-inter">Core Web Vitals optimized, sub-2.5s load times, responsive on every device.</p>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Bot className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Bot className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-2 font-rajdhani">Human-Led, AI-Enhanced</h3>
               <p className="text-gray-400 font-inter">We use AI to accelerate, but human judgment and empathy drive every decision.</p>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Shield className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-2 font-rajdhani">You Own Everything</h3>
               <p className="text-gray-400 font-inter">No vendor lock-in, no proprietary black boxes. Your site, your data, 100% yours.</p>
@@ -102,7 +102,7 @@ export default function ServicesPage() {
             <h3 className="text-xl font-bold mb-6 font-rajdhani">Our Process</h3>
             <div className="grid md:grid-cols-4 gap-6">
               <div className="flex items-start space-x-3">
-                <div className="h-8 w-8 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
                 <div>
@@ -111,7 +111,7 @@ export default function ServicesPage() {
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="h-8 w-8 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-sm">2</span>
                 </div>
                 <div>
@@ -120,7 +120,7 @@ export default function ServicesPage() {
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="h-8 w-8 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-sm">3</span>
                 </div>
                 <div>
@@ -129,7 +129,7 @@ export default function ServicesPage() {
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <div className="h-8 w-8 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-sm">4</span>
                 </div>
                 <div>
@@ -140,31 +140,31 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          <Card className="bg-[#121212] border border-white/10 p-6 mb-8">
+          <Card className="bg-[var(--surface-2)] border border-white/10 p-6 mb-8">
             <h3 className="text-xl font-bold mb-4 font-rajdhani">Deliverables</h3>
             <ul className="space-y-2">
               <li className="flex items-center space-x-2">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF]" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)]" />
                 <span className="text-gray-300">Fully responsive, pixel-perfect website</span>
               </li>
               <li className="flex items-center space-x-2">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF]" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)]" />
                 <span className="text-gray-300">Brand identity & style guide (if included)</span>
               </li>
               <li className="flex items-center space-x-2">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF]" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)]" />
                 <span className="text-gray-300">On-page SEO setup (meta, schema, speed)</span>
               </li>
               <li className="flex items-center space-x-2">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF]" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)]" />
                 <span className="text-gray-300">CMS integration for easy content updates</span>
               </li>
               <li className="flex items-center space-x-2">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF]" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)]" />
                 <span className="text-gray-300">Privacy-compliant cookie consent and analytics setup</span>
               </li>
               <li className="flex items-center space-x-2">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF]" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)]" />
                 <span className="text-gray-300">30 days of post-launch support</span>
               </li>
             </ul>
@@ -172,12 +172,12 @@ export default function ServicesPage() {
 
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/work">
-              <Button variant="outline" className="border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+              <Button variant="outline" className="border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                 See Our Work <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link href="/contact">
-              <Button className="bg-[#0080FF] hover:bg-[#0080FF]/90">
+              <Button className="bg-[var(--accent)] hover:bg-[var(--accent)]/90">
                 Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -186,7 +186,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 3: Tiered Partnership Packages */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-6xl">
           <AnimateOnScroll>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Full-Service Partnership Packages</h2>
@@ -197,28 +197,28 @@ export default function ServicesPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <AnimateOnScroll delay={0}>
-              <Card className="bg-black border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+              <Card className="bg-black border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
                 <h3 className="text-2xl font-bold mb-2 font-rajdhani">Foundation</h3>
-                <p className="text-[#0080FF] font-medium mb-6">Launch & Establish</p>
+                <p className="text-[var(--accent)] font-medium mb-6">Launch & Establish</p>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Website design & build (core)</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Brand identity kit (basic)</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Email & CRM setup (basic)</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Monthly blog post (1x)</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Quarterly analytics report</span>
                   </li>
                 </ul>
@@ -227,7 +227,7 @@ export default function ServicesPage() {
                   <p className="text-xs text-gray-400">after initial build fee</p>
                 </div>
                 <Link href="/contact">
-                  <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                  <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                     Book a Free Consultation
                   </Button>
                 </Link>
@@ -235,35 +235,35 @@ export default function ServicesPage() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
-              <Card className="bg-black border-2 border-[#0080FF] p-8 relative ring-2 ring-[#0080FF]">
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#0080FF] text-white text-xs font-bold px-3 py-1 rounded-full">
+              <Card className="bg-black border-2 border-[var(--accent)] p-8 relative ring-2 ring-[var(--accent)]">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[var(--accent)] text-white text-xs font-bold px-3 py-1 rounded-full">
                   POPULAR
                 </div>
                 <h3 className="text-2xl font-bold mb-2 font-rajdhani">Growth</h3>
-                <p className="text-[#0080FF] font-medium mb-6">Expand Your Reach</p>
+                <p className="text-[var(--accent)] font-medium mb-6">Expand Your Reach</p>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Everything in Foundation, plus:</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">SEO/AIEO ongoing optimization</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Social media (2 platforms, 3 posts/week)</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Newsletter design & send (bi-weekly)</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Landing pages & lead magnet design</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Monthly performance review call</span>
                   </li>
                 </ul>
@@ -271,7 +271,7 @@ export default function ServicesPage() {
                   <p className="text-2xl font-bold font-rajdhani">Starting at $____/month</p>
                 </div>
                 <Link href="/contact">
-                  <Button className="w-full bg-[#0080FF] hover:bg-[#0080FF]/90">
+                  <Button className="w-full bg-[var(--accent)] hover:bg-[var(--accent)]/90">
                     Book a Free Consultation
                   </Button>
                 </Link>
@@ -279,32 +279,32 @@ export default function ServicesPage() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={200}>
-              <Card className="bg-black border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
+              <Card className="bg-black border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
                 <h3 className="text-2xl font-bold mb-2 font-rajdhani">Scale</h3>
-                <p className="text-[#0080FF] font-medium mb-6">Full-Funnel Domination</p>
+                <p className="text-[var(--accent)] font-medium mb-6">Full-Funnel Domination</p>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Everything in Growth, plus:</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">PPC / paid media management</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Reputation management & reviews</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Advanced CRM automation & lead scoring</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Bi-weekly A/B testing & CRO</span>
                   </li>
                   <li className="flex items-start space-x-2">
-                    <CheckCircle2 className="h-5 w-5 text-[#0080FF] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-[var(--accent)] flex-shrink-0 mt-0.5" />
                     <span className="text-sm text-gray-300">Dedicated Slack/Teams channel & weekly strategy</span>
                   </li>
                 </ul>
@@ -312,7 +312,7 @@ export default function ServicesPage() {
                   <p className="text-2xl font-bold font-rajdhani">Starting at $____/month</p>
                 </div>
                 <Link href="/contact">
-                  <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                  <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                     Book a Free Consultation
                   </Button>
                 </Link>
@@ -331,101 +331,101 @@ export default function ServicesPage() {
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Palette className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Palette className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Brand Identity & Marketing Kit</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">From logo systems to presentation templates, get a cohesive visual brand that builds trust.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <FileText className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <FileText className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Blog & Resource Management</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Strategy, writing, and publishing that fuels your SEO and authority.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Mail className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Mail className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Newsletter & Email Marketing</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Convert subscribers into customers with beautifully designed, automated sequences.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Share2 className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Share2 className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Social Media Management</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Done-for-you content creation, scheduling, and engagement on the platforms that matter.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Users className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">CRM Management</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Setup, automation, data hygiene—so your leads never fall through the cracks.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <CreditCard className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <CreditCard className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">PPC & Paid Media</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Strategic ad buying and optimization tied to real revenue, not just clicks.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Search className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Search className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">SEO & AIEO</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Organic visibility on Google and AI answer engines—ethical, data-driven, transparent.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <TrendingUp className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <TrendingUp className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Analytics & CRO</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Turn data into decisions; improve what's working and fix what's not.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <MessageSquare className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <MessageSquare className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-lg font-bold mb-2 font-rajdhani">Reputation Management</h3>
               <p className="text-gray-400 text-sm mb-4 font-inter">Monitor, manage, and generate reviews that build social proof.</p>
-              <Link href="/contact" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+              <Link href="/contact" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                 I'm interested <ArrowRight className="inline ml-1 h-4 w-4" />
               </Link>
             </Card>
@@ -436,12 +436,12 @@ export default function ServicesPage() {
       {/* Section 5: Why Work With Me — The Anti-Agency Difference */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="container mx-auto max-w-4xl">
-          <Card className="bg-[#121212] border-l-4 border-l-[#0080FF] border-y border-r border-white/10 p-8 md:p-12">
+          <Card className="bg-[var(--surface-2)] border-l-4 border-l-[var(--accent)] border-y border-r border-white/10 p-8 md:p-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-8 font-orbitron">Why Work With Me — The Anti-Agency Difference</h2>
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center flex-shrink-0">
-                  <User className="h-6 w-6 text-[#0080FF]" />
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                  <User className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2 font-rajdhani">One Person, Full Accountability</h3>
@@ -450,8 +450,8 @@ export default function ServicesPage() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center flex-shrink-0">
-                  <Lock className="h-6 w-6 text-[#0080FF]" />
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                  <Lock className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2 font-rajdhani">You Own Your Assets</h3>
@@ -460,8 +460,8 @@ export default function ServicesPage() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center flex-shrink-0">
-                  <Bot className="h-6 w-6 text-[#0080FF]" />
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                  <Bot className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2 font-rajdhani">Human-Led, Not AI-Generated</h3>
@@ -470,8 +470,8 @@ export default function ServicesPage() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center flex-shrink-0">
-                  <FileCheck className="h-6 w-6 text-[#0080FF]" />
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center flex-shrink-0">
+                  <FileCheck className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2 font-rajdhani">Transparent Reporting</h3>
@@ -484,7 +484,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 6: Frequently Asked Questions */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-4xl">
           <AnimateOnScroll>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Frequently Asked Questions</h2>
@@ -496,7 +496,7 @@ export default function ServicesPage() {
               <Accordion.Item key={index} value={`item-${index}`} className="bg-black border border-white/10 rounded-lg">
                 <Accordion.Trigger className="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors focus:outline-none">
                   <span className="font-semibold font-rajdhani">{faq.question}</span>
-                  <ChevronDown className="h-5 w-5 text-[#0080FF] transition-transform duration-200 data-[state=open]:rotate-180" />
+                  <ChevronDown className="h-5 w-5 text-[var(--accent)] transition-transform duration-200 data-[state=open]:rotate-180" />
                 </Accordion.Trigger>
                 <Accordion.Content className="px-6 pb-6 pt-0">
                   <p className="text-gray-400 font-inter">{faq.answer}</p>
@@ -508,13 +508,13 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 7: Final CTA */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[#0080FF]/20">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[var(--accent)]/20">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Your Website Should Be Your Best Salesperson. Let's Make It Happen.</h2>
           <p className="text-xl text-gray-400 mb-8 font-inter">
             No confusing packages, no hidden fees, no pressure. Just a transparent conversation about how we can grow your business together.
           </p>
-          <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8 mb-4">
+          <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8 mb-4">
             Book Your Free Strategy Call
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>

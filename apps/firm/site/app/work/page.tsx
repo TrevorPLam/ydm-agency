@@ -118,8 +118,8 @@ export default function WorkPage() {
                     onClick={() => setIndustryFilter(industry)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                       industryFilter === industry
-                        ? "bg-[#0080FF] text-white"
-                        : "bg-[#121212] border border-white/10 text-gray-400 hover:border-[#0080FF]"
+                        ? "bg-[var(--accent)] text-white"
+                        : "bg-[var(--surface-2)] border border-white/10 text-gray-400 hover:border-[var(--accent)]"
                     }`}
                   >
                     {industry}
@@ -136,8 +136,8 @@ export default function WorkPage() {
                     onClick={() => setServiceFilter(service)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                       serviceFilter === service
-                        ? "bg-[#0080FF] text-white"
-                        : "bg-[#121212] border border-white/10 text-gray-400 hover:border-[#0080FF]"
+                        ? "bg-[var(--accent)] text-white"
+                        : "bg-[var(--surface-2)] border border-white/10 text-gray-400 hover:border-[var(--accent)]"
                     }`}
                   >
                     {service}
@@ -160,24 +160,24 @@ export default function WorkPage() {
               return (
                 <AnimateOnScroll key={project.id} delay={index * 80}>
                   <Card className={`
-                    bg-[#121212] border border-white/10 
-                    hover:border-[#0080FF] transition-all duration-300 
+                    bg-[var(--surface-2)] border border-white/10 
+                    hover:border-[var(--accent)] transition-all duration-300 
                     hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,128,255,0.12)]
                     h-full
                     ${isLarge ? 'md:col-span-2 md:row-span-2' : ''}
                     ${isWide ? 'md:col-span-2' : ''}
                   `}>
                     <CardContent className="p-6 h-full flex flex-col">
-                      <div className="h-48 bg-[#1E1E1E] rounded-lg mb-4 flex items-center justify-center flex-grow">
+                      <div className="h-48 bg-[var(--surface-3)] rounded-lg mb-4 flex items-center justify-center flex-grow">
                         <Monitor className="h-16 w-16 text-gray-600" />
                       </div>
-                      <div className="text-[#0080FF] text-xs font-medium mb-2">{project.industry}</div>
+                      <div className="text-[var(--accent)] text-xs font-medium mb-2">{project.industry}</div>
                       <h3 className="text-xl font-bold mb-2 font-rajdhani">{project.name}</h3>
-                      <div className="text-2xl font-bold text-[#0080FF] mb-3 font-rajdhani">{project.stat}</div>
+                      <div className="text-2xl font-bold text-[var(--accent)] mb-3 font-rajdhani">{project.stat}</div>
                       <p className="text-gray-400 text-sm mb-6 font-inter">{project.blurb}</p>
                       <div className="flex flex-col gap-2 mt-auto">
                         <Link href={project.href}>
-                          <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                          <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                             View Case Study <ArrowRight className="ml-2 h-4 w-4" />
                           </Button>
                         </Link>
@@ -185,7 +185,7 @@ export default function WorkPage() {
                           href={project.demoHref}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center text-sm text-gray-400 hover:text-[#0080FF] transition-colors"
+                          className="flex items-center justify-center text-sm text-gray-400 hover:text-[var(--accent)] transition-colors"
                         >
                           See Live Site <ExternalLink className="ml-1 h-3 w-3" />
                         </a>
@@ -200,36 +200,36 @@ export default function WorkPage() {
       </section>
 
       {/* Section 4: Featured Case Study */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-6xl">
           <Card className="bg-black border border-white/10 p-8 md:p-12">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="h-80 bg-[#1E1E1E] rounded-lg flex items-center justify-center">
+              <div className="h-80 bg-[var(--surface-3)] rounded-lg flex items-center justify-center">
                 <Monitor className="h-24 w-24 text-gray-600" />
               </div>
               <div>
-                <div className="text-[#0080FF] text-sm font-medium mb-2">Featured Case Study</div>
+                <div className="text-[var(--accent)] text-sm font-medium mb-2">Featured Case Study</div>
                 <h2 className="text-2xl md:text-3xl font-bold mb-4 font-orbitron">How We Turned an Outdated Site into a Lead-Generating Engine</h2>
                 <p className="text-gray-400 mb-6 font-inter">
                   A complete rebuild of a dental practice website that transformed their online presence from invisible to industry leader.
                 </p>
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-center space-x-2">
-                    <Zap className="h-5 w-5 text-[#0080FF]" />
+                    <Zap className="h-5 w-5 text-[var(--accent)]" />
                     <span className="text-gray-300">Mobile speed improved by 300%</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <Zap className="h-5 w-5 text-[#0080FF]" />
+                    <Zap className="h-5 w-5 text-[var(--accent)]" />
                     <span className="text-gray-300">Contact form conversions up 85%</span>
                   </li>
                   <li className="flex items-center space-x-2">
-                    <Zap className="h-5 w-5 text-[#0080FF]" />
+                    <Zap className="h-5 w-5 text-[var(--accent)]" />
                     <span className="text-gray-300">First-page Google ranking for 5 target keywords</span>
                   </li>
                 </ul>
                 <div className="flex gap-4">
                   <Link href="/demo/day-care">
-                    <Button className="bg-[#0080FF] hover:bg-[#0080FF]/90">
+                    <Button className="bg-[var(--accent)] hover:bg-[var(--accent)]/90">
                       Read Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>
@@ -238,7 +238,7 @@ export default function WorkPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button variant="outline" className="border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                    <Button variant="outline" className="border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                       See Live Demo <ExternalLink className="ml-2 h-4 w-4" />
                     </Button>
                   </a>
@@ -258,25 +258,25 @@ export default function WorkPage() {
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <Card className="bg-[#121212] border border-white/10 p-6">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <FileText className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <FileText className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-2 font-rajdhani">Strategic Brief</h3>
               <p className="text-gray-400 font-inter">Every project starts with a deep understanding of your audience, goals, and competitive landscape—demo or not.</p>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <Target className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <Target className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-2 font-rajdhani">Custom Build</h3>
               <p className="text-gray-400 font-inter">No templates. No shortcuts. Your site is built to your brand and optimized for performance.</p>
             </Card>
 
-            <Card className="bg-[#121212] border border-white/10 p-6">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-4">
-                <BarChart3 className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
+                <BarChart3 className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-2 font-rajdhani">Results Tracking</h3>
               <p className="text-gray-400 font-inter">We define success metrics before launch and track real business outcomes after.</p>
@@ -284,7 +284,7 @@ export default function WorkPage() {
           </div>
 
           <Link href="/contact">
-            <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8">
+            <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8">
               Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
@@ -292,9 +292,9 @@ export default function WorkPage() {
       </section>
 
       {/* Section 6: Testimonial Placeholder */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-4xl">
-          <Card className="bg-black border-l-4 border-l-[#0080FF] border-y border-r border-white/10 p-8 md:p-12">
+          <Card className="bg-black border-l-4 border-l-[var(--accent)] border-y border-r border-white/10 p-8 md:p-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-6 font-orbitron">Building Our Success Stories</h2>
             <p className="text-gray-300 font-inter leading-relaxed">
               We're building our library of client success stories right now. In the meantime, the demos above represent the same strategic rigor and design quality you'll receive. Want to be our first case study? Let's make it a good one.
@@ -304,13 +304,13 @@ export default function WorkPage() {
       </section>
 
       {/* Section 7: Final CTA */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[#0080FF]/20">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[var(--accent)]/20">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">See a Project You Like? Let's Build Yours.</h2>
           <p className="text-xl text-gray-400 mb-8 font-inter">
             Every business deserves a website that works as hard as they do. Let's talk about yours. Free 30-minute consultation, no pressure.
           </p>
-          <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8 mb-4">
+          <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8 mb-4">
             Book Your Free Strategy Call
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>

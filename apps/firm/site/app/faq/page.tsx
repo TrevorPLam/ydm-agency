@@ -186,21 +186,21 @@ export default function FaqPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-[#0080FF] flex items-center justify-center">
+              <div className="h-8 w-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold font-rajdhani">Your Dedicated Marketer</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Home</Link>
-              <Link href="/services" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Services</Link>
-              <Link href="/work" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Portfolio</Link>
-              <Link href="/about" className="text-sm font-medium hover:text-[#0080FF] transition-colors">About</Link>
-              <Link href="/faq" className="text-sm font-medium text-[#0080FF]">FAQ</Link>
-              <Link href="/blog" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Blog</Link>
-              <Link href="/contact" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Contact</Link>
+              <Link href="/" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Home</Link>
+              <Link href="/services" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Services</Link>
+              <Link href="/work" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Portfolio</Link>
+              <Link href="/about" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">About</Link>
+              <Link href="/faq" className="text-sm font-medium text-[var(--accent)]">FAQ</Link>
+              <Link href="/blog" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Blog</Link>
+              <Link href="/contact" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Contact</Link>
             </div>
-            <Button className="bg-[#0080FF] hover:bg-[#0080FF]/90">Book Consultation</Button>
+            <Button className="bg-[var(--accent)] hover:bg-[var(--accent)]/90">Book Consultation</Button>
           </div>
         </div>
       </nav>
@@ -226,17 +226,17 @@ export default function FaqPage() {
             {categories.map((category) => {
               const isCategoryOpen = openCategory === category.id
               return (
-                <Card key={category.id} className="bg-[#121212] border border-white/10 overflow-hidden">
+                <Card key={category.id} className="bg-[var(--surface-2)] border border-white/10 overflow-hidden">
                   <button
                     onClick={() => toggleCategory(category.id)}
-                    className="w-full p-6 text-left flex items-center justify-between hover:border-[#0080FF] transition-colors"
+                    className="w-full p-6 text-left flex items-center justify-between hover:border-[var(--accent)] transition-colors"
                   >
                     <div>
                       <h2 className="text-xl font-bold font-rajdhani mb-1">{category.title}</h2>
                       <p className="text-sm text-gray-400 font-inter">{category.description}</p>
                     </div>
                     {isCategoryOpen ? (
-                      <ChevronUp className="h-5 w-5 text-[#0080FF] shrink-0 ml-4" />
+                      <ChevronUp className="h-5 w-5 text-[var(--accent)] shrink-0 ml-4" />
                     ) : (
                       <ChevronDown className="h-5 w-5 text-gray-400 shrink-0 ml-4" />
                     )}
@@ -254,7 +254,7 @@ export default function FaqPage() {
                             >
                               <span className="font-medium font-rajdhani pr-4">{question.question}</span>
                               {isQuestionOpen ? (
-                                <ChevronUp className="h-4 w-4 text-[#0080FF] shrink-0" />
+                                <ChevronUp className="h-4 w-4 text-[var(--accent)] shrink-0" />
                               ) : (
                                 <ChevronDown className="h-4 w-4 text-gray-400 shrink-0" />
                               )}
@@ -277,20 +277,20 @@ export default function FaqPage() {
       </section>
 
       {/* Section 3: Didn't Find Your Answer? */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-4xl">
-          <Card className="bg-black border-2 border-[#0080FF] p-8 md:p-12 text-center">
+          <Card className="bg-black border-2 border-[var(--accent)] p-8 md:p-12 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 font-orbitron">Still have a question? Let's talk.</h2>
             <p className="text-gray-400 mb-8 font-inter max-w-2xl mx-auto">
               If something wasn't covered here, I'm happy to answer directly. Use the chat, send an email, or book a free 15-minute Q&A call.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8">
+              <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8">
                 Start Chat
                 <MessageSquare className="ml-2 h-4 w-4" />
               </Button>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white text-base px-8">
+                <Button size="lg" variant="outline" className="border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white text-base px-8">
                   Book a Quick Call
                   <Calendar className="ml-2 h-4 w-4" />
                 </Button>

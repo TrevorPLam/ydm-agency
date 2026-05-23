@@ -46,12 +46,12 @@ export function Navigation() {
     <nav className="sticky top-0 z-50 h-16
       bg-[rgba(0,0,0,0.72)] 
       backdrop-blur-[20px] backdrop-saturate-200
-      border-b border-[rgba(255,255,255,0.06)]
+      border-b border-[var(--border-subtle)]
       transition-all duration-300">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex h-full items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-lg bg-[#0080FF] flex items-center justify-center">
+            <div className="h-8 w-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
               <Zap className="h-5 w-5 text-white" />
             </div>
             <span className="text-xl font-bold font-rajdhani">Your Dedicated Marketer</span>
@@ -71,7 +71,7 @@ export function Navigation() {
                   key={item.href}
                   href={item.href}
                   className={`text-sm font-medium transition-colors ${
-                    isActive ? 'text-[#0080FF]' : 'text-[#B0B0B0] hover:text-[#0080FF]'
+                    isActive ? 'text-[var(--accent)]' : 'text-[var(--text-secondary)] hover:text-[var(--accent)]'
                   }`}
                 >
                   {item.label}
@@ -82,7 +82,7 @@ export function Navigation() {
           <button
             ref={menuButtonRef}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-[#B0B0B0] hover:text-white hover:bg-white/10 transition-colors"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-[var(--text-secondary)] hover:text-white hover:bg-white/10 transition-colors"
             aria-expanded={isMobileMenuOpen ? 'true' : 'false'}
             aria-controls="mobile-menu"
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
@@ -91,7 +91,7 @@ export function Navigation() {
           </button>
           <Link
             href="/contact"
-            className="hidden md:inline-flex items-center px-4 py-2 bg-[#0080FF] hover:bg-[#0080FF]/90 text-white text-sm font-medium rounded-lg transition-all hover:shadow-[0_0_20px_rgba(0,128,255,0.35)]"
+            className="hidden md:inline-flex items-center px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-white text-sm font-medium rounded-lg transition-all hover:shadow-[0_0_20px_rgba(0,128,255,0.35)]"
           >
             Book Consultation
           </Link>
@@ -111,7 +111,7 @@ export function Navigation() {
           {/* Mobile Menu */}
           <div
             id="mobile-menu"
-            className="fixed inset-y-0 right-0 w-full max-w-sm bg-[rgba(13,13,13,0.95)] backdrop-blur-xl border-l border-white/10 z-50 md:hidden transform transition-transform duration-300 ease-in-out"
+            className="fixed inset-y-0 right-0 w-full max-w-sm bg-[var(--surface-2)] backdrop-blur-xl border-l border-white/10 z-50 md:hidden transform transition-transform duration-300 ease-in-out"
             onKeyDown={handleKeyDown}
             role="dialog"
             aria-modal="true"
@@ -124,7 +124,7 @@ export function Navigation() {
                 </h2>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="inline-flex items-center justify-center p-2 rounded-lg text-[#B0B0B0] hover:text-white hover:bg-white/10 transition-colors"
+                  className="inline-flex items-center justify-center p-2 rounded-lg text-[var(--text-secondary)] hover:text-white hover:bg-white/10 transition-colors"
                   aria-label="Close menu"
                 >
                   <X className="h-6 w-6" />
@@ -150,8 +150,8 @@ export function Navigation() {
                       href={item.href}
                       className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                         isActive
-                          ? 'bg-[#0080FF]/20 text-[#0080FF]'
-                          : 'text-[#B0B0B0] hover:bg-white/5 hover:text-white'
+                          ? 'bg-[var(--accent)]/20 text-[var(--accent)]'
+                          : 'text-[var(--text-secondary)] hover:bg-white/5 hover:text-white'
                       }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -165,7 +165,7 @@ export function Navigation() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full text-center px-4 py-3 bg-[#0080FF] hover:bg-[#0080FF]/90 text-white text-sm font-medium rounded-lg transition-all hover:shadow-[0_0_20px_rgba(0,128,255,0.35)]"
+                  className="block w-full text-center px-4 py-3 bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-white text-sm font-medium rounded-lg transition-all hover:shadow-[0_0_20px_rgba(0,128,255,0.35)]"
                 >
                   Book Consultation
                 </Link>

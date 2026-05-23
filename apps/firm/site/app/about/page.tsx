@@ -11,13 +11,13 @@ export default function AboutPage() {
       <Navigation />
 
       {/* Section 1: Header */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-[#1E1E1E] to-black">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-[var(--surface-3)] to-black">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,128,255,0.15),transparent_50%)]" />
         
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 py-20">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-orbitron leading-tight">
             Marketing Shouldn't Be This Hard.<br />
-            <span className="text-[#0080FF]">We're Here to Change That.</span>
+            <span className="text-[var(--accent)]">We're Here to Change That.</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-4xl mx-auto font-inter">
             The industry is full of agencies that overpromise, underdeliver, and hide behind vanity metrics. Your Dedicated Marketer was built to be the opposite: transparent, human-led, and relentlessly focused on what actually grows your business.
@@ -30,11 +30,11 @@ export default function AboutPage() {
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">The Way Marketing Is Sold Is Broken.</h2>
           
-          <Card className="bg-[#121212] border border-white/10 p-8 md:p-12 mb-8">
+          <Card className="bg-[var(--surface-2)] border border-white/10 p-8 md:p-12 mb-8">
             <div className="grid md:grid-cols-3 gap-8">
               <div className="space-y-4">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center">
-                  <Link2 className="h-6 w-6 text-[#0080FF]" />
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
+                  <Link2 className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold font-rajdhani">The "Average Trap"</h3>
                 <p className="text-gray-400 font-inter">
@@ -43,8 +43,8 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-4">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center">
-                  <Search className="h-6 w-6 text-[#0080FF]" />
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
+                  <Search className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold font-rajdhani">Vanity Metrics, Not Business Results</h3>
                 <p className="text-gray-400 font-inter">
@@ -53,8 +53,8 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-4">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center">
-                  <Bot className="h-6 w-6 text-[#0080FF]" />
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
+                  <Bot className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold font-rajdhani">Fragmented Accountability</h3>
                 <p className="text-gray-400 font-inter">
@@ -71,7 +71,7 @@ export default function AboutPage() {
       </section>
 
       {/* Section 3: Our Philosophy — The Human-AI Symbiosis */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">Technology Is a Tool. Humans Are the Strategy.</h2>
           
@@ -83,48 +83,48 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="bg-black border border-white/10 p-8">
-              <h3 className="text-xl font-bold mb-6 font-rajdhani text-[#0080FF]">What AI Does Here</h3>
+              <h3 className="text-xl font-bold mb-6 font-rajdhani text-[var(--accent)]">What AI Does Here</h3>
               <ul className="space-y-3">
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Data analysis</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Research acceleration</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Content drafting assistance</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Performance pattern detection</span>
                 </li>
               </ul>
             </Card>
 
             <Card className="bg-black border border-white/10 p-8">
-              <h3 className="text-xl font-bold mb-6 font-rajdhani text-[#0080FF]">What Humans Do Here</h3>
+              <h3 className="text-xl font-bold mb-6 font-rajdhani text-[var(--accent)]">What Humans Do Here</h3>
               <ul className="space-y-3">
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Brand strategy</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Creative direction</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Empathy-driven copy</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Ethical judgment</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                   <span className="text-gray-300 font-inter">Relationship building</span>
                 </li>
               </ul>
@@ -142,9 +142,9 @@ export default function AboutPage() {
           
           <div className="grid md:grid-cols-2 gap-6">
             <AnimateOnScroll delay={0}>
-              <Card className="bg-[#121212] border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                  <Shield className="h-6 w-6 text-[#0080FF]" />
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <Shield className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">Radical Transparency</h3>
                 <p className="text-gray-400 font-inter">
@@ -154,9 +154,9 @@ export default function AboutPage() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
-              <Card className="bg-[#121212] border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                  <FileCheck className="h-6 w-6 text-[#0080FF]" />
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <FileCheck className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">You Own Everything</h3>
                 <p className="text-gray-400 font-inter">
@@ -166,9 +166,9 @@ export default function AboutPage() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={200}>
-              <Card className="bg-[#121212] border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                  <Search className="h-6 w-6 text-[#0080FF]" />
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <Search className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">Metrics That Matter</h3>
                 <p className="text-gray-400 font-inter">
@@ -178,9 +178,9 @@ export default function AboutPage() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={300}>
-              <Card className="bg-[#121212] border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                  <User className="h-6 w-6 text-[#0080FF]" />
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <User className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">One Person, Full Accountability</h3>
                 <p className="text-gray-400 font-inter">
@@ -193,12 +193,12 @@ export default function AboutPage() {
       </section>
 
       {/* Section 5: Who Is Behind This? (Minimal Founder Note) */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-4xl">
           <Card className="bg-black border border-white/10 p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
-              <div className="h-24 w-24 rounded-full bg-[#0080FF]/10 flex items-center justify-center shrink-0">
-                <User className="h-12 w-12 text-[#0080FF]" />
+              <div className="h-24 w-24 rounded-full bg-[var(--accent)]/10 flex items-center justify-center shrink-0">
+                <User className="h-12 w-12 text-[var(--accent)]" />
               </div>
               <div className="space-y-4">
                 <h2 className="text-2xl md:text-3xl font-bold font-orbitron">Hello. I'm [Your Name].</h2>
@@ -216,7 +216,7 @@ export default function AboutPage() {
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">We Work Best With Businesses That...</h2>
           
-          <Card className="bg-[#121212] border border-white/10 p-8 md:p-12">
+          <Card className="bg-[var(--surface-2)] border border-white/10 p-8 md:p-12">
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
                 <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
@@ -244,14 +244,14 @@ export default function AboutPage() {
       </section>
 
       {/* Section 7: Final CTA */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-black to-[#0080FF]/20">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-black to-[var(--accent)]/20">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Let's Leave the Agency Nonsense Behind.</h2>
           <p className="text-xl text-gray-400 mb-8 font-inter">
             If you're looking for a marketing partner who takes full accountability, tells you the truth, and obsesses over your growth—let's talk. Free 30-minute strategy call, no pressure, no pitch deck.
           </p>
           <Link href="/contact">
-            <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8 mb-4">
+            <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8 mb-4">
               Book Your Free Strategy Call
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

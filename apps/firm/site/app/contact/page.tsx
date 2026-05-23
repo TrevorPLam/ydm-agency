@@ -35,20 +35,20 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-[#0080FF] flex items-center justify-center">
+              <div className="h-8 w-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold font-rajdhani">Your Dedicated Marketer</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Home</Link>
-              <Link href="/services" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Services</Link>
-              <Link href="/work" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Portfolio</Link>
-              <Link href="/about" className="text-sm font-medium hover:text-[#0080FF] transition-colors">About</Link>
-              <Link href="/blog" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Blog</Link>
-              <Link href="/contact" className="text-sm font-medium text-[#0080FF]">Contact</Link>
+              <Link href="/" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Home</Link>
+              <Link href="/services" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Services</Link>
+              <Link href="/work" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Portfolio</Link>
+              <Link href="/about" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">About</Link>
+              <Link href="/blog" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Blog</Link>
+              <Link href="/contact" className="text-sm font-medium text-[var(--accent)]">Contact</Link>
             </div>
-            <Button className="bg-[#0080FF] hover:bg-[#0080FF]/90">Book Consultation</Button>
+            <Button className="bg-[var(--accent)] hover:bg-[var(--accent)]/90">Book Consultation</Button>
           </div>
         </div>
       </nav>
@@ -65,8 +65,8 @@ export default function ContactPage() {
             You'll reach me directly—no forms that vanish into a ticket queue, no "somebody will get back to you." Just a real conversation about how we can grow your business.
           </p>
           <div className="flex justify-center">
-            <div className="h-12 w-12 rounded-full bg-[#0080FF]/10 flex items-center justify-center animate-pulse">
-              <MessageSquare className="h-6 w-6 text-[#0080FF]" />
+            <div className="h-12 w-12 rounded-full bg-[var(--accent)]/10 flex items-center justify-center animate-pulse">
+              <MessageSquare className="h-6 w-6 text-[var(--accent)]" />
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@ export default function ContactPage() {
       {/* Section 2: Contact Form */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="container mx-auto max-w-2xl">
-          <Card className="bg-[#121212] border-l-4 border-l-[#0080FF] border-y border-r border-white/10 p-8 md:p-12">
+          <Card className="bg-[var(--surface-2)] border-l-4 border-l-[var(--accent)] border-y border-r border-white/10 p-8 md:p-12">
             <h2 className="text-2xl font-bold mb-8 font-orbitron">Send Me a Message</h2>
             
             <form className="space-y-6">
@@ -85,7 +85,7 @@ export default function ContactPage() {
                   id="name"
                   type="text"
                   placeholder="Your name"
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors"
                   required
                 />
               </div>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                   id="email"
                   type="email"
                   placeholder="you@company.com"
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors"
                   required
                 />
               </div>
@@ -107,7 +107,7 @@ export default function ContactPage() {
                   id="company"
                   type="text"
                   placeholder="yourcompany.com"
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors"
                 />
               </div>
 
@@ -115,7 +115,7 @@ export default function ContactPage() {
                 <label htmlFor="interest" className="text-sm font-medium text-gray-300">What Are You Interested In? <span className="text-gray-500">(optional)</span></label>
                 <select
                   id="interest"
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors"
                 >
                   <option value="">Select a topic...</option>
                   <option value="web-design">Web Design / Redesign</option>
@@ -139,12 +139,12 @@ export default function ContactPage() {
                   id="message"
                   placeholder="What are you trying to achieve? What challenges are you facing?"
                   rows={5}
-                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[#0080FF] focus:ring-1 focus:ring-[#0080FF] transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-black border border-white/20 rounded-md text-white placeholder-gray-500 focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors resize-none"
                   required
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full bg-[#0080FF] hover:bg-[#0080FF]/90 text-base">
+              <Button type="submit" size="lg" className="w-full bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base">
                 Send Message
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -155,7 +155,7 @@ export default function ContactPage() {
                 I read every message personally. No auto-responders, no canned replies. You'll hear back from me, usually within 24 hours on business days.
               </p>
               <p className="text-xs text-gray-500 font-inter">
-                Your information is never shared, sold, or used for spam. I hate that too. <Link href="/privacy" className="text-[#0080FF] hover:underline">Privacy Policy</Link>
+                Your information is never shared, sold, or used for spam. I hate that too. <Link href="/privacy" className="text-[var(--accent)] hover:underline">Privacy Policy</Link>
               </p>
             </div>
           </Card>
@@ -163,39 +163,39 @@ export default function ContactPage() {
       </section>
 
       {/* Section 3: Alternative Ways to Reach Me */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">Prefer Another Way? You've Got Options.</h2>
           
           <div className="grid md:grid-cols-3 gap-6">
-            <Card className="bg-black border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                <Calendar className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-black border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                <Calendar className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-4 font-rajdhani">Book a Call Directly</h3>
               <p className="text-gray-400 mb-6 font-inter">
                 Skip the back-and-forth. Grab a time that works for you on my calendar. Free 30-minute strategy call, no pressure.
               </p>
               <Link href="/contact">
-                <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                   Book Your Free Call
                 </Button>
               </Link>
             </Card>
 
-            <Card className="bg-black border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                <Mail className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-black border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                <Mail className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-4 font-rajdhani">Write Me Directly</h3>
               <p className="text-gray-400 mb-6 font-inter">
-                If you prefer to email, reach me at <a href="mailto:hello@yourdedicatedmarketer.com" className="text-[#0080FF] hover:underline">hello@yourdedicatedmarketer.com</a>. It comes straight to my inbox—not a shared team mailbox.
+                If you prefer to email, reach me at <a href="mailto:hello@yourdedicatedmarketer.com" className="text-[var(--accent)] hover:underline">hello@yourdedicatedmarketer.com</a>. It comes straight to my inbox—not a shared team mailbox.
               </p>
             </Card>
 
-            <Card className="bg-black border border-white/10 p-8 hover:border-[#0080FF] transition-colors">
-              <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                <MessageSquare className="h-6 w-6 text-[#0080FF]" />
+            <Card className="bg-black border border-white/10 p-8 hover:border-[var(--accent)] transition-colors">
+              <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                <MessageSquare className="h-6 w-6 text-[var(--accent)]" />
               </div>
               <h3 className="text-xl font-bold mb-4 font-rajdhani">Real-Time Chat</h3>
               <p className="text-gray-400 mb-6 font-inter">
@@ -211,10 +211,10 @@ export default function ContactPage() {
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">What Happens After You Reach Out.</h2>
           
-          <Card className="bg-[#121212] border border-white/10 p-8 md:p-12">
+          <Card className="bg-[var(--surface-2)] border border-white/10 p-8 md:p-12">
             <div className="space-y-8">
               <div className="flex items-start space-x-4">
-                <div className="h-10 w-10 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">1</span>
                 </div>
                 <div>
@@ -224,7 +224,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="h-10 w-10 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">2</span>
                 </div>
                 <div>
@@ -234,7 +234,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="h-10 w-10 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">3</span>
                 </div>
                 <div>
@@ -244,7 +244,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="h-10 w-10 rounded-full bg-[#0080FF] flex items-center justify-center flex-shrink-0">
+                <div className="h-10 w-10 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">4</span>
                 </div>
                 <div>
@@ -258,7 +258,7 @@ export default function ContactPage() {
       </section>
 
       {/* Section 5: FAQ Snippet */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">Common Questions</h2>
 
@@ -273,7 +273,7 @@ export default function ContactPage() {
                   >
                     <span className="font-semibold font-rajdhani">{faq.question}</span>
                     {isOpen ? (
-                      <ChevronUp className="h-5 w-5 text-[#0080FF]" />
+                      <ChevronUp className="h-5 w-5 text-[var(--accent)]" />
                     ) : (
                       <ChevronDown className="h-5 w-5 text-gray-400" />
                     )}
@@ -291,13 +291,13 @@ export default function ContactPage() {
       </section>
 
       {/* Section 6: Final CTA (Emergency Option) */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-black to-[#0080FF]/20">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-black to-[var(--accent)]/20">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Need Something Urgent? Use the Chat.</h2>
           <p className="text-xl text-gray-400 mb-8 font-inter">
             If you're up against a deadline or have a quick question, the live chat is your fastest path. I'll answer if I'm at my desk.
           </p>
-          <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8">
+          <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8">
             Start Chat
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>

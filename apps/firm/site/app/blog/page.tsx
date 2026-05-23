@@ -38,21 +38,21 @@ export default function BlogPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-[#0080FF] flex items-center justify-center">
+              <div className="h-8 w-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold font-rajdhani">Your Dedicated Marketer</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Home</Link>
-              <Link href="/services" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Services</Link>
-              <Link href="/work" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Portfolio</Link>
-              <Link href="/about" className="text-sm font-medium hover:text-[#0080FF] transition-colors">About</Link>
-              <Link href="/blog" className="text-sm font-medium text-[#0080FF]">Blog</Link>
-              <Link href="/faq" className="text-sm font-medium hover:text-[#0080FF] transition-colors">FAQ</Link>
-              <Link href="/contact" className="text-sm font-medium hover:text-[#0080FF] transition-colors">Contact</Link>
+              <Link href="/" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Home</Link>
+              <Link href="/services" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Services</Link>
+              <Link href="/work" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Portfolio</Link>
+              <Link href="/about" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">About</Link>
+              <Link href="/blog" className="text-sm font-medium text-[var(--accent)]">Blog</Link>
+              <Link href="/faq" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">FAQ</Link>
+              <Link href="/contact" className="text-sm font-medium hover:text-[var(--accent)] transition-colors">Contact</Link>
             </div>
-            <Button className="bg-[#0080FF] hover:bg-[#0080FF]/90">Book Consultation</Button>
+            <Button className="bg-[var(--accent)] hover:bg-[var(--accent)]/90">Book Consultation</Button>
           </div>
         </div>
       </nav>
@@ -76,8 +76,8 @@ export default function BlogPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8">
             {posts.map((post) => (
-              <Card key={post.id} className="bg-[#121212] border border-white/10 p-6 hover:border-[#0080FF] transition-colors">
-                <div className="text-[#0080FF] text-xs font-medium mb-2">{post.category}</div>
+              <Card key={post.id} className="bg-[var(--surface-2)] border border-white/10 p-6 hover:border-[var(--accent)] transition-colors">
+                <div className="text-[var(--accent)] text-xs font-medium mb-2">{post.category}</div>
                 <h3 className="text-lg font-bold mb-2 font-rajdhani">{post.title}</h3>
                 <p className="text-gray-400 text-sm mb-4 font-inter">{post.excerpt}</p>
                 <div className="flex items-center space-x-4 text-xs text-gray-500 mb-4">
@@ -90,7 +90,7 @@ export default function BlogPage() {
                     <span>{post.readTime}</span>
                   </div>
                 </div>
-                <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white text-sm">
+                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white text-sm">
                   Read More
                   <ArrowRight className="ml-2 h-3 w-3" />
                 </Button>
@@ -101,14 +101,14 @@ export default function BlogPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#121212]">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Want More Insights Like This?</h2>
           <p className="text-xl text-gray-400 mb-8 font-inter">
             Subscribe to get practical marketing tips delivered to your inbox. No spam, ever.
           </p>
           <Link href="/contact">
-            <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8">
+            <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8">
               Get in Touch
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

@@ -59,7 +59,7 @@ export default function Home() {
 
         {/* Live Chat Widget Placeholder */}
         <div className="fixed bottom-4 right-4 z-50">
-          <Button className="bg-[#121212] border border-[#0080FF] hover:bg-[#1E1E1E] text-sm">
+          <Button className="bg-[var(--surface-2)] border border-[var(--accent)] hover:bg-[var(--surface-3)] text-sm">
             <MessageSquare className="mr-2 h-4 w-4" />
             Ask me anything – I'm a real human, not a bot farm.
           </Button>
@@ -71,45 +71,45 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8">
             <AnimateOnScroll delay={0}>
-              <Card className="bg-[#121212] border border-white/10 hover:border-[#0080FF] transition-colors p-8">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                  <Layout className="h-6 w-6 text-[#0080FF]" />
+              <Card className="bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] transition-colors p-8">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <Layout className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">Website as Your Growth Engine</h3>
                 <p className="text-gray-400 mb-6 font-inter">
                   Custom, conversion-focused web design that becomes the central hub of your marketing. Built to perform, built to scale.
                 </p>
-                <a href="/services" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+                <a href="/services" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                   Learn More <ArrowRight className="inline ml-1 h-4 w-4" />
                 </a>
               </Card>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
-              <Card className="bg-[#121212] border border-white/10 hover:border-[#0080FF] transition-colors p-8">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                  <Megaphone className="h-6 w-6 text-[#0080FF]" />
+              <Card className="bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] transition-colors p-8">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <Megaphone className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">Digital Marketing Ecosystem</h3>
                 <p className="text-gray-400 mb-6 font-inter">
                   SEO, content, social media, email, and paid ads — all managed cohesively around your website, not in fragmented silos.
                 </p>
-                <a href="/services" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+                <a href="/services" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                   Learn More <ArrowRight className="inline ml-1 h-4 w-4" />
                 </a>
               </Card>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={200}>
-              <Card className="bg-[#121212] border border-white/10 hover:border-[#0080FF] transition-colors p-8">
-                <div className="h-12 w-12 rounded-lg bg-[#0080FF]/10 flex items-center justify-center mb-6">
-                  <BarChart3 className="h-6 w-6 text-[#0080FF]" />
+              <Card className="bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] transition-colors p-8">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <BarChart3 className="h-6 w-6 text-[var(--accent)]" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 font-rajdhani">Analytics & Automation</h3>
                 <p className="text-gray-400 mb-6 font-inter">
                   CRM setup, marketing automation, and revenue-focused analytics that turn data into decisions — no vanity metrics, just growth.
                 </p>
-                <a href="/services" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+                <a href="/services" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                   Learn More <ArrowRight className="inline ml-1 h-4 w-4" />
                 </a>
               </Card>
@@ -128,48 +128,48 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <AnimateOnScroll delay={0}>
-              <Card className="bg-[#121212] border border-white/10 p-6">
-                <div className="h-48 bg-[#1E1E1E] rounded-lg mb-4 flex items-center justify-center">
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+                <div className="h-48 bg-[var(--surface-3)] rounded-lg mb-4 flex items-center justify-center">
                   <Monitor className="h-12 w-12 text-gray-600" />
                 </div>
-                <div className="text-[#0080FF] text-sm font-medium mb-2">Law Firm</div>
+                <div className="text-[var(--accent)] text-sm font-medium mb-2">Law Firm</div>
                 <div className="text-2xl font-bold mb-2 font-rajdhani">+142% Mobile Conversion</div>
                 <p className="text-gray-400 text-sm mb-4 font-inter">
                   Complete booking and scheduling platform with real-time availability management.
                 </p>
-                <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                   View Case Study
                 </Button>
               </Card>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
-              <Card className="bg-[#121212] border border-white/10 p-6">
-                <div className="h-48 bg-[#1E1E1E] rounded-lg mb-4 flex items-center justify-center">
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+                <div className="h-48 bg-[var(--surface-3)] rounded-lg mb-4 flex items-center justify-center">
                   <Monitor className="h-12 w-12 text-gray-600" />
                 </div>
-                <div className="text-[#0080FF] text-sm font-medium mb-2">Hair Salon</div>
+                <div className="text-[var(--accent)] text-sm font-medium mb-2">Hair Salon</div>
                 <div className="text-2xl font-bold mb-2 font-rajdhani">2.5M Appointments Booked</div>
                 <p className="text-gray-400 text-sm mb-4 font-inter">
                   Stylist scheduling and appointment booking system with service catalog and client management.
                 </p>
-                <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                   View Case Study
                 </Button>
               </Card>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={200}>
-              <Card className="bg-[#121212] border border-white/10 p-6">
-                <div className="h-48 bg-[#1E1E1E] rounded-lg mb-4 flex items-center justify-center">
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+                <div className="h-48 bg-[var(--surface-3)] rounded-lg mb-4 flex items-center justify-center">
                   <Monitor className="h-12 w-12 text-gray-600" />
                 </div>
-                <div className="text-[#0080FF] text-sm font-medium mb-2">Tax Firm</div>
+                <div className="text-[var(--accent)] text-sm font-medium mb-2">Tax Firm</div>
                 <div className="text-2xl font-bold mb-2 font-rajdhani">98% Client Retention</div>
                 <p className="text-gray-400 text-sm mb-4 font-inter">
                   Client management and document tracking system for tax preparation firms with secure workflows.
                 </p>
-                <Button variant="outline" className="w-full border-[#0080FF] text-[#0080FF] hover:bg-[#0080FF] hover:text-white">
+                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
                   View Case Study
                 </Button>
               </Card>
@@ -177,7 +177,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-8">
-            <a href="/work" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+            <a href="/work" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
               View Full Portfolio <ArrowRight className="inline ml-1 h-4 w-4" />
             </a>
           </div>
@@ -194,14 +194,14 @@ export default function Home() {
           
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-[#0080FF]" />
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-[var(--accent)]" />
             
             <div className="space-y-12">
               <AnimateOnScroll delay={0}>
                 <div className="relative flex items-start md:items-center">
-                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[#0080FF] border-4 border-black" />
+                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
                   <div className="ml-16 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
-                    <div className="bg-[#121212] border border-white/10 p-6 rounded-lg">
+                    <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg">
                       <h3 className="text-xl font-bold mb-2 font-rajdhani">Discovery & Data Audit</h3>
                       <p className="text-gray-400 font-inter">
                         We define your goals, audit your data, and agree on revenue-tied success metrics before a single pixel is designed.
@@ -213,9 +213,9 @@ export default function Home() {
 
               <AnimateOnScroll delay={100}>
                 <div className="relative flex items-start md:items-center">
-                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[#0080FF] border-4 border-black" />
+                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
                   <div className="ml-16 md:ml-auto md:w-1/2 md:pl-12">
-                    <div className="bg-[#121212] border border-white/10 p-6 rounded-lg">
+                    <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg">
                       <h3 className="text-xl font-bold mb-2 font-rajdhani">Design & Build</h3>
                       <p className="text-gray-400 font-inter">
                         You get a custom, mobile-first website that respects privacy and amplifies your brand. AI assists, but human judgment leads.
@@ -227,9 +227,9 @@ export default function Home() {
 
               <AnimateOnScroll delay={200}>
                 <div className="relative flex items-start md:items-center">
-                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[#0080FF] border-4 border-black" />
+                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
                   <div className="ml-16 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
-                    <div className="bg-[#121212] border border-white/10 p-6 rounded-lg">
+                    <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg">
                       <h3 className="text-xl font-bold mb-2 font-rajdhani">Launch, Learn & Optimize</h3>
                       <p className="text-gray-400 font-inter">
                         Post-launch, we track real business outcomes, not vanity metrics. Transparent monthly reports show exactly how your site contributes to growth.
@@ -256,39 +256,39 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <AnimateOnScroll delay={0}>
-              <Card className="bg-[#121212] border border-white/10 p-6">
-                <div className="text-[#0080FF] text-xs font-medium mb-2">Web Design</div>
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+                <div className="text-[var(--accent)] text-xs font-medium mb-2">Web Design</div>
                 <h3 className="text-lg font-bold mb-2 font-rajdhani">Why AI Alone Won't Build Your Brand (And What Actually Works)</h3>
                 <p className="text-gray-400 text-sm mb-4 font-inter">
                   Learn why human creativity and strategic thinking are essential for building a brand that resonates.
                 </p>
-                <a href="/blog" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+                <a href="/blog" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                   Read More <ArrowRight className="inline ml-1 h-4 w-4" />
                 </a>
               </Card>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
-              <Card className="bg-[#121212] border border-white/10 p-6">
-                <div className="text-[#0080FF] text-xs font-medium mb-2">SEO/AIEO</div>
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+                <div className="text-[var(--accent)] text-xs font-medium mb-2">SEO/AIEO</div>
                 <h3 className="text-lg font-bold mb-2 font-rajdhani">Stop Counting Clicks: The Metrics That Actually Matter for Small Business Websites</h3>
                 <p className="text-gray-400 text-sm mb-4 font-inter">
                   Discover the revenue-focused metrics that drive real business growth, not vanity numbers.
                 </p>
-                <a href="/blog" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+                <a href="/blog" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                   Read More <ArrowRight className="inline ml-1 h-4 w-4" />
                 </a>
               </Card>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={200}>
-              <Card className="bg-[#121212] border border-white/10 p-6">
-                <div className="text-[#0080FF] text-xs font-medium mb-2">Analytics</div>
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+                <div className="text-[var(--accent)] text-xs font-medium mb-2">Analytics</div>
                 <h3 className="text-lg font-bold mb-2 font-rajdhani">The Privacy-First Web: How to Grow Without Being Creepy</h3>
                 <p className="text-gray-400 text-sm mb-4 font-inter">
                   Build trust and grow your business with privacy-first marketing strategies that respect your customers.
                 </p>
-                <a href="/blog" className="text-[#0080FF] hover:text-[#0080FF]/80 text-sm font-medium">
+                <a href="/blog" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                   Read More <ArrowRight className="inline ml-1 h-4 w-4" />
                 </a>
               </Card>
@@ -301,7 +301,7 @@ export default function Home() {
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="container mx-auto max-w-4xl">
           <AnimateOnScroll>
-            <Card className="bg-[#121212] border-l-4 border-l-[#0080FF] border-y border-r border-white/10 p-8 md:p-12">
+            <Card className="bg-[var(--surface-2)] border-l-4 border-l-[var(--accent)] border-y border-r border-white/10 p-8 md:p-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-6 font-orbitron">We're Not Your Typical Marketing Firm. And We're Proud of It.</h2>
               <p className="text-gray-300 font-inter leading-relaxed">
                 The marketing industry is full of overpriced, opaque agencies that deliver templated work, vanity metrics, and intrusive tracking. Your Dedicated Marketer was built to be the opposite: transparent, client-centric, and relentlessly focused on what actually grows your business. We're new, which means you get obsessive attention and a partner who's as invested in your success as you are. Don't believe us? Check out our demo case studies and see the quality for yourself.
@@ -312,14 +312,14 @@ export default function Home() {
       </section>
 
       {/* Section 7: Final CTA – Conversion Zone */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[#0080FF]/20">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black to-[var(--accent)]/20">
         <div className="container mx-auto max-w-4xl text-center">
           <AnimateOnScroll>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Ready to Build a Website That Actually Works for Your Business?</h2>
             <p className="text-xl text-gray-400 mb-8 font-inter">
               No flashy promises. No bloated retainers. Just a dedicated marketer who knows how to drive results. Book a free 30-minute consultation.
             </p>
-            <Button size="lg" className="bg-[#0080FF] hover:bg-[#0080FF]/90 text-base px-8 mb-4">
+            <Button size="lg" className="bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-base px-8 mb-4">
               Book Your Consultation
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -336,7 +336,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 rounded-lg bg-[#0080FF] flex items-center justify-center">
+                <div className="h-8 w-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
                   <Zap className="h-5 w-5 text-white" />
                 </div>
                 <span className="text-xl font-bold font-rajdhani">Your Dedicated Marketer</span>
@@ -345,23 +345,23 @@ export default function Home() {
             <div>
               <h3 className="font-semibold mb-4 font-rajdhani">Navigation</h3>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="/services" className="hover:text-[#0080FF]">Services</a></li>
-                <li><a href="/work" className="hover:text-[#0080FF]">Portfolio</a></li>
-                <li><a href="/about" className="hover:text-[#0080FF]">About</a></li>
-                <li><a href="/blog" className="hover:text-[#0080FF]">Blog</a></li>
-                <li><a href="/contact" className="hover:text-[#0080FF]">Contact</a></li>
+                <li><a href="/services" className="hover:text-[var(--accent)]">Services</a></li>
+                <li><a href="/work" className="hover:text-[var(--accent)]">Portfolio</a></li>
+                <li><a href="/about" className="hover:text-[var(--accent)]">About</a></li>
+                <li><a href="/blog" className="hover:text-[var(--accent)]">Blog</a></li>
+                <li><a href="/contact" className="hover:text-[var(--accent)]">Contact</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4 font-rajdhani">Legal</h3>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><a href="/privacy" className="hover:text-[#0080FF]">Privacy Policy</a></li>
-                <li><a href="/terms" className="hover:text-[#0080FF]">Terms of Service</a></li>
+                <li><a href="/privacy" className="hover:text-[var(--accent)]">Privacy Policy</a></li>
+                <li><a href="/terms" className="hover:text-[var(--accent)]">Terms of Service</a></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4 font-rajdhani">Connect</h3>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-400 hover:text-[#0080FF]">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-400 hover:text-[var(--accent)]">
                 <Link className="h-5 w-5" />
                 <span className="text-sm">LinkedIn</span>
               </a>
