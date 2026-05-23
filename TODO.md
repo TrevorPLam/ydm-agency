@@ -188,8 +188,8 @@
   - ✅ TASK-006-8: apps/firm/site/app/page.tsx - Added micro-interactions: hover:scale-105, hover:border-accent, hover:shadow-lg
   - ✅ TASK-006-9: apps/firm/site/app/page.tsx - Ensured mobile responsiveness: stacks to single column on small screens
 
-- [ ] **TASK-007: Transform Portfolio Section to Enhanced Bento Grid**
-  Status: pending
+- [x] **TASK-007: Transform Portfolio Section to Enhanced Bento Grid**
+  Status: completed
   Related: apps/firm/site/app/page.tsx
   Done: Portfolio section uses varied bento layout with featured tile and additional content tiles
   Out: Adding new case studies, changing portfolio content
@@ -201,14 +201,14 @@
   Depends: TASK-004, TASK-006
   Blocks: TASK-008
 
-  - TASK-007-1: apps/firm/site/app/page.tsx - Enhance existing bento grid with more dramatic size variations
-  - TASK-007-2: apps/firm/site/app/page.tsx - Make first case study (Law Firm) 2x2 featured tile with larger preview area
-  - TASK-007-3: apps/firm/site/app/page.tsx - Vary other case studies: some 1x1, some 1x2, some 2x1
-  - TASK-007-4: apps/firm/site/app/page.tsx - Add "Client Testimonial" tile (1x1) with quote and attribution
-  - TASK-007-5: apps/firm/site/app/page.tsx - Add "Industry Recognition" tile (1x1) with awards/badges
-  - TASK-007-6: apps/firm/site/app/page.tsx - Replace Monitor icon placeholders with actual screenshots or stylized mockups
-  - TASK-007-7: apps/firm/site/app/page.tsx - Add hover effects: image zoom (scale-110), overlay slide-up with project details
-  - TASK-007-8: apps/firm/site/app/page.tsx - Add "featured" badge to first case study with accent color
+  - ✅ TASK-007-1: apps/firm/site/app/page.tsx - Enhanced existing bento grid with more dramatic size variations (2x2, 1x1 tiles)
+  - ✅ TASK-007-2: apps/firm/site/app/page.tsx - Made first case study (Law Firm) 2x2 featured tile with larger preview area (h-64)
+  - ✅ TASK-007-3: apps/firm/site/app/page.tsx - Varied other case studies: Hair Salon and Tax Firm as 1x1 tiles
+  - ✅ TASK-007-4: apps/firm/site/app/page.tsx - Added "Client Testimonial" tile (1x1) with quote and attribution
+  - ✅ TASK-007-5: apps/firm/site/app/page.tsx - Added "Industry Recognition" tile (1x1) with awards/badges
+  - ✅ TASK-007-6: apps/firm/site/app/page.tsx - Replaced Monitor icon placeholders with stylized mockups (gradient backgrounds, accent overlays, large typography)
+  - ✅ TASK-007-7: apps/firm/site/app/page.tsx - Added hover effects: image zoom (scale-110), overlay with accent color, border glow
+  - ✅ TASK-007-8: apps/firm/site/app/page.tsx - Added "featured" badge to first case study with accent color
 
 - [ ] **TASK-008: Transform How It Works to Scroll-Driven Storytelling**
   Status: pending

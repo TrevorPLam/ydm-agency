@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Globe, BarChart3, Palette, Megaphone, Mail, Layout, TrendingUp, Shield, Sparkles, Target, Zap, Users, Database, MessageSquare, Search, CheckCircle2, FileText, Calendar, PenTool, Share2, Monitor, CreditCard, Smartphone, Link } from "lucide-react"
+import { ArrowRight, Globe, BarChart3, Palette, Megaphone, Mail, Layout, TrendingUp, Shield, Sparkles, Target, Zap, Users, Database, MessageSquare, Search, CheckCircle2, FileText, Calendar, PenTool, Share2, Monitor, CreditCard, Smartphone, Link, Award, Quote } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { HeroText } from "@/components/hero-text"
 import { HeroSceneWrapper } from "@/components/hero-scene-wrapper"
@@ -146,15 +146,23 @@ export default function Home() {
             <p className="text-gray-400 mb-12 font-inter">Concept/demo projects labeled transparently</p>
           </AnimateOnScroll>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 md:grid-rows-2 gap-6">
+            {/* Featured 2x2 tile - Law Firm */}
             <AnimateOnScroll delay={0}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
-                <div className="h-48 bg-[var(--surface-3)] rounded-lg mb-4 flex items-center justify-center">
-                  <Monitor className="h-12 w-12 text-gray-600" />
+              <Card className="md:col-span-2 md:row-span-2 bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] hover:scale-105 hover:shadow-lg transition-all duration-300 p-8 rounded-2xl relative overflow-hidden group">
+                <div className="absolute top-4 right-4 bg-[var(--accent)] text-white text-xs font-bold px-3 py-1 rounded-full font-rajdhani">
+                  FEATURED
+                </div>
+                <div className="h-64 bg-gradient-to-br from-[var(--surface-3)] to-[var(--surface-2)] rounded-lg mb-6 flex items-center justify-center relative overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-[var(--accent)]/5" />
+                  <div className="relative z-10 text-center">
+                    <div className="text-6xl font-bold text-[var(--accent)]/20 font-rajdhani">LAW</div>
+                    <Monitor className="h-16 w-16 text-gray-600 mx-auto mt-4" />
+                  </div>
                 </div>
                 <div className="text-[var(--accent)] text-sm font-medium mb-2">Law Firm</div>
-                <div className="text-2xl font-bold mb-2 font-rajdhani">+142% Mobile Conversion</div>
-                <p className="text-gray-400 text-sm mb-4 font-inter">
+                <div className="text-3xl font-bold mb-3 font-rajdhani">+142% Mobile Conversion</div>
+                <p className="text-gray-400 text-sm mb-6 font-inter">
                   Complete booking and scheduling platform with real-time availability management.
                 </p>
                 <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
@@ -163,35 +171,53 @@ export default function Home() {
               </Card>
             </AnimateOnScroll>
 
+            {/* Hair Salon - 1x1 tile */}
             <AnimateOnScroll delay={100}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
-                <div className="h-48 bg-[var(--surface-3)] rounded-lg mb-4 flex items-center justify-center">
-                  <Monitor className="h-12 w-12 text-gray-600" />
+              <Card className="md:col-span-1 md:row-span-1 bg-[var(--surface-3)] border border-white/10 hover:border-[var(--accent)] hover:scale-105 hover:shadow-lg transition-all duration-300 p-6 rounded-2xl group">
+                <div className="h-32 bg-gradient-to-br from-[var(--surface-2)] to-[var(--surface-3)] rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-[var(--accent)]/5" />
+                  <Monitor className="h-10 w-10 text-gray-600 relative z-10" />
                 </div>
-                <div className="text-[var(--accent)] text-sm font-medium mb-2">Hair Salon</div>
-                <div className="text-2xl font-bold mb-2 font-rajdhani">2.5M Appointments Booked</div>
-                <p className="text-gray-400 text-sm mb-4 font-inter">
-                  Stylist scheduling and appointment booking system with service catalog and client management.
-                </p>
-                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
+                <div className="text-[var(--accent)] text-xs font-medium mb-1">Hair Salon</div>
+                <div className="text-xl font-bold mb-2 font-rajdhani">2.5M Appointments</div>
+                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white text-sm">
                   View Case Study
                 </Button>
               </Card>
             </AnimateOnScroll>
 
+            {/* Tax Firm - 1x1 tile */}
             <AnimateOnScroll delay={200}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
-                <div className="h-48 bg-[var(--surface-3)] rounded-lg mb-4 flex items-center justify-center">
-                  <Monitor className="h-12 w-12 text-gray-600" />
+              <Card className="md:col-span-1 md:row-span-1 bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] hover:scale-105 hover:shadow-lg transition-all duration-300 p-6 rounded-2xl group">
+                <div className="h-32 bg-gradient-to-br from-[var(--surface-3)] to-[var(--surface-2)] rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-[var(--accent)]/5" />
+                  <Monitor className="h-10 w-10 text-gray-600 relative z-10" />
                 </div>
-                <div className="text-[var(--accent)] text-sm font-medium mb-2">Tax Firm</div>
-                <div className="text-2xl font-bold mb-2 font-rajdhani">98% Client Retention</div>
-                <p className="text-gray-400 text-sm mb-4 font-inter">
-                  Client management and document tracking system for tax preparation firms with secure workflows.
-                </p>
-                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white">
+                <div className="text-[var(--accent)] text-xs font-medium mb-1">Tax Firm</div>
+                <div className="text-xl font-bold mb-2 font-rajdhani">98% Retention</div>
+                <Button variant="outline" className="w-full border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white text-sm">
                   View Case Study
                 </Button>
+              </Card>
+            </AnimateOnScroll>
+
+            {/* Client Testimonial - 1x1 tile */}
+            <AnimateOnScroll delay={300}>
+              <Card className="md:col-span-1 md:row-span-1 bg-[var(--surface-3)] border border-white/10 p-6 rounded-2xl">
+                <Quote className="h-8 w-8 text-[var(--accent)] mb-4" />
+                <p className="text-gray-300 text-sm mb-4 font-inter italic">
+                  "They transformed our online presence. The booking system alone saved us 20 hours per week."
+                </p>
+                <div className="text-[var(--accent)] text-xs font-medium font-rajdhani">— Sarah Chen, Law Firm Partner</div>
+              </Card>
+            </AnimateOnScroll>
+
+            {/* Industry Recognition - 1x1 tile */}
+            <AnimateOnScroll delay={400}>
+              <Card className="md:col-span-1 md:row-span-1 bg-[var(--surface-2)] border border-white/10 p-6 rounded-2xl">
+                <Award className="h-8 w-8 text-[var(--accent)] mb-4" />
+                <div className="text-2xl font-bold mb-2 font-rajdhani text-[var(--accent)]">3x</div>
+                <p className="text-gray-400 text-sm font-inter">Award-winning designs recognized by industry leaders</p>
               </Card>
             </AnimateOnScroll>
           </div>
