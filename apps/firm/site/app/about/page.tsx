@@ -36,8 +36,8 @@ export default function AboutPage() {
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">The Way Marketing Is Sold Is Broken.</h2>
           
-          <Card className="bg-[var(--surface-2)] border border-white/10 p-8 md:p-12 mb-8">
-            <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 md:grid-rows-2 gap-6 mb-6">
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-8 md:col-span-2 hover:border-[var(--accent)] transition-colors rounded-2xl">
               <div className="space-y-4">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
                   <Link2 className="h-6 w-6 text-[var(--accent)]" />
@@ -47,7 +47,9 @@ export default function AboutPage() {
                   AI has made it easy to churn out generic, synthetic-feeling content and templated websites. Many agencies now all sound, look, and perform exactly the same. Your brand deserves better than a copy-paste solution.
                 </p>
               </div>
+            </Card>
 
+            <Card className="bg-[var(--surface-3)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors rounded-2xl">
               <div className="space-y-4">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
                   <Search className="h-6 w-6 text-[var(--accent)]" />
@@ -57,7 +59,9 @@ export default function AboutPage() {
                   Clicks, impressions, and "engagement" don't pay the bills. Yet agencies often report these numbers while ignoring the metrics that matter most: leads, sales, and customer value. We report on what moves your bottom line.
                 </p>
               </div>
+            </Card>
 
+            <Card className="bg-[var(--surface-3)] border border-white/10 p-8 hover:border-[var(--accent)] transition-colors rounded-2xl">
               <div className="space-y-4">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
                   <Bot className="h-6 w-6 text-[var(--accent)]" />
@@ -67,12 +71,14 @@ export default function AboutPage() {
                   When your website, SEO, social, and ads are handled by different vendors, who takes responsibility when the strategy fails? Everyone points fingers. We're a single, dedicated partner who owns the entire outcome.
                 </p>
               </div>
-            </div>
-          </Card>
+            </Card>
+          </div>
 
-          <p className="text-center text-lg text-gray-300 font-inter italic">
-            Your business deserves a marketing partner who is as invested in your success as you are—not a vendor who disappears after the invoice is paid.
-          </p>
+          <Card className="bg-[var(--surface-2)] border-l-4 border-l-[var(--accent)] border-y-0 border-r-0 border-white/10 p-8 rounded-2xl">
+            <p className="text-lg text-gray-300 font-inter italic text-center">
+              Your business deserves a marketing partner who is as invested in your success as you are—not a vendor who disappears after the invoice is paid.
+            </p>
+          </Card>
         </div>
       </section>
 
