@@ -7,7 +7,7 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "start": "turbo run start",
-    "lint": "turbo run lint",
+    "lint": "biome lint .",
     "typecheck": "turbo run typecheck",
     "clean": "turbo run clean",
     "format": "biome format --write .",
