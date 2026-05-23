@@ -2,6 +2,19 @@
 
 ## Infrastructure Issues
 
+- [ ] **TASK-INFRA-005: Fix packages/ui test failure**
+  Status: pending
+  Related: packages/ui/src/components/stat-card.test.tsx
+  Done: All tests in packages/ui pass
+  Out: Changing test infrastructure
+  Rules: Testing best practices, React Testing Library
+  Pattern: Proper test selectors, unique element queries
+  Anti: Ambiguous test queries, multiple element matches
+  Depends: none
+  Blocks: none
+
+  - TASK-INFRA-005-1: packages/ui/src/components/stat-card.test.tsx - Fix test that queries for empty string which matches multiple elements
+
 - [x] **TASK-INFRA-001: Fix eslint-config typecheck error**
   Status: completed
   Related: packages/eslint-config/src/index.ts
@@ -152,8 +165,8 @@
   - ✅ TASK-005-6: apps/firm/site/app/globals.css - Add text-reveal animation keyframes if not present
   - ✅ TASK-005-7: apps/firm/site/app/globals.css - Add fluid typography utilities for responsive text scaling
 
-- [ ] **TASK-006: Transform Services Section to Bento Grid**
-  Status: pending
+- [x] **TASK-006: Transform Services Section to Bento Grid**
+  Status: completed
   Related: apps/firm/site/app/page.tsx
   Done: Services section uses asymmetrical bento layout with varied tile sizes
   Out: Adding new services, changing service content
@@ -165,15 +178,15 @@
   Depends: TASK-004, TASK-005
   Blocks: TASK-007
 
-  - TASK-006-1: apps/firm/site/app/page.tsx - Replace grid-cols-3 with CSS Grid bento layout using grid-template-areas or explicit column/row spans
-  - TASK-006-2: apps/firm/site/app/page.tsx - Make "Website as Growth Engine" span 2 columns, 2 rows (md:col-span-2 md:row-span-2)
-  - TASK-006-3: apps/firm/site/app/page.tsx - Make "Digital Marketing Ecosystem" span 1 column, 2 rows (md:col-span-1 md:row-span-2)
-  - TASK-006-4: apps/firm/site/app/page.tsx - Make "Analytics & Automation" span 1 column, 1 row (md:col-span-1 md:row-span-1)
-  - TASK-006-5: apps/firm/site/app/page.tsx - Add stat tiles: "142% avg conversion" (1x1), "98% client retention" (1x1) with accent colors
-  - TASK-006-6: apps/firm/site/app/page.tsx - Apply exaggerated corner rounding (rounded-2xl or rounded-3xl) to all tiles
-  - TASK-006-7: apps/firm/site/app/page.tsx - Vary background opacities for depth (some bg-surface-2, some bg-surface-3)
-  - TASK-006-8: apps/firm/site/app/page.tsx - Add micro-interactions: hover:scale-105, hover:border-accent, hover:shadow-lg
-  - TASK-006-9: apps/firm/site/app/page.tsx - Ensure mobile responsiveness: stack to single column on small screens
+  - ✅ TASK-006-1: apps/firm/site/app/page.tsx - Replaced grid-cols-3 with CSS Grid bento layout using md:grid-cols-2 md:grid-rows-2
+  - ✅ TASK-006-2: apps/firm/site/app/page.tsx - Made "Website as Growth Engine" span 2 columns, 2 rows (md:col-span-2 md:row-span-2)
+  - ✅ TASK-006-3: apps/firm/site/app/page.tsx - Made "Digital Marketing Ecosystem" span 1 column, 2 rows (md:col-span-1 md:row-span-2)
+  - ✅ TASK-006-4: apps/firm/site/app/page.tsx - Made "Analytics & Automation" span 1 column, 1 row (md:col-span-1 md:row-span-1)
+  - ✅ TASK-006-5: apps/firm/site/app/page.tsx - Added stat tiles: "142% avg conversion" (1x1), "98% client retention" (1x1) with accent colors
+  - ✅ TASK-006-6: apps/firm/site/app/page.tsx - Applied exaggerated corner rounding (rounded-2xl) to all tiles
+  - ✅ TASK-006-7: apps/firm/site/app/page.tsx - Varied background opacities for depth (some bg-surface-2, some bg-surface-3)
+  - ✅ TASK-006-8: apps/firm/site/app/page.tsx - Added micro-interactions: hover:scale-105, hover:border-accent, hover:shadow-lg
+  - ✅ TASK-006-9: apps/firm/site/app/page.tsx - Ensured mobile responsiveness: stacks to single column on small screens
 
 - [ ] **TASK-007: Transform Portfolio Section to Enhanced Bento Grid**
   Status: pending

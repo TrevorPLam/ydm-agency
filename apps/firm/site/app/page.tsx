@@ -69,9 +69,9 @@ export default function Home() {
       {/* Section 2: What We Do – Core Service Blocks */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 md:grid-rows-2 gap-6">
             <AnimateOnScroll delay={0}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] transition-colors p-8">
+              <Card className="md:col-span-2 md:row-span-2 bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] hover:scale-105 hover:shadow-lg transition-all duration-300 p-8 rounded-2xl">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
                   <Layout className="h-6 w-6 text-[var(--accent)]" />
                 </div>
@@ -86,7 +86,7 @@ export default function Home() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={100}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] transition-colors p-8">
+              <Card className="md:col-span-1 md:row-span-2 bg-[var(--surface-3)] border border-white/10 hover:border-[var(--accent)] hover:scale-105 hover:shadow-lg transition-all duration-300 p-8 rounded-2xl">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
                   <Megaphone className="h-6 w-6 text-[var(--accent)]" />
                 </div>
@@ -101,7 +101,7 @@ export default function Home() {
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={200}>
-              <Card className="bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] transition-colors p-8">
+              <Card className="md:col-span-1 md:row-span-1 bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] hover:scale-105 hover:shadow-lg transition-all duration-300 p-8 rounded-2xl">
                 <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
                   <BarChart3 className="h-6 w-6 text-[var(--accent)]" />
                 </div>
@@ -112,6 +112,26 @@ export default function Home() {
                 <a href="/services" className="text-[var(--accent)] hover:text-[var(--accent)]/80 text-sm font-medium">
                   Learn More <ArrowRight className="inline ml-1 h-4 w-4" />
                 </a>
+              </Card>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={300}>
+              <Card className="md:col-span-1 md:row-span-1 bg-[var(--surface-3)] border border-white/10 hover:border-[var(--accent)] hover:scale-105 hover:shadow-lg transition-all duration-300 p-8 rounded-2xl">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <TrendingUp className="h-6 w-6 text-[var(--accent)]" />
+                </div>
+                <div className="text-3xl font-bold mb-2 font-rajdhani text-[var(--accent)]">142%</div>
+                <p className="text-gray-400 text-sm font-inter">Average conversion increase</p>
+              </Card>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll delay={400}>
+              <Card className="md:col-span-1 md:row-span-1 bg-[var(--surface-2)] border border-white/10 hover:border-[var(--accent)] hover:scale-105 hover:shadow-lg transition-all duration-300 p-8 rounded-2xl">
+                <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-6">
+                  <Users className="h-6 w-6 text-[var(--accent)]" />
+                </div>
+                <div className="text-3xl font-bold mb-2 font-rajdhani text-[var(--accent)]">98%</div>
+                <p className="text-gray-400 text-sm font-inter">Client retention rate</p>
               </Card>
             </AnimateOnScroll>
           </div>
