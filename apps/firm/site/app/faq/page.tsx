@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Zap, MessageSquare, Calendar, ChevronDown, ChevronUp } from "lucide-react"
+import { ArrowRight, Zap, MessageSquare, Calendar, ChevronDown, ChevronUp, TrendingUp, Star } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -24,6 +24,8 @@ export default function FaqPage() {
       id: "working-with-me",
       title: "Working With Me",
       description: "Designed to humanize the solo-founder model and differentiate from faceless agencies.",
+      accent: "#0080FF",
+      popular: true,
       questions: [
         {
           id: "who-work-with",
@@ -51,6 +53,8 @@ export default function FaqPage() {
       id: "pricing",
       title: "Pricing, Contracts & Commitment",
       description: "Directly addresses fear of hidden costs, long lock-ins, and agency bloat.",
+      accent: "#00D4FF",
+      popular: true,
       questions: [
         {
           id: "website-cost",
@@ -78,6 +82,8 @@ export default function FaqPage() {
       id: "web-design",
       title: "Web Design & Development",
       description: "Clarifies process, ownership, and technical standards.",
+      accent: "#7C3AED",
+      popular: false,
       questions: [
         {
           id: "platform",
@@ -110,6 +116,8 @@ export default function FaqPage() {
       id: "seo-content",
       title: "SEO, AIEO & Content",
       description: "Educates on modern search and counters AI-generated slop concerns.",
+      accent: "#10B981",
+      popular: true,
       questions: [
         {
           id: "seo-vs-aieo",
@@ -137,6 +145,8 @@ export default function FaqPage() {
       id: "process",
       title: "Process & Reporting",
       description: "Counters vanity metrics and the 'black box' agency experience.",
+      accent: "#F59E0B",
+      popular: false,
       questions: [
         {
           id: "reporting",
@@ -159,6 +169,8 @@ export default function FaqPage() {
       id: "privacy",
       title: "Privacy, Data & Ethics",
       description: "Directly addresses the privacy vs. personalization paradox from your research.",
+      accent: "#EF4444",
+      popular: false,
       questions: [
         {
           id: "customer-data",
@@ -222,21 +234,41 @@ export default function FaqPage() {
       {/* Section 2: Question Categories */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-6">
-            {categories.map((category) => {
+          <div className="grid md:grid-cols-3 md:grid-rows-2 gap-6">
+            {categories.map((category, index) => {
               const isCategoryOpen = openCategory === category.id
+              // Bento layout: first 3 categories are 2x1, last 3 are 1x1
+              const isWide = index < 3
               return (
-                <Card key={category.id} className="bg-[var(--surface-2)] border border-white/10 overflow-hidden">
+                <Card 
+                  key={category.id} 
+                  className={`bg-[var(--surface-2)] border border-white/10 overflow-hidden rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-lg ${isWide ? 'md:col-span-2 md:row-span-1' : 'md:col-span-1 md:row-span-1'}`}
+                  style={{ 
+                    '--category-accent': category.accent,
+                    borderColor: isCategoryOpen ? `var(--category-accent)` : 'rgba(255,255,255,0.1)'
+                  } as React.CSSProperties}
+                >
                   <button
                     onClick={() => toggleCategory(category.id)}
-                    className="w-full p-6 text-left flex items-center justify-between hover:border-[var(--accent)] transition-colors"
+                    className="w-full p-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors relative"
                   >
-                    <div>
-                      <h2 className="text-xl font-bold font-rajdhani mb-1">{category.title}</h2>
-                      <p className="text-sm text-gray-400 font-inter">{category.description}</p>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h2 className="text-xl font-bold font-rajdhani" style={{ color: 'var(--category-accent)' }}>{category.title}</h2>
+                        {category.popular && (
+                          <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: 'var(--category-accent)20', color: 'var(--category-accent)' }}>
+                            <Star className="h-3 w-3" />
+                            Popular
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-gray-400 font-inter mb-2">{category.description}</p>
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <span className="font-medium" style={{ color: 'var(--category-accent)' }}>{category.questions.length} questions</span>
+                      </div>
                     </div>
                     {isCategoryOpen ? (
-                      <ChevronUp className="h-5 w-5 text-[var(--accent)] shrink-0 ml-4" />
+                      <ChevronUp className="h-5 w-5 shrink-0 ml-4" style={{ color: 'var(--category-accent)' }} />
                     ) : (
                       <ChevronDown className="h-5 w-5 text-gray-400 shrink-0 ml-4" />
                     )}
@@ -254,7 +286,7 @@ export default function FaqPage() {
                             >
                               <span className="font-medium font-rajdhani pr-4">{question.question}</span>
                               {isQuestionOpen ? (
-                                <ChevronUp className="h-4 w-4 text-[var(--accent)] shrink-0" />
+                                <ChevronUp className="h-4 w-4 shrink-0" style={{ color: 'var(--category-accent)' }} />
                               ) : (
                                 <ChevronDown className="h-4 w-4 text-gray-400 shrink-0" />
                               )}

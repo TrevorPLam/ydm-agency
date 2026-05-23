@@ -508,21 +508,21 @@
   - ✅ TASK-022-5: apps/firm/site/app/blog/page.tsx - Reading time already present as visual element with Clock icon
   - ✅ TASK-022-6: apps/firm/site/app/blog/page.tsx - Replaced "Coming Soon" dates with actual dates (Jan 15, 2026; Jan 8, 2026; Dec 22, 2025)
 
-- [ ] **TASK-023: Transform FAQ Page to Bento Layout**
-  Status: pending
+- [x] **TASK-023: Transform FAQ Page to Bento Layout**
+  Status: completed
   Related: apps/firm/site/app/faq/page.tsx
   Done: FAQ categories use varied bento layout with question counts
   Out: Changing FAQ content
   Rules: Bento grid principles, varied layouts, visual hierarchy
   Pattern: Varied tile sizes, question counts, popular badges
   Anti: 2-column equal grid, no hierarchy
-  Imports: none (CSS Grid)
+  Imports: Star from lucide-react
   Exports: Updated FAQ page
   Depends: TASK-004
   Blocks: none
 
-  - TASK-023-1: apps/firm/site/app/faq/page.tsx - Transform 2-column grid to varied bento layout
-  - TASK-023-2: apps/firm/site/app/faq/page.tsx - Use varied tile sizes: some 2x1, some 1x1
-  - TASK-023-3: apps/firm/site/app/faq/page.tsx - Add different accent colors per category
-  - TASK-023-4: apps/firm/site/app/faq/page.tsx - Add question count indicator to each category
-  - TASK-023-5: apps/firm/site/app/faq/page.tsx - Add "most popular" badge to key categories
+  - ✅ TASK-023-1: apps/firm/site/app/faq/page.tsx - Transformed 2-column grid to varied bento layout using md:grid-cols-3 md:grid-rows-2
+  - ✅ TASK-023-2: apps/firm/site/app/faq/page.tsx - Used varied tile sizes: first 3 categories are 2x1 (md:col-span-2), last 3 are 1x1 (md:col-span-1)
+  - ✅ TASK-023-3: apps/firm/site/app/faq/page.tsx - Added different accent colors per category (blue, cyan, purple, green, amber, red)
+  - ✅ TASK-023-4: apps/firm/site/app/faq/page.tsx - Added question count indicator to each category showing "X questions"
+  - ✅ TASK-023-5: apps/firm/site/app/faq/page.tsx - Added "most popular" badge with Star icon to key categories (Working With Me, Pricing, SEO/AIEO)
