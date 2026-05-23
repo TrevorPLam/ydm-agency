@@ -412,9 +412,9 @@
 
 ## Phase 6: About Page Transformation
 
-- [ ] **TASK-018: Transform About Header to Storytelling Design**
-  Status: pending
-  Related: apps/firm/site/app/about/page.tsx
+- [x] **TASK-018: Transform About Header to Storytelling Design**
+  Status: completed
+  Related: apps/firm/site/app/about/page.tsx, apps/firm/site/app/globals.css
   Done: Header uses oversized typography with scroll-triggered reveals
   Out: Changing header content
   Rules: Storytelling principles, oversized typography, scroll animations
@@ -425,10 +425,10 @@
   Depends: TASK-004
   Blocks: TASK-019
 
-  - TASK-018-1: apps/firm/site/app/about/page.tsx - Make headline oversized (text-5xl lg:text-7xl) with text clipping
-  - TASK-018-2: apps/firm/site/app/about/page.tsx - Add scroll-triggered text reveals using CSS scroll-driven animations
-  - TASK-018-3: apps/firm/site/app/about/page.tsx - Consider adding timeline element showing journey (vertical line with milestones)
-  - TASK-018-4: apps/firm/site/app/about/page.tsx - Remove standard centered layout, use asymmetrical positioning
+  - ✅ TASK-018-1: apps/firm/site/app/about/page.tsx - Made headline oversized (text-5xl md:text-6xl lg:text-7xl xl:text-8xl) with text clipping
+  - ✅ TASK-018-2: apps/firm/site/app/about/page.tsx - Added scroll-triggered text reveals using CSS text-reveal animation with staggered delays
+  - ✅ TASK-018-3: apps/firm/site/app/globals.css - Added animate-text-reveal-delay-1 and animate-text-reveal-delay-2 classes for staggered animations
+  - ✅ TASK-018-4: apps/firm/site/app/about/page.tsx - Removed standard centered layout, used asymmetrical positioning with max-w-5xl and left-aligned text
 
 - [ ] **TASK-019: Transform Problem Section to Asymmetrical Layout**
   Status: pending

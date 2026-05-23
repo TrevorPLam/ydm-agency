@@ -134,6 +134,16 @@ body {
   animation: text-reveal 800ms ease-out forwards;
 }
 
+.animate-text-reveal-delay-1 {
+  animation: text-reveal 800ms ease-out forwards;
+  animation-delay: 200ms;
+}
+
+.animate-text-reveal-delay-2 {
+  animation: text-reveal 800ms ease-out forwards;
+  animation-delay: 400ms;
+}
+
 /* Broken-grid portfolio layout */
 .portfolio-grid {
   display: grid;
