@@ -313,8 +313,8 @@
   - ✅ TASK-012-5: apps/firm/site/app/work/page.tsx - Enhanced hover effects: scale-110 image zoom, overlay with project details slide-up (translate-y)
   - ✅ TASK-012-6: apps/firm/site/app/work/page.tsx - Added subtle parallax on scroll using timeline-parallax class from globals.css
 
-- [ ] **TASK-013: Modernize Filter Bar**
-  Status: pending
+- [x] **TASK-013: Modernize Filter Bar**
+  Status: completed
   Related: apps/firm/site/app/work/page.tsx
   Done: Filter bar uses pill-shaped buttons with smooth transitions and result count
   Out: Changing filter functionality
@@ -326,11 +326,11 @@
   Depends: TASK-004
   Blocks: TASK-014
 
-  - TASK-013-1: apps/firm/site/app/work/page.tsx - Transform filter buttons to pill-shaped (rounded-full)
-  - TASK-013-2: apps/firm/site/app/work/page.tsx - Add smooth transitions for hover and active states (transition-all duration-300)
-  - TASK-013-3: apps/firm/site/app/work/page.tsx - Enhance active state: accent color, subtle glow (shadow-[0_0_20px_rgba(0,128,255,0.3)])
-  - TASK-013-4: apps/firm/site/app/work/page.tsx - Add sticky positioning to filter bar (sticky top-16 z-40)
-  - TASK-013-5: apps/firm/site/app/work/page.tsx - Add result count indicator showing "X projects"
+  - ✅ TASK-013-1: apps/firm/site/app/work/page.tsx - Transform filter buttons to pill-shaped (rounded-full)
+  - ✅ TASK-013-2: apps/firm/site/app/work/page.tsx - Add smooth transitions for hover and active states (transition-all duration-300)
+  - ✅ TASK-013-3: apps/firm/site/app/work/page.tsx - Enhance active state: accent color, subtle glow (shadow-[0_0_20px_rgba(0,128,255,0.3)])
+  - ✅ TASK-013-4: apps/firm/site/app/work/page.tsx - Add sticky positioning to filter bar (sticky top-16 z-40)
+  - ✅ TASK-013-5: apps/firm/site/app/work/page.tsx - Add result count indicator showing "X projects"
 
 - [ ] **TASK-014: Transform Featured Case Study to Immersive Layout**
   Status: pending
