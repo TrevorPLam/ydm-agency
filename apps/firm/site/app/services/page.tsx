@@ -38,7 +38,7 @@ export default function ServicesPage() {
       <Navigation />
 
       {/* Section 1: Header & Philosophy */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-[#1E1E1E] to-black">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-[var(--surface-3)] to-black">
         <div className="container mx-auto max-w-4xl text-center">
           <AnimateOnScroll>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-orbitron leading-tight">

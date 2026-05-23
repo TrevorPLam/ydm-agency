@@ -20,7 +20,7 @@ function HeroSceneFallback() {
 
 function HeroSceneError({ error }: { error: Error }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-black via-[#0a0a1a] to-black">
+    <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-black via-[var(--surface-1)] to-black">
       <div className="text-center">
         <p className="text-sm text-gray-400">
           3D content unavailable. Please refresh or contact support.
@@ -69,7 +69,7 @@ export function HeroSceneWrapper() {
   if (prefersReducedMotion) {
     return (
       <div
-        className="absolute inset-0 bg-linear-to-br from-black via-[#0a0a1a] to-black"
+        className="absolute inset-0 bg-linear-to-br from-black via-[var(--surface-1)] to-black"
         aria-label="Animated 3D particle field disabled for reduced motion preference"
       />
     )

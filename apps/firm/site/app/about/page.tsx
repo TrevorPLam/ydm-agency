@@ -219,23 +219,23 @@ export default function AboutPage() {
           <Card className="bg-[var(--surface-2)] border border-white/10 p-8 md:p-12">
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                 <span className="text-gray-300 font-inter">Are tired of managing multiple freelancers and agencies.</span>
               </li>
               <li className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                 <span className="text-gray-300 font-inter">Value transparency and direct communication over polished pitches.</span>
               </li>
               <li className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                 <span className="text-gray-300 font-inter">Want a long-term marketing partner, not a one-off project vendor.</span>
               </li>
               <li className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                 <span className="text-gray-300 font-inter">Understand that real growth takes strategy, not just tactics.</span>
               </li>
               <li className="flex items-start space-x-3">
-                <CheckCircle2 className="h-5 w-5 text-[#0080FF] shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-5 w-5 text-[var(--accent)] shrink-0 mt-0.5" />
                 <span className="text-gray-300 font-inter">Are ready to invest in a website and marketing engine that actually performs.</span>
               </li>
             </ul>

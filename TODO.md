@@ -104,8 +104,8 @@
   - ✅ TASK-003-3: apps/firm/site/components/hero-scene-wrapper.tsx - Add aria-label to Canvas describing 3D content purpose
   - ✅ TASK-003-4: apps/firm/site/components/hero-scene-wrapper.tsx - Add prefers-reduced-motion check to disable animations when requested
 
-- [ ] **TASK-004: Replace Hardcoded Colors with CSS Variables**
-  Status: pending
+- [x] **TASK-004: Replace Hardcoded Colors with CSS Variables**
+  Status: completed
   Related: apps/firm/site/components/*.tsx, apps/firm/site/app/*.tsx
   Done: All components use CSS custom properties from globals.css
   Out: Complete color system redesign, adding new colors
@@ -117,15 +117,17 @@
   Depends: none
   Blocks: TASK-005, TASK-006, TASK-007
 
-  - TASK-004-1: apps/firm/site/components/navigation.tsx - Replace #0080FF with var(--accent), #121212 with var(--surface-2)
-  - TASK-004-2: apps/firm/site/components/hero-text.tsx - Replace hardcoded colors with CSS variables
-  - TASK-004-3: apps/firm/site/app/page.tsx - Replace all hardcoded colors with CSS variables throughout
-  - TASK-004-4: apps/firm/site/app/about/page.tsx - Replace hardcoded colors with CSS variables
-  - TASK-004-5: apps/firm/site/app/services/page.tsx - Replace hardcoded colors with CSS variables
-  - TASK-004-6: apps/firm/site/app/work/page.tsx - Replace hardcoded colors with CSS variables
-  - TASK-004-7: apps/firm/site/app/contact/page.tsx - Replace hardcoded colors with CSS variables
-  - TASK-004-8: apps/firm/site/app/blog/page.tsx - Replace hardcoded colors with CSS variables
-  - TASK-004-9: apps/firm/site/app/faq/page.tsx - Replace hardcoded colors with CSS variables
+  - ✅ TASK-004-1: apps/firm/site/components/navigation.tsx - Already using CSS variables
+  - ✅ TASK-004-2: apps/firm/site/components/hero-text.tsx - Already using CSS variables
+  - ✅ TASK-004-3: apps/firm/site/app/page.tsx - Already using CSS variables
+  - ✅ TASK-004-4: apps/firm/site/app/about/page.tsx - Replaced #0080FF with var(--accent)
+  - ✅ TASK-004-5: apps/firm/site/app/services/page.tsx - Replaced #1E1E1E with var(--surface-3)
+  - ✅ TASK-004-6: apps/firm/site/app/work/page.tsx - Replaced #1E1E1E with var(--surface-3)
+  - ✅ TASK-004-7: apps/firm/site/app/contact/page.tsx - Replaced #1E1E1E with var(--surface-3)
+  - ✅ TASK-004-8: apps/firm/site/app/blog/page.tsx - Replaced #1E1E1E with var(--surface-3)
+  - ✅ TASK-004-9: apps/firm/site/app/faq/page.tsx - Replaced #1E1E1E with var(--surface-3)
+  - ✅ TASK-004-10: apps/firm/site/components/marketing-partner-strip.tsx - Replaced #121212 and #0080FF with CSS variables
+  - ✅ TASK-004-11: apps/firm/site/components/hero-scene-wrapper.tsx - Replaced #0a0a1a with var(--surface-1)
 
 ## Phase 2: Homepage Transformation
 

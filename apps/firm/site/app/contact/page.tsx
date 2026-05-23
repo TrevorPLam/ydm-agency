@@ -54,7 +54,7 @@ export default function ContactPage() {
       </nav>
 
       {/* Section 1: Header */}
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-[#1E1E1E] to-black">
+      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-black via-[var(--surface-3)] to-black">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,128,255,0.1),transparent_50%)]" />
         
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 py-20">
