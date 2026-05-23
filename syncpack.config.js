@@ -62,4 +62,22 @@ module.exports = {
 	],
 	// Ensure semantic versioning consistency
 	semverRange: '^',
+	// Configure semver ranges for different dependency types
+	semverGroups: [
+		{
+			label: 'Production dependencies',
+			dependencyTypes: ['dependencies'],
+			range: '^',
+		},
+		{
+			label: 'Development dependencies',
+			dependencyTypes: ['devDependencies'],
+			range: '^',
+		},
+		{
+			label: 'Peer dependencies',
+			dependencyTypes: ['peerDependencies'],
+			range: '>=',
+		},
+	],
 };

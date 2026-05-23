@@ -73,9 +73,6 @@ export function sharedConfig(options: VitestConfigOptions = {}) {
 				include: coverageInclude,
 				exclude: coverageExclude,
 			},
-			experimental: {
-				viteModuleRunner: experimentalViteModuleRunner,
-			},
 		},
 	})
 }

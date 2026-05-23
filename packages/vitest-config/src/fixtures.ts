@@ -102,7 +102,13 @@ export class UserFixture {
 		return this;
 	}
 
-	build(): this['user'] {
+	build(): {
+		id?: string;
+		name?: string;
+		email?: string;
+		role?: 'admin' | 'user' | 'guest';
+		verified?: boolean;
+	} {
 		return { ...this.user };
 	}
 }
