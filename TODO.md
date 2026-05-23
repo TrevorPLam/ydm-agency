@@ -449,24 +449,24 @@
   - ✅ TASK-019-4: apps/firm/site/app/about/page.tsx - Added quote tile below with italic styling and accent left border (border-l-4 border-l-[var(--accent)])
   - ✅ TASK-019-5: apps/firm/site/app/about/page.tsx - Added exaggerated corner rounding (rounded-2xl) and varied background opacities (surface-2 for featured, surface-3 for others)
 
-- [ ] **TASK-020: Transform Commitments to Bento Grid**
-  Status: pending
+- [x] **TASK-020: Transform Commitments to Bento Grid**
+  Status: completed
   Related: apps/firm/site/app/about/page.tsx
   Done: Commitments section uses varied bento layout with trust signals
   Out: Changing commitment content
   Rules: Bento grid principles, varied layouts, trust signals
   Pattern: Varied tile sizes, trust signal tiles, client logo tiles
   Anti: 2x2 equal grid, repetitive layout
-  Imports: none (CSS Grid)
+  Imports: Award, Building2 from lucide-react
   Exports: Updated about page
   Depends: TASK-004, TASK-019
   Blocks: TASK-021
 
-  - TASK-020-1: apps/firm/site/app/about/page.tsx - Transform 2x2 grid to varied bento layout
-  - TASK-020-2: apps/firm/site/app/about/page.tsx - Use varied tile sizes: some 2x1, some 1x1
-  - TASK-020-3: apps/firm/site/app/about/page.tsx - Add "trust signals" tile with certifications/badges (when available)
-  - TASK-020-4: apps/firm/site/app/about/page.tsx - Add "client logos" tile placeholder (when available)
-  - TASK-020-5: apps/firm/site/app/about/page.tsx - Add exaggerated corner rounding and varied background opacities
+  - ✅ TASK-020-1: apps/firm/site/app/about/page.tsx - Transformed 2x2 grid to varied bento layout using md:grid-cols-2 md:grid-rows-3
+  - ✅ TASK-020-2: apps/firm/site/app/about/page.tsx - Used varied tile sizes: "Radical Transparency" spans 2 columns (md:col-span-2), others are 1x1
+  - ✅ TASK-020-3: apps/firm/site/app/about/page.tsx - Added "Trust Signals" tile with certification badges (GDPR Compliant, SOC 2 Ready) using Award icon
+  - ✅ TASK-020-4: apps/firm/site/app/about/page.tsx - Added "Trusted By" tile with client logo placeholders using Building2 icon
+  - ✅ TASK-020-5: apps/firm/site/app/about/page.tsx - Added exaggerated corner rounding (rounded-2xl) and varied background opacities (surface-2 for featured, surface-3 for others)
 
 - [ ] **TASK-021: Enhance Founder Section with Personal Touch**
   Status: pending
