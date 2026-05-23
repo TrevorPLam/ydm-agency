@@ -237,21 +237,91 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 5: Who Is Behind This? (Minimal Founder Note) */}
+      {/* Section 5: Who Is Behind This? (Enhanced Founder Section) */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--surface-2)]">
-        <div className="container mx-auto max-w-4xl">
-          <Card className="bg-black border border-white/10 p-8 md:p-12">
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
-              <div className="h-24 w-24 rounded-full bg-[var(--accent)]/10 flex items-center justify-center shrink-0">
-                <User className="h-12 w-12 text-[var(--accent)]" />
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">The Person Behind This.</h2>
+          
+          <div className="grid md:grid-cols-2 md:grid-rows-2 gap-6">
+            {/* Photo tile - larger, stylized frame */}
+            <Card className="bg-black border border-white/10 p-8 md:col-span-1 md:row-span-2 rounded-2xl hover:border-[var(--accent)] transition-colors">
+              <div className="relative">
+                <div className="aspect-[3/4] bg-gradient-to-br from-[var(--surface-3)] to-[var(--surface-2)] rounded-xl overflow-hidden shadow-2xl border border-white/5">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <User className="h-24 w-24 text-[var(--accent)]/30 mx-auto mb-4" />
+                      <p className="text-gray-500 text-sm font-inter">Photo Coming Soon</p>
+                    </div>
+                  </div>
+                  {/* Subtle accent glow */}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,128,255,0.1),transparent_50%)]" />
+                </div>
+                {/* Handwritten signature accent */}
+                <div className="mt-6 text-right">
+                  <p className="font-handwritten text-3xl text-[var(--accent)] opacity-80">— [Your Name]</p>
+                </div>
               </div>
+            </Card>
+
+            {/* Handwritten quote tile */}
+            <Card className="bg-[var(--surface-3)] border border-white/10 p-8 rounded-2xl hover:border-[var(--accent)] transition-colors">
               <div className="space-y-4">
-                <h2 className="text-2xl md:text-3xl font-bold font-orbitron">Hello. I'm [Your Name].</h2>
-                <p className="text-gray-300 font-inter leading-relaxed">
-                  I've spent my career leading marketing and strategy across three very different industries. That experience taught me one universal truth: businesses don't fail because they lack options—they fail because they lack a dedicated partner who can cut through the noise and execute. I started Your Dedicated Marketer to be that partner for businesses that are tired of the agency runaround. No fluff. No ego. Just good work that gets results.
+                <p className="font-handwritten text-2xl md:text-3xl text-gray-200 leading-relaxed">
+                  "I started this because I was tired of seeing businesses waste money on agencies that promise the moon but deliver craters."
                 </p>
+                <div className="h-1 w-16 bg-[var(--accent)] rounded-full" />
               </div>
-            </div>
+            </Card>
+
+            {/* Career timeline tile */}
+            <Card className="bg-black border border-white/10 p-8 rounded-2xl hover:border-[var(--accent)] transition-colors">
+              <h3 className="text-lg font-bold mb-6 font-rajdhani text-[var(--accent)]">The Journey</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="h-8 w-8 rounded-full bg-[var(--accent)]/10 flex items-center justify-center shrink-0 border border-[var(--accent)]/30">
+                    <div className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+                  </div>
+                  <div>
+                    <p className="text-white font-medium font-inter">Industry 1</p>
+                    <p className="text-gray-400 text-sm font-inter">Led marketing strategy</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="h-8 w-8 rounded-full bg-[var(--accent)]/10 flex items-center justify-center shrink-0 border border-[var(--accent)]/30">
+                    <div className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+                  </div>
+                  <div>
+                    <p className="text-white font-medium font-inter">Industry 2</p>
+                    <p className="text-gray-400 text-sm font-inter">Built growth engines</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="h-8 w-8 rounded-full bg-[var(--accent)]/10 flex items-center justify-center shrink-0 border border-[var(--accent)]/30">
+                    <div className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+                  </div>
+                  <div>
+                    <p className="text-white font-medium font-inter">Industry 3</p>
+                    <p className="text-gray-400 text-sm font-inter">Transformed digital presence</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(0,128,255,0.5)]">
+                    <Zap className="h-4 w-4 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-white font-medium font-inter">Your Dedicated Marketer</p>
+                    <p className="text-gray-400 text-sm font-inter">Now serving businesses like yours</p>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Personal note below */}
+          <Card className="bg-[var(--surface-3)] border-l-4 border-l-[var(--accent)] border-y-0 border-r-0 border-white/10 p-8 rounded-2xl mt-6">
+            <p className="text-gray-300 font-inter leading-relaxed">
+              I've spent my career leading marketing and strategy across three very different industries. That experience taught me one universal truth: businesses don't fail because they lack options—they fail because they lack a dedicated partner who can cut through the noise and execute. Your Dedicated Marketer exists to be that partner for businesses tired of the agency runaround. No fluff. No ego. Just good work that gets results.
+            </p>
           </Card>
         </div>
       </section>
