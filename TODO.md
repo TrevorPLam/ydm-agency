@@ -210,25 +210,25 @@
   - ✅ TASK-007-7: apps/firm/site/app/page.tsx - Added hover effects: image zoom (scale-110), overlay with accent color, border glow
   - ✅ TASK-007-8: apps/firm/site/app/page.tsx - Added "featured" badge to first case study with accent color
 
-- [ ] **TASK-008: Transform How It Works to Scroll-Driven Storytelling**
-  Status: pending
-  Related: apps/firm/site/app/page.tsx
+- [x] **TASK-008: Transform How It Works to Scroll-Driven Storytelling**
+  Status: completed
+  Related: apps/firm/site/app/page.tsx, apps/firm/site/app/globals.css
   Done: Timeline uses scroll-driven animations with progress indicator
   Out: Changing process content, adding new steps
   Rules: CSS scroll-driven animations, Intersection Observer, sticky positioning
   Pattern: Scroll-linked animations, pinned elements, progress indicators
   Anti: Static linear timelines, no scroll feedback
   Imports: none (CSS animations)
-  Exports: Updated page.tsx
+  Exports: Updated page.tsx, globals.css
   Depends: TASK-004
   Blocks: none
 
-  - TASK-008-1: apps/firm/site/app/page.tsx - Add CSS scroll-driven animation support (animation-timeline: view())
-  - TASK-008-2: apps/firm/site/app/page.tsx - Make each timeline step pin to viewport while content scrolls (position: sticky)
-  - TASK-008-3: apps/firm/site/app/page.tsx - Add progress indicator "Step X of 3" that updates on scroll
-  - TASK-008-4: apps/firm/site/app/page.tsx - Add subtle parallax depth to timeline elements (transform: translateY based on scroll)
-  - TASK-008-5: apps/firm/site/app/page.tsx - Add reveal animations for step content as it enters viewport
-  - TASK-008-6: apps/firm/site/app/page.tsx - Ensure reduced motion support (prefers-reduced-motion media query)
+  - ✅ TASK-008-1: apps/firm/site/app/globals.css - Added CSS scroll-driven animation support with @supports (animation-timeline: view()) and fallback
+  - ✅ TASK-008-2: apps/firm/site/app/page.tsx - Made each timeline step pin to viewport with position: sticky and min-h-[50vh]
+  - ✅ TASK-008-3: apps/firm/site/app/page.tsx - Added progress indicator "Step X of 3" with progress bar (hidden on mobile)
+  - ✅ TASK-008-4: apps/firm/site/app/globals.css - Added parallax depth animation (parallax-depth keyframe, timeline-parallax class)
+  - ✅ TASK-008-5: apps/firm/site/app/globals.css - Added reveal animations for step content (timeline-reveal keyframe, timeline-step class)
+  - ✅ TASK-008-6: apps/firm/site/app/globals.css - Reduced motion support already present in existing @media (prefers-reduced-motion: reduce) rule
 
 ## Phase 3: Services Page Transformation
 

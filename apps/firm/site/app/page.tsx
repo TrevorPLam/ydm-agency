@@ -231,59 +231,61 @@ export default function Home() {
       </section>
 
       {/* Section 4: How It Works – Your Transparent Process */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black relative">
+        {/* Progress Indicator */}
+        <div className="progress-indicator hidden md:block">
+          <div className="text-[var(--accent)] font-rajdhani font-medium">Step <span id="current-step">1</span> of 3</div>
+          <div className="progress-bar">
+            <div className="progress-bar-fill" />
+          </div>
+        </div>
+
         <div className="container mx-auto max-w-4xl">
           <AnimateOnScroll>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 font-orbitron">A Partnership Built on Clarity, Not Confusion.</h2>
             <p className="text-gray-400 mb-12 font-inter">Our transparent process from start to finish</p>
           </AnimateOnScroll>
-          
+
           <div className="relative">
             {/* Vertical line */}
             <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-[var(--accent)]" />
-            
+
             <div className="space-y-12">
-              <AnimateOnScroll delay={0}>
-                <div className="relative flex items-start md:items-center">
-                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
-                  <div className="ml-16 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
-                    <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg">
-                      <h3 className="text-xl font-bold mb-2 font-rajdhani">Discovery & Data Audit</h3>
-                      <p className="text-gray-400 font-inter">
-                        We define your goals, audit your data, and agree on revenue-tied success metrics before a single pixel is designed.
-                      </p>
-                    </div>
+              <div className="timeline-step timeline-step-sticky relative flex items-start md:items-center min-h-[50vh]">
+                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
+                <div className="ml-16 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
+                  <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg timeline-parallax">
+                    <h3 className="text-xl font-bold mb-2 font-rajdhani">Discovery & Data Audit</h3>
+                    <p className="text-gray-400 font-inter">
+                      We define your goals, audit your data, and agree on revenue-tied success metrics before a single pixel is designed.
+                    </p>
                   </div>
                 </div>
-              </AnimateOnScroll>
+              </div>
 
-              <AnimateOnScroll delay={100}>
-                <div className="relative flex items-start md:items-center">
-                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
-                  <div className="ml-16 md:ml-auto md:w-1/2 md:pl-12">
-                    <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg">
-                      <h3 className="text-xl font-bold mb-2 font-rajdhani">Design & Build</h3>
-                      <p className="text-gray-400 font-inter">
-                        You get a custom, mobile-first website that respects privacy and amplifies your brand. AI assists, but human judgment leads.
-                      </p>
-                    </div>
+              <div className="timeline-step timeline-step-sticky relative flex items-start md:items-center min-h-[50vh]">
+                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
+                <div className="ml-16 md:ml-auto md:w-1/2 md:pl-12">
+                  <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg timeline-parallax">
+                    <h3 className="text-xl font-bold mb-2 font-rajdhani">Design & Build</h3>
+                    <p className="text-gray-400 font-inter">
+                      You get a custom, mobile-first website that respects privacy and amplifies your brand. AI assists, but human judgment leads.
+                    </p>
                   </div>
                 </div>
-              </AnimateOnScroll>
+              </div>
 
-              <AnimateOnScroll delay={200}>
-                <div className="relative flex items-start md:items-center">
-                  <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
-                  <div className="ml-16 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
-                    <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg">
-                      <h3 className="text-xl font-bold mb-2 font-rajdhani">Launch, Learn & Optimize</h3>
-                      <p className="text-gray-400 font-inter">
-                        Post-launch, we track real business outcomes, not vanity metrics. Transparent monthly reports show exactly how your site contributes to growth.
-                      </p>
-                    </div>
+              <div className="timeline-step timeline-step-sticky relative flex items-start md:items-center min-h-[50vh]">
+                <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 h-4 w-4 rounded-full bg-[var(--accent)] border-4 border-black" />
+                <div className="ml-16 md:ml-0 md:w-1/2 md:pr-12 md:text-right">
+                  <div className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-lg timeline-parallax">
+                    <h3 className="text-xl font-bold mb-2 font-rajdhani">Launch, Learn & Optimize</h3>
+                    <p className="text-gray-400 font-inter">
+                      Post-launch, we track real business outcomes, not vanity metrics. Transparent monthly reports show exactly how your site contributes to growth.
+                    </p>
                   </div>
                 </div>
-              </AnimateOnScroll>
+              </div>
             </div>
           </div>
         </div>
