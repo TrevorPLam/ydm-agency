@@ -72,7 +72,7 @@ export default function ServicesPage() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-2xl md:col-span-2 hover:border-[var(--accent)] transition-colors">
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <Layout className="h-6 w-6 text-[var(--accent)]" />
               </div>
@@ -80,7 +80,7 @@ export default function ServicesPage() {
               <p className="text-gray-400 font-inter">Every site is built from strategy, not copied from a theme marketplace.</p>
             </Card>
 
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+            <Card className="bg-[var(--surface-3)] border border-white/10 p-6 rounded-2xl hover:border-[var(--accent)] transition-colors">
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <Zap className="h-6 w-6 text-[var(--accent)]" />
               </div>
@@ -88,7 +88,7 @@ export default function ServicesPage() {
               <p className="text-gray-400 font-inter">Core Web Vitals optimized, sub-2.5s load times, responsive on every device.</p>
             </Card>
 
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+            <Card className="bg-[var(--surface-2)] border border-white/10 p-6 rounded-2xl hover:border-[var(--accent)] transition-colors">
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <Bot className="h-6 w-6 text-[var(--accent)]" />
               </div>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
               <p className="text-gray-400 font-inter">We use AI to accelerate, but human judgment and empathy drive every decision.</p>
             </Card>
 
-            <Card className="bg-[var(--surface-2)] border border-white/10 p-6">
+            <Card className="bg-[var(--surface-3)] border border-white/10 p-6 rounded-2xl hover:border-[var(--accent)] transition-colors">
               <div className="h-12 w-12 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center mb-4">
                 <Shield className="h-6 w-6 text-[var(--accent)]" />
               </div>
@@ -107,47 +107,39 @@ export default function ServicesPage() {
 
           <div className="mb-12">
             <h3 className="text-xl font-bold mb-6 font-rajdhani">Our Process</h3>
-            <div className="grid md:grid-cols-4 gap-6">
-              <div className="flex items-start space-x-3">
-                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
+            <div className="grid md:grid-cols-4 gap-4">
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-4 rounded-2xl hover:border-[var(--accent)] transition-colors">
+                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center mb-3">
                   <span className="text-white font-bold text-sm">1</span>
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Strategy & Discovery</h4>
-                  <p className="text-sm text-gray-400">Goals, audit, metrics</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
+                <h4 className="font-semibold mb-1 font-rajdhani">Strategy & Discovery</h4>
+                <p className="text-sm text-gray-400 font-inter">Goals, audit, metrics</p>
+              </Card>
+              <Card className="bg-[var(--surface-3)] border border-white/10 p-4 rounded-2xl hover:border-[var(--accent)] transition-colors">
+                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center mb-3">
                   <span className="text-white font-bold text-sm">2</span>
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Wireframes & Design</h4>
-                  <p className="text-sm text-gray-400">Visual concepts, UX</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
+                <h4 className="font-semibold mb-1 font-rajdhani">Wireframes & Design</h4>
+                <p className="text-sm text-gray-400 font-inter">Visual concepts, UX</p>
+              </Card>
+              <Card className="bg-[var(--surface-2)] border border-white/10 p-4 rounded-2xl hover:border-[var(--accent)] transition-colors">
+                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center mb-3">
                   <span className="text-white font-bold text-sm">3</span>
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Development & Launch</h4>
-                  <p className="text-sm text-gray-400">Build, test, deploy</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
+                <h4 className="font-semibold mb-1 font-rajdhani">Development & Launch</h4>
+                <p className="text-sm text-gray-400 font-inter">Build, test, deploy</p>
+              </Card>
+              <Card className="bg-[var(--surface-3)] border border-white/10 p-4 rounded-2xl hover:border-[var(--accent)] transition-colors">
+                <div className="h-8 w-8 rounded-full bg-[var(--accent)] flex items-center justify-center mb-3">
                   <span className="text-white font-bold text-sm">4</span>
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Post-Launch Optimization</h4>
-                  <p className="text-sm text-gray-400">Monitor, refine, grow</p>
-                </div>
-              </div>
+                <h4 className="font-semibold mb-1 font-rajdhani">Post-Launch Optimization</h4>
+                <p className="text-sm text-gray-400 font-inter">Monitor, refine, grow</p>
+              </Card>
             </div>
           </div>
 
-          <Card className="bg-[var(--surface-2)] border border-white/10 p-6 mb-8">
+          <Card className="bg-[var(--surface-2)] border border-white/10 p-6 mb-8 rounded-2xl hover:border-[var(--accent)] transition-colors">
             <h3 className="text-xl font-bold mb-4 font-rajdhani">Deliverables</h3>
             <ul className="space-y-2">
               <li className="flex items-center space-x-2">
