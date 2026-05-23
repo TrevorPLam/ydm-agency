@@ -441,53 +441,83 @@ export default function ContactPage() {
       </section>
 
       {/* Section 4: What Happens Next? */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-black relative">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 font-orbitron">What Happens After You Reach Out.</h2>
           
-          <Card className="bg-[var(--surface-2)] border border-white/10 p-8 md:p-12">
-            <div className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <div className="h-10 w-10 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold">1</span>
+          {/* Progress Indicator */}
+          <div className="progress-indicator mb-8 hidden md:block">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm text-gray-400 font-inter">Step Progress</span>
+              <span className="text-sm font-medium text-[var(--accent)] font-inter">4 steps</span>
+            </div>
+            <div className="progress-bar">
+              <div className="progress-bar-fill" />
+            </div>
+          </div>
+
+          <div className="relative">
+            {/* Vertical Connecting Line */}
+            <div className="absolute left-8 md:left-12 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent)] via-[var(--accent)]/50 to-transparent hidden md:block" />
+            
+            <div className="space-y-12 md:space-y-16">
+              {/* Step 1 */}
+              <div className="timeline-step relative pl-20 md:pl-24">
+                <div className="absolute left-0 md:left-8 top-0 h-16 w-16 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(0,128,255,0.5)] z-10">
+                  <span className="text-white font-bold text-2xl font-orbitron">1</span>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2 font-rajdhani">You send a message or book a call.</h3>
+                <div className="bg-[var(--surface-2)] border border-white/10 rounded-2xl p-6 md:p-8 hover:border-[var(--accent)]/50 transition-all">
+                  <div className="flex items-center gap-2 mb-3">
+                    <h3 className="text-xl font-bold font-rajdhani">You send a message or book a call.</h3>
+                    <span className="text-xs text-[var(--accent)] font-medium bg-[var(--accent)]/10 px-2 py-1 rounded-full">Immediate</span>
+                  </div>
                   <p className="text-gray-400 font-inter">No gatekeepers, no forms disappearing into the void.</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="h-10 w-10 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold">2</span>
+              {/* Step 2 */}
+              <div className="timeline-step relative pl-20 md:pl-24">
+                <div className="absolute left-0 md:left-8 top-0 h-16 w-16 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(0,128,255,0.5)] z-10">
+                  <span className="text-white font-bold text-2xl font-orbitron">2</span>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2 font-rajdhani">I review and reply within 24 hours (often faster).</h3>
+                <div className="bg-[var(--surface-2)] border border-white/10 rounded-2xl p-6 md:p-8 hover:border-[var(--accent)]/50 transition-all">
+                  <div className="flex items-center gap-2 mb-3">
+                    <h3 className="text-xl font-bold font-rajdhani">I review and reply within 24 hours (often faster).</h3>
+                    <span className="text-xs text-[var(--accent)] font-medium bg-[var(--accent)]/10 px-2 py-1 rounded-full">Within 24 hours</span>
+                  </div>
                   <p className="text-gray-400 font-inter">If you booked a call, you'll get a confirmation with details.</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="h-10 w-10 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold">3</span>
+              {/* Step 3 */}
+              <div className="timeline-step relative pl-20 md:pl-24">
+                <div className="absolute left-0 md:left-8 top-0 h-16 w-16 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(0,128,255,0.5)] z-10">
+                  <span className="text-white font-bold text-2xl font-orbitron">3</span>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2 font-rajdhani">We talk — openly, honestly, no pitch decks.</h3>
+                <div className="bg-[var(--surface-2)] border border-white/10 rounded-2xl p-6 md:p-8 hover:border-[var(--accent)]/50 transition-all">
+                  <div className="flex items-center gap-2 mb-3">
+                    <h3 className="text-xl font-bold font-rajdhani">We talk — openly, honestly, no pitch decks.</h3>
+                    <span className="text-xs text-[var(--accent)] font-medium bg-[var(--accent)]/10 px-2 py-1 rounded-full">Within 48 hours</span>
+                  </div>
                   <p className="text-gray-400 font-inter">We discuss your business, your challenges, and whether we're a good fit. If we are, great. If not, I'll tell you honestly and point you in the right direction.</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="h-10 w-10 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold">4</span>
+              {/* Step 4 */}
+              <div className="timeline-step relative pl-20 md:pl-24">
+                <div className="absolute left-0 md:left-8 top-0 h-16 w-16 rounded-full bg-[var(--accent)] flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(0,128,255,0.5)] z-10">
+                  <span className="text-white font-bold text-2xl font-orbitron">4</span>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2 font-rajdhani">You get a clear, transparent proposal if we move forward.</h3>
+                <div className="bg-[var(--surface-2)] border border-white/10 rounded-2xl p-6 md:p-8 hover:border-[var(--accent)]/50 transition-all">
+                  <div className="flex items-center gap-2 mb-3">
+                    <h3 className="text-xl font-bold font-rajdhani">You get a clear, transparent proposal if we move forward.</h3>
+                    <span className="text-xs text-[var(--accent)] font-medium bg-[var(--accent)]/10 px-2 py-1 rounded-full">Within 3-5 days</span>
+                  </div>
                   <p className="text-gray-400 font-inter">No hidden fees, no surprise charges. Everything scoped and agreed upon before any work begins.</p>
                 </div>
               </div>
             </div>
-          </Card>
+          </div>
         </div>
       </section>
 

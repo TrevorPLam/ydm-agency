@@ -391,8 +391,8 @@
   - ✅ TASK-016-4: apps/firm/site/app/contact/page.tsx - Added availability indicators (green dot with animate-pulse for available, gray for offline)
   - ✅ TASK-016-5: apps/firm/site/app/contact/page.tsx - Added exaggerated corner rounding (rounded-2xl) and varied background opacities (surface-3 for featured, black for others)
 
-- [ ] **TASK-017: Transform What Happens Next to Visual Timeline**
-  Status: pending
+- [x] **TASK-017: Transform What Happens Next to Visual Timeline**
+  Status: completed
   Related: apps/firm/site/app/contact/page.tsx
   Done: Timeline uses scroll-driven animations with progress indicator and timeframes
   Out: Changing process steps
@@ -404,11 +404,11 @@
   Depends: TASK-004
   Blocks: none
 
-  - TASK-017-1: apps/firm/site/app/contact/page.tsx - Transform linear list to visual timeline with connecting line
-  - TASK-017-2: apps/firm/site/app/contact/page.tsx - Add scroll-driven animations for each step (reveal on scroll)
-  - TASK-017-3: apps/firm/site/app/contact/page.tsx - Add progress indicator showing current step
-  - TASK-017-4: apps/firm/site/app/contact/page.tsx - Make each step feel like milestone with larger numbered circles
-  - TASK-017-5: apps/firm/site/app/contact/page.tsx - Add estimated timeframes to each step (e.g., "Within 24 hours")
+  - ✅ TASK-017-1: apps/firm/site/app/contact/page.tsx - Transform linear list to visual timeline with connecting line
+  - ✅ TASK-017-2: apps/firm/site/app/contact/page.tsx - Add scroll-driven animations for each step (reveal on scroll)
+  - ✅ TASK-017-3: apps/firm/site/app/contact/page.tsx - Add progress indicator showing current step
+  - ✅ TASK-017-4: apps/firm/site/app/contact/page.tsx - Make each step feel like milestone with larger numbered circles
+  - ✅ TASK-017-5: apps/firm/site/app/contact/page.tsx - Add estimated timeframes to each step (e.g., "Within 24 hours")
 
 ## Phase 6: About Page Transformation
 
