@@ -4,7 +4,7 @@ export { Container, type ContainerProps } from './Container';
 export { Badge, type BadgeProps } from './Badge';
 export { Hero, type HeroProps } from './Hero';
 export { Features, type FeaturesProps, type FeatureItem } from './Features';
-export { Header, type HeaderProps, type HeaderNavLink } from './Header';
+export { Header, type HeaderProps } from './Header';
 export { Footer, type FooterProps } from './Footer';
 export { Pricing, type PricingProps, type PricingPlan } from './Pricing';
 export { ThemeToggle } from './ThemeToggle';
