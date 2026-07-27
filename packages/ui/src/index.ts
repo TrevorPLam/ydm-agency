@@ -1,6 +1,6 @@
 export { Button, buttonVariants, type ButtonProps } from './Button';
-export { Card } from './Card';
-export { Container } from './Container';
+export { Card, type CardProps } from './Card';
+export { Container, type ContainerProps } from './Container';
 export { Badge, type BadgeProps } from './Badge';
 export { Hero, type HeroProps } from './Hero';
 export { Features, type FeaturesProps, type FeatureItem } from './Features';
