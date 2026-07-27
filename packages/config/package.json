@@ -1,0 +1,23 @@
+{
+  "name": "@ydm-agency/config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "eslint-next.js",
+    "eslint-react.js",
+    "nextjs.js",
+    "prettier.js",
+    "tailwind.js",
+    "tsconfig.base.json"
+  ],
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.34.0",
+    "typescript": "^5.6.0",
+    "tailwindcss": "catalog:",
+    "prettier": "^3.3.0",
+    "prettier-plugin-tailwindcss": "^0.6.0"
+  }
+}
