@@ -1,4 +1,4 @@
-export { Button } from './Button';
+export { Button, buttonVariants, type ButtonProps } from './Button';
 export { Card } from './Card';
 export { Container } from './Container';
 export { Badge, type BadgeProps } from './Badge';

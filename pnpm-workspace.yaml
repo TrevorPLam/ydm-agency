@@ -14,3 +14,8 @@ catalog:
   lucide-react: ^0.468.0
   zod: ^3.24.1
   next-themes: ^0.3.0
+  class-variance-authority: ^0.7.0
+  "@radix-ui/react-slot": ^1.1.0
+  vitest: ^2.0.0
+  "@testing-library/react": ^16.0.0
+  "@testing-library/jest-dom": ^6.5.0
