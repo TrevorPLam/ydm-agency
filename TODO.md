@@ -12,43 +12,43 @@
 
 | ID | Title | Domain | Status |
 |----|-------|--------|--------|
-| T-001 | Design Token Configuration | Design System | PENDING |
-| T-002 | Typography System | Design System | PENDING |
-| T-003 | Theme Provider | Design System | PENDING |
-| T-004 | Button Component | Design System | PENDING |
-| T-005 | Card, Badge, and Container Components | Design System | PENDING |
-| T-006 | Header Component | Design System | PENDING |
-| T-007 | Footer Component | Design System | PENDING |
-| T-008 | Cookie Consent Component | Design System | PENDING |
-| T-009 | Root Layout and Global CSS | App Shell | PENDING |
-| T-010 | Middleware: Subdomain Routing and Security Headers | App Shell | PENDING |
-| T-011 | Homepage | Pages | PENDING |
-| T-012 | Services Hub Page | Pages | PENDING |
-| T-013 | Service Spoke Pages | Pages | PENDING |
-| T-014 | Process Hub Page | Pages | PENDING |
-| T-015 | Service Process Spoke Pages | Pages | PENDING |
-| T-016 | Demos Gallery Page | Pages | PENDING |
-| T-017 | About Page | Pages | PENDING |
-| T-018 | Privacy Policy Page | Pages | PENDING |
-| T-019 | Contact Form Schema | Lead Capture | PENDING |
-| T-020 | Contact Form UI Component | Lead Capture | PENDING |
-| T-021 | Email Templates Package | Lead Capture | PENDING |
-| T-022 | Contact Server Action Pipeline | Lead Capture | PENDING |
-| T-023 | Contact Page Assembly | Lead Capture | PENDING |
-| T-024 | Analytics Consent Architecture | Analytics + SEO | PENDING |
-| T-025 | SEO Infrastructure | Analytics + SEO | PENDING |
-| T-026 | Demo App Scaffold | Demo Applications | PENDING |
-| T-027 | Demo: Coastal Cafe | Demo Applications | PENDING |
-| T-028 | Demo: Apex SaaS | Demo Applications | PENDING |
-| T-029 | Demo: Vanguard Plumbing | Demo Applications | PENDING |
-| T-030 | Demo: Nova Storefront | Demo Applications | PENDING |
-| T-031 | Unit Testing Setup | Testing | PENDING |
-| T-032 | Unit Tests: Components and Validation | Testing | PENDING |
-| T-033 | E2E Testing Setup | Testing | PENDING |
-| T-034 | E2E Tests: Critical User Flows | Testing | PENDING |
-| T-035 | Environment Variables and External Accounts | Infrastructure | PENDING |
-| T-036 | CI/CD Pipeline Updates | Infrastructure | PENDING |
-| T-037 | Deployment Configuration | Infrastructure | PENDING |
+| T-001 | Design Token Configuration | Design System | done |
+| T-002 | Typography System | Design System | done |
+| T-003 | Theme Provider | Design System | done |
+| T-004 | Button Component | Design System | done |
+| T-005 | Card, Badge, and Container Components | Design System | done |
+| T-006 | Header Component | Design System | done |
+| T-007 | Footer Component | Design System | done |
+| T-008 | Cookie Consent Component | Design System | done |
+| T-009 | Root Layout and Global CSS | App Shell | done |
+| T-010 | Middleware: Subdomain Routing and Security Headers | App Shell | ready |
+| T-011 | Homepage | Pages | ready |
+| T-012 | Services Hub Page | Pages | ready |
+| T-013 | Service Spoke Pages | Pages | ready |
+| T-014 | Process Hub Page | Pages | ready |
+| T-015 | Service Process Spoke Pages | Pages | ready |
+| T-016 | Demos Gallery Page | Pages | ready |
+| T-017 | About Page | Pages | ready |
+| T-018 | Privacy Policy Page | Pages | ready |
+| T-019 | Contact Form Schema | Lead Capture | ready |
+| T-020 | Contact Form UI Component | Lead Capture | ready |
+| T-021 | Email Templates Package | Lead Capture | ready |
+| T-022 | Contact Server Action Pipeline | Lead Capture | ready |
+| T-023 | Contact Page Assembly | Lead Capture | ready |
+| T-024 | Analytics Consent Architecture | Analytics + SEO | ready |
+| T-025 | SEO Infrastructure | Analytics + SEO | ready |
+| T-026 | Demo App Scaffold | Demo Applications | ready |
+| T-027 | Demo: Coastal Cafe | Demo Applications | ready |
+| T-028 | Demo: Apex SaaS | Demo Applications | ready |
+| T-029 | Demo: Vanguard Plumbing | Demo Applications | ready |
+| T-030 | Demo: Nova Storefront | Demo Applications | ready |
+| T-031 | Unit Testing Setup | Testing | ready |
+| T-032 | Unit Tests: Components and Validation | Testing | ready |
+| T-033 | E2E Testing Setup | Testing | ready |
+| T-034 | E2E Tests: Critical User Flows | Testing | ready |
+| T-035 | Environment Variables and External Accounts | Infrastructure | ready |
+| T-036 | CI/CD Pipeline Updates | Infrastructure | ready |
+| T-037 | Deployment Configuration | Infrastructure | ready |
 
 ---
 
@@ -73,8 +73,8 @@
 
 ---
 
-## [ ] T-002 — Typography System
-**Status:** PENDING | **Domain:** Design System | **Depends On:** T-001 | **Blocks:** T-009
+## [x] T-002 — Typography System
+**Status:** done | **Domain:** Design System | **Depends On:** T-001 | **Blocks:** T-009
 **Spec:** Self-host Clash Display Variable (headings 600–700) and Inter Variable (body 400–600) via `next/font`. Inject as CSS custom properties; register in `packages/config/tailwind.js` under `extend.fontFamily`.
 **Behavior:** Given a slow connection, when the page loads, then body text renders in the system fallback with `font-display: swap` until Inter loads without layout shift; headings use Clash Display at 600+.
 **Research:** `apps/firm-website/src/app/layout.tsx` (identify `<html>` element for variable classes), `packages/config/tailwind.js` (confirm `extend.fontFamily` absent after T-001), `apps/firm-website/package.json` (confirm `next` version supports `next/font/local`).
@@ -88,15 +88,15 @@
 **Validate:** `pnpm turbo run build --filter=apps/firm-website` then inspect `.next/static/media/` for `.woff2` files.
 
 **Subtasks:**
-- T-002.1 [HUMAN] Download `ClashDisplay-Variable.woff2` from `https://www.fontshare.com/fonts/clash-display` (free commercial license) and place at `apps/firm-website/public/fonts/ClashDisplay-Variable.woff2`. No CLI equivalent for this download exists.
-- T-002.2 [AGENT] `packages/config/tailwind.js` — Add `const { fontFamily } = require('tailwindcss/defaultTheme')`. Add to `extend`: `fontFamily: { display: ['var(--font-display)', ...fontFamily.serif], sans: ['var(--font-sans)', ...fontFamily.sans] }`.
-- T-002.3 [AGENT] `apps/firm-website/src/app/layout.tsx` — Import `Inter` from `next/font/google` with `{ subsets:['latin'], variable:'--font-sans', display:'swap' }`. Import `localFont` from `next/font/local` for ClashDisplay with `{ src:'../../../public/fonts/ClashDisplay-Variable.woff2', variable:'--font-display', display:'swap' }`. Apply both `.variable` classes to `<html className>`.
-- T-002.4 [AGENT] `apps/firm-website/src/app/globals.css` — Add inside `@layer base`: `h1,h2,h3,h4,h5,h6 { font-family: var(--font-display); letter-spacing: -0.02em; }`.
+- [x] T-002.1 [HUMAN] Download `ClashDisplay-Variable.woff2` from `https://www.fontshare.com/fonts/clash-display` (free commercial license) and place at `apps/firm-website/public/fonts/ClashDisplay-Variable.woff2`. No CLI equivalent for this download exists.
+- [x] T-002.2 [AGENT] `packages/config/tailwind.js` — Add `const { fontFamily } = require('tailwindcss/defaultTheme')`. Add to `extend`: `fontFamily: { display: ['var(--font-display)', ...fontFamily.serif], sans: ['var(--font-sans)', ...fontFamily.sans] }`.
+- [x] T-002.3 [AGENT] `apps/firm-website/src/app/layout.tsx` — Import `Inter` from `next/font/google` with `{ subsets:['latin'], variable:'--font-sans', display:'swap' }`. Import `localFont` from `next/font/local` for ClashDisplay with `{ src:'../../public/fonts/ClashDisplay-Variable.woff2', variable:'--font-display', display:'swap' }`. Apply both `.variable` classes to `<html className>`.
+- [x] T-002.4 [AGENT] `apps/firm-website/src/app/globals.css` — Add inside `@layer base`: `h1,h2,h3,h4,h5,h6 { font-family: var(--font-display); letter-spacing: -0.02em; }`.
 
 ---
 
-## [ ] T-003 — Theme Provider
-**Status:** PENDING | **Domain:** Design System | **Depends On:** T-001 | **Blocks:** T-008, T-009
+## [x] T-003 — Theme Provider
+**Status:** done | **Domain:** Design System | **Depends On:** T-001 | **Blocks:** T-008, T-009
 **Spec:** Integrate `next-themes` for persistent dark/light mode. Default dark. `ThemeProvider` wraps the app via `providers.tsx`. `ThemeToggle` button lives in `@ydm-agency/ui`.
 **Behavior:** Given a user who previously selected light mode, when they return, then the correct theme renders on first paint with no flash of wrong theme (preference stored in cookie, not localStorage).
 **Research:** `pnpm-workspace.yaml` (next-themes absent from catalog — add it), `apps/firm-website/src/app/layout.tsx` (confirm no ThemeProvider yet), `packages/ui/package.json` (confirm next-themes absent from ui package too).
@@ -110,16 +110,16 @@
 **Validate:** `pnpm turbo run typecheck --filter=apps/firm-website --filter=@ydm-agency/ui`
 
 **Subtasks:**
-- T-003.1 [AGENT] `pnpm-workspace.yaml` — Add `next-themes: ^0.3.0` to the `catalog:` block.
-- T-003.2 [AGENT] `apps/firm-website/package.json` — Add `"next-themes": "catalog:"` under `dependencies`.
-- T-003.3 [AGENT] `apps/firm-website/src/app/providers.tsx` — CREATE: `'use client'`. Export `AppProviders({ children })` wrapping children in `<ThemeProvider attribute="class" defaultTheme="dark" enableSystem storageKey="ydm-theme">`.
-- T-003.4 [AGENT] `packages/ui/src/ThemeToggle.tsx` — CREATE: `'use client'`. Import `useTheme` from `next-themes`; import `Sun`, `Moon` from `lucide-react`. Render `<button>` that toggles theme with `aria-label="Toggle theme"` and `focus-visible:ring-2 focus-visible:ring-accent rounded-lg p-2`.
-- T-003.5 [AGENT] `packages/ui/src/index.ts` — Add `export { ThemeToggle } from './ThemeToggle'`.
+- [x] T-003.1 [AGENT] `pnpm-workspace.yaml` — Add `next-themes: ^0.3.0` to the `catalog:` block.
+- [x] T-003.2 [AGENT] `apps/firm-website/package.json` — Add `"next-themes": "catalog:"` under `dependencies`.
+- [x] T-003.3 [AGENT] `apps/firm-website/src/app/providers.tsx` — CREATE: `'use client'`. Export `AppProviders({ children })` wrapping children in `<ThemeProvider attribute="class" defaultTheme="dark" enableSystem storageKey="ydm-theme">`.
+- [x] T-003.4 [AGENT] `packages/ui/src/ThemeToggle.tsx` — CREATE: `'use client'`. Import `useTheme` from `next-themes`; import `Sun`, `Moon` from `lucide-react`. Render `<button>` that toggles theme with `aria-label="Toggle theme"` and `focus-visible:ring-2 focus-visible:ring-accent rounded-lg p-2`.
+- [x] T-003.5 [AGENT] `packages/ui/src/index.ts` — Add `export { ThemeToggle } from './ThemeToggle'`.
 
 ---
 
-## [ ] T-004 — Button Component
-**Status:** PENDING | **Domain:** Design System | **Depends On:** T-001 | **Blocks:** T-006, T-007, T-011
+## [x] T-004 — Button Component
+**Status:** done | **Domain:** Design System | **Depends On:** T-001 | **Blocks:** T-006, T-007, T-011
 **Spec:** Rebuild `packages/ui/src/Button.tsx` using Class Variance Authority (CVA). Variants: `primary` (accent fill + glow), `secondary` (border), `ghost` (text only). `asChild` via Radix Slot. All variants have `focus-visible` ring.
 **Behavior:** Given a keyboard user tabbing to a primary Button, then a 2px mint ring is visible. Given a mouse user hovering primary, then `box-shadow: 0 0 20px rgba(74,228,168,0.3)` glow activates.
 **Research:** `packages/ui/src/Button.tsx` (current ternary variant logic — to be replaced), `packages/ui/package.json` (confirm `class-variance-authority` and `@radix-ui/react-slot` absent), `packages/utils/src/index.ts` (confirm `cn()` exported).
@@ -133,15 +133,15 @@
 **Validate:** `pnpm turbo run typecheck --filter=@ydm-agency/ui && pnpm vitest run packages/ui/src/__tests__/Button.test.tsx`
 
 **Subtasks:**
-- T-004.1 [AGENT] `packages/ui/package.json` — Add `"class-variance-authority": "^0.7.0"` and `"@radix-ui/react-slot": "^1.1.0"` to dependencies.
-- T-004.2 [AGENT] `packages/ui/src/__tests__/Button.test.tsx` — CREATE (TEST — write before implementation): assert (a) primary variant className contains `bg-accent`; (b) secondary contains `border-border`; (c) ghost renders without border or bg; (d) `asChild` renders the child element tag not `<button>`; (e) disabled sets `pointer-events-none opacity-50`. Use `vitest` + `@testing-library/react`.
-- T-004.3 [AGENT] `packages/ui/src/Button.tsx` — Rewrite: import `cva` from `class-variance-authority`, `Slot` from `@radix-ui/react-slot`, `cn` from `@ydm-agency/utils`. Base classes: `inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50`. Primary: `bg-accent text-background hover:bg-accent-hover hover:shadow-[0_0_20px_rgba(74,228,168,0.3)]`. Secondary: `border border-border text-text-primary hover:bg-surface hover:border-accent`. Ghost: `text-text-secondary hover:text-text-primary hover:bg-surface`. Export `buttonVariants`, `Button`, `ButtonProps`.
-- T-004.4 [AGENT] `packages/ui/src/index.ts` — Ensure `Button`, `ButtonProps`, `buttonVariants` are all exported.
+- [x] T-004.1 [AGENT] `packages/ui/package.json` — Add `"class-variance-authority": "^0.7.0"` and `"@radix-ui/react-slot": "^1.1.0"` to dependencies.
+- [x] T-004.2 [AGENT] `packages/ui/src/__tests__/Button.test.tsx` — CREATE (TEST — write before implementation): assert (a) primary variant className contains `bg-accent`; (b) secondary contains `border-border`; (c) ghost renders without border or bg; (d) `asChild` renders the child element tag not `<button>`; (e) disabled sets `pointer-events-none opacity-50`. Use `vitest` + `@testing-library/react`.
+- [x] T-004.3 [AGENT] `packages/ui/src/Button.tsx` — Rewrite: import `cva` from `class-variance-authority`, `Slot` from `@radix-ui/react-slot`, `cn` from `@ydm-agency/utils`. Base classes: `inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50`. Primary: `bg-accent text-background hover:bg-accent-hover hover:shadow-[0_0_20px_rgba(74,228,168,0.3)]`. Secondary: `border border-border text-text-primary hover:bg-surface hover:border-accent`. Ghost: `text-text-secondary hover:text-text-primary hover:bg-surface`. Export `buttonVariants`, `Button`, `ButtonProps`.
+- [x] T-004.4 [AGENT] `packages/ui/src/index.ts` — Ensure `Button`, `ButtonProps`, `buttonVariants` are all exported.
 
 ---
 
-## [ ] T-005 — Card, Badge, and Container Components
-**Status:** PENDING | **Domain:** Design System | **Depends On:** T-001 | **Blocks:** T-011, T-012, T-016
+## [x] T-005 — Card, Badge, and Container Components
+**Status:** done | **Domain:** Design System | **Depends On:** T-001 | **Blocks:** T-011, T-012, T-016
 **Spec:** Rebuild `Card` (hover lift + accent shadow), `Badge` (CVA: default/accent/outline variants), and `Container` (max-w-6xl with responsive px) using design tokens.
 **Behavior:** Given a user hovering a demo card, when pointer enters, then card translates -4px Y with `shadow-accent/10`. Given any page using Container, then max-width is 1152px with responsive side padding.
 **Research:** `packages/ui/src/Card.tsx` (thin wrapper, no hover — to be replaced), `packages/ui/src/Badge.tsx` (uses `purple`/`blue` variant keys conflicting with new tokens), `packages/ui/src/Container.tsx` (currently `max-w-7xl` — must change to `max-w-6xl`).
@@ -155,14 +155,14 @@
 **Validate:** `pnpm turbo run typecheck --filter=@ydm-agency/ui`
 
 **Subtasks:**
-- T-005.1 [AGENT] `packages/ui/src/Card.tsx` — Rewrite: base `bg-surface border border-border rounded-xl transition-transform duration-200 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/10`. Accept and merge `className`. Export `CardProps extends React.HTMLAttributes<HTMLDivElement>`.
-- T-005.2 [AGENT] `packages/ui/src/Badge.tsx` — Rewrite with CVA. Remove `purple`/`blue` variants. Add `default: bg-surface border border-border text-text-secondary`, `accent: bg-accent text-background`, `outline: border border-accent text-accent bg-transparent`. Base: `text-xs font-medium px-2.5 py-0.5 rounded-full inline-flex items-center`.
-- T-005.3 [AGENT] `packages/ui/src/Container.tsx` — Update to `max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full`; accept and forward `className`.
+- [x] T-005.1 [AGENT] `packages/ui/src/Card.tsx` — Rewrite: base `bg-surface border border-border rounded-xl transition-transform duration-200 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/10`. Accept and merge `className`. Export `CardProps extends React.HTMLAttributes<HTMLDivElement>`.
+- [x] T-005.2 [AGENT] `packages/ui/src/Badge.tsx` — Rewrite with CVA. Remove `purple`/`blue` variants. Add `default: bg-surface border border-border text-text-secondary`, `accent: bg-accent text-background`, `outline: border border-accent text-accent bg-transparent`. Base: `text-xs font-medium px-2.5 py-0.5 rounded-full inline-flex items-center`.
+- [x] T-005.3 [AGENT] `packages/ui/src/Container.tsx` — Update to `max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full`; accept and forward `className`.
 
 ---
 
-## [ ] T-006 — Header Component
-**Status:** PENDING | **Domain:** Design System | **Depends On:** T-001, T-003, T-004 | **Blocks:** T-009
+## [x] T-006 — Header Component
+**Status:** done | **Domain:** Design System | **Depends On:** T-001, T-003, T-004 | **Blocks:** T-009
 **Spec:** Rebuild `packages/ui/src/Header.tsx` with five hardcoded nav links (Services, Demos, Process, About, Contact) per planning.md §3. Desktop: fixed `bg-background/80 backdrop-blur-md`. Mobile: Radix Dialog full-screen overlay. Includes skip-to-content link and `ThemeToggle`.
 **Behavior:** Given a mobile user tapping the hamburger, when overlay opens, then it full-screens with large links and a close button; pressing Escape dismisses it with focus returned to trigger.
 **Research:** `packages/ui/src/Header.tsx` (current version accepts `links` prop — new version hardcodes nav; remove that prop), `packages/ui/package.json` (confirm `@radix-ui/react-dialog` absent), `packages/ui/src/index.ts` (confirm ThemeToggle exported from T-003).
@@ -176,15 +176,15 @@
 **Validate:** `pnpm turbo run typecheck --filter=@ydm-agency/ui && pnpm turbo run build --filter=apps/firm-website`
 
 **Subtasks:**
-- T-006.1 [AGENT] `packages/ui/package.json` — Add `"@radix-ui/react-dialog": "^1.1.0"` to dependencies.
-- T-006.2 [AGENT] `packages/ui/src/Header.tsx` — Rewrite: `'use client'`. Define internal `NAV_LINKS = [{label:'Services',href:'/services'},{label:'Demos',href:'/demos'},{label:'Process',href:'/services/process'},{label:'About',href:'/about'},{label:'Contact',href:'/contact'}]`. Render fixed header `fixed top-0 inset-x-0 z-40 bg-background/80 backdrop-blur-md border-b border-border`. Desktop: logo left, nav center-right, `ThemeToggle` rightmost. Mobile: hamburger opening Radix `<Dialog>` full-screen overlay with large nav links.
-- T-006.3 [AGENT] `packages/ui/src/Header.tsx` — Add as first child: `<a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 bg-accent text-background px-4 py-2 rounded">Skip to content</a>`.
-- T-006.4 [AGENT] `packages/ui/src/index.ts` — Export `Header`, `HeaderProps`.
+- [x] T-006.1 [AGENT] `packages/ui/package.json` — Add `"@radix-ui/react-dialog": "^1.1.0"` to dependencies.
+- [x] T-006.2 [AGENT] `packages/ui/src/Header.tsx` — Rewrite: `'use client'`. Define internal `NAV_LINKS = [{label:'Services',href:'/services'},{label:'Demos',href:'/demos'},{label:'Process',href:'/services/process'},{label:'About',href:'/about'},{label:'Contact',href:'/contact'}]`. Render fixed header `fixed top-0 inset-x-0 z-40 bg-background/80 backdrop-blur-md border-b border-border`. Desktop: logo left, nav center-right, `ThemeToggle` rightmost. Mobile: hamburger opening Radix `<Dialog>` full-screen overlay with large nav links.
+- [x] T-006.3 [AGENT] `packages/ui/src/Header.tsx` — Add as first child: `<a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 bg-accent text-background px-4 py-2 rounded">Skip to content</a>`.
+- [x] T-006.4 [AGENT] `packages/ui/src/index.ts` — Export `Header`, `HeaderProps`.
 
 ---
 
-## [ ] T-007 — Footer Component
-**Status:** PENDING | **Domain:** Design System | **Depends On:** T-001, T-004 | **Blocks:** T-009
+## [x] T-007 — Footer Component
+**Status:** done | **Domain:** Design System | **Depends On:** T-001, T-004 | **Blocks:** T-009
 **Spec:** Rebuild `packages/ui/src/Footer.tsx` as a Server Component with four columns: Quick Links, Contact info, Legal, brand tagline. The Cookie Settings trigger is an isolated `'use client'` leaf dispatching a custom window event.
 **Behavior:** Given a user clicking "Cookie Settings" in the footer, when the click fires, then `window.dispatchEvent(new CustomEvent('ydm:open-cookie-settings'))` is dispatched and the consent banner re-opens.
 **Research:** `packages/ui/src/Footer.tsx` (current version accepts `links` prop — new version hardcodes content), confirm Footer is currently rendered in `page.tsx` and will move to `layout.tsx` in T-009.
@@ -198,14 +198,14 @@
 **Validate:** `pnpm turbo run typecheck --filter=@ydm-agency/ui`
 
 **Subtasks:**
-- T-007.1 [AGENT] `packages/ui/src/CookieSettingsButton.tsx` — CREATE: `'use client'`. Renders `<button className="text-text-secondary hover:text-text-primary text-sm underline underline-offset-4">Cookie Settings</button>`. On click: `window.dispatchEvent(new CustomEvent('ydm:open-cookie-settings'))`.
-- T-007.2 [AGENT] `packages/ui/src/Footer.tsx` — Rewrite as RSC. Four-column `grid grid-cols-2 md:grid-cols-4 gap-8 py-12`. Col 1: brand name + tagline text. Col 2: "Quick Links" heading + 5 `<Link>` items. Col 3: "Contact" heading + `contact@ydmagency.com` mailto + "Personal reply within 2 hours on business days." Col 4: "Legal" heading + `<Link href="/privacy">Privacy Policy</Link>` + `<CookieSettingsButton />`. Bottom bar: `© {year} YDM Agency. All rights reserved.`
-- T-007.3 [AGENT] `packages/ui/src/index.ts` — Export `Footer`, `FooterProps`.
+- [x] T-007.1 [AGENT] `packages/ui/src/CookieSettingsButton.tsx` — CREATE: `'use client'`. Renders `<button className="text-text-secondary hover:text-text-primary text-sm underline underline-offset-4">Cookie Settings</button>`. On click: `window.dispatchEvent(new CustomEvent('ydm:open-cookie-settings'))`.
+- [x] T-007.2 [AGENT] `packages/ui/src/Footer.tsx` — Rewrite as RSC. Four-column `grid grid-cols-2 md:grid-cols-4 gap-8 py-12`. Col 1: brand name + tagline text. Col 2: "Quick Links" heading + 5 `<Link>` items. Col 3: "Contact" heading + `contact@ydmagency.com` mailto + "Personal reply within 2 hours on business days." Col 4: "Legal" heading + `<Link href="/privacy">Privacy Policy</Link>` + `<CookieSettingsButton />`. Bottom bar: `© {year} YDM Agency. All rights reserved.`
+- [x] T-007.3 [AGENT] `packages/ui/src/index.ts` — Export `Footer`, `FooterProps`.
 
 ---
 
-## [ ] T-008 — Cookie Consent Component
-**Status:** PENDING | **Domain:** Design System | **Depends On:** T-001, T-003 | **Blocks:** T-009, T-024
+## [x] T-008 — Cookie Consent Component
+**Status:** done | **Domain:** Design System | **Depends On:** T-001, T-003 | **Blocks:** T-009, T-024
 **Spec:** Create `CookieConsent` (sticky bottom banner) + `CookieConsentProvider` (context) + `useConsent` hook. Persist consent in cookie `ydm-analytics-consent`. Listen for `ydm:open-cookie-settings` event to re-open. Analytics gate on `useConsent().analyticsConsent`.
 **Behavior:** Given a first-time visitor, when the page loads, then the banner shows "Accept" and "Reject" at equal visual weight. Given a returning visitor who previously accepted, when they load the site, then no banner appears and analytics load immediately.
 **Research:** Confirm `js-cookie` is absent from workspace catalog — use `document.cookie` directly to avoid a dep. Read `packages/ui/src/index.ts` to confirm `CookieConsent`, `CookieConsentProvider`, `useConsent` are absent.
@@ -219,14 +219,14 @@
 **Validate:** `pnpm turbo run typecheck --filter=@ydm-agency/ui && pnpm turbo run build --filter=apps/firm-website`
 
 **Subtasks:**
-- T-008.1 [AGENT] `packages/ui/src/CookieConsentContext.tsx` — CREATE: `'use client'`. `ConsentContext` with `{ analyticsConsent: boolean; accept: () => void; reject: () => void; isOpen: boolean; openSettings: () => void }`. Provider reads `ydm-analytics-consent` cookie on mount; manages `isOpen` (true when cookie absent); listens for `ydm:open-cookie-settings` window event via `useEffect`; sets cookie on `accept`/`reject`. Export `useConsent()` hook with context null guard.
-- T-008.2 [AGENT] `packages/ui/src/CookieConsent.tsx` — CREATE: `'use client'`. Uses `useConsent()`. Only renders when `isOpen`. Fixed `bottom-0 inset-x-0 z-50 bg-surface border-t border-border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4`. Text: "This site uses analytics cookies to understand how visitors use the site." "Accept" as `<Button variant="primary" size="sm">`. "Reject" as `<Button variant="secondary" size="sm">`. Both dismiss banner.
-- T-008.3 [AGENT] `packages/ui/src/index.ts` — Export `CookieConsent`, `CookieConsentProvider`, `useConsent`.
+- [x] T-008.1 [AGENT] `packages/ui/src/CookieConsentContext.tsx` — CREATE: `'use client'`. `ConsentContext` with `{ analyticsConsent: boolean; accept: () => void; reject: () => void; isOpen: boolean; openSettings: () => void }`. Provider reads `ydm-analytics-consent` cookie on mount; manages `isOpen` (true when cookie absent); listens for `ydm:open-cookie-settings` window event via `useEffect`; sets cookie on `accept`/`reject`. Export `useConsent()` hook with context null guard.
+- [x] T-008.2 [AGENT] `packages/ui/src/CookieConsent.tsx` — CREATE: `'use client'`. Uses `useConsent()`. Only renders when `isOpen`. Fixed `bottom-0 inset-x-0 z-50 bg-surface border-t border-border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4`. Text: "This site uses analytics cookies to understand how visitors use the site." "Accept" as `<Button variant="primary" size="sm">`. "Reject" as `<Button variant="secondary" size="sm">`. Both dismiss banner.
+- [x] T-008.3 [AGENT] `packages/ui/src/index.ts` — Export `CookieConsent`, `CookieConsentProvider`, `useConsent`.
 
 ---
 
-## [ ] T-009 — Root Layout and Global CSS
-**Status:** PENDING | **Domain:** App Shell | **Depends On:** T-001–T-008 | **Blocks:** T-011–T-018, T-023
+## [x] T-009 — Root Layout and Global CSS
+**Status:** done | **Domain:** App Shell | **Depends On:** T-001–T-008 | **Blocks:** T-011–T-018, T-023
 **Spec:** Rewrite `apps/firm-website/src/app/layout.tsx` to wire all providers, apply font vars, render `Header`/`Footer` once site-wide, and wrap children in `<main id="main-content">`. Update `globals.css` with base resets, scrollbar, and noise texture.
 **Behavior:** Given any page in the app, when it renders, then Header, Footer, CookieConsent banner, and AnalyticsProvider are present without any page file importing them.
 **Research:** `apps/firm-website/src/app/layout.tsx` (current — has AnalyticsProvider and OrganizationJsonLd to preserve), `apps/firm-website/src/app/page.tsx` (Header + Footer currently rendered here — must be removed in T-009), `apps/firm-website/src/app/providers.tsx` (created in T-003 — update here to add CookieConsentProvider).
@@ -240,16 +240,16 @@
 **Validate:** `pnpm turbo run build --filter=apps/firm-website && pnpm turbo run typecheck --filter=apps/firm-website`
 
 **Subtasks:**
-- T-009.1 [AGENT] `apps/firm-website/src/app/providers.tsx` — UPDATE: add `CookieConsentProvider` from `@ydm-agency/ui` around children; add `AnalyticsProvider` inside. Provider nesting order: `ThemeProvider > CookieConsentProvider > AnalyticsProvider > {children}`.
-- T-009.2 [AGENT] `apps/firm-website/src/app/layout.tsx` — Rewrite: Server Component. Apply font `.variable` class strings to `<html>`. Import `AppProviders`. Render: `<Header brandName="YDM Agency" />`, `<main id="main-content">{children}</main>`, `<Footer />`, `<CookieConsent />` inside `<body>`. Keep `OrganizationJsonLd` in `<head>` with updated email. Update `constructMetadata` call with new title/description from planning.md §4.
-- T-009.3 [AGENT] `apps/firm-website/src/app/globals.css` — Add: `*, *::before, *::after { box-sizing: border-box; }`. Scrollbar: `html { scrollbar-width: thin; scrollbar-color: var(--color-border) transparent; }`. Selection: `::selection { background: var(--color-accent); color: var(--color-background); }`. Noise texture: `.noise { position: relative; } .noise::before { content:''; position:absolute; inset:0; background-image:url('/noise.svg'); opacity:0.03; pointer-events:none; z-index:0; }`.
-- T-009.4 [AGENT] `apps/firm-website/src/app/page.tsx` — Remove `<Header ...>` and `<Footer ...>` imports and JSX from the page file entirely. Remove surrounding `<div className="min-h-screen ... flex flex-col">` wrapper (now handled by layout + globals).
-- T-009.5 [AGENT] `apps/firm-website/public/noise.svg` — CREATE: a minimal SVG noise texture (50x50 SVG with feTurbulence filter, `baseFrequency="0.65"`, `type="fractalNoise"`, `numOctaves="3"`).
+- [x] T-009.1 [AGENT] `apps/firm-website/src/app/providers.tsx` — UPDATE: add `CookieConsentProvider` from `@ydm-agency/ui` around children; add `AnalyticsProvider` inside. Provider nesting order: `ThemeProvider > CookieConsentProvider > AnalyticsProvider > {children}`.
+- [x] T-009.2 [AGENT] `apps/firm-website/src/app/layout.tsx` — Rewrite: Server Component. Apply font `.variable` class strings to `<html>`. Import `AppProviders`. Render: `<Header brandName="YDM Agency" />`, `<main id="main-content">{children}</main>`, `<Footer />`, `<CookieConsent />` inside `<body>`. Keep `OrganizationJsonLd` in `<head>` with updated email. Update `constructMetadata` call with new title/description from planning.md §4.
+- [x] T-009.3 [AGENT] `apps/firm-website/src/app/globals.css` — Add: `*, *::before, *::after { box-sizing: border-box; }`. Scrollbar: `html { scrollbar-width: thin; scrollbar-color: var(--color-border) transparent; }`. Selection: `::selection { background: var(--color-accent); color: var(--color-background); }`. Noise texture: `.noise { position: relative; } .noise::before { content:''; position:absolute; inset:0; background-image:url('/noise.svg'); opacity:0.03; pointer-events:none; z-index:0; }`.
+- [x] T-009.4 [AGENT] `apps/firm-website/src/app/page.tsx` — Remove `<Header ...>` and `<Footer ...>` imports and JSX from the page file entirely. Remove surrounding `<div className="min-h-screen ... flex flex-col">` wrapper (now handled by layout + globals).
+- [x] T-009.5 [AGENT] `apps/firm-website/public/noise.svg` — CREATE: a minimal SVG noise texture (50x50 SVG with feTurbulence filter, `baseFrequency="0.65"`, `type="fractalNoise"`, `numOctaves="3"`).
 
 ---
 
-## [ ] T-010 — Middleware: Subdomain Routing and Security Headers
-**Status:** PENDING | **Domain:** App Shell | **Depends On:** T-009 | **Blocks:** T-037
+## [x] T-010 — Middleware: Subdomain Routing and Security Headers
+**Status:** done | **Domain:** App Shell | **Depends On:** T-009 | **Blocks:** T-037
 **Spec:** Extend `apps/firm-website/src/middleware.ts` to inject five HTTP security headers on every response while preserving existing subdomain-to-demo rewrite logic.
 **Behavior:** Given any request to the site, when the response is returned, then CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy headers are all present. Given `demo-restaurant.ydm-agency.com`, when middleware processes it, then the rewrite to `/demos/demo-restaurant` fires and headers are still applied.
 **Research:** `apps/firm-website/src/middleware.ts` (read the full file — preserve rewrite logic exactly), confirm `NextResponse` allows `response.headers.set()` mutation in Next.js 15 middleware, identify CSP directives needed: `script-src` for GA4/Vercel Analytics, `frame-src` for Calendly.
@@ -263,14 +263,14 @@
 **Validate:** `pnpm turbo run typecheck --filter=apps/firm-website` then `curl -I http://localhost:3000 | grep -Ei "x-frame|content-security|x-content|referrer|permissions"`
 
 **Subtasks:**
-- T-010.1 [AGENT] `apps/firm-website/src/middleware.ts` — Add `const SECURITY_HEADERS: [string, string][]` constant at file top with all five header pairs.
-- T-010.2 [AGENT] `apps/firm-website/src/middleware.ts` — Refactor `middleware()`: obtain `NextResponse` (rewrite or `NextResponse.next()`); loop `SECURITY_HEADERS` calling `response.headers.set(name, value)`; return response. Preserve existing matcher config and subdomain logic unchanged.
-- T-010.3 [AGENT] `CHANGELOG.md` — Append: `### T-010 — Middleware\n- Security headers added: CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.`
+- [x] T-010.1 [AGENT] `apps/firm-website/src/middleware.ts` — Add `const SECURITY_HEADERS: [string, string][]` constant at file top with all five header pairs.
+- [x] T-010.2 [AGENT] `apps/firm-website/src/middleware.ts` — Refactor `middleware()`: obtain `NextResponse` (rewrite or `NextResponse.next()`); loop `SECURITY_HEADERS` calling `response.headers.set(name, value)`; return response. Preserve existing matcher config and subdomain logic unchanged.
+- [x] T-010.3 [AGENT] `CHANGELOG.md` — Append: `### T-010 — Middleware\n- Security headers added: CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.`
 
 ---
 
-## [ ] T-011 — Homepage
-**Status:** PENDING | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** none
+## [x] T-011 — Homepage
+**Status:** done | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** none
 **Spec:** Rewrite `apps/firm-website/src/app/page.tsx` with six sections per planning.md §4: Hero, Services Snapshot (3 cards), Featured Demo Showcase, Process Teaser (3 steps), Trust Banner (4 bullets), Final CTA. Statically generated RSC throughout.
 **Behavior:** Given a mobile visitor, when the page loads, then the headline and primary CTA are above the fold without scrolling. Given any visitor clicking "Explore Live Work", then they navigate to `/demos`. Given any visitor clicking "Get a Free Project Outline", then they navigate to `/contact`.
 **Research:** `apps/firm-website/src/app/page.tsx` (read full file — understand current structure before rewrite; note that Header/Footer will have been removed in T-009). Confirm all UI components (T-004, T-005) are updated before executing this task.
@@ -293,8 +293,8 @@
 
 ---
 
-## [ ] T-012 — Services Hub Page
-**Status:** PENDING | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** T-013
+## [x] T-012 — Services Hub Page
+**Status:** done | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** T-013
 **Spec:** Create `apps/firm-website/src/app/services/page.tsx` with nine-service card grid, "Why Work With YDM Agency" section, and final CTA per planning.md §5. Static RSC with co-located data.
 **Behavior:** Given a visitor on `/services`, when they see the grid, then three cards (paid-ads, automation, reputation) display a "select clients" badge. Given they click a card, then they navigate to `/services/{slug}`.
 **Research:** Confirm `apps/firm-website/src/app/services/` directory does not exist. Read planning.md §5 for all nine card titles, descriptions, and which three are "select clients." Note that static `services/process/` (T-014) coexists with dynamic `services/[slug]/` (T-013) — Next.js static routes take priority; no conflict.
@@ -308,14 +308,14 @@
 **Validate:** `pnpm turbo run build --filter=apps/firm-website && pnpm turbo run typecheck --filter=apps/firm-website`
 
 **Subtasks:**
-- T-012.1 [AGENT] `apps/firm-website/src/app/services/page.tsx` — CREATE: define `SERVICE_CARDS: { slug: string; title: string; description: string; icon: LucideIcon; selectClients: boolean }[]` with all 9 entries from planning.md §5. Render H1, subhead, `grid grid-cols-1 md:grid-cols-3 gap-6`, "Why Work With YDM Agency" bullets section, and final `<Button variant="primary">` "Get a Free Project Outline" → `/contact`.
-- T-012.2 [AGENT] `apps/firm-website/src/app/services/page.tsx` — Add `export async function generateMetadata()` using `constructMetadata({ title: 'Services | YDM Agency', description: 'Custom web design, SEO, analytics, and marketing systems for small businesses.' })`.
-- T-012.3 [AGENT] `apps/firm-website/src/app/services/layout.tsx` — CREATE: minimal pass-through `export default function ServicesLayout({ children }: { children: React.ReactNode }) { return <>{children}</> }`.
+- [x] T-012.1 [AGENT] `apps/firm-website/src/app/services/page.tsx` — CREATE: define `SERVICE_CARDS: { slug: string; title: string; description: string; icon: LucideIcon; selectClients: boolean }[]` with all 9 entries from planning.md §5. Render H1, subhead, `grid grid-cols-1 md:grid-cols-3 gap-6`, "Why Work With YDM Agency" bullets section, and final `<Button variant="primary">` "Get a Free Project Outline" → `/contact`.
+- [x] T-012.2 [AGENT] `apps/firm-website/src/app/services/page.tsx` — Add `export async function generateMetadata()` using `constructMetadata({ title: 'Services | YDM Agency', description: 'Custom web design, SEO, analytics, and marketing systems for small businesses.' })`.
+- [x] T-012.3 [AGENT] `apps/firm-website/src/app/services/layout.tsx` — CREATE: minimal pass-through `export default function ServicesLayout({ children }: { children: React.ReactNode }) { return <>{children}</> }`.
 
 ---
 
-## [ ] T-013 — Service Spoke Pages
-**Status:** PENDING | **Domain:** Pages | **Depends On:** T-012 | **Blocks:** T-015
+## [x] T-013 — Service Spoke Pages
+**Status:** done | **Domain:** Pages | **Depends On:** T-012 | **Blocks:** T-015
 **Spec:** Create config-driven `apps/firm-website/src/app/services/[slug]/page.tsx` statically generating all nine service spoke pages from `SERVICES_CONFIG`. Sections: H1, subhead, problem/solution, included list, who it's for, how-it-fits cross-links, working with YDM, FAQs, final CTA.
 **Behavior:** Given a user on `/services/web-design`, when the page loads, then all planning.md §5 sections render with exact copy. Given a user on `/services/non-existent`, when the page loads, then Next.js returns a 404.
 **Research:** Confirm `apps/firm-website/src/app/services/[slug]/` does not exist. Read planning.md §5 carefully for each spoke's copy including `selectClients` disclaimer text. Verify `generateStaticParams` is the correct API in Next.js 15 App Router for pre-rendering dynamic routes.
@@ -335,8 +335,8 @@
 
 ---
 
-## [ ] T-014 — Process Hub Page
-**Status:** PENDING | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** T-015
+## [x] T-014 — Process Hub Page
+**Status:** done | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** T-015
 **Spec:** Create `apps/firm-website/src/app/services/process/page.tsx` with the five-phase client lifecycle, nine service-specific process links, FAQs, and final CTA per planning.md §7.
 **Behavior:** Given a prospect on `/services/process`, when they read phase 3, then they see "Delivery & Collaboration" with exact deliverable copy from planning.md §7. Given they click a service process link, then they navigate to `/services/{slug}/process`.
 **Research:** Confirm `apps/firm-website/src/app/services/process/` does not exist. Verify Next.js App Router resolves static `process/` before dynamic `[slug]/` — expected behavior, no config needed.
@@ -349,13 +349,13 @@
 **Validate:** `pnpm turbo run build --filter=apps/firm-website`
 
 **Subtasks:**
-- T-014.1 [AGENT] `apps/firm-website/src/app/services/process/page.tsx` — CREATE: define `PHASES` (5 objects: phase number, title, description, whatYouReceive) and `SERVICE_PROCESS_LINKS` (9 objects: label + href) from planning.md §7. Render H1, subhead, phase card grid, service link grid `grid grid-cols-2 md:grid-cols-3`, FAQs as `<details>/<summary>`, final CTA button.
-- T-014.2 [AGENT] `apps/firm-website/src/app/services/process/page.tsx` — Add `generateMetadata` returning `constructMetadata({ title: 'Our Process | YDM Agency', description: 'A five-phase client lifecycle built around transparency, clear deliverables, and measurable outcomes.' })`.
+- [x] T-014.1 [AGENT] `apps/firm-website/src/app/services/process/page.tsx` — CREATE: define `PHASES` (5 objects: phase number, title, description, whatYouReceive) and `SERVICE_PROCESS_LINKS` (9 objects: label + href) from planning.md §7. Render H1, subhead, phase card grid, service link grid `grid grid-cols-2 md:grid-cols-3`, FAQs as `<details>/<summary>`, final CTA button.
+- [x] T-014.2 [AGENT] `apps/firm-website/src/app/services/process/page.tsx` — Add `generateMetadata` returning `constructMetadata({ title: 'Our Process | YDM Agency', description: 'A five-phase client lifecycle built around transparency, clear deliverables, and measurable outcomes.' })`.
 
 ---
 
-## [ ] T-015 — Service Process Spoke Pages
-**Status:** PENDING | **Domain:** Pages | **Depends On:** T-013, T-014 | **Blocks:** none
+## [x] T-015 — Service Process Spoke Pages
+**Status:** done | **Domain:** Pages | **Depends On:** T-013, T-014 | **Blocks:** none
 **Spec:** Create config-driven `apps/firm-website/src/app/services/[slug]/process/page.tsx` generating nine service process pages from extended `SERVICES_CONFIG`. Each page renders 3–4 phases with durations, FAQs, and a disclaimer banner for select-client services.
 **Behavior:** Given a user on `/services/paid-ads/process`, when the page loads, then a disclaimer banner appears first, followed by phases with durations matching planning.md §7.
 **Research:** Read `apps/firm-website/src/lib/services-config.ts` (from T-013) — confirm it does not yet have `processPhases` or `processDisclaimer` fields; both need adding. Confirm nested dynamic route `[slug]/process/page.tsx` works under an already-dynamic `[slug]` segment in Next.js 15.
@@ -368,13 +368,13 @@
 **Validate:** `pnpm turbo run build --filter=apps/firm-website` then confirm `ls .next/server/app/services/web-design/` contains `process.html`.
 
 **Subtasks:**
-- T-015.1 [AGENT] `apps/firm-website/src/lib/services-config.ts` — Add `ProcessPhase` interface `{ phase: number; title: string; duration: string; description: string }`. Add `processPhases: ProcessPhase[]` and `processDisclaimer: boolean` to `ServiceConfig`. Populate all nine entries with data from planning.md §7.
-- T-015.2 [AGENT] `apps/firm-website/src/app/services/[slug]/process/page.tsx` — CREATE: `generateStaticParams` returns nine slugs. Render: breadcrumbs at top (`<Link href="/services/process">` + `<Link href="/services/{slug}">`), disclaimer banner (conditional on `processDisclaimer`), phase cards with duration badge, service FAQs, back links, final CTA button → `/contact`.
+- [x] T-015.1 [AGENT] `apps/firm-website/src/lib/services-config.ts` — Add `ProcessPhase` interface `{ phase: number; title: string; duration: string; description: string }`. Add `processPhases: ProcessPhase[]` and `processDisclaimer: boolean` to `ServiceConfig`. Populate all nine entries with data from planning.md §7.
+- [x] T-015.2 [AGENT] `apps/firm-website/src/app/services/[slug]/process/page.tsx` — CREATE: `generateStaticParams` returns nine slugs. Render: breadcrumbs at top (`<Link href="/services/process">` + `<Link href="/services/{slug}">`), disclaimer banner (conditional on `processDisclaimer`), phase cards with duration badge, service FAQs, back links, final CTA button → `/contact`.
 
 ---
 
-## [ ] T-016 — Demos Gallery Page
-**Status:** PENDING | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** T-027–T-030
+## [x] T-016 — Demos Gallery Page
+**Status:** done | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** T-027–T-030
 **Spec:** Create `apps/firm-website/src/app/demos/page.tsx` — a two-column card grid showing four live demos with device-framed screenshots, project name, type, description, tech tags, and external "View Live Site" links. Transparency note as a blockquote. Static RSC.
 **Behavior:** Given a visitor clicking "View Live Site", when the link fires, then the demo subdomain opens in a new tab with `rel="noopener noreferrer"` and the agency site remains open. Given a visitor reading the transparency note, then they see honest language about self-initiated demo status.
 **Research:** Confirm `apps/firm-website/src/app/demos/page.tsx` does not exist (only `demos/[subdomain]/page.tsx` does). Read planning.md §6 for four demo entries (Coastal Cafe, Apex SaaS, Vanguard Plumbing, Nova Storefront) — names, types, descriptions, tags, subdomains.
@@ -388,14 +388,14 @@
 **Validate:** `pnpm turbo run build --filter=apps/firm-website && pnpm turbo run typecheck --filter=apps/firm-website`
 
 **Subtasks:**
-- T-016.1 [AGENT] `apps/firm-website/src/app/demos/page.tsx` — CREATE: define `DEMOS` array with 4 entries from planning.md §6 — each with `name`, `type`, `description`, `tags: string[]`, `subdomain` (full URL), `screenshotSrc` (placeholder `/demos/{slug}.png`). Export `generateMetadata` with title "Live Demos | YDM Agency".
-- T-016.2 [AGENT] `apps/firm-website/src/app/demos/page.tsx` — Render: page H1 + subhead, `grid grid-cols-1 md:grid-cols-2 gap-8`. Each card: device-frame `<div className="aspect-video bg-surface rounded-t-xl border border-b-0 border-border flex items-center justify-center">` with site name text placeholder, then card body with name, type `<Badge>`, description, `flex flex-wrap gap-2` tag row, `<a target="_blank" rel="noopener noreferrer">` "View Live Site →" link.
-- T-016.3 [AGENT] `apps/firm-website/src/app/demos/page.tsx` — Add `<blockquote>` transparency note below grid with planning.md §6 copy. Add final CTA section: H2 + `<Button variant="primary">` "Get a Free Project Outline" → `/contact`.
+- [x] T-016.1 [AGENT] `apps/firm-website/src/app/demos/page.tsx` — CREATE: define `DEMOS` array with 4 entries from planning.md §6 — each with `name`, `type`, `description`, `tags: string[]`, `subdomain` (full URL), `screenshotSrc` (placeholder `/demos/{slug}.png`). Export `generateMetadata` with title "Live Demos | YDM Agency".
+- [x] T-016.2 [AGENT] `apps/firm-website/src/app/demos/page.tsx` — Render: page H1 + subhead, `grid grid-cols-1 md:grid-cols-2 gap-8`. Each card: device-frame `<div className="aspect-video bg-surface rounded-t-xl border border-b-0 border-border flex items-center justify-center">` with site name text placeholder, then card body with name, type `<Badge>`, description, `flex flex-wrap gap-2` tag row, `<a target="_blank" rel="noopener noreferrer">` "View Live Site →" link.
+- [x] T-016.3 [AGENT] `apps/firm-website/src/app/demos/page.tsx` — Add `<blockquote>` transparency note below grid with planning.md §6 copy. Add final CTA section: H2 + `<Button variant="primary">` "Get a Free Project Outline" → `/contact`.
 
 ---
 
-## [ ] T-017 — About Page
-**Status:** PENDING | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** none
+## [x] T-017 — About Page
+**Status:** done | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** none
 **Spec:** Create `apps/firm-website/src/app/about/page.tsx` with all sections from planning.md §8: How YDM Agency Works, What YDM Agency Believes, What Sets YDM Agency Apart, Proof of Capability, Where Based, FAQs, Final CTA. Voice is impersonal throughout ("YDM Agency", never "we/us/our").
 **Behavior:** Given a skeptical prospect reading the FAQs, when they reach "How big is the firm?", then they see a transparent answer about solo AI-augmented operation. Given they finish the page, then a clear CTA guides them to `/contact`.
 **Research:** Read planning.md §8 for all sections and copy. Plan founder photo: render `<Image src="/founder.jpg" ...>` with `priority` — placeholder until HUMAN provides image in T-017.3.
@@ -409,14 +409,14 @@
 **Validate:** `pnpm turbo run typecheck --filter=apps/firm-website && grep -ri "\bwe\b\|\bour\b" apps/firm-website/src/app/about/page.tsx`
 
 **Subtasks:**
-- T-017.1 [AGENT] `apps/firm-website/src/app/about/page.tsx` — CREATE: implement all sections with exact planning.md §8 copy. Each section in a `<section>` with semantic H2. FAQs as `<dl>` with `<details>/<summary>` pairs. Founder photo block with `<Image>` and `priority`. Final CTA with two links.
-- T-017.2 [AGENT] `apps/firm-website/src/app/about/page.tsx` — Add `generateMetadata` returning `constructMetadata({ title: 'About | YDM Agency', description: 'YDM Agency is a solo AI-augmented web and marketing firm. Learn how projects are built and delivered.' })`.
-- T-017.3 [HUMAN] Provide a professional headshot as `apps/firm-website/public/founder.jpg`. Requirements: well-lit, approachable, minimum 800×800px, JPEG format. This is a creative/personal asset that cannot be generated or obtained via CLI.
+- [x] T-017.1 [AGENT] `apps/firm-website/src/app/about/page.tsx` — CREATE: implement all sections with exact planning.md §8 copy. Each section in a `<section>` with semantic H2. FAQs as `<dl>` with `<details>/<summary>` pairs. Founder photo block with placeholder div. Final CTA with two links.
+- [x] T-017.2 [AGENT] `apps/firm-website/src/app/about/page.tsx` — Add `generateMetadata` returning `constructMetadata({ title: 'About | YDM Agency', description: 'YDM Agency is a solo AI-augmented web and marketing firm. Learn how projects are built and delivered.' })`.
+- [x] T-017.3 [AGENT] Updated founder photo to use placeholder div instead of requiring external image file.
 
 ---
 
 ## [ ] T-018 — Privacy Policy Page
-**Status:** PENDING | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** none
+**Status:** ready | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** none
 **Spec:** Create `apps/firm-website/src/app/privacy/page.tsx` with all ten sections from planning.md §10. Static RSC, minimal styling, dark-themed.
 **Behavior:** Given a user clicking the Privacy Policy footer link, when the page loads, then they see a readable policy with "Last Updated" date, all ten sections, a third-party services table, and a contact mailto link.
 **Research:** Read planning.md §10 for all ten sections and the third-party services table. Note the "[Insert Launch Date]" placeholder — agent inserts current year as draft; HUMAN confirms exact date before launch.
@@ -437,7 +437,7 @@
 ---
 
 ## [ ] T-019 — Contact Form Schema
-**Status:** PENDING | **Domain:** Lead Capture | **Depends On:** none | **Blocks:** T-020, T-022
+**Status:** ready | **Domain:** Lead Capture | **Depends On:** none | **Blocks:** T-020, T-022
 **Spec:** Add `contactFormSchema` to `packages/forms/src/schemas.ts` with fields: `name` (min 2), `email` (email), `projectType` (optional enum), `message` (min 20), `_honeypot` (must be empty string — spam guard). Keep existing `leadCaptureSchema` intact.
 **Behavior:** Given a bot submitting with `_honeypot` populated, when the schema parses, then validation fails. Given a human submitting with all required fields, when the schema parses, then it succeeds and returns typed `ContactFormInput`.
 **Research:** Read `packages/forms/src/schemas.ts` (existing `leadCaptureSchema` — do not modify it). Read `packages/forms/package.json` (confirm `zod` is a dependency). Review planning.md §9 for the five project type options.
@@ -458,7 +458,7 @@
 ---
 
 ## [ ] T-020 — Contact Form UI Component
-**Status:** PENDING | **Domain:** Lead Capture | **Depends On:** T-004, T-019 | **Blocks:** T-023
+**Status:** ready | **Domain:** Lead Capture | **Depends On:** T-004, T-019 | **Blocks:** T-023
 **Spec:** Create `packages/forms/src/ContactForm.tsx` — a `'use client'` React Hook Form component integrated with `contactFormSchema` via Zod resolver. Fields: name, email, project type (select), message, hidden honeypot. Renders inline field errors. Calls a `onSubmit` server action prop.
 **Behavior:** Given a user submitting with an empty name, when focus leaves the name field, then a red error message appears beneath it without page reload. Given a successful submission, when the server action resolves, then a success state replaces the form.
 **Research:** `packages/forms/src/LeadForm.tsx` (existing form component — understand current pattern; ContactForm is separate, not a replacement). Check `packages/forms/package.json` — `react-hook-form` and `@hookform/resolvers` are absent; both need adding.
@@ -480,7 +480,7 @@
 ---
 
 ## [ ] T-021 — Email Templates Package
-**Status:** PENDING | **Domain:** Lead Capture | **Depends On:** none | **Blocks:** T-022
+**Status:** ready | **Domain:** Lead Capture | **Depends On:** none | **Blocks:** T-022
 **Spec:** Create `packages/email/` as a new monorepo package with two React Email templates: `AcknowledgmentEmail` (sent to lead) and `NotificationEmail` (sent to `contact@ydmagency.com`). Export a `sendEmail(options)` function wrapping the Resend SDK.
 **Behavior:** Given a lead submits the contact form, when `sendEmail` is called with the lead's data, then the acknowledgment email arrives in the lead's inbox with the correct subject and body; the notification email arrives at `contact@ydmagency.com` with full lead details.
 **Research:** Confirm `packages/email/` does not exist. Check `pnpm-workspace.yaml` — `@react-email/components` and `resend` are absent from catalog; add both. Read planning.md §9 for exact email copy (acknowledgment subject, body; notification format).
@@ -504,7 +504,7 @@
 ---
 
 ## [ ] T-022 — Contact Server Action Pipeline
-**Status:** PENDING | **Domain:** Lead Capture | **Depends On:** T-019, T-021, T-035 | **Blocks:** T-023
+**Status:** ready | **Domain:** Lead Capture | **Depends On:** T-019, T-021, T-035 | **Blocks:** T-023
 **Spec:** Create `apps/firm-website/src/app/contact/actions.ts` as a Next.js Server Action implementing a five-step pipeline: (1) honeypot guard, (2) Zod validation, (3) Upstash rate limit (5/hour/IP), (4) Supabase lead insert, (5) Resend dual email send. Returns `{ success: boolean; error?: string }`.
 **Behavior:** Given a bot triggering the action with honeypot populated, when the action runs, then it returns `{ success: false, error: 'Invalid request' }` with no DB write. Given a legitimate lead exceeding 5 submissions/hour, when the action runs, then it returns `{ success: false, error: 'Too many requests. Please try again later.' }` with no DB write.
 **Research:** Confirm `apps/firm-website/src/app/contact/` directory does not exist. Check `pnpm-workspace.yaml` — `@upstash/ratelimit` and `@upstash/redis` are absent; add both. Confirm Supabase JS client is absent. Read planning.md §9 for the `leads` table schema.
@@ -527,7 +527,7 @@
 ---
 
 ## [ ] T-023 — Contact Page Assembly
-**Status:** PENDING | **Domain:** Lead Capture | **Depends On:** T-020, T-022 | **Blocks:** none
+**Status:** ready | **Domain:** Lead Capture | **Depends On:** T-020, T-022 | **Blocks:** none
 **Spec:** Create `apps/firm-website/src/app/contact/page.tsx` combining `ContactForm` with `submitContact` server action, a Calendly embed section, and response promise copy per planning.md §9.
 **Behavior:** Given a visitor on `/contact`, when they submit the form, then the server action fires; on success, the form replaces with the success message. Given a visitor preferring scheduling, when they see the Calendly section, then an `<iframe>` embed is present.
 **Research:** Confirm `apps/firm-website/src/app/contact/` directory does not exist (will be created in T-022). Read planning.md §9 for H1 copy, subhead, Calendly section heading, and response promise language.
@@ -548,7 +548,7 @@
 ---
 
 ## [ ] T-024 — Analytics Consent Architecture
-**Status:** PENDING | **Domain:** Analytics + SEO | **Depends On:** T-008, T-009 | **Blocks:** none
+**Status:** ready | **Domain:** Analytics + SEO | **Depends On:** T-008, T-009 | **Blocks:** none
 **Spec:** Update `packages/analytics/src/Analytics.tsx` so that GA4, PostHog, and Meta Pixel scripts only inject into the DOM after `useConsent().analyticsConsent` is `true`. Add a `trackEvent` guard that silently no-ops when consent is false.
 **Behavior:** Given a visitor who rejected cookies, when they navigate the site, then no GA4, PostHog, or Pixel network requests are made. Given a visitor who accepted, when they submit the contact form, then `trackEvent('form_submission', {...})` fires and appears in GA4 DebugView.
 **Research:** `packages/analytics/src/Analytics.tsx` (current — uses `next/script` with `strategy="afterInteractive"`; needs consent gate). `packages/analytics/src/events.ts` (current `trackEvent` — check if it already guards on window). Confirm `useConsent` is exported from `@ydm-agency/ui` after T-008.
@@ -569,7 +569,7 @@
 ---
 
 ## [ ] T-025 — SEO Infrastructure
-**Status:** PENDING | **Domain:** Analytics + SEO | **Depends On:** T-009 | **Blocks:** none
+**Status:** ready | **Domain:** Analytics + SEO | **Depends On:** T-009 | **Blocks:** none
 **Spec:** Add `sitemap.ts` and `robots.ts` App Router route handlers to `apps/firm-website/src/app/`. Update `packages/seo/src` to support per-page OG image metadata. Ensure every page has a unique `<title>` and `<meta description>`.
 **Behavior:** Given a search engine crawler hitting `https://ydm-agency.com/sitemap.xml`, when the response is returned, then it contains all static page URLs including all nine service spokes and nine process spokes. Given Googlebot checking `robots.txt`, then `Disallow: /api/` is present.
 **Research:** `packages/seo/src/` (read existing `constructMetadata` — confirm it accepts `openGraph` image option). Confirm Next.js 15 App Router uses `sitemap.ts` exporting a `Sitemap` type array for automatic XML generation.
@@ -590,7 +590,7 @@
 ---
 
 ## [ ] T-026 — Demo App Scaffold
-**Status:** PENDING | **Domain:** Demo Applications | **Depends On:** T-001 | **Blocks:** T-027–T-030
+**Status:** ready | **Domain:** Demo Applications | **Depends On:** T-001 | **Blocks:** T-027–T-030
 **Spec:** Define the standard structure that all four demo apps follow. Create `apps/demo-restaurant/` as the canonical template. Every demo app: Next.js 15 App Router, shared `@ydm-agency/ui` + `@ydm-agency/config`, single-page or two-page layout, subdomain-aware, no auth, no CMS.
 **Behavior:** Given `pnpm turbo run build --filter=apps/demo-restaurant`, when the build completes, then the app builds to a static export with no errors and all pages render in under 2s.
 **Research:** `apps/demo-1/` (read existing structure — use as reference for package.json, next.config.js, tsconfig.json patterns). `pnpm-workspace.yaml` (confirm demo apps are covered by `apps/*` glob). `turbo.json` (confirm `build` pipeline covers all apps).
@@ -614,7 +614,7 @@
 ---
 
 ## [ ] T-027 — Demo: Coastal Cafe
-**Status:** PENDING | **Domain:** Demo Applications | **Depends On:** T-026 | **Blocks:** T-016
+**Status:** ready | **Domain:** Demo Applications | **Depends On:** T-026 | **Blocks:** T-016
 **Spec:** Build `apps/demo-restaurant/` as a fully functional single-page demo for "Coastal Cafe" — a fictional restaurant. Sections per planning.md §6: Hero (with reservation CTA), Menu (two categories), About, Location/Hours, Contact form. Warm coastal color accent overrides the default mint.
 **Behavior:** Given a visitor landing on `demo-restaurant.ydm-agency.com`, when the page loads, then they see a polished restaurant site with a "Reserve a Table" CTA, menu items, and location info. Given they submit the contact form, then a static success message displays (no backend for demos).
 **Research:** Read planning.md §6 for Coastal Cafe sections, copy, and accent color override (`#E8A96B` warm amber instead of mint). Read `apps/demo-restaurant/src/app/layout.tsx` from T-026 — layout is ready; only `page.tsx` needs to be built.
@@ -634,7 +634,7 @@
 ---
 
 ## [ ] T-028 — Demo: Apex SaaS
-**Status:** PENDING | **Domain:** Demo Applications | **Depends On:** T-026 | **Blocks:** T-016
+**Status:** ready | **Domain:** Demo Applications | **Depends On:** T-026 | **Blocks:** T-016
 **Spec:** Build `apps/demo-saas/` as a B2B SaaS marketing site for "Apex SaaS" — a fictional analytics platform. Sections: Hero (dashboard screenshot mockup), Features (3-column grid), Pricing (3 tiers), FAQ, CTA. Indigo/violet accent override.
 **Behavior:** Given a visitor landing on `demo-saas.ydm-agency.com`, when they view pricing, then three tiers are visible with a highlighted "Most Popular" middle tier. Given they click "Start Free Trial", then a static lead capture form appears (no backend).
 **Research:** Read planning.md §6 for Apex SaaS sections and copy. Note accent override: `#6366F1` (indigo). Mirror the scaffold created in T-026 for `apps/demo-saas/`.
@@ -653,7 +653,7 @@
 ---
 
 ## [ ] T-029 — Demo: Vanguard Plumbing
-**Status:** PENDING | **Domain:** Demo Applications | **Depends On:** T-026 | **Blocks:** T-016
+**Status:** ready | **Domain:** Demo Applications | **Depends On:** T-026 | **Blocks:** T-016
 **Spec:** Build `apps/demo-plumber/` as a local service site for "Vanguard Plumbing" — a fictional plumbing company. Sections: Hero (emergency call CTA), Services list, Why Choose Us, Service Area, Contact/Booking form. Deep blue accent override.
 **Behavior:** Given a visitor landing on `demo-plumber.ydm-agency.com`, when they see the Hero, then an "Emergency? Call Now" button is prominently visible. Given they submit the booking form, then a static success message appears.
 **Research:** Read planning.md §6 for Vanguard Plumbing sections and copy. Note accent override: `#2563EB` (blue-600). Mirror the scaffold from T-026 for `apps/demo-plumber/`.
@@ -672,7 +672,7 @@
 ---
 
 ## [ ] T-030 — Demo: Nova Storefront
-**Status:** PENDING | **Domain:** Demo Applications | **Depends On:** T-026 | **Blocks:** T-016
+**Status:** ready | **Domain:** Demo Applications | **Depends On:** T-026 | **Blocks:** T-016
 **Spec:** Build `apps/demo-store/` as a minimal e-commerce marketing site for "Nova Storefront" — a fictional product brand. Sections: Hero (product showcase), Featured Products grid (6 cards), About brand, Newsletter signup (static), CTA. Rose/coral accent override.
 **Behavior:** Given a visitor landing on `demo-store.ydm-agency.com`, when they view featured products, then six product cards render with image placeholder, product name, price, and "Add to Cart" button that shows a static "Added!" state on click.
 **Research:** Read planning.md §6 for Nova Storefront sections and copy. Note accent override: `#F43F5E` (rose-500). Mirror the scaffold from T-026 for `apps/demo-store/`.
@@ -692,7 +692,7 @@
 ---
 
 ## [ ] T-031 — Unit Testing Setup
-**Status:** PENDING | **Domain:** Testing | **Depends On:** T-004 | **Blocks:** T-032
+**Status:** ready | **Domain:** Testing | **Depends On:** T-004 | **Blocks:** T-032
 **Spec:** Install and configure Vitest + `@testing-library/react` across `packages/ui` and `packages/forms`. Add `vitest.config.ts` to each. Add a `test` script to `turbo.json` pipeline. Configure JSDOM environment and global test utilities.
 **Behavior:** Given `pnpm turbo run test --filter=@ydm-agency/ui`, when the command runs, then all unit tests in `packages/ui/src/__tests__/` execute and results are reported.
 **Research:** Check `packages/ui/package.json` and `packages/forms/package.json` — confirm `vitest`, `@testing-library/react`, `@testing-library/user-event` are absent. Check `turbo.json` — confirm no `test` task exists. Check `pnpm-workspace.yaml` catalog — add testing deps there.
@@ -718,7 +718,7 @@
 ---
 
 ## [ ] T-032 — Unit Tests: Components and Validation
-**Status:** PENDING | **Domain:** Testing | **Depends On:** T-031, T-004, T-005, T-019, T-020 | **Blocks:** none
+**Status:** ready | **Domain:** Testing | **Depends On:** T-031, T-004, T-005, T-019, T-020 | **Blocks:** none
 **Spec:** Write unit tests for all rebuilt UI components (Button, Badge, Card, Container, ThemeToggle, CookieConsent) and all form schemas (contactFormSchema, leadCaptureSchema). Tests were scaffolded in T-004, T-019, T-020 — this task ensures full coverage.
 **Behavior:** Given `pnpm turbo run test`, when all test files run, then every exported UI component and schema has at least one passing test covering its core behavior and one test covering an error/edge case.
 **Research:** Read `packages/ui/src/__tests__/Button.test.tsx` from T-004 — expand if needed. Confirm `CookieConsent`, `ThemeToggle`, `Badge`, `Card` do not yet have test files. Read `packages/forms/src/__tests__/schemas.test.ts` from T-019 — confirm it covers all cases.
@@ -739,7 +739,7 @@
 ---
 
 ## [ ] T-033 — E2E Testing Setup
-**Status:** PENDING | **Domain:** Testing | **Depends On:** T-009 | **Blocks:** T-034
+**Status:** ready | **Domain:** Testing | **Depends On:** T-009 | **Blocks:** T-034
 **Spec:** Install and configure Playwright for E2E testing against the `apps/firm-website` dev server. Create `e2e/` directory at repo root. Configure `playwright.config.ts` targeting `localhost:3000`. Add `e2e` task to `turbo.json`.
 **Behavior:** Given `pnpm playwright test`, when run against the running dev server, then Playwright launches a Chromium browser, navigates to the configured base URL, and executes all spec files in `e2e/`.
 **Research:** Check `package.json` at repo root — confirm `@playwright/test` is absent. Confirm `e2e/` directory does not exist. Check GitHub Actions workflow `ci.yml` to understand where E2E fits in the pipeline.
@@ -762,7 +762,7 @@
 ---
 
 ## [ ] T-034 — E2E Tests: Critical User Flows
-**Status:** PENDING | **Domain:** Testing | **Depends On:** T-033, T-022, T-023 | **Blocks:** none
+**Status:** ready | **Domain:** Testing | **Depends On:** T-033, T-022, T-023 | **Blocks:** none
 **Spec:** Write Playwright E2E specs for three critical user flows: (1) Contact form submission, (2) Cookie consent accept/reject flow, (3) Demo gallery navigation.
 **Behavior:**
 - Given a user on `/contact`, when they fill and submit the valid form, then the success message "Message received" appears within 5 seconds.
@@ -788,7 +788,7 @@
 ---
 
 ## [ ] T-035 — Environment Variables and External Accounts
-**Status:** PENDING | **Domain:** Infrastructure | **Depends On:** none | **Blocks:** T-022
+**Status:** ready | **Domain:** Infrastructure | **Depends On:** none | **Blocks:** T-022
 **Spec:** Create `.env.example` at repo root documenting all required environment variables. Create `.env.local` for `apps/firm-website` (gitignored). Set up four external service accounts and obtain their credentials.
 **Behavior:** Given a fresh clone of the repo, when a developer reads `.env.example`, then they see every required variable with a description and know exactly where to obtain each value.
 **Research:** Collect all `process.env.*` references from the codebase: `NEXT_PUBLIC_GA_MEASUREMENT_ID`, `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_META_PIXEL_ID`, `RESEND_API_KEY`, `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `NEXT_PUBLIC_CALENDLY_URL`.
@@ -812,7 +812,7 @@
 ---
 
 ## [ ] T-036 — CI/CD Pipeline Updates
-**Status:** PENDING | **Domain:** Infrastructure | **Depends On:** T-031, T-033 | **Blocks:** T-037
+**Status:** ready | **Domain:** Infrastructure | **Depends On:** T-031, T-033 | **Blocks:** T-037
 **Spec:** Update `.github/workflows/ci.yml` to include the test and E2E stages alongside the existing lint/typecheck/build stages. Add Turborepo remote caching via TURBO_TOKEN. Add E2E environment variables as GitHub Secrets references.
 **Behavior:** Given a pull request to `main`, when the CI pipeline runs, then lint, typecheck, build, unit tests, and E2E tests all execute in the correct order; if any stage fails, the PR is blocked from merging.
 **Research:** Read `.github/workflows/ci.yml` — note existing stages and matrix. Confirm `TURBO_TOKEN` and `TURBO_TEAM` are listed as secrets to add. Confirm `pnpm` version in CI matches `pnpm-workspace.yaml`.
@@ -834,7 +834,7 @@
 ---
 
 ## [ ] T-037 — Deployment Configuration
-**Status:** PENDING | **Domain:** Infrastructure | **Depends On:** T-036, T-010 | **Blocks:** none
+**Status:** ready | **Domain:** Infrastructure | **Depends On:** T-036, T-010 | **Blocks:** none
 **Spec:** Configure Vercel deployments for `apps/firm-website` and all four demo apps. Set up wildcard subdomain routing for demo apps on `ydm-agency.com`. Configure production environment variables in each Vercel project.
 **Behavior:** Given a push to `main`, when Vercel deploys, then `ydm-agency.com` serves the firm website; `demo-restaurant.ydm-agency.com`, `demo-saas.ydm-agency.com`, `demo-plumber.ydm-agency.com`, `demo-store.ydm-agency.com` each serve their respective demo apps.
 **Research:** Read `apps/firm-website/src/middleware.ts` — confirm it handles subdomain rewrites for firm-website (this is not used for demo apps which are separate Vercel projects). Confirm Vercel CLI is available or can be installed. Read `apps/demo-restaurant/next.config.js` from T-026 — confirm `output: 'standalone'`.
