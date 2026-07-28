@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   --color-background: #0A0A0B;
   --color-surface: #161618;
@@ -24,6 +28,30 @@
   --color-border: #2A2A2E;
   --color-error: #F87171;
   --color-success: #4AE4A8;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-background);
+}
+
+.noise {
+  position: relative;
+}
+
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/noise.svg');
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
 }
 
 @layer base {

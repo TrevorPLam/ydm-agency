@@ -1,6 +1,8 @@
 'use client';
 
 import { ThemeProvider } from 'next-themes';
+import { CookieConsentProvider } from '@ydm-agency/ui';
+import { AnalyticsProvider } from '@ydm-agency/analytics';
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
@@ -10,7 +12,10 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       enableSystem
       storageKey="ydm-theme"
     >
-      {children}
+      <CookieConsentProvider>
+        <AnalyticsProvider gaId="" posthogKey="" metaPixelId="" />
+        {children}
+      </CookieConsentProvider>
     </ThemeProvider>
   );
 }

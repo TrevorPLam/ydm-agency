@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Hero, Features, Pricing, Container, Card, Badge, Footer } from '@ydm-agency/ui';
+import { Hero, Features, Pricing, Container, Card, Badge } from '@ydm-agency/ui';
 import { LeadForm } from '@ydm-agency/forms';
 
 export default function Home() {
@@ -90,9 +90,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex flex-col">
-      <Header brandName="YDM Agency" />
-
+    <>
       <main className="flex-1">
         <Hero
           badgeText="Next-Gen Marketing & Monorepo Development"
@@ -175,8 +173,6 @@ export default function Home() {
           </Container>
         </section>
       </main>
-
-      <Footer brandName="YDM Agency" />
-    </div>
+    </>
   );
 }

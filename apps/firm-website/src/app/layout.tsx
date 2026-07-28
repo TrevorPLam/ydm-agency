@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
-import { AnalyticsProvider } from '@ydm-agency/analytics';
 import { OrganizationJsonLd, constructMetadata } from '@ydm-agency/seo';
+import { Header, Footer, CookieConsent } from '@ydm-agency/ui';
+import { AppProviders } from './providers';
 import './globals.css';
 
 const inter = Inter({
@@ -18,8 +19,8 @@ const clashDisplay = localFont({
 });
 
 export const metadata: Metadata = constructMetadata({
-  title: 'YDM Agency | Digital Growth & Native Web Applications',
-  description: 'Data-driven marketing, ultra-fast web development, and client conversion systems for ambitious businesses.',
+  title: 'YDM Agency | Custom Websites, Marketing Systems & Business Apps',
+  description: 'Your business deserves a website and marketing that actually work. Custom websites, search visibility, and marketing systems — built by a modern, AI-augmented firm.',
 });
 
 export default function RootLayout({
@@ -35,14 +36,20 @@ export default function RootLayout({
           url="https://ydm-agency.com"
           logo="https://ydm-agency.com/logo.png"
           contactPoint={{
-            email: 'hello@ydm-agency.com',
+            email: 'contact@ydmagency.com',
             contactType: 'Customer Support',
           }}
         />
       </head>
-      <body className="bg-slate-950 text-slate-100 antialiased selection:bg-blue-500 selection:text-white">
-        <AnalyticsProvider />
-        {children}
+      <body className="bg-background text-text-primary antialiased font-sans">
+        <AppProviders>
+          <Header brandName="YDM Agency" />
+          <main id="main-content">
+            {children}
+          </main>
+          <Footer />
+          <CookieConsent />
+        </AppProviders>
       </body>
     </html>
   );
