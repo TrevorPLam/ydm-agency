@@ -107,7 +107,7 @@ export default function ServicesPage() {
             Website Design, SEO, and Marketing Services for Small Businesses
           </h1>
           <p className="text-xl text-text-secondary max-w-3xl">
-            Whatever's holding your business back online — an outdated website, invisible search rankings, or marketing you don't have time to manage — issues are fixed directly, without agency overhead.
+            Whatever&apos;s holding your business back online — an outdated website, invisible search rankings, or marketing you don&apos;t have time to manage — issues are fixed directly, without agency overhead.
           </p>
         </Container>
       </section>
@@ -151,7 +151,7 @@ export default function ServicesPage() {
             <li className="flex items-start gap-4">
               <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" />
               <p className="text-text-secondary">
-                Direct collaboration with the person executing the work — no account managers, no waiting on someone else's schedule.
+                Direct collaboration with the person executing the work — no account managers, no waiting on someone else&apos;s schedule.
               </p>
             </li>
             <li className="flex items-start gap-4">
@@ -195,7 +195,7 @@ export default function ServicesPage() {
         <Container>
           <div className="max-w-2xl text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-text-primary mb-6">
-              Describe what's not working — a clear path to fix it will be provided.
+              Describe what&apos;s not working — a clear path to fix it will be provided.
             </h2>
             <Link href="/contact">
               <Button variant="primary" size="lg">
