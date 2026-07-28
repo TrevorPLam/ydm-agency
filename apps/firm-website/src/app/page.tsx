@@ -1,178 +1,221 @@
-import React from 'react';
-import { Hero, Features, Pricing, Container, Card, Badge } from '@ydm-agency/ui';
-import { LeadForm } from '@ydm-agency/forms';
+import Link from 'next/link';
+import { Hero, Container, Card, Button } from '@ydm-agency/ui';
+import { CheckCircle, Monitor, MessageSquare, Wrench, Rocket } from 'lucide-react';
 
 export default function Home() {
-  const agencyServices = [
-    {
-      title: 'High-Converting Web Platforms',
-      description: 'Ultra-fast Next.js & React websites built with sub-second page loads, mobile perfection, and search engine dominance.',
-      icon: '🚀',
-    },
-    {
-      title: 'Subdomain Landing Page Engines',
-      description: 'Deploy bespoke client campaigns and interactive demo sites in minutes using our monorepo architecture.',
-      icon: '⚡',
-    },
-    {
-      title: 'Conversion Analytics & Funnels',
-      description: 'End-to-end attribution modeling with GA4, PostHog, and Meta Pixel so every marketing dollar is accounted for.',
-      icon: '📊',
-    },
-    {
-      title: 'Native Business Applications',
-      description: 'Custom internal tools, client portals, and workflow automation apps tailored specifically to your business operations.',
-      icon: '💼',
-    },
-  ];
-
-  const demoSites = [
-    {
-      title: 'Apex Dental Care',
-      subdomain: 'demo-1.ydm-agency.com',
-      demoPath: '/demos/demo-1',
-      industry: 'Healthcare / Local Business',
-      description: 'Complete patient self-scheduling platform with automated SMS intake and digital medical forms.',
-      badge: 'Healthcare Demo',
-    },
-    {
-      title: 'FlowMetric AI',
-      subdomain: 'saas.ydm-agency.com',
-      demoPath: '/demos/saas',
-      industry: 'B2B SaaS / Tech',
-      description: 'Data analytics platform marketing site with interactive pricing tiers, feature highlights, and lead capture.',
-      badge: 'B2B SaaS Demo',
-    },
-  ];
-
-  const agencyPlans = [
-    {
-      name: 'Landing Page System',
-      price: '$2,500',
-      period: 'one-time',
-      description: 'Ideal for launching a flagship product, local business, or specific marketing campaign.',
-      features: [
-        'Bespoke Next.js & Tailwind UI',
-        'Mobile & Conversion Optimized',
-        'Lead Capture Form Integration',
-        'Full SEO Meta & Schema Setup',
-        'Subdomain or Custom Domain Deployment',
-      ],
-    },
-    {
-      name: 'Growth Web Platform',
-      price: '$4,900',
-      period: 'one-time',
-      description: 'Complete marketing website + CMS setup for scaling businesses looking to dominate search.',
-      features: [
-        'Multi-Page Next.js App Router',
-        'Headless Content Management',
-        'Subdomain & Demo Ecosystem Integration',
-        'GA4, PostHog & Pixel Setup',
-        'Performance & Accessibility Guarantee',
-        '3 Months Post-Launch Support',
-      ],
-      popular: true,
-    },
-    {
-      name: 'Custom Agency Partnership',
-      price: '$7,500+',
-      period: 'monthly or project',
-      description: 'Full-service web development, continuous landing page production, and native business applications.',
-      features: [
-        'Dedicated Monorepo Application Workspace',
-        'Infinite Subdomain Campaign Deployment',
-        'Custom Business App & Portal Development',
-        '24/7 Monitoring & Direct Developer Access',
-        'A/B Testing & Funnel Optimization',
-      ],
-    },
-  ];
-
   return (
     <>
-      <main className="flex-1">
+      {/* Hero Section */}
+      <section className="noise relative">
         <Hero
-          badgeText="Next-Gen Marketing & Monorepo Development"
-          title="We Build High-Converting Sites & Native Web Apps for"
-          highlightedTitle="Ambitious Businesses"
-          description="YDM Agency combines modern engineering with conversion rate psychology to deliver lightning-fast web platforms, subdomain marketing campaigns, and native business apps."
-          primaryCtaText="Book Strategy Call"
-          primaryCtaHref="#contact"
-          secondaryCtaText="Explore Demo Sites"
-          secondaryCtaHref="#demos"
+          title="Your Business Deserves a Website and Marketing That"
+          highlightedTitle="Actually Work"
+          description="Custom websites, search visibility, and marketing systems — built by a modern, AI‑augmented firm that moves fast, communicates directly, and doesn't charge agency overhead."
+          primaryCtaText="Explore Live Work"
+          primaryCtaHref="/demos"
+          secondaryCtaText="Get a Free Project Outline"
+          secondaryCtaHref="/contact"
         />
+      </section>
 
-        <div id="services">
-          <Features
-            title="Core Marketing & Engineering Services"
-            subtitle="Built on enterprise-grade monorepo technology to scale your business without technical debt."
-            features={agencyServices}
-          />
-        </div>
+      {/* Services Snapshot */}
+      <section id="services" className="py-24 md:py-32 bg-background">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary font-display">
+              Start with What Matters Most
+            </h2>
+            <p className="mt-4 text-lg text-text-secondary">
+              Three core services that drive immediate results for your business.
+            </p>
+          </div>
 
-        <section id="demos" className="py-20 bg-slate-900 border-t border-slate-800">
-          <Container>
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <Badge variant="accent" className="mb-4">Subdomain Showcase</Badge>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                Live Subdomain Demo Sites
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-8 flex flex-col h-full">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-accent/10">
+                  <Monitor className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-semibold text-text-primary">Build a Website That Converts</h3>
+              </div>
+              <p className="text-text-secondary mb-6 flex-1">
+                Custom design and development, fast load speeds, mobile‑ready, and built to turn visitors into leads.
+              </p>
+              <Link href="/services/web-design" className="text-accent hover:text-accent-hover font-medium inline-flex items-center gap-2">
+                Learn more →
+              </Link>
+            </Card>
+
+            <Card className="p-8 flex flex-col h-full">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-accent/10">
+                  <Rocket className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-semibold text-text-primary">Get Found on Google & Beyond</h3>
+              </div>
+              <p className="text-text-secondary mb-6 flex-1">
+                SEO, local search optimization, and AI‑search readiness so customers can find you wherever they look.
+              </p>
+              <Link href="/services/seo" className="text-accent hover:text-accent-hover font-medium inline-flex items-center gap-2">
+                Learn more →
+              </Link>
+            </Card>
+
+            <Card className="p-8 flex flex-col h-full">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-accent/10">
+                  <MessageSquare className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="text-xl font-semibold text-text-primary">Market Smarter, Not Harder</h3>
+              </div>
+              <p className="text-text-secondary mb-6 flex-1">
+                Paid advertising, branding, copywriting, and automation — all managed with total transparency.
+              </p>
+              <Link href="/services/paid-ads" className="text-accent hover:text-accent-hover font-medium inline-flex items-center gap-2">
+                Learn more →
+              </Link>
+            </Card>
+          </div>
+        </Container>
+      </section>
+
+      {/* Featured Demo Showcase */}
+      <section className="py-24 md:py-32 bg-surface border-y border-border">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary font-display mb-6">
+                See the Work in Action
               </h2>
-              <p className="mt-4 text-lg text-slate-400">
-                Test-drive sample client websites running directly on subdomains from our unified agency monorepo architecture.
+              <p className="text-lg text-text-secondary mb-8">
+                A fully functional restaurant booking site — custom built, mobile‑responsive, and performance‑optimized. Not a template. Not a mockup.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/demos">
+                  <Button variant="primary" className="w-full sm:w-auto">
+                    Explore Live Work
+                  </Button>
+                </Link>
+                <Link href="/demos" className="text-text-secondary hover:text-text-primary font-medium inline-flex items-center">
+                  View all live demos →
+                </Link>
+              </div>
+            </div>
+            <div className="aspect-video bg-background rounded-2xl border border-border flex items-center justify-center">
+              <div className="text-center">
+                <Monitor className="w-16 h-16 text-text-secondary mx-auto mb-4" />
+                <p className="text-text-secondary">Demo mockup placeholder</p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Process Teaser */}
+      <section className="py-24 md:py-32 bg-background">
+        <Container>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary font-display">
+              How Projects Move Forward
+            </h2>
+            <p className="mt-4 text-lg text-text-secondary">
+              A clear, transparent process from first conversation to final delivery.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-8 text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-accent">1</span>
+              </div>
+              <h3 className="text-xl font-semibold text-text-primary mb-3">We talk.</h3>
+              <p className="text-text-secondary">
+                A short call or questionnaire uncovers your goals and what success looks like.
+              </p>
+            </Card>
+
+            <Card className="p-8 text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-accent">2</span>
+              </div>
+              <h3 className="text-xl font-semibold text-text-primary mb-3">We build.</h3>
+              <p className="text-text-secondary">
+                AI‑augmented development accelerates the work; you see progress through regular previews and dashboards.
+              </p>
+            </Card>
+
+            <Card className="p-8 text-center">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-accent">3</span>
+              </div>
+              <h3 className="text-xl font-semibold text-text-primary mb-3">We deliver.</h3>
+              <p className="text-text-secondary">
+                Performance‑tested, accessibility‑checked, and fully deployed — with ongoing support available.
+              </p>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link href="/services/process" className="text-accent hover:text-accent-hover font-medium inline-flex items-center gap-2">
+              Learn more about the process →
+            </Link>
+          </div>
+        </Container>
+      </section>
+
+      {/* Trust Banner */}
+      <section className="bg-surface border-y border-border py-12">
+        <Container>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex items-start gap-4">
+              <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+              <p className="text-text-primary">
+                No account managers. You talk directly to the person building your project.
               </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {demoSites.map((demo, idx) => (
-                <Card
-                  key={idx}
-                  className="bg-slate-950 border-slate-800 p-8 hover:border-blue-500/60 transition-all duration-300 shadow-2xl flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <Badge variant="default">{demo.badge}</Badge>
-                      <span className="text-xs text-slate-500 font-mono">{demo.industry}</span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{demo.title}</h3>
-                    <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                      {demo.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <span className="text-xs font-mono text-blue-400 bg-blue-950/60 px-3 py-1.5 rounded border border-blue-900/60">
-                      https://{demo.subdomain}
-                    </span>
-                    <a
-                      href={demo.demoPath}
-                      className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm rounded-lg transition-colors shadow-md"
-                    >
-                      View Live Demo →
-                    </a>
-                  </div>
-                </Card>
-              ))}
+            <div className="flex items-start gap-4">
+              <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+              <p className="text-text-primary">
+                No templates. Every project is custom‑built with modern frameworks.
+              </p>
             </div>
-          </Container>
-        </section>
+            <div className="flex items-start gap-4">
+              <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+              <p className="text-text-primary">
+                No lock‑in contracts. Client relationships last because the results speak for themselves.
+              </p>
+            </div>
+            <div className="flex items-start gap-4">
+              <CheckCircle className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+              <p className="text-text-primary">
+                AI‑augmented, human‑directed. Speed without sacrifice.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
 
-        <Pricing
-          title="Transparent Agency Investment"
-          subtitle="Fixed-rate engagement models with clear deliverables and zero hidden fees."
-          plans={agencyPlans}
-        />
-
-        <section id="contact" className="py-20 bg-slate-950 border-t border-slate-800">
-          <Container>
-            <LeadForm
-              title="Schedule Your Growth Strategy Call"
-              subtitle="Let us analyze your web strategy and demonstrate how our monorepo architecture can scale your brand."
-              sourceApp="agency-main-homepage"
-            />
-          </Container>
-        </section>
-      </main>
+      {/* Final CTA */}
+      <section className="py-24 md:py-32 bg-background">
+        <Container className="text-center max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary font-display mb-6">
+            Ready for a website or marketing system that actually performs?
+          </h2>
+          <p className="text-lg text-text-secondary mb-8">
+            Describe what is not working — a clear path forward will be provided, free of charge.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/contact">
+              <Button variant="primary" className="w-full sm:w-auto">
+                Get a Free Project Outline
+              </Button>
+            </Link>
+            <Link href="/services" className="text-text-secondary hover:text-text-primary font-medium">
+              Explore all services
+            </Link>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }
