@@ -133,7 +133,7 @@ export default async function DemoSubdomainPage({ params }: DemoPageProps) {
         </section>
       </main>
 
-      <Footer brandName={demo.name} description={demo.heroDescription} />
+      <Footer brandName={demo.name} />
     </div>
   );
 }

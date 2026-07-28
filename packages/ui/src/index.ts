@@ -9,3 +9,6 @@ export { Footer, type FooterProps } from './Footer';
 export { Pricing, type PricingProps, type PricingPlan } from './Pricing';
 export { ThemeToggle } from './ThemeToggle';
 export { CookieSettingsButton } from './CookieSettingsButton';
+export { CookieConsent } from './CookieConsent';
+export { CookieConsentProvider } from './CookieConsentContext';
+export { useConsent } from './CookieConsentContext';

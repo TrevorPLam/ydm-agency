@@ -176,10 +176,7 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer
-        brandName="YDM Agency"
-        description="Data-driven marketing, ultra-fast web development, and high-converting subdomain ecosystems."
-      />
+      <Footer brandName="YDM Agency" />
     </div>
   );
 }
