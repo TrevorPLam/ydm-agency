@@ -13,7 +13,8 @@ export type LeadCaptureInput = z.infer<typeof leadCaptureSchema>;
 export const contactFormSchema = z.object({
   name: z.string().min(2, 'Name required'),
   email: z.string().email('Invalid email'),
-  projectType: z.enum(['website', 'seo', 'marketing', 'analytics', 'other']).optional(),
+  projectType: z
+    .preprocess((val) => (val === '' ? undefined : val), z.enum(['website', 'seo', 'marketing', 'analytics', 'other']).optional()),
   message: z.string().min(20, 'Message must be at least 20 characters'),
   _honeypot: z.string().refine((val) => val === '', 'Bot detected'),
 });
