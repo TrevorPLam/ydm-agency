@@ -436,8 +436,8 @@
 
 ---
 
-## [ ] T-019 — Contact Form Schema
-**Status:** ready | **Domain:** Lead Capture | **Depends On:** none | **Blocks:** T-020, T-022
+## [x] T-019 — Contact Form Schema
+**Status:** done | **Domain:** Lead Capture | **Depends On:** none | **Blocks:** T-020, T-022
 **Spec:** Add `contactFormSchema` to `packages/forms/src/schemas.ts` with fields: `name` (min 2), `email` (email), `projectType` (optional enum), `message` (min 20), `_honeypot` (must be empty string — spam guard). Keep existing `leadCaptureSchema` intact.
 **Behavior:** Given a bot submitting with `_honeypot` populated, when the schema parses, then validation fails. Given a human submitting with all required fields, when the schema parses, then it succeeds and returns typed `ContactFormInput`.
 **Research:** Read `packages/forms/src/schemas.ts` (existing `leadCaptureSchema` — do not modify it). Read `packages/forms/package.json` (confirm `zod` is a dependency). Review planning.md §9 for the five project type options.
@@ -451,14 +451,14 @@
 **Validate:** `pnpm vitest run packages/forms/src/__tests__/schemas.test.ts && pnpm turbo run typecheck --filter=@ydm-agency/forms`
 
 **Subtasks:**
-- T-019.1 [AGENT] `packages/forms/src/__tests__/schemas.test.ts` — CREATE (TEST): assert (a) valid full input passes; (b) missing `name` fails with correct message; (c) invalid email fails; (d) `message` under 20 chars fails; (e) `_honeypot` non-empty string fails; (f) `projectType` absent passes (optional); (g) invalid `projectType` enum fails.
-- T-019.2 [AGENT] `packages/forms/src/schemas.ts` — ADD `contactFormSchema` below existing `leadCaptureSchema`: `z.object({ name: z.string().min(2,'Name required'), email: z.string().email('Invalid email'), projectType: z.enum(['website','seo','marketing','analytics','other']).optional(), message: z.string().min(20,'Message must be at least 20 characters'), _honeypot: z.string().refine(v => v === '', 'Bot detected') })`. Export `ContactFormInput = z.infer<typeof contactFormSchema>`.
-- T-019.3 [AGENT] `packages/forms/src/index.ts` — Add exports: `contactFormSchema`, `ContactFormInput`.
+- [x] T-019.1 [AGENT] `packages/forms/src/__tests__/schemas.test.ts` — CREATE (TEST): assert (a) valid full input passes; (b) missing `name` fails with correct message; (c) invalid email fails; (d) `message` under 20 chars fails; (e) `_honeypot` non-empty string fails; (f) `projectType` absent passes (optional); (g) invalid `projectType` enum fails.
+- [x] T-019.2 [AGENT] `packages/forms/src/schemas.ts` — ADD `contactFormSchema` below existing `leadCaptureSchema`: `z.object({ name: z.string().min(2,'Name required'), email: z.string().email('Invalid email'), projectType: z.enum(['website','seo','marketing','analytics','other']).optional(), message: z.string().min(20,'Message must be at least 20 characters'), _honeypot: z.string().refine(v => v === '', 'Bot detected') })`. Export `ContactFormInput = z.infer<typeof contactFormSchema>`.
+- [x] T-019.3 [AGENT] `packages/forms/src/index.ts` — Add exports: `contactFormSchema`, `ContactFormInput`.
 
 ---
 
-## [ ] T-020 — Contact Form UI Component
-**Status:** ready | **Domain:** Lead Capture | **Depends On:** T-004, T-019 | **Blocks:** T-023
+## [x] T-020 — Contact Form UI Component
+**Status:** done | **Domain:** Lead Capture | **Depends On:** T-004, T-019 | **Blocks:** T-023
 **Spec:** Create `packages/forms/src/ContactForm.tsx` — a `'use client'` React Hook Form component integrated with `contactFormSchema` via Zod resolver. Fields: name, email, project type (select), message, hidden honeypot. Renders inline field errors. Calls a `onSubmit` server action prop.
 **Behavior:** Given a user submitting with an empty name, when focus leaves the name field, then a red error message appears beneath it without page reload. Given a successful submission, when the server action resolves, then a success state replaces the form.
 **Research:** `packages/forms/src/LeadForm.tsx` (existing form component — understand current pattern; ContactForm is separate, not a replacement). Check `packages/forms/package.json` — `react-hook-form` and `@hookform/resolvers` are absent; both need adding.
@@ -472,15 +472,16 @@
 **Validate:** `pnpm vitest run packages/forms/src/__tests__/ContactForm.test.tsx && pnpm turbo run typecheck --filter=@ydm-agency/forms`
 
 **Subtasks:**
-- T-020.1 [AGENT] `packages/forms/package.json` — Add `"react-hook-form": "^7.54.0"` and `"@hookform/resolvers": "^3.9.0"` to dependencies.
-- T-020.2 [AGENT] `packages/forms/src/__tests__/ContactForm.test.tsx` — CREATE (TEST): assert (a) form renders all visible fields; (b) submitting empty form shows "Name required" and "Invalid email" errors; (c) honeypot input exists in DOM but is not visible; (d) `onSubmit` prop called with correct data on valid fill; (e) success message shown after `onSubmit` resolves `{ success: true }`.
-- T-020.3 [AGENT] `packages/forms/src/ContactForm.tsx` — CREATE: `'use client'`. Import `useForm` from `react-hook-form`, `zodResolver` from `@hookform/resolvers/zod`, `contactFormSchema`, `ContactFormInput`. Manage `submitStatus` state. Render: `<form onSubmit={handleSubmit(handleFormSubmit)}>` with labeled inputs for name, email, projectType select, message textarea, hidden honeypot. Show field errors. Submit button with loading/disabled state. Conditional success/error message.
-- T-020.4 [AGENT] `packages/forms/src/index.ts` — Add exports: `ContactForm`, `ContactFormProps`.
+- [x] T-020.1 [AGENT] `pnpm-workspace.yaml` — Add `react-hook-form: ^7.54.0` and `@hookform/resolvers: ^3.9.0` to catalog.
+- [x] T-020.2 [AGENT] `packages/forms/package.json` — Add `react-hook-form: catalog:`, `@hookform/resolvers: catalog:`, `@testing-library/react: catalog:`, `@testing-library/user-event: catalog:` to dependencies/devDependencies.
+- [x] T-020.3 [AGENT] `packages/forms/src/__tests__/ContactForm.test.tsx` — CREATE (TEST): assert (a) form renders all visible fields; (b) submitting empty form shows "Name required" and "Invalid email" errors; (c) honeypot input exists in DOM but is not visible; (d) `onSubmit` prop called with correct data on valid fill; (e) success message shown after `onSubmit` resolves `{ success: true }`.
+- [x] T-020.4 [AGENT] `packages/forms/src/ContactForm.tsx` — CREATE: `'use client'`. Import `useForm` from `react-hook-form`, `zodResolver` from `@hookform/resolvers/zod`, `contactFormSchema`, `ContactFormInput`. Manage `submitStatus` state. Render: `<form onSubmit={handleSubmit(handleFormSubmit)}>` with labeled inputs for name, email, projectType select, message textarea, hidden honeypot. Show field errors. Submit button with loading/disabled state. Conditional success/error message.
+- [x] T-020.5 [AGENT] `packages/forms/src/index.ts` — Add exports: `ContactForm`, `ContactFormProps`.
 
 ---
 
-## [ ] T-021 — Email Templates Package
-**Status:** ready | **Domain:** Lead Capture | **Depends On:** none | **Blocks:** T-022
+## [x] T-021 — Email Templates Package
+**Status:** done | **Domain:** Lead Capture | **Depends On:** none | **Blocks:** T-022
 **Spec:** Create `packages/email/` as a new monorepo package with two React Email templates: `AcknowledgmentEmail` (sent to lead) and `NotificationEmail` (sent to `contact@ydmagency.com`). Export a `sendEmail(options)` function wrapping the Resend SDK.
 **Behavior:** Given a lead submits the contact form, when `sendEmail` is called with the lead's data, then the acknowledgment email arrives in the lead's inbox with the correct subject and body; the notification email arrives at `contact@ydmagency.com` with full lead details.
 **Research:** Confirm `packages/email/` does not exist. Check `pnpm-workspace.yaml` — `@react-email/components` and `resend` are absent from catalog; add both. Read planning.md §9 for exact email copy (acknowledgment subject, body; notification format).
@@ -494,12 +495,12 @@
 **Validate:** `pnpm turbo run build --filter=@ydm-agency/email && pnpm turbo run typecheck --filter=@ydm-agency/email`
 
 **Subtasks:**
-- T-021.1 [AGENT] `pnpm-workspace.yaml` — Add `resend: ^4.0.0` and `"@react-email/components": ^0.0.22` to catalog.
-- T-021.2 [AGENT] `packages/email/package.json` — CREATE: package name `@ydm-agency/email`, add deps `resend: catalog:`, `@react-email/components: catalog:`, `@react-email/render: ^0.0.12`; add peer dep `react`. Set `"main": "./src/index.ts"` (TypeScript-only package consumed via ts-node/turbo).
-- T-021.3 [AGENT] `packages/email/tsconfig.json` — CREATE: extend `@ydm-agency/config/tsconfig.json`, include `src/**/*.tsx`.
-- T-021.4 [AGENT] `packages/email/src/AcknowledgmentEmail.tsx` — CREATE: React Email component. Props: `{ name: string }`. Renders a plain-text-styled email: subject area (from parent), greeting "Hi {name},", body from planning.md §9 acknowledgment copy, signature "YDM Agency".
-- T-021.5 [AGENT] `packages/email/src/NotificationEmail.tsx` — CREATE: React Email component. Props: `{ name: string; email: string; projectType?: string; message: string }`. Renders all lead fields in a readable format for internal notification.
-- T-021.6 [AGENT] `packages/email/src/index.ts` — CREATE: export `AcknowledgmentEmail`, `NotificationEmail`. Export `sendEmail(options: SendEmailOptions): Promise<{success: boolean; error?: string}>` function that instantiates `new Resend(process.env.RESEND_API_KEY)`, renders both templates, and sends both emails in parallel via `Promise.all`.
+- [x] T-021.1 [AGENT] `pnpm-workspace.yaml` — Add `resend: ^4.0.0` and `"@react-email/components": ^0.0.22` to catalog.
+- [x] T-021.2 [AGENT] `packages/email/package.json` — CREATE: package name `@ydm-agency/email`, add deps `resend: catalog:`, `@react-email/components: catalog:`, `@react-email/render: ^0.0.12`; add peer dep `react`. Set `"main": "./src/index.ts"` (TypeScript-only package consumed via ts-node/turbo).
+- [x] T-021.3 [AGENT] `packages/email/tsconfig.json` — CREATE: extend `@ydm-agency/config/tsconfig.json`, include `src/**/*.tsx`.
+- [x] T-021.4 [AGENT] `packages/email/src/AcknowledgmentEmail.tsx` — CREATE: React Email component. Props: `{ name: string }`. Renders a plain-text-styled email: subject area (from parent), greeting "Hi {name},", body from planning.md §9 acknowledgment copy, signature "YDM Agency".
+- [x] T-021.5 [AGENT] `packages/email/src/NotificationEmail.tsx` — CREATE: React Email component. Props: `{ name: string; email: string; projectType?: string; message: string }`. Renders all lead fields in a readable format for internal notification.
+- [x] T-021.6 [AGENT] `packages/email/src/index.ts` — CREATE: export `AcknowledgmentEmail`, `NotificationEmail`. Export `sendEmail(options: SendEmailOptions): Promise<{success: boolean; error?: string}>` function that instantiates `new Resend(process.env.RESEND_API_KEY)`, renders both templates, and sends both emails in parallel via `Promise.all`.
 
 ---
 
