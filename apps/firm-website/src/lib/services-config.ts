@@ -1,3 +1,10 @@
+export interface ProcessPhase {
+  phase: number;
+  title: string;
+  duration: string;
+  description: string;
+}
+
 export interface ServiceConfig {
   slug: string;
   h1: string;
@@ -12,6 +19,8 @@ export interface ServiceConfig {
   selectClients: boolean;
   metaTitle: string;
   metaDescription: string;
+  processPhases: ProcessPhase[];
+  processDisclaimer: boolean;
 }
 
 export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
@@ -46,6 +55,13 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: false,
     metaTitle: 'Website Design & Development | YDM Agency',
     metaDescription: 'Custom websites that turn visitors into customers — fast, mobile‑ready, and built around how you do business.',
+    processPhases: [
+      { phase: 1, title: 'Discovery & Strategy', duration: '1–3 days', description: 'Your business, goals, and requirements are documented. Site structure and content needs are defined.' },
+      { phase: 2, title: 'Design & Prototyping', duration: '3–7 days', description: 'Visual design is created and refined. Interactive prototypes let you see and test the layout before build.' },
+      { phase: 3, title: 'AI-Assisted Build & Review', duration: '1–3 weeks', description: 'The site is built using modern frameworks. Staging previews are shared for feedback at key milestones.' },
+      { phase: 4, title: 'Testing, Launch & Handoff', duration: '2–3 days', description: 'Performance, accessibility, and integration testing is completed. The site goes live and documentation is provided.' },
+    ],
+    processDisclaimer: false,
   },
   'seo': {
     slug: 'seo',
@@ -78,6 +94,13 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: false,
     metaTitle: 'SEO & AI Search Optimization | YDM Agency',
     metaDescription: 'Customers find you wherever they’re searching — traditional search engines and AI‑powered tools.',
+    processPhases: [
+      { phase: 1, title: 'Audit & Discovery', duration: '1–2 weeks', description: 'Technical SEO audit is performed. Current rankings, competitors, and search opportunities are identified.' },
+      { phase: 2, title: 'Foundation Fixes & On-Page Optimization', duration: '2–4 weeks', description: 'Technical issues are resolved. On-page elements are optimized for target keywords and AI search readiness.' },
+      { phase: 3, title: 'Content & Authority Building', duration: 'ongoing monthly', description: 'Content strategy is executed. Authority signals are built through quality content and local SEO efforts.' },
+      { phase: 4, title: 'Monthly Reporting & Iteration', duration: 'ongoing', description: 'Progress is tracked and reported monthly. Strategy is adjusted based on performance data.' },
+    ],
+    processDisclaimer: false,
   },
   'maintenance': {
     slug: 'maintenance',
@@ -108,6 +131,12 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: false,
     metaTitle: 'Website Maintenance & Support | YDM Agency',
     metaDescription: 'Sites are kept secure, fast, and up‑to‑date so you never have to think about it.',
+    processPhases: [
+      { phase: 1, title: 'Onboarding & Site Audit', duration: '1–2 days', description: 'Current site state is assessed. Access is secured and backup systems are verified.' },
+      { phase: 2, title: 'Monthly Maintenance Cycle', duration: 'ongoing', description: 'Software and security updates are applied. Uptime is monitored and issues are resolved proactively.' },
+      { phase: 3, title: 'Quarterly Deep Reviews', duration: 'quarterly', description: 'Comprehensive performance and security reviews are conducted. Recommendations for improvements are provided.' },
+    ],
+    processDisclaimer: false,
   },
   'analytics': {
     slug: 'analytics',
@@ -138,6 +167,12 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: false,
     metaTitle: 'Analytics & Reporting | YDM Agency',
     metaDescription: 'Simple, honest tracking turns data into plain‑English reports — so guessing what’s working stops.',
+    processPhases: [
+      { phase: 1, title: 'Setup & Configuration', duration: '1–2 weeks', description: 'Analytics tools are installed and configured. Conversion tracking is set up for key actions.' },
+      { phase: 2, title: 'First Reporting Cycle', duration: '1 month after setup', description: 'Initial data is collected and analyzed. Baseline metrics are established and reported.' },
+      { phase: 3, title: 'Monthly Refinement', duration: 'ongoing', description: 'Reports are delivered monthly with clear insights and actionable recommendations.' },
+    ],
+    processDisclaimer: false,
   },
   'paid-ads': {
     slug: 'paid-ads',
@@ -169,6 +204,12 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: true,
     metaTitle: 'Paid Advertising | YDM Agency',
     metaDescription: 'Ads are built, managed, and optimized to turn clicks into customers — not just spend.',
+    processPhases: [
+      { phase: 1, title: 'Strategy & Goal Setting', duration: '1 week', description: 'Campaign objectives and target audiences are defined. Budget allocation and KPIs are established.' },
+      { phase: 2, title: 'Campaign Build & Launch', duration: '1–2 weeks', description: 'Ad creatives and copy are developed. Campaigns are launched with conversion tracking in place.' },
+      { phase: 3, title: 'Ongoing Management & Optimization', duration: 'ongoing', description: 'Weekly adjustments and A/B testing are performed. Monthly reports show performance and optimization actions.' },
+    ],
+    processDisclaimer: true,
   },
   'branding': {
     slug: 'branding',
@@ -199,6 +240,13 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: false,
     metaTitle: 'Branding & Positioning | YDM Agency',
     metaDescription: 'Messages are defined, identity is sharpened, and businesses are made unforgettable.',
+    processPhases: [
+      { phase: 1, title: 'Discovery & Research', duration: '3–5 days', description: 'Your business, market, and competitors are researched. Brand positioning opportunities are identified.' },
+      { phase: 2, title: 'Messaging & Positioning', duration: '3–5 days', description: 'Core messaging is defined. Positioning statement, mission, and brand promise are crafted.' },
+      { phase: 3, title: 'Visual Identity Development', duration: '1–2 weeks', description: 'Logo, color palette, typography, and imagery style are created. Brand guidelines are documented.' },
+      { phase: 4, title: 'Application & Handoff', duration: '2–3 days', description: 'Brand assets are finalized and delivered. Implementation guidance is provided.' },
+    ],
+    processDisclaimer: false,
   },
   'content': {
     slug: 'content',
@@ -230,6 +278,12 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: false,
     metaTitle: 'Content & Copywriting | YDM Agency',
     metaDescription: 'Copy is written that sounds like you and sells like crazy — benefit‑driven, clear, and conversion‑focused.',
+    processPhases: [
+      { phase: 1, title: 'Discovery & Voice Capture', duration: '2–4 days', description: 'Your voice and tone are captured through discovery. Audience and messaging goals are defined.' },
+      { phase: 2, title: 'First Drafts & Iteration', duration: '1–2 weeks', description: 'Copy is drafted and refined through collaboration. Revisions ensure authenticity and impact.' },
+      { phase: 3, title: 'SEO Polish & Final Delivery', duration: '2–3 days', description: 'Final copy is optimized for search. All deliverables are provided in editable format.' },
+    ],
+    processDisclaimer: false,
   },
   'automation': {
     slug: 'automation',
@@ -261,6 +315,12 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: true,
     metaTitle: 'CRM & Marketing Automation | YDM Agency',
     metaDescription: 'Systems are set up that automatically follow up, remind who to call, and make sure every inquiry gets a response.',
+    processPhases: [
+      { phase: 1, title: 'Process Audit & Mapping', duration: '2–4 days', description: 'Current lead flow is audited. Automation opportunities are identified and mapped.' },
+      { phase: 2, title: 'Tool Selection & Setup', duration: '1–2 weeks', description: 'Appropriate tools are selected. Accounts are set up in your name with full ownership.' },
+      { phase: 3, title: 'Workflow Automation & Testing', duration: '1 week', description: 'Automated workflows are built and tested. Documentation and optional training are provided.' },
+    ],
+    processDisclaimer: true,
   },
   'reputation': {
     slug: 'reputation',
@@ -292,5 +352,11 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
     selectClients: true,
     metaTitle: 'Reputation & Review Management | YDM Agency',
     metaDescription: 'Profiles are optimized, a system for collecting genuine reviews is built, and responses are handled.',
+    processPhases: [
+      { phase: 1, title: 'Profile Audit & Optimization', duration: '1–2 days', description: 'Google Business Profile is audited and optimized. Missing information is completed.' },
+      { phase: 2, title: 'Review Generation System Setup', duration: '1 week', description: 'Compliant review generation system is built. QR codes and automated requests are configured.' },
+      { phase: 3, title: 'Ongoing Monitoring & Response', duration: 'monthly', description: 'Reviews are monitored and responses are drafted. Monthly reputation summaries are provided.' },
+    ],
+    processDisclaimer: true,
   },
 };

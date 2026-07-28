@@ -15,3 +15,10 @@
 - Created config-driven dynamic route generating all nine service pages.
 - Added services-config.ts with ServiceConfig interface and full content for all services.
 - Implemented generateStaticParams for static pre-rendering of all service spoke pages.
+
+### T-015 — Service Process Spoke Pages
+- Extended ServiceConfig with ProcessPhase interface, processPhases array, and processDisclaimer boolean.
+- Added process phase data for all nine services from planning.md §7.
+- Created nested dynamic route at /services/[slug]/process with breadcrumbs, disclaimer banner, phase cards, FAQs, and CTA.
+- Implemented generateStaticParams for pre-rendering all nine process pages.
+- Added @/* path alias to firm-website tsconfig.json.
