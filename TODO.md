@@ -415,8 +415,8 @@
 
 ---
 
-## [ ] T-018 — Privacy Policy Page
-**Status:** ready | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** none
+## [x] T-018 — Privacy Policy Page
+**Status:** done | **Domain:** Pages | **Depends On:** T-009 | **Blocks:** none
 **Spec:** Create `apps/firm-website/src/app/privacy/page.tsx` with all ten sections from planning.md §10. Static RSC, minimal styling, dark-themed.
 **Behavior:** Given a user clicking the Privacy Policy footer link, when the page loads, then they see a readable policy with "Last Updated" date, all ten sections, a third-party services table, and a contact mailto link.
 **Research:** Read planning.md §10 for all ten sections and the third-party services table. Note the "[Insert Launch Date]" placeholder — agent inserts current year as draft; HUMAN confirms exact date before launch.
@@ -430,9 +430,9 @@
 **Validate:** `pnpm turbo run typecheck --filter=apps/firm-website`
 
 **Subtasks:**
-- T-018.1 [AGENT] `apps/firm-website/src/app/privacy/page.tsx` — CREATE: render `<article className="prose prose-invert max-w-3xl mx-auto py-16 px-4">` containing H1 "Privacy Policy", "Last Updated: [current year]", then all ten `<section>` blocks with H2s from planning.md §10. Third-party services rendered as a `<table>` with `<thead>/<tbody>` and three columns: Service, Purpose, Link.
-- T-018.2 [AGENT] `apps/firm-website/src/app/privacy/page.tsx` — Add `generateMetadata` returning `constructMetadata({ title: 'Privacy Policy | YDM Agency', description: 'How YDM Agency collects, uses, and protects your information.' })`.
-- T-018.3 [HUMAN] Before launch, update the "Last Updated" date in `apps/firm-website/src/app/privacy/page.tsx` to the actual launch date. This is a date-confirmation decision that requires human approval.
+- [x] T-018.1 [AGENT] `apps/firm-website/src/app/privacy/page.tsx` — CREATE: render `<article className="prose prose-invert max-w-3xl mx-auto py-16 px-4">` containing H1 "Privacy Policy", "Last Updated: [current year]", then all ten `<section>` blocks with H2s from planning.md §10. Third-party services rendered as a `<table>` with `<thead>/<tbody>` and three columns: Service, Purpose, Link.
+- [x] T-018.2 [AGENT] `apps/firm-website/src/app/privacy/page.tsx` — Add `generateMetadata` returning `constructMetadata({ title: 'Privacy Policy | YDM Agency', description: 'How YDM Agency collects, uses, and protects your information.' })`.
+- [ ] T-018.3 [HUMAN] Before launch, update the "Last Updated" date in `apps/firm-website/src/app/privacy/page.tsx` to the actual launch date. This is a date-confirmation decision that requires human approval.
 
 ---
 
