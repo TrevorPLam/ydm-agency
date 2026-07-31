@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <section>
           <h2>1. Introduction</h2>
           <p>
-            YDM Agency ("the firm," "we," "us") operates this website. This policy explains what information is collected when you visit the site, how that information is used, and your rights regarding your personal data. By using this website, you agree to the terms described here.
+            YDM Agency (&quot;the firm,&quot; &quot;we,&quot; &quot;us&quot;) operates this website. This policy explains what information is collected when you visit the site, how that information is used, and your rights regarding your personal data. By using this website, you agree to the terms described here.
           </p>
         </section>
 
@@ -87,7 +87,7 @@ export default function PrivacyPage() {
           </p>
           <ul>
             <li><strong>Essential cookie:</strong> stores whether you have accepted or declined analytics tracking. This cookie is required for the site to respect your choice and contains no personal data.</li>
-            <li><strong>Analytics cookies:</strong> only loaded if you explicitly accept analytics tracking. These cookies collect anonymous usage data as described above. You can change your preference at any time by clicking "Cookie Settings" in the footer.</li>
+            <li><strong>Analytics cookies:</strong> only loaded if you explicitly accept analytics tracking. These cookies collect anonymous usage data as described above. You can change your preference at any time by clicking &quot;Cookie Settings&quot; in the footer.</li>
           </ul>
         </section>
 
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
             <li><strong>Right to delete:</strong> request that your personal data be deleted.</li>
             <li><strong>Right to opt out:</strong> refuse or withdraw consent for non‑essential cookies at any time.</li>
           </ul>
-          <p>To exercise any of these rights, email <a href="mailto:contact@ydmagency.com">contact@ydmagency.com</a> with the subject line "Privacy Request." A response will be provided within 30 days.</p>
+          <p>To exercise any of these rights, email <a href="mailto:contact@ydmagency.com">contact@ydmagency.com</a> with the subject line &quot;Privacy Request.&quot; A response will be provided within 30 days.</p>
         </section>
 
         <section>
@@ -121,7 +121,7 @@ export default function PrivacyPage() {
         <section>
           <h2>9. Changes to This Policy</h2>
           <p>
-            This policy may be updated from time to time. The "Last Updated" date at the top of the page will reflect any changes. Continued use of the site after changes are posted constitutes acceptance of the revised policy.
+            This policy may be updated from time to time. The &quot;Last Updated&quot; date at the top of the page will reflect any changes. Continued use of the site after changes are posted constitutes acceptance of the revised policy.
           </p>
         </section>
 

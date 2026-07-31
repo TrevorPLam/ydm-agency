@@ -65,7 +65,7 @@ export default function AboutPage() {
             </li>
             <li className="flex gap-4">
               <span className="text-accent font-bold">Radical transparency.</span>
-              <span className="text-text-secondary">Real‑time dashboards, plain‑English reports, and no long‑term lock‑in contracts. Clients see exactly what's happening and only pay for what they need.</span>
+              <span className="text-text-secondary">Real‑time dashboards, plain‑English reports, and no long‑term lock‑in contracts. Clients see exactly what&apos;s happening and only pay for what they need.</span>
             </li>
           </ul>
           <p className="text-text-secondary mt-8 max-w-3xl">
@@ -81,7 +81,7 @@ export default function AboutPage() {
           <ul className="space-y-4 max-w-3xl">
             <li className="flex gap-4">
               <span className="text-accent font-bold">Results over reports.</span>
-              <span className="text-text-secondary">The goal isn't a 40‑page PDF of jargon — it's more leads, more sales, and more visibility.</span>
+              <span className="text-text-secondary">The goal isn&apos;t a 40‑page PDF of jargon — it&apos;s more leads, more sales, and more visibility.</span>
             </li>
             <li className="flex gap-4">
               <span className="text-accent font-bold">No templates, no shortcuts.</span>
@@ -181,7 +181,7 @@ export default function AboutPage() {
                 <span className="transform group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-2 text-text-secondary">
-                YDM Agency is intentionally lean. You'll collaborate directly with that dedicated professional — no account managers, no handoffs.
+                YDM Agency is intentionally lean. You&apos;ll collaborate directly with that dedicated professional — no account managers, no handoffs.
               </p>
             </details>
             <details className="group">
