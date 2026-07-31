@@ -22,3 +22,6 @@
 - Created nested dynamic route at /services/[slug]/process with breadcrumbs, disclaimer banner, phase cards, FAQs, and CTA.
 - Implemented generateStaticParams for pre-rendering all nine process pages.
 - Added @/* path alias to firm-website tsconfig.json.
+
+### T-001 — Analytics
+- Consent-gated script loading implemented; analytics only fire after cookie acceptance.
