@@ -25,3 +25,9 @@
 
 ### T-001 — Analytics
 - Consent-gated script loading implemented; analytics only fire after cookie acceptance.
+
+### T-003 — Demo App Scaffold
+- Created apps/demo-restaurant/ as canonical template for all demo apps.
+- Added package.json, next.config.js, tsconfig.json, tailwind.config.js following monorepo patterns.
+- Implemented src/app/globals.css with design system CSS variables.
+- Implemented src/app/layout.tsx with dark mode and metadata.
