@@ -9,9 +9,11 @@ import { Container } from './Container';
 import { ThemeToggle } from './ThemeToggle';
 
 const NAV_LINKS = [
+  { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
-  { label: 'Demos', href: '/demos' },
   { label: 'Process', href: '/services/process' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Education', href: '/education' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ] as const;

@@ -42,7 +42,7 @@ export default async function ServiceProcessPage({ params }: { params: Promise<{
         {service.processDisclaimer && (
           <div className="mb-8 rounded-lg border-l-4 border-accent bg-surface p-4">
             <p className="text-sm text-text-secondary">
-              This service is available for select clients; the exact phases and timelines may vary based on the tools and partnership approach used.
+              {service.disclaimer || 'This service is available for select clients; the exact phases and timelines may vary based on the tools and partnership approach used.'}
             </p>
           </div>
         )}

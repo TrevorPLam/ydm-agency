@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Hero, Container, Card, Button } from '@ydm-agency/ui';
-import { CheckCircle, Monitor, MessageSquare, Wrench, Rocket } from 'lucide-react';
+import { CheckCircle, Monitor, MessageSquare, Rocket } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -11,8 +11,8 @@ export default function Home() {
           title="Your Business Deserves a Website and Marketing That"
           highlightedTitle="Actually Work"
           description="Custom websites, search visibility, and marketing systems — built by a modern, AI‑augmented firm that moves fast, communicates directly, and doesn't charge agency overhead."
-          primaryCtaText="Explore Live Work"
-          primaryCtaHref="/demos"
+          primaryCtaText="Explore Services"
+          primaryCtaHref="/services"
           secondaryCtaText="Get a Free Project Outline"
           secondaryCtaHref="/contact"
         />
@@ -75,38 +75,6 @@ export default function Home() {
                 Learn more →
               </Link>
             </Card>
-          </div>
-        </Container>
-      </section>
-
-      {/* Featured Demo Showcase */}
-      <section className="py-24 md:py-32 bg-surface border-y border-border">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary font-display mb-6">
-                See the Work in Action
-              </h2>
-              <p className="text-lg text-text-secondary mb-8">
-                A fully functional restaurant booking site — custom built, mobile‑responsive, and performance‑optimized. Not a template. Not a mockup.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/demos">
-                  <Button variant="primary" className="w-full sm:w-auto">
-                    Explore Live Work
-                  </Button>
-                </Link>
-                <Link href="/demos" className="text-text-secondary hover:text-text-primary font-medium inline-flex items-center">
-                  View all live demos →
-                </Link>
-              </div>
-            </div>
-            <div className="aspect-video bg-background rounded-2xl border border-border flex items-center justify-center">
-              <div className="text-center">
-                <Monitor className="w-16 h-16 text-text-secondary mx-auto mb-4" />
-                <p className="text-text-secondary">Demo mockup placeholder</p>
-              </div>
-            </div>
           </div>
         </Container>
       </section>

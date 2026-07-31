@@ -31,13 +31,18 @@ export const Footer = ({ brandName = 'YDM Agency' }: FooterProps) => {
                 </Link>
               </li>
               <li>
-                <Link href="/demos" className="text-text-secondary hover:text-text-primary transition-colors">
-                  Demos
+                <Link href="/services/process" className="text-text-secondary hover:text-text-primary transition-colors">
+                  Process
                 </Link>
               </li>
               <li>
-                <Link href="/services/process" className="text-text-secondary hover:text-text-primary transition-colors">
-                  Process
+                <Link href="/blog" className="text-text-secondary hover:text-text-primary transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/education" className="text-text-secondary hover:text-text-primary transition-colors">
+                  Education
                 </Link>
               </li>
               <li>

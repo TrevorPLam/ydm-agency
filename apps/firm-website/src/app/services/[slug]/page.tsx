@@ -32,20 +32,6 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
 
   return (
     <main className="min-h-screen">
-      {/* Disclaimer for select clients */}
-      {config.selectClients && (
-        <section className="py-8 bg-surface border-b border-border">
-          <Container>
-            <div className="max-w-3xl">
-              <Badge variant="accent" className="mb-3">Available for select clients</Badge>
-              <p className="text-text-secondary text-sm">
-                This service is available for select clients. See the page below for details on requirements and how it&apos;s delivered.
-              </p>
-            </div>
-          </Container>
-        </section>
-      )}
-
       {/* Hero */}
       <section className="py-24 md:py-32">
         <Container>
@@ -57,6 +43,20 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
           </p>
         </Container>
       </section>
+
+      {/* Select client disclaimer */}
+      {config.selectClients && (
+        <section className="py-8 bg-surface border-y border-border">
+          <Container>
+            <div className="max-w-3xl">
+              <Badge variant="accent" className="mb-3">Available for select clients</Badge>
+              <p className="text-text-secondary text-sm">
+                {config.disclaimer || "This service is available for select clients. See the page below for details on requirements and how it's delivered."}
+              </p>
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Problem/Solution */}
       {config.problemSolution && (
