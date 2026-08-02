@@ -4,7 +4,8 @@ import { Button } from '@ydm-agency/ui';
 import { Container } from '@ydm-agency/ui';
 import { Badge } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
-import { SERVICES_CONFIG } from '../../../lib/services-config';
+import { ServiceSubnav } from '@/components/ServiceSubnav';
+import { SERVICES_CONFIG } from '@/lib/services-config';
 
 export async function generateStaticParams() {
   return Object.keys(SERVICES_CONFIG).map((slug) => ({ slug }));
@@ -32,6 +33,8 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
 
   return (
     <main className="min-h-screen">
+      <ServiceSubnav slug={config.slug} active="overview" />
+
       {/* Hero */}
       <section className="py-24 md:py-32">
         <Container>
@@ -88,6 +91,14 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
               </li>
             ))}
           </ul>
+          <div className="mt-8 max-w-3xl">
+            <Link
+              href={`/services/${config.slug}/deliverables`}
+              className="text-accent hover:text-accent-hover underline underline-offset-4"
+            >
+              See the full breakdown of what you get →
+            </Link>
+          </div>
         </Container>
       </section>
 
@@ -159,6 +170,14 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
               </details>
             ))}
           </div>
+          <div className="mt-8 max-w-3xl">
+            <Link
+              href={`/services/${config.slug}/faq`}
+              className="text-accent hover:text-accent-hover underline underline-offset-4"
+            >
+              View all {config.h1} FAQs →
+            </Link>
+          </div>
         </Container>
       </section>
 
@@ -169,11 +188,22 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
             <h2 className="text-3xl md:text-4xl font-display font-bold text-text-primary mb-6">
               {config.finalCtaText}
             </h2>
-            <Link href="/contact">
-              <Button variant="primary" size="lg">
-                Get a Free Project Outline
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button variant="primary" size="lg" asChild>
+                <Link href="/contact">Get a Free Project Outline</Link>
               </Button>
-            </Link>
+              <Button variant="secondary" size="lg" asChild>
+                <Link href={`/services/${config.slug}/process`}>See the Process</Link>
+              </Button>
+            </div>
+            <div className="mt-6">
+              <Link
+                href="/services/pricing"
+                className="text-text-secondary hover:text-accent underline underline-offset-4 text-sm"
+              >
+                See pricing factors for all services →
+              </Link>
+            </div>
           </div>
         </Container>
       </section>

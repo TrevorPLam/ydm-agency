@@ -180,12 +180,23 @@ export default function ServicesPage() {
       <section className="py-16 md:py-24">
         <Container>
           <div className="max-w-3xl">
+            <h2 className="text-3xl font-display font-bold text-text-primary mb-4">
+              Not Sure Where to Start?
+            </h2>
             <p className="text-lg text-text-secondary mb-4">
               Most clients begin with a website or SEO foundation and add services as they see results. A brief discovery call helps pinpoint the highest‑impact starting point — no obligation.
             </p>
-            <Link href="/contact" className="text-accent hover:text-accent-hover underline underline-offset-4">
-              Get in touch →
-            </Link>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <Link href="/services/compare" className="text-accent hover:text-accent-hover underline underline-offset-4">
+                Compare services →
+              </Link>
+              <Link href="/services/pricing" className="text-accent hover:text-accent-hover underline underline-offset-4">
+                Pricing factors →
+              </Link>
+              <Link href="/audit" className="text-accent hover:text-accent-hover underline underline-offset-4">
+                Free marketing audit →
+              </Link>
+            </div>
           </div>
         </Container>
       </section>

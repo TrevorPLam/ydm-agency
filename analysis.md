@@ -1,29 +1,8 @@
 # YDM Agency Repository Analysis
 
-**Date**: July 30, 2026  
+**Date**: August 2, 2026  
 **Repository**: ydm-agency  
 **Analysis Type**: Comprehensive Codebase Examination
-
----
-
-## Executive Summary
-
-This is a well-structured Turborepo monorepo for a marketing firm website built with modern web technologies. The project demonstrates solid architectural decisions, proper dependency management, and adherence to current best practices for Next.js 15, React 19, and TypeScript. The codebase is production-ready with security measures, analytics integration, and a comprehensive component library.
-
-**Key Strengths**:
-- Modern tech stack (Next.js 15, React 19, TypeScript 5.6)
-- Proper monorepo structure with shared packages
-- Security headers and middleware implementation
-- Comprehensive design system with CSS variables
-- Cookie consent gating for analytics
-- Well-organized service configuration system
-
-**Areas for Improvement**:
-- Missing E2E test implementations
-- No unit tests for utility functions
-- Missing contact page implementation
-- One service (`content`) has an empty `problemSolution` field
-- No demo/`/demos` page despite references from `/about`
 
 ---
 
@@ -37,7 +16,7 @@ Turborepo workspace with one app and seven shared packages.
 ydm-agency/
 ├── apps/
 │   └── firm-website/            # Next.js 15 marketing site
-│       ├── public/              # ClashDisplay-Variable.woff2, noise.svg
+│       ├── public/              # fonts/ClashDisplay-Variable.woff2, noise.svg
 │       ├── src/
 │       │   ├── app/
 │       │   │   ├── page.tsx
@@ -47,39 +26,59 @@ ydm-agency/
 │       │   │   ├── robots.ts
 │       │   │   ├── sitemap.ts
 │       │   │   ├── about/page.tsx
-│       │   │   ├── blog/page.tsx
-│       │   │   ├── education/
+│       │   │   ├── blog/
 │       │   │   │   ├── page.tsx
 │       │   │   │   └── [slug]/page.tsx
+│       │   │   ├── education/
+│       │   │   │   ├── page.tsx
+│       │   │   │   ├── EducationSearch.tsx
+│       │   │   │   └── [topic]/
+│       │   │   │       ├── page.tsx
+│       │   │   │       └── [slug]/page.tsx
 │       │   │   ├── privacy/page.tsx
+│       │   │   ├── audit/
+│       │   │   │   ├── page.tsx
+│       │   │   │   └── actions.ts
 │       │   │   └── services/
 │       │   │       ├── page.tsx
 │       │   │       ├── layout.tsx
 │       │   │       ├── process/page.tsx
+│       │   │       ├── compare/page.tsx
+│       │   │       ├── pricing/page.tsx
 │       │   │       └── [slug]/
 │       │   │           ├── page.tsx
-│       │   │           └── process/page.tsx
+│       │   │           ├── process/page.tsx
+│       │   │           ├── deliverables/page.tsx
+│       │   │           └── faq/page.tsx
+│       │   ├── components/
+│       │   │   ├── ServiceSubnav.tsx
+│       │   │   └── AuditForm.tsx
 │       │   ├── lib/
+│       │   │   ├── audit-schema.ts
 │       │   │   ├── blog-config.ts
 │       │   │   ├── education-config.ts
+│       │   │   ├── faq-utils.ts
+│       │   │   ├── pricing-config.ts
+│       │   │   ├── service-comparison-config.ts
+│       │   │   ├── service-labels.ts
 │       │   │   └── services-config.ts
 │       │   └── middleware.ts
 │       ├── next.config.js
 │       └── tailwind.config.js
 ├── packages/
-│   ├── ui/                      # 14 exports incl. Button, Card, Header, Footer,
+│   ├── ui/                      # 15 exports incl. Button, Card, Header, Footer,
 │   │                            # CookieConsent, CookieConsentProvider, useConsent
 │   │                            # + __tests__/
 │   ├── forms/                   # LeadForm, ContactForm, Zod schemas
 │   │                            # + __tests__/
 │   ├── analytics/               # AnalyticsProvider, trackEvent
-│   ├── seo/                     # constructMetadata, OrganizationJsonLd
-│   ├── email/                   # AcknowledgmentEmail, NotificationEmail
+│   ├── seo/                     # constructMetadata, OrganizationJsonLd, FaqPageJsonLd
+│   ├── email/                   # AcknowledgmentEmail, NotificationEmail, sendEmail
 │   ├── utils/                   # cn, formatDate, formatCurrency
 │   └── config/                  # shared ESLint, TS, Tailwind, Prettier, Next.js
 ├── e2e/                         # empty (only .gitkeep)
 ├── .github/workflows/           # ci.yml
-├── .devin/workflows/            # audit + todo workflows
+├── .devin/workflows/            # audit, todo, and official/ workflows
 ├── turbo/generators/config.ts
 ├── package.json
 ├── pnpm-workspace.yaml
@@ -87,8 +86,9 @@ ydm-agency/
 ```
 
 **Structural notes**:
-- Implemented routes: `/`, `/about`, `/blog`, `/education`, `/education/[slug]`, `/privacy`, `/services`, `/services/process`, `/services/[slug]`, `/services/[slug]/process`.
+- Implemented routes: `/`, `/about`, `/audit`, `/blog`, `/blog/[slug]`, `/education`, `/education/[topic]`, `/education/[topic]/[slug]`, `/privacy`, `/services`, `/services/process`, `/services/pricing`, `/services/compare`, `/services/[slug]`, `/services/[slug]/deliverables`, `/services/[slug]/faq`, `/services/[slug]/process`.
 - Missing routes: `/contact` and `/demos` are not present in `apps/firm-website/src/app/`.
+- New service-page ecosystem helpers: `faq-utils.ts`, `service-labels.ts`, `service-comparison-config.ts`, `pricing-config.ts`, `audit-schema.ts`.
 - Education and blog content is managed in `apps/firm-website/src/lib/education-config.ts` and `apps/firm-website/src/lib/blog-config.ts`.
 - Only `packages/ui` and `packages/forms` contain unit tests; `e2e/` has no tests.
 
@@ -102,30 +102,36 @@ ydm-agency/
 - Globs: `apps/*`, `packages/*`
 - `default` catalog for shared dependency versions
 
-**Catalog / resolved versions** (from `pnpm-lock.yaml`):
+**Catalog / resolved versions** (from `pnpm-lock.yaml` `catalogs.default`):
 - `next` ^15.1.0 → 15.5.22
 - `react` ^19.0.0 → 19.2.8
 - `react-dom` ^19.0.0 → 19.2.8
-- `typescript` ^5.6.3 → 5.9.3
 - `tailwindcss` ^3.4.17 → 3.4.19
+- `autoprefixer` ^10.4.20 → 10.5.4
+- `clsx` ^2.1.1 → 2.1.1
+- `tailwind-merge` ^2.5.5 → 2.6.1
+- `lucide-react` ^0.468.0 → 0.468.0
 - `zod` ^3.24.1 → 3.25.76
-- `lucide-react` 0.468.0
-- `@radix-ui/react-slot` 1.3.3
-- `@radix-ui/react-dialog` 1.1.23
-- `class-variance-authority` 0.7.1
-- `react-hook-form` 7.83.0, `@hookform/resolvers` 3.10.0
-- `resend` 4.8.0, `@react-email/components` 0.0.22
-- `vitest` 2.1.9, `@testing-library/react` 16.3.2
-- `clsx` 2.1.1, `tailwind-merge` 2.6.1, `autoprefixer` 10.5.4, `next-themes` 0.3.0
+- `next-themes` ^0.3.0 → 0.3.0
+- `class-variance-authority` ^0.7.0 → 0.7.1
+- `@radix-ui/react-slot` ^1.1.0 → 1.3.3
+- `@radix-ui/react-dialog` ^1.1.0 → 1.1.23
+- `vitest` ^2.0.0 → 2.1.9
+- `@testing-library/react` ^16.0.0 → 16.3.2, `@testing-library/jest-dom` ^6.5.0 → 6.9.1, `@testing-library/user-event` ^14.5.0 → 14.6.1
+- `react-hook-form` ^7.54.0 → 7.83.0, `@hookform/resolvers` ^3.9.0 → 3.10.0
+- `resend` ^4.0.0 → 4.8.0, `@react-email/components` ^0.0.22 → 0.0.22
+
+**Resolved notes**:
+- `typescript` is declared in the workspace catalog as `^5.6.3`, but every package pins it directly to `^5.6.0`; `pnpm-lock.yaml` resolves it to `5.9.3`.
 
 **Workspace protocol usage**:
-- `firm-website` → `@ydm-agency/ui`, `utils`, `forms`, `seo`, `analytics`
-- `ui` → `utils`
-- `forms` → `ui`, `analytics`
-- `analytics` → `ui`
-- `@ydm-agency/config` shared as dev dependency across packages
+- `apps/firm-website` → `@ydm-agency/analytics`, `@ydm-agency/email`, `@ydm-agency/forms`, `@ydm-agency/seo`, `@ydm-agency/ui`, `@ydm-agency/utils`
+- `packages/ui` → `@ydm-agency/utils`
+- `packages/forms` → `@ydm-agency/analytics`, `@ydm-agency/ui`
+- `packages/analytics` → `@ydm-agency/ui`
+- `@ydm-agency/config` is a dev dependency in `apps/firm-website`, `packages/analytics`, `packages/email`, `packages/forms`, `packages/seo`, `packages/ui`, and `packages/utils`.
 
-**Turbo pipeline** (`turbo.json`): `build`, `dev`, `lint`, `typecheck`, `test`, `e2e`, `clean`. `typecheck`, `test`, `e2e` depend on `^build`; `build` outputs `.next/**` and `dist/**`; `dev` is persistent and uncached.
+**Turbo pipeline** (`turbo.json`): `build`, `dev`, `lint`, `typecheck`, `test`, `e2e`, `clean`. `build` depends on `^build` and outputs `.next/**` (excluding `.next/cache/**`) and `dist/**`; `typecheck`, `test`, and `e2e` depend on `^build`; `dev` is persistent and uncached. Note: `package.json` also defines a `format` script, but `format` is not declared in `turbo.json` and no workspace package exposes a `format` task.
 
 ---
 
@@ -152,23 +158,36 @@ ydm-agency/
 - `/` — Hero, services snapshot, process teaser, trust/FAQ
 - `/services` — 9-card service hub with `selectClients` badges
 - `/services/[slug]` — Service detail (SSG via `generateStaticParams` over 9 `SERVICES_CONFIG` slugs; `notFound()` for unknown slugs)
+- `/services/[slug]/deliverables` — Service-specific deliverables / “What You Get” breakdown (SSG)
+- `/services/[slug]/faq` — Service-specific FAQ hub with FAQPage JSON-LD (SSG)
 - `/services/[slug]/process` — Service-specific process phases + FAQs (also SSG)
 - `/services/process` — Process hub with 5-phase client lifecycle + links to all 9 service process pages
+- `/services/pricing` — Global pricing and investment factors per service
+- `/services/compare` — Service comparison and starting-point guide
+- `/audit` — Free marketing audit request form (Server Action + Resend)
 - `/about` — Founder story, principles, FAQs; includes a placeholder link to `/demos`
 - `/blog` — Opinion and news hub (3 sample posts from `blog-config.ts`)
-- `/education` — Technical lesson hub (6 lessons from `education-config.ts`, with safety/attribution badges)
-- `/education/[slug]` — Lesson detail (SSG via `generateStaticParams` over 6 `EDUCATION_LESSONS` slugs; `notFound()` for unknown slugs)
+- `/education` — Technical lesson hub with 5 topics (SEO, Conversion, Foundations, Strategy, Compliance) containing 6 lessons total, with safety/attribution badges
+- `/education/[topic]` — Topic-specific lesson listing (SSG via `generateStaticParams` over 5 `EDUCATION_TOPICS` slugs; `notFound()` for unknown topics)
+- `/education/[topic]/[slug]` — Lesson detail (SSG via `generateStaticParams` over 6 `EDUCATION_LESSONS` slugs; `notFound()` for unknown lessons)
 - `/privacy` — Privacy policy
-- `/sitemap.xml` — Generated sitemap (static routes + 9 service spokes + 9 process spokes + 6 education lesson spokes)
+- `/sitemap.xml` — Generated sitemap (static routes + 9 service spokes + 9 process spokes + 9 deliverables spokes + 9 FAQ spokes + 3 blog posts + 5 education topic pages + 6 education lesson pages)
 - `/robots.txt` — `allow: /`, `disallow: /api/`, sitemap reference
 
 **Referenced but not implemented**:
 - `/contact` — Linked in `Header`, `Footer`, sitemap, and CTAs; `ContactForm` exists in `@ydm-agency/forms` but no route
 - `/demos` — Linked from `/about` page text and FAQ
 
+**Implemented since prior analysis**:
+- `/services/[slug]/faq` — FAQ spoke pages
+- `/services/pricing` — Pricing factors
+- `/services/compare` — Service comparison
+- `/audit` — Free marketing audit
+
 **Notes**:
 - `services/layout.tsx` is a passthrough layout.
 - The sitemap emits `/contact` even though the route is not implemented.
+- Education routes use a two-level structure: `/education/[topic]/[slug]` for lessons, with topic hub pages at `/education/[topic]`
 
 ### 2.3 Key Components
 
@@ -188,21 +207,28 @@ ydm-agency/
 - `CookieConsent`, `CookieConsentProvider`, `useConsent`, `CookieSettingsButton` — consent state + banner
 
 **Cross-cutting packages**:
-- `@ydm-agency/seo` — `constructMetadata()` (OG, Twitter, metadataBase), `OrganizationJsonLd`
+- `@ydm-agency/seo` — `constructMetadata()` (OG, Twitter, metadataBase), `OrganizationJsonLd`, `FaqPageJsonLd`
 - `@ydm-agency/analytics` — `AnalyticsProvider` (GA4, PostHog, Meta Pixel, consent-gated Scripts), `trackEvent()`
 - `@ydm-agency/forms` — `ContactForm` (`react-hook-form` + Zod + honeypot), `LeadForm` (controlled inputs + Zod)
-- `@ydm-agency/utils` — `cn()` (clsx + tailwind-merge)
+- `@ydm-agency/utils` — `cn()` (clsx + tailwind-merge), `formatDate()`, `formatCurrency()`
 
 **Page components**:
-- `page.tsx` (home) — `Hero` (CTA to `/contact`), 3-card services snapshot, 3-step process teaser, trust banner, final CTA
-- `services/page.tsx` — 9-card service hub with `selectClients` badges
-- `services/[slug]/page.tsx` — Dynamic service detail: hero, problem/solution, included list, who it’s for, cross-service links, FAQs, final CTA
-- `services/[slug]/process/page.tsx` — Service process phases (timeline with duration badges), FAQ, back links
+- `page.tsx` (home) — `Hero` (CTA to `/services` and `/contact`), 3-card services snapshot, 3-step process teaser, trust banner, final CTA
+- `services/page.tsx` — 9-card service hub with `selectClients` badges, "Why Work With YDM Agency" section, and links to `/services/compare`, `/services/pricing`, and `/audit`
+- `services/[slug]/page.tsx` — Dynamic service detail: hero, problem/solution, included list, who it’s for, cross-service links, FAQs, final CTA, and links to FAQ/pricing; includes a `ServiceSubnav` linking to deliverables, process, and FAQ spokes
+- `services/[slug]/deliverables/page.tsx` — Service-specific deliverables / “What You Get” breakdown, with output, timeline, and outcome for each deliverable; includes a link to the FAQ page
+- `services/[slug]/faq/page.tsx` — Grouped service FAQs (Pricing, Timeline, Scope, Prerequisites, Compliance, General, Answer Engine) with `FAQPage` JSON-LD
+- `services/[slug]/process/page.tsx` — Service process phases (timeline with duration badges), FAQ, back links, and link to the FAQ page; includes the `ServiceSubnav`
 - `services/process/page.tsx` — 5-phase client lifecycle, links to all 9 service process pages, FAQ
+- `services/compare/page.tsx` — Scenario-based service comparison and a service fit matrix
+- `services/pricing/page.tsx` — Per-service investment factors, included extras, and starting-range placeholders
+- `audit/page.tsx` — Free marketing audit form (name, email, website, challenge, marketing state) with Zod + honeypot; backed by `apps/firm-website/src/app/audit/actions.ts`
+- `apps/firm-website/src/components/AuditForm.tsx` — Client audit form using `react-hook-form`, `zodResolver`, and `submitAudit` Server Action
 - `about/page.tsx` — Founder story, company principles, trust signals, FAQ (includes placeholder `/demos` link)
-- `blog/page.tsx` — Opinion and news hub
-- `education/page.tsx` — Technical lesson hub with topic, safety, and attribution badges
-- `education/[slug]/page.tsx` — Dynamic lesson detail: hero, topic/safety/level badges, sections, back link, CTA
+- `blog/page.tsx` — Opinion and news hub with featured article layout (editorial styling, pull quotes, author metadata)
+- `education/page.tsx` — Technical lesson hub with search component and topic-based organization (5 topics with lesson counts)
+- `education/[topic]/page.tsx` — Topic-specific lesson listing with safety/attribution badges
+- `education/[topic]/[slug]/page.tsx` — Dynamic lesson detail: hero, topic/safety/level badges, sections, back link, CTA
 - `privacy/page.tsx` — Privacy policy
 - `sitemap.ts` / `robots.ts` — Generated SEO routes
 
@@ -221,7 +247,11 @@ ydm-agency/
   - Honeypot `_honeypot` hidden field must be empty
   - `name` ≥ 2 chars, valid email, `message` ≥ 20 chars, optional `projectType` enum
 - `LeadForm` uses `leadCaptureSchema` (`fullName`, email, `message` ≥ 10 chars)
-- `sendEmail()` in `@ydm-agency/email` exists but is **not wired to a Server Action or page** yet
+- `AuditForm` (`apps/firm-website/src/components/AuditForm.tsx`) uses `react-hook-form` + `zodResolver` + `auditFormSchema`
+  - Honeypot `_honeypot` hidden field must be empty
+  - `name` ≥ 2 chars, valid email, `website` ≥ 3 chars, `challenge` ≥ 10 chars, `marketingState` enum
+  - Submits to `submitAudit()` Server Action in `apps/firm-website/src/app/audit/actions.ts`
+- `sendEmail()` in `@ydm-agency/email` is wired to the `/audit` Server Action
 
 **Privacy / consent**:
 - `CookieConsentProvider` sets `ydm-analytics-consent` (`SameSite=Lax`, 1 year) and exposes `accept`/`reject`/`useConsent`
@@ -229,10 +259,11 @@ ydm-agency/
 - `/privacy` documents collection, cookies, third parties (Vercel, Resend, Calendly, Supabase), and user rights
 
 **Not yet implemented**:
-- No `app/api/` routes, Server Actions, Supabase/Upstash wiring, or rate limiting in code
+- No `app/api/` routes, Supabase/Upstash wiring, or rate limiting in code
 - `ContactForm` receives an `onSubmit` prop but has no backend handler
+- `AuditForm` has a backend handler but no Supabase storage or rate limiting
 
-**Analysis**: Strong static security posture via headers and client-side bot/privacy controls; server-side form submission, storage, and rate limiting are still missing.
+**Analysis**: Strong static security posture via headers and client-side bot/privacy controls; the `/audit` Server Action provides a working Resend-based form backend, but storage and rate limiting remain unimplemented.
 
 ### 2.5 Design System
 
@@ -247,7 +278,9 @@ ydm-agency/
 - Success: `#3B82F6` (aliased to the same value as accent, not a distinct green)
 - Exposed as Tailwind colors: `bg-background`, `text-text-primary`, `text-text-secondary`, `bg-surface`, `border-border`, `text-accent`, `bg-accent`, etc.
 
-**Design system drift**: `packages/email` (`AcknowledgmentEmail.tsx`, `NotificationEmail.tsx`) still hard-codes the old accent color `#4AE4A8` (teal/green) for its signature text, since email templates can't consume CSS variables. This no longer matches the site's current blue accent (`#3B82F6`/`#2563EB`) and should be updated for brand consistency if the email flow is ever wired up.
+**Design system drift**: 
+- `packages/email` (`AcknowledgmentEmail.tsx`, `NotificationEmail.tsx`) still hard-codes the old accent color `#4AE4A8` (teal/green) for signature/label text, since email templates can't consume CSS variables. This no longer matches the site's current blue accent (`#3B82F6`/`#2563EB`) and should be updated for brand consistency if the email flow is ever wired up.
+- `Button` component still uses the old teal shadow color `rgba(74,228,168,0.3)` in its hover state instead of the current blue accent color.
 
 **Typography**:
 - Headings: `ClashDisplay-Variable` via `next/font/local`, CSS var `--font-display`
@@ -286,51 +319,58 @@ ydm-agency/
 - **Container** — `max-w-6xl` centered wrapper with responsive horizontal padding.
 - **Badge** — CVA variants `default`/`accent`/`outline`.
 - **Hero** — centered hero with badge, title, optional highlighted span, and dual CTAs.
-- **Features** — 3-column feature grid.
-- **Header** — fixed responsive header with skip-to-content link, desktop/mobile Radix Dialog nav, active-path indicator, and `ThemeToggle`. Nav links to `/services`, `/services/process`, `/about`, `/contact`.
-- **Footer** — brand blurb, quick links, `contact@ydmagency.com`, legal, and `CookieSettingsButton`.
-- **Pricing** — 3-tier pricing grid.
+- **Features** — 3-column feature grid (`FeatureItem[]`, optional icons).
+- **Header** — fixed responsive header with skip-to-content link, desktop/mobile Radix Dialog nav, active-path indicator, and `ThemeToggle`. Nav links to `/`, `/services`, `/services/process`, `/blog`, `/education`, `/about`, and `/contact`.
+- **Footer** — brand blurb, quick links (`/services`, `/services/process`, `/blog`, `/education`, `/about`, `/contact`), `contact@ydmagency.com`, legal, and `CookieSettingsButton`.
+- **Pricing** — 3-tier pricing grid; supports `ctaHref`/`ctaText` links or an `onSelectPlan` callback.
 - **ThemeToggle** — dark/light toggle via `next-themes`.
 - **CookieSettingsButton** — re-opens the consent banner by dispatching `ydm:open-cookie-settings`.
 - **CookieConsent** — bottom fixed banner with Accept/Reject and Escape-to-dismiss.
-- **CookieConsentProvider** + **useConsent** — consent state, `ydm-analytics-consent` cookie (`SameSite=Lax`, 1 year), `accept`/`reject`/`openSettings` API.
+- **CookieConsentProvider** + **useConsent** — consent state, `ydm-analytics-consent` cookie (`SameSite=Lax`, 1 year, values `accepted`/`rejected`), `accept`/`reject`/`openSettings` API plus the `analyticsConsent` boolean.
 
-**Dependencies**: `react`, `next`, `lucide-react`, `next-themes`, `class-variance-authority`, `@radix-ui/react-slot`, `@radix-ui/react-dialog`, `@ydm-agency/utils`.
+**Dependencies** (`packages/ui/package.json`):
+- Runtime: `react`, `react-dom`, `next`, `lucide-react`, `next-themes`, `class-variance-authority`, `@radix-ui/react-slot`, `@radix-ui/react-dialog`, `@ydm-agency/utils`.
+- Dev: `@ydm-agency/config`, `@types/node`, `@types/react`, `@types/react-dom`, `typescript`, `vitest`, `@testing-library/react`, `@testing-library/jest-dom`, `@vitejs/plugin-react`, `jsdom`.
 
-**Tests** (`packages/ui/src/__tests__/`): 4 Vitest test files — `Button.test.tsx`, `Card.test.tsx`, `Badge.test.tsx`, `CookieConsent.test.tsx` — covering variants, class merging, and consent accept/reject/cookie flows.
+**Scripts**: `lint`, `typecheck`, `test` (Vitest).
+
+**Tests** (`packages/ui/src/__tests__/`): 4 Vitest test files — `Button.test.tsx`, `Card.test.tsx`, `Badge.test.tsx`, `CookieConsent.test.tsx` — covering variants, class merging, `asChild` rendering, disabled states, and consent accept/reject/cookie flows.
 
 **Observations**:
 - Strong TypeScript typing with exported `*Props` interfaces and consistent `cn()`/`cva` patterns.
-- `Button`, `Badge`, `Card`, `Container`, `Hero`, `Header`, `Footer`, and consent components use the workspace Tailwind tokens (`bg-accent`, `text-text-primary`, etc.).
-- `Features.tsx` and `Pricing.tsx` are hard-coded to `slate-*`/`blue-*` colors instead of design tokens and are not imported by any route.
+- `Button`, `Badge`, `Card`, `Container`, `Hero`, `Header`, `Footer`, `CookieConsent`, and `CookieSettingsButton` use the workspace Tailwind tokens (`bg-accent`, `text-text-primary`, etc.).
+- `Button` primary variant adds a stale teal glow shadow (`rgba(74,228,168,0.3)`) on hover, which does not match the current blue accent.
+- `Features.tsx` and `Pricing.tsx` are hard-coded to `slate-*`/`blue-*` colors instead of design tokens and are not imported by any route in `apps/firm-website`.
 - `Header` and `Footer` link to `/contact`, which is not implemented in the app router.
 - `CookieConsentProvider` is client-only (`document.cookie`, `window` event listeners) and has no SSR cookie handling.
 
-**Analysis**: A clean, well-typed component library. Main gaps are the two unused, off-palette components (`Features`, `Pricing`) and the `/contact` route referenced by the site shell.
+**Analysis**: A clean, well-typed component library. Main gaps are the two unused, off-palette components (`Features`, `Pricing`), the stale teal shadow in `Button`, and the `/contact` route referenced by the site shell.
 
 ### 3.2 @ydm-agency/utils
 
 **Purpose**: Shared helper utilities for class-name merging and locale formatting.
 
 **Exports** (`packages/utils/src/index.ts`):
-- `cn(...inputs: ClassValue[]): string` — `clsx` + `tailwind-merge` for conditional Tailwind classes.
-- `formatDate(date: Date | string): string` — `en-US` long date (`month long`, day, year) via `toLocaleDateString`.
+- `cn(...inputs: ClassValue[]): string` — `clsx` (`ClassValue` type) + `tailwind-merge` for conditional Tailwind classes.
+- `formatDate(date: Date | string): string` — parses a string date if needed, then returns an `en-US` long date (`month long`, day, year) via `toLocaleDateString`.
 - `formatCurrency(amount: number, currency = 'USD'): string` — `Intl.NumberFormat` currency string.
 
-**Dependencies**: `clsx`, `tailwind-merge`.
+**Dependencies** (`packages/utils/package.json`):
+- Runtime: `clsx`, `tailwind-merge`.
+- Dev: `@ydm-agency/config`, `typescript`.
 
-**Scripts**: `lint`, `typecheck` only; no test script.
+**Scripts**: `lint`, `typecheck` only; no `test` script.
 
 **Usage**:
 - `cn` is imported by `packages/ui` (`Button`, `Card`, `Badge`, `Container`) and is the primary class-merge utility across the UI package.
 - `formatDate` and `formatCurrency` are exported but not imported by any page or package outside their own package.
 
 **Observations**:
-- Functions are strongly typed and use standard built-ins (`Intl.NumberFormat`, `toLocaleDateString`).
-- No unit tests exist in `packages/utils`, despite the AGENTS.md requirement for utility tests.
-- `formatDate` and `formatCurrency` are currently dead code.
+- Functions are strongly typed and use standard built-ins (`clsx`, `tailwind-merge`, `Intl.NumberFormat`, `toLocaleDateString`).
+- No unit tests exist in `packages/utils`, despite the `AGENTS.md` requirement for utility tests.
+- `formatDate` and `formatCurrency` are currently dead code; no `apps/firm-website` page formats dates or currencies using these helpers.
 
-**Analysis**: Clean, focused helpers. `cn()` is actively used, while the formatting utilities are unused and untested.
+**Analysis**: Clean, focused helpers. `cn()` is actively used across the UI package, while the formatting utilities are unused and untested.
 
 ### 3.3 @ydm-agency/forms
 
@@ -343,26 +383,28 @@ ydm-agency/
 - `leadCaptureSchema`, `type LeadCaptureInput`
 
 **Schemas** (`packages/forms/src/schemas.ts`):
-- `contactFormSchema` — `name` (≥2), `email`, `projectType` enum (`website`/`seo`/`marketing`/`analytics`/`other`, optional, empty → `undefined`), `message` (≥20), `_honeypot` must be empty.
-- `leadCaptureSchema` — `fullName` (≥2), `email`, `companyName` (optional), `budget` (optional), `message` (≥10).
+- `contactFormSchema` — `name` (≥2), `email`, `projectType` enum (`website`/`seo`/`marketing`/`analytics`/`other`, optional; empty string is preprocessed to `undefined`), `message` (≥20), `_honeypot` must be empty.
+- `leadCaptureSchema` — `fullName` (≥2), `email`, `companyName` (optional), `budget` (optional string; not validated against the dropdown values), `message` (≥10).
 
 **Components**:
-- **ContactForm** — `react-hook-form` + `zodResolver` with `onSubmit` prop. Fields: name, email, optional project-type select, message, hidden `_honeypot`. Handles `idle`/`loading`/`success`/`error` states.
-- **LeadForm** — controlled-input form using `useState`, manual `safeParse` validation, budget dropdown, calls `trackEvent('lead_form_submitted')` on success.
+- **ContactForm** — `react-hook-form` + `zodResolver` with an injected async `onSubmit` prop. Fields: name, email, optional project-type select, message, hidden `_honeypot`. Handles `idle`/`loading`/`success`/`error` states and renders a "Message received" success panel.
+- **LeadForm** — controlled-input form using `useState`, manual `leadCaptureSchema.safeParse` validation, budget dropdown, configurable `title`/`subtitle`/`sourceApp`/`onSubmitSuccess` props, and calls `trackEvent('lead_form_submitted')` on successful validation. It does not persist or submit lead data to a backend.
 
-**Dependencies**: `zod`, `react-hook-form`, `@hookform/resolvers`, `react`, `@ydm-agency/ui`, `@ydm-agency/analytics`.
+**Dependencies** (`packages/forms/package.json`):
+- Runtime: `zod`, `react`, `react-hook-form`, `@hookform/resolvers`, `@ydm-agency/ui`, `@ydm-agency/analytics`.
+- Dev: `@ydm-agency/config`, `@testing-library/jest-dom`, `@testing-library/react`, `@testing-library/user-event`, `@types/node`, `@types/react`, `typescript`, `vitest`.
 
 **Scripts**: `lint`, `typecheck`, `test` (vitest).
 
-**Tests** (`packages/forms/src/__tests__/`): `ContactForm.test.tsx` (field render, validation, honeypot, valid submit, success state) and `schemas.test.ts` (valid/invalid contact input, honeypot, projectType, 20-char message).
+**Tests** (`packages/forms/src/__tests__/`): `ContactForm.test.tsx` (field render, validation, honeypot, valid submit, success state) and `schemas.test.ts` (valid/invalid contact input, honeypot, projectType, 20-char message). No `LeadForm` tests.
 
 **Observations**:
 - `ContactForm` uses design-system Tailwind tokens and expects an injected async `onSubmit` handler.
 - `LeadForm` is hard-coded to `gray-*`/`blue-500`/`emerald-*`/`red-500` colors and contains first-person copy ("we will get back to you", "We have received your request"), which conflicts with the "no we/us/our" voice rule.
-- Neither form is imported by `apps/firm-website`; the `/contact` route and any Server Action/backend handler are missing.
+- The `@ydm-agency/forms` package is not imported by `apps/firm-website`; the `/contact` route and any Server Action/backend handler are missing.
 - `LeadForm` does not submit data to a backend; it only fires an analytics event.
 
-**Analysis**: Solid validation and testing for `contactFormSchema`/`ContactForm`. Main issues are the off-palette, off-voice `LeadForm`, no route integration, and no real backend wiring for either form.
+**Analysis**: Solid validation and testing for `contactFormSchema`/`ContactForm`. Main issues are the off-palette, off-voice `LeadForm`, no `LeadForm` test coverage, no app route integration, and no real backend wiring for either form.
 
 ### 3.4 @ydm-agency/analytics
 
@@ -382,7 +424,9 @@ ydm-agency/
 - Dispatches a `CustomEvent('ydm_analytics_event')`.
 - Routes to `gtag('event')`, `posthog.capture`, and `fbq('trackCustom')` if the global objects exist; logs in development.
 
-**Dependencies**: `react`, `next`, `@ydm-agency/ui`.
+**Dependencies** (`packages/analytics/package.json`):
+- Runtime: `react`, `next`, `@ydm-agency/ui`.
+- Dev: `@ydm-agency/config`, `@types/node`, `@types/react`, `typescript`.
 
 **Scripts**: `lint`, `typecheck` only; no tests.
 
@@ -392,7 +436,8 @@ ydm-agency/
 
 **Observations**:
 - Analytics are effectively disabled by the empty provider IDs.
-- `AnalyticsProvider` uses `dangerouslySetInnerHTML` for GA4, PostHog, and Meta Pixel initialization. The current `Content-Security-Policy` (`script-src 'self' https://www.googletagmanager.com https://va.vercel-scripts.com`) does not allow inline scripts or `https://connect.facebook.net` / PostHog hosts, so scripts would be blocked even if IDs were configured.
+- `AnalyticsProvider` uses `dangerouslySetInnerHTML` for GA4, PostHog, and Meta Pixel initialization. The current `Content-Security-Policy` (`script-src 'self' https://www.googletagmanager.com https://va.vercel-scripts.com`) does not allow inline scripts or `https://connect.facebook.net` / PostHog hosts, so scripts would be blocked even if IDs were configured. Because `default-src 'self'` is set and no `connect-src` is defined, event POSTs to analytics APIs would also be blocked.
+- `trackEvent` dispatches a `CustomEvent('ydm_analytics_event')`, but no package or app currently listens for it.
 - `trackEvent` relies on type-unsafe `window as any` access to `gtag`, `posthog`, and `fbq`.
 - No unit or integration tests cover consent gating or event dispatch.
 
@@ -416,16 +461,21 @@ ydm-agency/
 - Renders an `application/ld+json` `Organization` schema with `name`, `url`, optional `logo`, `sameAs`, and `contactPoint`.
 - Used in root `layout.tsx` with name `YDM Agency`, url `https://ydm-agency.com`, logo `https://ydm-agency.com/logo.png`, contact point `contact@ydmagency.com`.
 
-**Dependencies**: `next`, `react`.
+**Dependencies** (`packages/seo/package.json`):
+- Runtime: `next`, `react`.
+- Dev: `@ydm-agency/config`, `@types/react`, `typescript`.
 
 **Scripts**: `lint`, `typecheck` only; no tests.
 
-**Usage**: `constructMetadata` is used in `layout.tsx` and every page metadata export (`about`, `privacy`, `services`, `services/process`, `services/[slug]`, `services/[slug]/process`); `OrganizationJsonLd` is used in `layout.tsx`.
+**Usage**:
+- `constructMetadata` is used in `layout.tsx` and every page metadata export: `/about`, `/audit`, `/blog`, `/blog/[slug]`, `/education`, `/education/[topic]`, `/education/[topic]/[slug]`, `/privacy`, `/services`, `/services/process`, `/services/pricing`, `/services/compare`, `/services/[slug]`, `/services/[slug]/deliverables`, `/services/[slug]/faq`, `/services/[slug]/process`.
+- `OrganizationJsonLd` is used in `layout.tsx`.
+- `FaqPageJsonLd` is used in `/services/[slug]/faq`.
 
 **Observations**:
 - `constructMetadata` defaults to `/og-image.png` and `/favicon.ico`, but neither file exists in `apps/firm-website/public/` (only `fonts/` and `noise.svg` are present).
 - `OrganizationJsonLd` references an external `https://ydm-agency.com/logo.png` that is not in the repo.
-- No page passes `canonicalUrl`, so `metadataBase` is undefined and OpenGraph/Twitter images resolve as relative paths.
+- No page passes `canonicalUrl`, `image`, or `icons`, so `metadataBase` is undefined and OpenGraph/Twitter images resolve as relative paths using the defaults.
 - No unit tests for metadata construction or JSON-LD output.
 
 **Analysis**: Clean, well-typed SEO helper. Main gaps are missing static assets, no canonical default, and no tests.
@@ -450,32 +500,36 @@ ydm-agency/
 - Sends acknowledgment to the submitter and notification to `contact@ydmagency.com` in parallel with `Promise.allSettled`.
 - Returns `{ success: true }` even if one send fails, logging the failure to the console.
 
-**Dependencies**: `resend`, `@react-email/components`, `@react-email/render`; `react` as peer dependency.
+**Dependencies** (`packages/email/package.json`):
+- Runtime: `resend`, `@react-email/components`, `@react-email/render`.
+- Peer: `react`.
+- Dev: `@ydm-agency/config`, `@types/node`, `@types/react`, `typescript`.
 
 **Scripts**: `lint`, `typecheck`, `build`.
 
-**Usage**: `sendEmail`, `AcknowledgmentEmail`, and `NotificationEmail` are not imported anywhere outside `packages/email/src/index.ts`. There is no Server Action or `/contact` route wiring them to `ContactForm`.
+**Usage**: `sendEmail`, `AcknowledgmentEmail`, and `NotificationEmail` are not imported anywhere outside `packages/email/src/index.ts` (verified by codebase search). There is no Server Action or `/contact` route wiring them to `ContactForm`.
 
 **Observations**:
 - No unit or integration tests for rendering or `sendEmail` logic.
 - `from` address is `YDM Agency <noreply@ydmagency.com>`; internal `to` address is `contact@ydmagency.com`.
 - `sendEmail` instantiates a new Resend client on every call and lacks rate-limiting or Supabase lead storage integration.
+- `AcknowledgmentEmail` and `NotificationEmail` both use a teal `#4AE4A8` accent for the signature and labels, which is stale relative to the current blue accent (`#3B82F6`).
 - It is currently unused by the app, so the email flow is not reachable end-to-end.
 
-**Analysis**: Clean React Email templates and a straightforward Resend wrapper. Needs integration with a Server Action and the contact form, plus tests and environment validation.
+**Analysis**: Clean React Email templates and a straightforward Resend wrapper. Needs integration with a Server Action and the contact form, plus tests, environment validation, and a design-token refresh.
 
 ### 3.7 @ydm-agency/config
 
 **Purpose**: Shared base configuration files consumed by `apps/firm-website` and other workspace packages.
 
-**Package** (`packages/config/package.json`): No runtime scripts; exposes the listed files via the `files` field. Dev dependencies include `eslint`, `eslint-config-next`, `eslint-config-prettier`, `eslint-plugin-react`, `typescript`, `tailwindcss`, `prettier`, and `prettier-plugin-tailwindcss`.
+**Package** (`packages/config/package.json`): No runtime scripts; only `devDependencies` (`eslint`, `eslint-config-next`, `eslint-config-prettier`, `eslint-plugin-react`, `typescript`, `tailwindcss`, `prettier`, `prettier-plugin-tailwindcss`). Exposes the listed config files via the `files` field.
 
 **Configs**:
-- `tsconfig.base.json` — strict TypeScript: `target: ES2022`, `module: ESNext`, `moduleResolution: bundler`, `noEmit: true`, `isolatedModules: true`, `skipLibCheck: true`, and the Next.js TS plugin.
+- `tsconfig.base.json` — strict TypeScript: `target: ES2022`, `lib: ["ES2022"]`, `module: ESNext`, `moduleResolution: bundler`, `resolveJsonModule: true`, `allowJs: true`, `strict: true`, `noEmit: true`, `esModuleInterop: true`, `skipLibCheck: true`, `forceConsistentCasingInFileNames: true`, `isolatedModules: true`, `incremental: true`, and the Next.js TS plugin.
 - `tailwind.js` — design-system colors mapped to CSS variables (`background`, `surface`, `text-primary`, `text-secondary`, `accent`, `accent-hover`, `border`, `error`, `success`), plus `fontFamily.display`/`fontFamily.sans`. Content glob covers `./src/**/*` (consuming app) and `../../packages/{ui,forms,analytics,seo}/src/**/*`.
 - `nextjs.js` — `reactStrictMode: true`, `transpilePackages: ['@ydm-agency/ui', '@ydm-agency/forms', '@ydm-agency/seo', '@ydm-agency/analytics', '@ydm-agency/utils']`. (`email` and `config` are not included.)
 - `eslint-next.js` — extends `next/core-web-vitals` + `prettier`; turns off `@next/next/no-html-link-for-pages`.
-- `eslint-react.js` — extends `eslint:recommended`, `plugin:react/recommended`, `prettier`; JSX scope and prop-types rules off; React version `detect`.
+- `eslint-react.js` — extends `eslint:recommended`, `plugin:react/recommended`, `prettier`; `parserOptions` for latest ES modules and JSX; React version `detect`; `react/react-in-jsx-scope` and `react/prop-types` off.
 - `prettier.js` — `prettier-plugin-tailwindcss`, single quote, semicolons, tab width 2, `trailingComma: 'es5'`, `printWidth: 100`.
 
 **Observations**:
@@ -494,30 +548,35 @@ ydm-agency/
 
 **File**: `apps/firm-website/src/lib/services-config.ts`
 
-**Structure**: Single 363-line module exporting `ProcessPhase`, `ServiceConfig`, and `SERVICES_CONFIG: Record<string, ServiceConfig>`.
+**Structure**: Single module exporting `ProcessPhase`, `Deliverable`, `ServiceConfig`, and `SERVICES_CONFIG: Record<string, ServiceConfig>`.
 
 **Types**:
 - `ProcessPhase` — `phase` number, `title`, `duration`, `description`.
-- `ServiceConfig` — `slug`, `h1`, `subhead`, `problemSolution`, `included[]`, `whoItsFor`, `howItFits[]` (cross-service `{label, href}`), `workingWithYdm`, `faqs[]`, `finalCtaText`, `selectClients`, `metaTitle`, `metaDescription`, `processPhases[]`, `processDisclaimer`.
+- `Deliverable` — `title`, `description`, `output`, `timeline`, `outcome`.
+- `ServiceConfig` — `slug`, `h1`, `subhead`, `problemSolution`, `included[]`, `deliverables[]`, `whoItsFor`, `howItFits[]` (cross-service `{label, href}`), `workingWithYdm`, `faqs[]`, `finalCtaText`, `selectClients`, `disclaimer?`, `metaTitle`, `metaDescription`, `processPhases[]`, `processDisclaimer`.
 
 **Services** (9):
 - `web-design` — full site builds/redesigns.
 - `seo` — search + AI search optimization.
 - `maintenance` — monthly care and support.
 - `analytics` — tracking, conversion reporting.
-- `paid-ads` — Google/Meta ad management (`selectClients: true`, `processDisclaimer: true`).
+- `paid-ads` — Google/Meta ad management (`selectClients: true`, `processDisclaimer: true`, includes a `disclaimer` string).
 - `branding` — positioning and visual identity.
-- `content` — copy and blog content.
-- `automation` — CRM/automation (`selectClients: true`, `processDisclaimer: true`).
-- `reputation` — GBP and review management (`selectClients: true`, `processDisclaimer: true`).
+- `content` — copy and blog content (empty `problemSolution`).
+- `automation` — CRM/automation (`selectClients: true`, `processDisclaimer: true`, includes a `disclaimer` string).
+- `reputation` — GBP and review management (`selectClients: true`, `processDisclaimer: true`, includes a `disclaimer` string).
 
 **Usage**:
 - `services/[slug]/page.tsx` — SSG params, metadata, and full service detail rendering.
+- `services/[slug]/deliverables/page.tsx` — SSG params, metadata, and service-specific deliverables / “What You Get” page.
+- `services/[slug]/faq/page.tsx` — SSG params, metadata, and grouped service FAQs.
 - `services/[slug]/process/page.tsx` — SSG params, metadata, and service-specific process page.
+- `services/pricing/page.tsx` — Derives pricing context from `SERVICES_CONFIG.included`, `selectClients`, and `PRICING_DETAILS`.
+- `components/ServiceSubnav.tsx` — Navigation tabs across the four service spoke pages (overview, deliverables, process, FAQ).
 - **Not** consumed by `/services` hub or `/services/process` hub, which maintain their own content arrays (duplication/inconsistency risk).
 
 **Observations**:
-- Content per service is comprehensive: problem/solution, inclusions, audience, cross-service links, working-with-YDM, FAQs, process timeline, metadata, and select-client flags.
+- Content per service is comprehensive: problem/solution, inclusions, deliverables (with output, timeline, and outcome for each), audience, cross-service links, working-with-YDM, FAQs, process timeline, metadata, and select-client flags.
 - Only `content` has an empty `problemSolution` string (`''`); all other 8 services, including `branding`, have fully written problem/solution copy.
 - All copy in the config uses an impersonal, firm-level voice and customer-second-person (`your`, `you’ll`) with no first-person pronouns.
 - The single-file format is convenient but large; splitting into per-service modules would reduce merge conflicts and improve maintainability.
@@ -531,18 +590,19 @@ ydm-agency/
 - `apps/firm-website/src/lib/education-config.ts`
 
 **`blog-config.ts`**:
-- Exports `BlogPost` interface (`slug`, `title`, `summary`, `category`, `publishedAt`, `readTime`).
-- Contains 3 sample blog posts for the `/blog` hub.
-- Not yet used for individual post pages.
+- Exports `BlogPost` interface with `slug`, `title`, `summary`, `category` (`'Opinion' | 'Analysis' | 'News' | 'Essay'`), `contentType`, `publishedAt`, `readTime`, `featured?`, `author?` (`name`, `role`, `photo?`, `bio?`), `pullQuote?`, `sections?` (`heading`, `body`, `type?`), `metaTitle`, and `metaDescription`.
+- Contains 3 sample blog posts.
+- Drives `/blog` hub (`blog/page.tsx`) and `/blog/[slug]` detail pages (`blog/[slug]/page.tsx`) with `generateStaticParams` and per-post metadata.
 
 **`education-config.ts`**:
-- Exports `EducationLessonSection` and `EducationLesson` interfaces.
-- `EducationLesson` includes `slug`, `title`, `summary`, `topic`, `level`, `readTime`, `attribution`, `safety`, `metaTitle`, `metaDescription`, and `sections`.
-- Contains 6 lessons: 3 technical marketing lessons and 3 framework-attribution lessons (public domain, named frameworks, proprietary frameworks).
-- Drives both the `/education` hub and `/education/[slug]` detail pages via `generateStaticParams`.
+- Exports `EducationLessonSection`, `EducationLesson`, `EducationTopic` interfaces plus helpers `getLessonsByTopic`, `getTopicsFromLessons`, `getTopicBySlug`.
+- `EducationLesson` includes `slug`, `title`, `summary`, `topic`, `level` (`'Beginner' | 'Intermediate' | 'Advanced'`), `readTime`, `attribution`, `safety` (`'public-domain' | 'cite-creator' | 'extra-care'`), `metaTitle`, `metaDescription`, `sections`, and `lastUpdated?`.
+- `EducationTopic` includes `slug`, `name`, `description`, `icon` (Lucide icon name), and `order`.
+- Contains 6 lessons across 5 topics: 2 SEO lessons, 1 Conversion, 1 Foundations, 1 Strategy, 1 Compliance — including 3 framework/attribution lessons (public domain, named frameworks, proprietary frameworks).
+- Drives `/education` hub (`education/page.tsx`), `/education/[topic]` topic pages, and `/education/[topic]/[slug]` detail pages (`education/[topic]/[slug]/page.tsx`) with `generateStaticParams` and Article JSON-LD.
 
 **Attribution & safety model**:
-- `safety: 'public-domain' | 'cite-creator' | 'extra-care'` categorizes lessons by sharing risk.
+- `safety` categorizes lessons by sharing risk.
 - `attribution` provides a short source/trademark note displayed on hub cards and lesson heroes.
 - Framework content includes originators, creators, trademark symbols (e.g., SOSTAC®), and source links.
 
@@ -791,7 +851,7 @@ ydm-agency/
 
 - **Version alignment**: Most catalog deps resolve to the latest compatible version. `react-hook-form` resolves to `7.83.0` under `^7.54.0`—verify this is the intended minor, as it is far from the lower bound.
 - **Radix UI divergence**: `@radix-ui/react-slot` (`1.3.3`) and `@radix-ui/react-dialog` (`1.1.23`) are on different minor tracks; acceptable but may be worth aligning.
-- **React Email duplication**: `resend@4.8.0` transitively depends on `@react-email/render@1.1.2`, while `packages/email` directly declares `@react-email/render@0.0.12`. Two versions are installed; consider aligning on one.
+- **React Email duplication**: `resend@4.8.0` transitively depends on `@react-email/render@1.1.2`, while `packages/email` directly declares `@react-email/render@0.0.12`; a third resolved version, `@react-email/render@0.0.17`, also appears in `pnpm-lock.yaml` as a transitive dependency. Three versions are installed; consider aligning on one.
 - **Email package unused by app**: `resend`, `@react-email/components`, and `@react-email/render` are installed in `packages/email`, but `apps/firm-website` does not depend on `@ydm-agency/email`.
 - **next-themes**: `0.3.0` is installed; `0.4+` is available if a future upgrade is desired.
 
@@ -897,7 +957,9 @@ ydm-agency/
    - Should showcase live project demos
    - Mentioned as proof of capability
 
-**Note**: Service process pages (`/services/[slug]/process`) are already implemented (see Section 2.2/2.3) and are no longer missing; this section previously listed them in error. `/blog` and `/education` (including `/education/[slug]` detail pages) are now implemented as well.
+**Note**: Service process pages (`/services/[slug]/process`), service deliverables pages (`/services/[slug]/deliverables`), service FAQ pages (`/services/[slug]/faq`), the service comparison page (`/services/compare`), the pricing page (`/services/pricing`), and the free audit page (`/audit`) are now implemented (see Section 2.2/2.3) and are no longer missing. `/blog` and `/education` (including `/education/[slug]` detail pages) are now implemented as well.
+
+**Authoritative specs exist for both missing pages** (`docs/planning/`, not yet built) — see Section 16.2/16.3 for the full spec-vs-implementation comparison.
 
 ### 13.2 Missing Backend Integration
 
@@ -961,16 +1023,108 @@ ydm-agency/
 
 ---
 
-## 15. Conclusion
+## 15. Planning Documentation & Governance
 
-The YDM Agency repository demonstrates a well-architected, modern web application built with current best practices. The monorepo structure is properly configured, the design system is comprehensive, and security measures are thoughtfully implemented.
+### 15.1 `docs/planning/` Corpus (13 files, not yet cross-referenced against code)
 
-**Overall Assessment**: Production-ready foundation with missing implementations for critical user-facing features.
+| File | Size | Covers |
+|---|---|---|
+| `00-index.md` | 3.4KB | Shared placeholders (`[STD-CTA]`, `[RESPONSE-PROMISE]`) referenced by other docs |
+| `01-strategy-positioning.md` | 2.8KB | Brand strategy |
+| `02-design-system.md` | 4.5KB | Design tokens (source of truth AGENTS.md/config derive from) |
+| `03-sitemap-ia-navigation.md` | 4.1KB | IA/nav — compare against `Header.tsx`/`Footer.tsx` |
+| `04-home-page.md` | 3.6KB | Home page copy/layout spec |
+| `05-services-copy.md` | 15.7KB | Services copy — largest planning doc, source for `services-config.ts` |
+| `06-demos-page.md` | 3.4KB | `/demos` spec — see 15.3 |
+| `07-process-copy.md` | 5.8KB | Process page copy |
+| `08-about-page.md` | 3.0KB | About page spec |
+| `09-contact-page.md` | 3.8KB | `/contact` spec — see 15.2 |
+| `10-privacy-policy.md` | 4.8KB | Privacy policy spec |
+| `11-tech-stack-implementation.md` | 7.6KB | Tech stack rationale |
+| `12-launch-protocol.md` | 3.9KB | Launch checklist |
 
-**Next Steps**: Focus on implementing the missing contact page, adding E2E tests, and completing the demo projects page to make the site fully functional for launch.
+This corpus is not referenced anywhere in `analysis.md`'s prior revision or in `README.md`; it is the design source-of-truth for unbuilt pages.
+
+### 15.2 Contact Page: Spec (`09-contact-page.md`) vs. Implementation
+
+| Spec requirement | Implemented? |
+|---|---|
+| Route `/contact` with `ContactForm` | **No** — route absent (Section 2.2) |
+| Server Action: validate → Supabase `leads` insert → Resend ack + internal notify | **No** — no Server Action anywhere in repo |
+| Upstash rate limiting, 5/hr/IP | **No** — `@upstash/ratelimit` not a dependency |
+| GA4 `form_submission` event on success | **No** — `trackEvent` never called from `ContactForm` |
+| Calendly inline embed, lazy-loaded (`next/dynamic`, `ssr: false`) | **No** — no Calendly integration/dependency found |
+| `role="alert"` on field errors | **No** — `ContactForm.tsx:80-135` renders errors as plain `<p className="text-error ...">`, no `role="alert"`/`aria-live` |
+| Honeypot, Zod validation, React Hook Form | **Yes** — `ContactForm.tsx` fully implements these |
+| Submit button copy "Get Your Free Project Outline" | **No** — actual button reads "Send Message" (`ContactForm.tsx:159`) |
+
+### 15.3 Demos Page: Spec (`06-demos-page.md`) vs. Implementation
+
+- Spec calls for 4 named demo subdomains: **Coastal Café** (restaurant), **Apex SaaS** (landing page), **Vanguard Plumbing** (local service), **Nova Storefront** (e-commerce) — each an independent Next.js app in the monorepo deployed to its own subdomain.
+- **None exist**: no additional apps in `apps/`, no `/demos` route, no demo-related code anywhere in the repo.
+- `/demos` is referenced twice in `about/page.tsx` (line 137 inline link, line 202 FAQ answer text) and is absent from `Header`/`Footer` nav — consistent with "not yet implemented" but the About page over-promises functionality that doesn't exist yet.
+
+### 15.4 `.devin/workflows/` (9 files)
+
+`audit-architecture.md`, `audit-code.md`, `audit-dependencies.md`, `audit-hygiene.md`, `audit-security.md`, `audit-tests.md`, `create-todo.md`, `execute-todo.md` (4-6KB each), plus `official/official.md` (42.9KB — largest single doc in the repo, not inspected in this pass due to size).
+
+### 15.5 README.md / AGENTS.md Drift
+
+- Both `README.md` and `AGENTS.md` have been updated to list the new service-page ecosystem routes (`/services/[slug]/faq`, `/services/compare`, `/services/pricing`, `/audit`) and the new `@ydm-agency/seo` `FaqPageJsonLd` export.
+- Both `README.md` and `AGENTS.md` still list the education route as `/education/[slug]`. The actual implemented structure is the two-level `/education/[topic]/[slug]` (Section 2.2) — both governance docs are stale on this specific point.
+- `AGENTS.md` does not list `success` as a documented color token (only `README`-adjacent `tailwind.js`/`globals.css` define it), though it's aliased to the same value as `accent` (Section 2.5) so the omission is low-impact.
+- `README.md` and `AGENTS.md` route lists otherwise match the implemented routes in Section 2.2.
+
+### 15.6 AGENTS.md Directives Not Currently Met
+
+| AGENTS.md directive | Status |
+|---|---|
+| "Implement scroll reveals with Framer Motion" (line 56) | **Not met** — `framer-motion` is not a dependency in any `package.json`; no scroll-reveal animation code found anywhere in `apps/firm-website` or `packages/ui` |
+| "Optimize images with Next.js Image component" (line 167) | **Not applicable yet** — zero `next/image` or `<img>` usage found in `apps/firm-website/src` (grep-confirmed); the only "photo" is an emoji placeholder (`👤`) in `about/page.tsx:29`, so there are no raster images to optimize |
+| "Use dynamic imports for heavy components" (line 168) | **Not met** — no `next/dynamic` usage found anywhere in the app |
+| "Lighthouse score targets: 90+ Performance, 95+ Accessibility" (line 170) | **Unverified** — no Lighthouse CI step in `.github/workflows/ci.yml`, no local Lighthouse config |
+
+---
+
+## 16. Accessibility & Resilience Audit
+
+### 16.1 Error Handling Boundaries
+
+No `error.tsx`, `not-found.tsx`, or `loading.tsx` exist anywhere in `apps/firm-website/src/app` (confirmed via `find_by_name` across the app tree). Dynamic routes (`services/[slug]`, `services/[slug]/process`, `services/[slug]/deliverables`, `services/[slug]/faq`, `education/[topic]`, `education/[topic]/[slug]`) call Next.js's `notFound()` for invalid params, but there is no custom `not-found.tsx` to style that state, and no `error.tsx` to catch runtime render errors — both fall back to Next.js's unstyled defaults.
+
+### 16.2 Form & Interactive Component Accessibility
+
+- **`ContactForm.tsx`** (`packages/forms/src`): field errors render as plain `<p className="text-error text-sm mt-1">` with no `role="alert"` or `aria-live` region, despite `docs/planning/09-contact-page.md:35` explicitly specifying `role="alert"` for errors and keyboard-navigable, accessible error states.
+- **`CookieConsent.tsx`** (`packages/ui/src`): the bottom banner has no `role="dialog"`/`role="alertdialog"`, no `aria-live`, and no focus trap despite blocking the viewport and requiring a decision.
+- **`CookieConsent.tsx:12-16`**: pressing `Escape` calls `reject()` directly — this silently opts the visitor out of analytics rather than performing a neutral dismiss, which may be an unintended UX side-effect of the Escape handler.
+- **`Header.tsx`**: correctly implements a skip-to-content link, `aria-label`s on menu buttons, and Radix `Dialog` for the mobile nav (accessible focus trap/`Escape` handling comes from Radix here, unlike the custom `CookieConsent` implementation).
+
+### 16.3 Images
+
+No `next/image` or raw `<img>` tags exist anywhere in `apps/firm-website/src` (grep-confirmed). The About page's "Founder Photo" section (`about/page.tsx:26-32`) is a bordered placeholder `<div>` containing an emoji (`👤`) and the text "Founder Photo Placeholder" — there is currently no real photography/imagery in the site at all, only Lucide icons and CSS.
+
+---
+
+## 17. Code Hygiene & Type Safety
+
+- **No `TODO`/`FIXME`/`XXX` comments** found anywhere in `apps/` or `packages/` (grep-confirmed across `.ts`/`.tsx`) — outstanding work is tracked in `docs/planning/` and `.devin/workflows/` rather than inline code comments.
+- **No `any` type or `as any` casts** found in `apps/firm-website/src` or any `packages/*/src` (grep-confirmed) — this exceeds the AGENTS.md baseline and contradicts nothing; worth noting as a positive strength not previously captured.
+- **`console.log` usage**: exactly one call, in `packages/analytics/src/events.ts:39`, gated by `process.env.NODE_ENV === 'development'`. No stray debug logging elsewhere.
+- **`tsconfig.base.json` strictness**: `strict: true` is set, but stricter opt-in flags are not enabled: `noUncheckedIndexedAccess`, `noImplicitOverride`, `exactOptionalPropertyTypes`, `noPropertyAccessFromIndexSignature`. Not required by `AGENTS.md`, but would harden the `Record<string, ServiceConfig>`-style lookups in `services-config.ts`/`education-config.ts` where slug lookups aren't currently guaranteed non-`undefined` by the type system.
+- **Vitest config** (`packages/ui/vitest.config.ts`, `packages/forms/vitest.config.ts`): both use `environment: 'jsdom'`, `globals: true`, and a package-local `setupFiles` importing `jest-dom`; each aliases its own workspace package to source (`@ydm-agency/utils`, `@ydm-agency/forms` respectively) for import resolution during tests, bypassing the built/published entry point.
+
+---
+
+## 18. Conclusion
+
+The YDM Agency repository demonstrates a well-architected, modern web application built with current best practices. The monorepo structure is properly configured, the design system is comprehensive, and security measures are thoughtfully implemented. Type safety and code hygiene (Section 17) exceed the `AGENTS.md` baseline — no `any` usage, no stray debug logging, no unresolved `TODO`s.
+
+**Overall Assessment**: Production-ready foundation with missing implementations for critical user-facing features and two categories of resilience gaps not previously documented: (1) no Next.js `error.tsx`/`not-found.tsx`/`loading.tsx` boundaries anywhere in the app, and (2) accessibility gaps in `ContactForm` error states and the `CookieConsent` banner (Section 16). Detailed, pre-written specs for both missing pages already exist in `docs/planning/06-demos-page.md` and `docs/planning/09-contact-page.md` (Section 15), including exact copy, a Supabase `leads` schema, and rate-limiting requirements — these should be treated as the implementation source of truth rather than re-derived from `AGENTS.md` alone.
+
+**Next Steps**: Focus on implementing the missing contact page (per `docs/planning/09-contact-page.md`) and demos page (per `docs/planning/06-demos-page.md`), adding E2E tests, adding `error.tsx`/`not-found.tsx` boundaries, fixing the form/cookie-banner accessibility gaps, and reconciling `README.md`/`AGENTS.md` route documentation drift (Section 15.5) before launch.
 
 ---
 
 **Analysis Completed By**: Cascade AI Assistant  
-**Analysis Method**: Direct code examination without markdown documentation review  
-**Lines of Code Examined**: ~2,000+ across configuration, components, and pages
+**Analysis Method**: Direct code examination without markdown documentation review, cross-referenced against `docs/planning/`, `AGENTS.md`, and `README.md` for spec/governance drift  
+**Lines of Code Examined**: ~3,500+ across configuration, components, pages, and planning documentation

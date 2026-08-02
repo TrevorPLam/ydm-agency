@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { Container, Button, Card, Badge } from '@ydm-agency/ui';
 import { SERVICES_CONFIG } from '@/lib/services-config';
 import { constructMetadata } from '@ydm-agency/seo';
+import { ServiceSubnav } from '@/components/ServiceSubnav';
 
 export async function generateStaticParams() {
   return Object.keys(SERVICES_CONFIG).map((slug) => ({ slug }));
@@ -25,8 +26,10 @@ export default async function ServiceProcessPage({ params }: { params: Promise<{
   if (!service) notFound();
 
   return (
-    <main className="py-16 md:py-24">
-      <Container>
+    <main className="min-h-screen">
+      <ServiceSubnav slug={service.slug} active="process" />
+      <section className="py-16 md:py-24">
+        <Container>
         {/* Breadcrumbs */}
         <nav className="mb-8 flex items-center gap-2 text-sm text-text-secondary">
           <Link href="/services/process" className="hover:text-text-primary">
@@ -103,6 +106,10 @@ export default async function ServiceProcessPage({ params }: { params: Promise<{
           <Link href={`/services/${service.slug}`} className="text-text-secondary hover:text-text-primary">
             ← Back to {service.h1}
           </Link>
+          <span className="text-text-secondary">|</span>
+          <Link href={`/services/${service.slug}/faq`} className="text-text-secondary hover:text-text-primary">
+            View all {service.h1} FAQs →
+          </Link>
         </div>
 
         {/* Final CTA */}
@@ -110,11 +117,17 @@ export default async function ServiceProcessPage({ params }: { params: Promise<{
           <h2 className="mb-4 font-display text-2xl font-semibold text-text-primary">
             {service.finalCtaText}
           </h2>
-          <Button variant="primary" asChild>
-            <Link href="/contact">Get a Free Project Outline</Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button variant="primary" asChild>
+              <Link href="/contact">Get a Free Project Outline</Link>
+            </Button>
+            <Button variant="secondary" asChild>
+              <Link href={`/services/${service.slug}/deliverables`}>See What You Get</Link>
+            </Button>
+          </div>
         </div>
       </Container>
+    </section>
     </main>
   );
 }

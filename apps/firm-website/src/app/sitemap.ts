@@ -89,6 +89,44 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  // Deliverables spoke pages
+  const deliverablesUrls: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
+    url: `${baseUrl}/services/${slug}/deliverables`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
+
+  // FAQ spoke pages
+  const faqUrls: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
+    url: `${baseUrl}/services/${slug}/faq`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
+
+  // Service comparison, pricing, and audit pages
+  const comparisonUrls: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/services/compare`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/services/pricing`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/audit`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+  ];
+
   // Blog post pages
   const blogUrls: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
@@ -113,5 +151,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticUrls, ...serviceUrls, ...processUrls, ...blogUrls, ...educationTopicUrls, ...educationLessonUrls];
+  return [
+    ...staticUrls,
+    ...serviceUrls,
+    ...processUrls,
+    ...deliverablesUrls,
+    ...faqUrls,
+    ...comparisonUrls,
+    ...blogUrls,
+    ...educationTopicUrls,
+    ...educationLessonUrls,
+  ];
 }

@@ -5,6 +5,14 @@ export interface ProcessPhase {
   description: string;
 }
 
+export interface Deliverable {
+  title: string;
+  description: string;
+  output: string;
+  timeline: string;
+  outcome: string;
+}
+
 export interface ServiceConfig {
   slug: string;
   h1: string;
@@ -22,6 +30,7 @@ export interface ServiceConfig {
   metaDescription: string;
   processPhases: ProcessPhase[];
   processDisclaimer: boolean;
+  deliverables: Deliverable[];
 }
 
 export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
@@ -55,6 +64,50 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: 'How much does a website cost?', a: 'Every project is scoped individually based on pages, features, and timeline, so no single number fits all cases. The free project outline includes a clear, transparent estimate before any commitment is made.' },
     ],
     finalCtaText: 'Ready for a website that works as hard as you do?',
+    deliverables: [
+      {
+        title: 'Custom design — no template',
+        description: 'Every page is designed from a blank canvas around the business, its content, and its goals. No pre-made themes or one-size-fits-all layouts are used.',
+        output: 'Approved visual designs and a structured page plan before any code is written.',
+        timeline: 'Phases 1–2 (Discovery through Design & Prototyping)',
+        outcome: 'A site that looks, feels, and performs like the business — not a generic template.',
+      },
+      {
+        title: 'Mobile-friendly layout',
+        description: 'The site is planned, designed, and tested for phones and tablets first, then scaled up to larger screens.',
+        output: 'Responsive layouts that work cleanly across all common devices and screen sizes.',
+        timeline: 'Designed in phase 2; built and tested in phase 3.',
+        outcome: 'Visitors on any device can navigate, read, and convert without friction.',
+      },
+      {
+        title: 'On-page SEO built in from day one',
+        description: 'Search fundamentals — clean markup, meta data, headings, URL structure, and internal linking — are part of the build, not bolted on later.',
+        output: 'Pages optimized with titles, descriptions, structured headings, and fast, crawlable code.',
+        timeline: 'Built into design and development; validated before launch.',
+        outcome: 'The site is findable by Google and ready for further SEO or AI search work.',
+      },
+      {
+        title: 'Fast load speeds, tested pre-launch',
+        description: 'Performance is measured and tuned before the site goes live, including image handling, code splitting, and caching where appropriate.',
+        output: 'A tested, production-ready site that loads quickly on real connections.',
+        timeline: 'Phase 3 (AI-Assisted Build & Review) and phase 4 (Testing, Launch & Handoff).',
+        outcome: 'Lower bounce rates, better search signals, and a smoother visitor experience.',
+      },
+      {
+        title: 'Contact forms and lead capture integrated',
+        description: 'Forms, calls-to-action, and lead capture points are placed where visitors actually make decisions, then connected to the business.',
+        output: 'Working contact forms, lead capture flows, and delivery routing.',
+        timeline: 'Phase 3 build; tested in phase 4.',
+        outcome: 'More inquiries turn into actual leads instead of leaking at the form.',
+      },
+      {
+        title: 'A simple update process, or pairing with a maintenance plan',
+        description: 'The business is shown how to make straightforward content updates, or an optional maintenance plan keeps the site current.',
+        output: 'Documentation, training notes, or a monthly maintenance plan.',
+        timeline: 'Handoff in phase 4; maintenance begins when chosen.',
+        outcome: 'The site stays accurate and secure long after launch without requiring technical knowledge.',
+      },
+    ],
     selectClients: false,
     metaTitle: 'Custom Website Design & Development for Small Businesses | YDM Agency',
     metaDescription: 'Custom-built websites for small businesses — fast, mobile-ready, and designed to turn visitors into customers. No templates. See the process and get a free project outline.',
@@ -95,6 +148,50 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: 'How much does SEO cost?', a: "Every plan is scoped to the size of the business and how competitive its market is, so there isn't one flat number. The free project outline includes a transparent estimate before any commitment is made." },
     ],
     finalCtaText: 'Ready to get found by the customers searching for you right now?',
+    deliverables: [
+      {
+        title: 'Technical SEO audit & fixes',
+        description: 'The site is crawled and diagnosed for technical blockers that prevent search engines from indexing or ranking pages correctly.',
+        output: 'A prioritized technical audit and implemented fixes (speed, crawlability, mobile issues, structured data).',
+        timeline: 'Month 1',
+        outcome: 'A site that search engines can crawl, understand, and rank without technical obstacles.',
+      },
+      {
+        title: 'On-page optimization matched to real customer searches',
+        description: 'Page content, titles, headings, and internal links are aligned with the actual words customers use when searching.',
+        output: 'Updated page copy, metadata, and keyword mapping based on real search data.',
+        timeline: 'Month 1–2',
+        outcome: 'Pages become relevant for the searches that drive revenue, not just traffic.',
+      },
+      {
+        title: 'Local SEO (Google Business Profile)',
+        description: 'The business’s local presence is optimized so nearby searches turn into calls, visits, and map views.',
+        output: 'An optimized Google Business Profile and local citation alignment.',
+        timeline: 'Month 1',
+        outcome: 'The business shows up correctly for “near me” and local service searches.',
+      },
+      {
+        title: 'AI search optimization',
+        description: 'Content is structured so AI answer engines like ChatGPT, Perplexity, and Google AI Overviews can find, understand, and recommend the business.',
+        output: 'Clear entity signals, structured data, and content formatted for generative engine extraction.',
+        timeline: 'Ongoing, starting month 1',
+        outcome: 'Visibility expands beyond traditional search into the AI tools buyers now use to ask questions.',
+      },
+      {
+        title: 'Plain-English monthly reporting',
+        description: 'Each month the business receives a clear summary of what was done, what changed, and what happens next — no jargon or vanity metrics.',
+        output: 'A monthly report with rankings, traffic, conversions, and the next month’s plan.',
+        timeline: 'Monthly',
+        outcome: 'Marketing decisions become informed and accountable instead of guesswork.',
+      },
+      {
+        title: 'Ongoing optimization & iteration',
+        description: 'SEO is not a one-time task. The plan is adjusted each month based on data, algorithm changes, and competitive movement.',
+        output: 'Monthly execution, content updates, and strategy refinements.',
+        timeline: 'Months 2–6 and beyond',
+        outcome: 'Initial improvements in 30–60 days, with meaningful results compounding over 3–6 months.',
+      },
+    ],
     selectClients: false,
     metaTitle: 'SEO & AI Search Optimization for Small Businesses | YDM Agency',
     metaDescription: 'SEO and AI search optimization for small businesses — technical fixes, local SEO, and AI-search readiness that help customers find you. No guesswork. See the process and get a free project outline.',
@@ -135,6 +232,50 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: 'Do I need a maintenance plan if my site is brand new?', a: "It's optional early on, but even new sites benefit from security updates and backups from day one — problems are easier to prevent than to fix after the fact." },
     ],
     finalCtaText: 'Ready to stop worrying about your site?',
+    deliverables: [
+      {
+        title: 'Software & security updates',
+        description: 'Core software, plugins, and dependencies are kept current so vulnerabilities are closed before they become problems.',
+        output: 'Updated core software and a record of every update applied.',
+        timeline: 'Monthly maintenance cycle',
+        outcome: 'The site stays secure and compatible, reducing the risk of hacks or failures.',
+      },
+      {
+        title: 'Regular, tested backups',
+        description: 'Backups are scheduled, stored, and tested so the site can be restored quickly if something goes wrong.',
+        output: 'Automated backup system with verified restore capability.',
+        timeline: 'Set up during onboarding; verified monthly',
+        outcome: 'A worst-case failure becomes a quick restore, not a complete rebuild.',
+      },
+      {
+        title: 'Uptime monitoring',
+        description: 'The site is monitored around the clock for downtime or critical errors.',
+        output: 'Uptime alerts and incident reports.',
+        timeline: 'Active from onboarding',
+        outcome: 'Problems are caught and addressed before customers notice them.',
+      },
+      {
+        title: 'Broken-link and bug fixes',
+        description: 'Broken links, layout issues, and small bugs are found and fixed as part of routine care.',
+        output: 'A monthly health check with fixes applied.',
+        timeline: 'Monthly maintenance cycle',
+        outcome: 'A polished, trustworthy site experience that does not send visitors to dead ends.',
+      },
+      {
+        title: 'Performance checks',
+        description: 'Load speed and core performance metrics are reviewed so the site does not slow down over time.',
+        output: 'Performance snapshot and any recommended or applied fixes.',
+        timeline: 'Monthly, with deeper quarterly review',
+        outcome: 'Pages stay fast, which protects both user experience and search rankings.',
+      },
+      {
+        title: 'Up to 30 minutes of content updates',
+        description: 'Small text, image, and content changes are included each month so the site stays current without extra invoices.',
+        output: 'Applied content updates or a summary of changes.',
+        timeline: 'Included monthly; extra time with pre-approval',
+        outcome: 'The business can keep the site accurate without touching code or paying hourly for every tweak.',
+      },
+    ],
     selectClients: false,
     metaTitle: 'Website Maintenance & Support Plans for Small Businesses | YDM Agency',
     metaDescription: 'Monthly website maintenance and support — security updates, backups, uptime monitoring, and fast fixes, so a site never becomes a problem. See plans and get a free project outline.',
@@ -174,6 +315,50 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: 'Will this tell me if my marketing is actually working, or just show more numbers?', a: 'The reports are built around one question: what should happen next. Every monthly report includes specific action items, not just charts — the number of visitors matters far less than what to do about it.' },
     ],
     finalCtaText: 'Ready to stop guessing and start knowing?',
+    deliverables: [
+      {
+        title: 'Channel clarity',
+        description: 'Traffic is attributed to the actual source that sent it — Google, social, email, ads, direct, referrals — so the business can see what each channel contributes.',
+        output: 'A clean channel grouping and source report aligned to business goals.',
+        timeline: 'Setup phase (1–2 weeks)',
+        outcome: 'Budget stops being split evenly and starts flowing toward what actually works.',
+      },
+      {
+        title: 'Conversion tracking',
+        description: 'The actions that matter — form fills, calls, purchases, bookings — are tracked and tied back to the marketing that drove them.',
+        output: 'Configured goals, events, and conversion reports in the business’s analytics account.',
+        timeline: 'Setup phase (1–2 weeks)',
+        outcome: 'The business knows which keywords, campaigns, and channels generate real leads.',
+      },
+      {
+        title: 'Automatic “how did you hear about us” insight',
+        description: 'A tracking setup captures the source of leads and customers without relying on staff to ask every caller.',
+        output: 'A reporting view showing how leads heard about the business.',
+        timeline: 'Setup phase',
+        outcome: 'Sales and marketing teams stop guessing where leads come from.',
+      },
+      {
+        title: 'Page performance and drop-off identification',
+        description: 'Page-level data shows where visitors leave before converting, so problem pages can be fixed.',
+        output: 'A page performance report with drop-off points and recommendations.',
+        timeline: 'First reporting cycle and ongoing',
+        outcome: 'Conversion leaks are found and fixed with targeted changes instead of site-wide overhauls.',
+      },
+      {
+        title: 'Month-over-month trends with clear recommendations',
+        description: 'Each monthly report focuses on what changed and what to do next, not vanity numbers.',
+        output: 'Plain-English monthly report with 1–2 prioritized action items.',
+        timeline: 'Monthly',
+        outcome: 'Data turns into decisions instead of unread dashboards.',
+      },
+      {
+        title: 'Full setup on new or existing accounts',
+        description: 'Analytics accounts are set up, cleaned, or reconfigured in the business’s own name — no black-box dashboards.',
+        output: 'Fully configured analytics property, goals, and a live dashboard.',
+        timeline: 'Setup phase (1–2 weeks)',
+        outcome: 'The business owns its data and can access it anytime without depending on a third party.',
+      },
+    ],
     selectClients: false,
     metaTitle: 'Marketing Analytics & Attribution for Small Businesses | YDM Agency',
     metaDescription: "Know exactly where customers come from — clean tracking, conversion attribution, and plain-English monthly reports. Stop guessing what's working. Get a free project outline.",
@@ -213,6 +398,50 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: 'Do I need a dedicated landing page, or can ads point to my existing site?', a: "A dedicated landing page is strongly recommended, since it's built around one specific offer instead of competing with a homepage's other messages. It can be built alongside the ad campaign if one doesn't exist yet." },
     ],
     finalCtaText: 'Ready to turn your ad budget into measurable growth?',
+    deliverables: [
+      {
+        title: 'Campaign strategy aligned to business goals',
+        description: 'The campaign is built around a real outcome — leads, sales, bookings — not impressions or clicks.',
+        output: 'A written campaign strategy with goals, budget allocation, and KPIs.',
+        timeline: 'Phase 1 (1 week)',
+        outcome: 'Ad spend is tied to business results from the start.',
+      },
+      {
+        title: 'Keyword research and search ad structure (Google)',
+        description: 'The search campaigns target the exact queries people type when they are ready to buy.',
+        output: 'Structured Google Ads campaigns with keyword themes, match types, and negative keywords.',
+        timeline: 'Phase 2 (1–2 weeks)',
+        outcome: 'Budget goes toward high-intent searches instead of broad, expensive clicks.',
+      },
+      {
+        title: 'Audience targeting and creative setup (Meta)',
+        description: 'Meta campaigns reach the people most likely to act, with creative and messaging built for the platform.',
+        output: 'Audience definitions, ad sets, and launch-ready creative.',
+        timeline: 'Phase 2 (1–2 weeks)',
+        outcome: 'Ads are shown to the right people, not the widest possible audience.',
+      },
+      {
+        title: 'Conversion tracking on every click',
+        description: 'Every meaningful action is tracked so the business knows exactly what the ad budget produced.',
+        output: 'Conversion events, tracking tags, and attribution setup.',
+        timeline: 'Phase 2',
+        outcome: 'Cost per lead and return on ad spend become visible and optimizable.',
+      },
+      {
+        title: 'Ongoing optimization — weekly adjustments, A/B testing',
+        description: 'Campaigns are watched and tuned weekly: bids, audiences, creative, and landing page alignment.',
+        output: 'Weekly optimization log and monthly performance summary.',
+        timeline: 'Phase 3 (ongoing)',
+        outcome: 'Ad performance improves over time instead of bleeding budget on underperforming ads.',
+      },
+      {
+        title: 'Monthly plain-English report and live dashboard',
+        description: 'The business sees what was spent, what it produced, and what is changing next — in language that makes sense.',
+        output: 'A shared live dashboard and a monthly report with action items.',
+        timeline: 'Monthly',
+        outcome: 'Full transparency; the campaign is never a black box.',
+      },
+    ],
     selectClients: true,
     disclaimer: 'This service is available for select clients; the exact phases, tools, and timelines may be adapted based on the partnership approach used. Typically delivered in partnership with specialist tools/platforms to ensure quality and reliability. Min. $500/month ad budget recommended.',
     metaTitle: 'Google & Meta Ads Management for Small Businesses | YDM Agency',
@@ -252,6 +481,43 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: "I'm not a 'creative' person — how involved do I need to be?", a: 'Deep discovery upfront does most of the heavy lifting. Direction and feedback are needed at key points, but the strategic and creative work itself is handled directly.' },
     ],
     finalCtaText: 'Ready for a brand that does the selling before you even open your mouth?',
+    deliverables: [
+      {
+        title: 'Positioning statement',
+        description: 'A clear definition of who the business serves, the problem it solves, and why it is the right choice.',
+        output: 'A one-page positioning statement.',
+        timeline: 'Phase 2 (3–5 days)',
+        outcome: 'The business can explain its place in the market in one sentence.',
+      },
+      {
+        title: 'Core messaging',
+        description: 'Mission, brand promise, and elevator pitch are defined so the business speaks consistently everywhere.',
+        output: 'Core messaging document with mission, promise, pitch, and supporting messages.',
+        timeline: 'Phase 2 (3–5 days)',
+        outcome: 'Every channel says the same thing, the same way.',
+      },
+      {
+        title: 'Visual identity',
+        description: 'Logo, color palette, typography, and imagery style are created or refined to match the positioning.',
+        output: 'Logo files, color palette, type pairings, and imagery direction.',
+        timeline: 'Phase 3 (1–2 weeks)',
+        outcome: 'The brand looks cohesive, professional, and instantly recognizable.',
+      },
+      {
+        title: 'Simple brand style guide',
+        description: 'A practical guide so anyone creating future materials can keep the brand consistent.',
+        output: 'A brand style guide covering logo usage, colors, type, tone, and examples.',
+        timeline: 'Phase 4 (2–3 days)',
+        outcome: 'Future marketing — social posts, proposals, ads — all look like the same business.',
+      },
+      {
+        title: 'Competitive clarity',
+        description: 'A clear answer to what makes this business different from the next option on a prospect’s list.',
+        output: 'Competitive differentiation statement and messaging.',
+        timeline: 'Phase 2',
+        outcome: 'Prospects understand why to choose this business over competitors without having to figure it out themselves.',
+      },
+    ],
     selectClients: false,
     metaTitle: 'Branding & Positioning for Small Businesses | YDM Agency',
     metaDescription: 'Branding and positioning that makes customers choose you — messaging, visual identity, and a style guide built to make a business unforgettable. See the process and get a free project outline.',
@@ -290,6 +556,43 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: 'Voice match', a: 'Discovery captures your tone; refinement until it feels right.' },
     ],
     finalCtaText: 'Ready for words that work as hard as you do?',
+    deliverables: [
+      {
+        title: 'Website copy',
+        description: 'Home, about, services, and contact pages are written to sound like the business and move visitors toward action.',
+        output: 'Final website copy in an editable format, ready for design or implementation.',
+        timeline: 'Phase 2 (1–2 weeks)',
+        outcome: 'The site explains what the business does and why it matters without relying on the visitor to translate.',
+      },
+      {
+        title: 'Landing page copy',
+        description: 'A dedicated page is written around one goal — a call, a form, a sale — with no competing messages.',
+        output: 'Conversion-focused landing page copy with headline, body, and CTA.',
+        timeline: 'Phase 2',
+        outcome: 'A page that supports ads or campaigns by speaking directly to one offer.',
+      },
+      {
+        title: 'Blog and article content',
+        description: 'SEO-aware articles are written to attract search traffic and demonstrate expertise without sounding robotic.',
+        output: 'Draft blog posts or article outlines, ready for review.',
+        timeline: 'Phase 2–3',
+        outcome: 'The business becomes discoverable for long-tail searches and has content to share across channels.',
+      },
+      {
+        title: 'Discovery process to capture voice',
+        description: 'A structured interview and research process captures the business’s tone, audience, and key messages before writing starts.',
+        output: 'Voice and tone brief plus content strategy notes.',
+        timeline: 'Phase 1 (2–4 days)',
+        outcome: 'The final copy sounds like the real business, not a generic writer.',
+      },
+      {
+        title: 'Revisions',
+        description: 'Back-and-forth refinement is included so the copy feels authentic and hits the mark.',
+        output: 'Revised drafts based on feedback.',
+        timeline: 'Phase 2',
+        outcome: 'The business owns the final words and is confident in how it sounds.',
+      },
+    ],
     selectClients: false,
     metaTitle: 'Content & Copywriting | YDM Agency',
     metaDescription: 'Copy is written that sounds like you and sells like crazy — benefit‑driven, clear, and conversion‑focused.',
@@ -329,6 +632,50 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: 'How much does CRM setup and automation cost?', a: "Every CRM and automation setup is scoped to the number of workflows, tools, and integrations needed, so there isn't one flat number. The free project outline includes a transparent estimate before any commitment is made." },
     ],
     finalCtaText: 'Ready to stop losing leads to follow-up gaps?',
+    deliverables: [
+      {
+        title: 'Instant lead acknowledgment',
+        description: 'Every inquiry receives an immediate email or SMS response so the prospect knows their message was received.',
+        output: 'Configured acknowledgment workflows with branded messaging.',
+        timeline: 'Phase 3 (1 week)',
+        outcome: 'No lead is left wondering if their form or message went into a black hole.',
+      },
+      {
+        title: 'Appointment confirmations and reminders',
+        description: 'Bookings are confirmed and reminded automatically, reducing no-shows and manual back-and-forth.',
+        output: 'Automated confirmation and reminder sequences.',
+        timeline: 'Phase 3',
+        outcome: 'Fewer missed appointments and less administrative time spent on scheduling.',
+      },
+      {
+        title: 'Lead nurture sequences',
+        description: 'A series of helpful, timed follow-ups keeps prospects warm and moves them toward a decision.',
+        output: 'Configured email/SMS nurture workflows.',
+        timeline: 'Phase 3',
+        outcome: 'More leads convert over time without manual chasing.',
+      },
+      {
+        title: 'Lead scoring and routing',
+        description: 'Inquiries are scored and routed to the right person so the best leads get attention first.',
+        output: 'Lead scoring rules and routing logic inside the CRM.',
+        timeline: 'Phase 3',
+        outcome: 'Sales time is spent on the leads most likely to close, not on sorting through inboxes.',
+      },
+      {
+        title: 'Post-project follow-ups',
+        description: 'Review requests and feedback outreach are automated after a project or purchase is completed.',
+        output: 'Post-project follow-up workflows and review request sequences.',
+        timeline: 'Phase 3',
+        outcome: 'More genuine reviews and feedback without awkward manual asks.',
+      },
+      {
+        title: 'A central dashboard',
+        description: 'Every lead and interaction is visible in one place, so nothing falls through the cracks.',
+        output: 'A CRM dashboard configured for the business’s pipeline.',
+        timeline: 'Phase 2–3',
+        outcome: 'The team sees the full picture of every lead and every follow-up in real time.',
+      },
+    ],
     selectClients: true,
     disclaimer: 'This service is available for select clients; the exact phases, tools, and timelines may be adapted based on the partnership approach used. Typically delivered in partnership with specialist tools/platforms to ensure quality and reliability.',
     metaTitle: 'CRM Setup & Marketing Automation for Small Businesses | YDM Agency',
@@ -369,6 +716,50 @@ export const SERVICES_CONFIG: Record<string, ServiceConfig> = {
       { q: 'How much does reputation management cost?', a: "Every reputation management plan is scoped to the business, its current profile state, and how active review management needs to be, so there isn't one flat number. The free project outline includes a transparent estimate before any commitment is made." },
     ],
     finalCtaText: 'Ready to turn your online reputation into your biggest asset?',
+    deliverables: [
+      {
+        title: 'Google Business Profile setup and full optimization',
+        description: 'The profile is completed, corrected, and optimized with categories, services, photos, and business information.',
+        output: 'A fully optimized Google Business Profile under the client’s own account.',
+        timeline: 'Phase 1 (1–2 days)',
+        outcome: 'The business shows up accurately in local and “near me” searches.',
+      },
+      {
+        title: 'Compliant review-generation system',
+        description: 'A simple, platform-compliant system is built to make it easy for happy customers to leave reviews.',
+        output: 'QR cards, follow-up emails or SMS, and direct review links.',
+        timeline: 'Phase 2 (1 week)',
+        outcome: 'A steady, organic flow of new reviews without policy violations.',
+      },
+      {
+        title: 'Regular profile posts and updates',
+        description: 'The profile stays active with posts, offers, and updates that signal a live, trustworthy business.',
+        output: 'Scheduled or monthly profile posts.',
+        timeline: 'Ongoing monthly',
+        outcome: 'The profile remains fresh and engaging to both customers and Google’s ranking signals.',
+      },
+      {
+        title: 'Real-time review monitoring and alerts',
+        description: 'New reviews are tracked as they come in so nothing sits unanswered.',
+        output: 'Review alert system and monitoring dashboard.',
+        timeline: 'Phase 2',
+        outcome: 'Negative reviews are caught early and addressed before they damage reputation.',
+      },
+      {
+        title: 'Professional response drafts for every review',
+        description: 'Calm, professional responses are drafted for positive and negative reviews, ready for approval or posting.',
+        output: 'Response drafts and, if preferred, posted replies.',
+        timeline: 'Within 24 hours of new review',
+        outcome: 'Public responses build trust with future customers and show the business cares.',
+      },
+      {
+        title: 'Monthly reputation summary',
+        description: 'Each month the business receives a snapshot of reviews, ratings, profile activity, and trends.',
+        output: 'Monthly reputation report.',
+        timeline: 'Monthly',
+        outcome: 'The business sees how its reputation is trending and where to focus next.',
+      },
+    ],
     selectClients: true,
     disclaimer: 'This service is available for select clients; the exact phases, tools, and timelines may be adapted based on the partnership approach used. Typically delivered in partnership with specialist tools/platforms to ensure quality and reliability.',
     metaTitle: 'Google Business Profile & Review Management | YDM Agency',

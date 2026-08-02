@@ -95,9 +95,15 @@ importers:
 
   apps/firm-website:
     dependencies:
+      '@hookform/resolvers':
+        specifier: 'catalog:'
+        version: 3.10.0(react-hook-form@7.83.0(react@19.2.8))
       '@ydm-agency/analytics':
         specifier: workspace:*
         version: link:../../packages/analytics
+      '@ydm-agency/email':
+        specifier: workspace:*
+        version: link:../../packages/email
       '@ydm-agency/forms':
         specifier: workspace:*
         version: link:../../packages/forms
@@ -125,6 +131,12 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.2.8(react@19.2.8)
+      react-hook-form:
+        specifier: 'catalog:'
+        version: 7.83.0(react@19.2.8)
+      zod:
+        specifier: 'catalog:'
+        version: 3.25.76
     devDependencies:
       '@types/node':
         specifier: ^22.0.0

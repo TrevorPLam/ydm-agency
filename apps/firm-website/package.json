@@ -20,7 +20,11 @@
     "@ydm-agency/utils": "workspace:*",
     "@ydm-agency/seo": "workspace:*",
     "@ydm-agency/analytics": "workspace:*",
-    "@ydm-agency/forms": "workspace:*"
+    "@ydm-agency/forms": "workspace:*",
+    "@ydm-agency/email": "workspace:*",
+    "zod": "catalog:",
+    "react-hook-form": "catalog:",
+    "@hookform/resolvers": "catalog:"
   },
   "devDependencies": {
     "@ydm-agency/config": "workspace:*",
