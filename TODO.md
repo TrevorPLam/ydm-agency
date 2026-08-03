@@ -56,8 +56,8 @@ PR-only AI output), that is called out per task.
 
 ## T-002: Create packages/web-core foundation package
 
-- [ ] **Task ID**: T-002
-- **Status**: `ready`
+- [x] **Task ID**: T-002
+- **Status**: `done`
 - **Related files**: `packages/web-core/` (new), `apps/firm-website/src/lib/`, `packages/utils/src/`
 - **Definition of Done**:
   - `packages/web-core` exists with layout shell, meta/SEO wrapper helpers, a unified env-var config helper with safe defaults
@@ -67,23 +67,30 @@ PR-only AI output), that is called out per task.
 - **Rules to Follow**: TypeScript strict, explicit return types for public functions, no barrel exports
 - **Advanced Coding Pattern**: Deep module for env-var config helper (simple `getEnv()` interface hiding validation/defaults)
 - **Anti-patterns**: No barrel `index.ts` re-exporting everything; no client-only code in server helpers
-- **Imports/Exports**: New export `@packages/web-core` (formatDate, formatCurrency, env config helper)
+- **Imports/Exports**: New export `@packages/web-core` (`format`, `env`, `layout`, `meta`)
 - **Depends on**: T-001
 - **Blocks**: T-003, T-025, T-029
 
 ### Initial Analysis
 
-- [ ] Read `packages/utils/src/` to inventory current exports before splitting.
-- [ ] Research Next.js 15 conventions for shared env-var access across server/client boundaries.
-- [ ] Report findings before implementation.
+- [x] Read `packages/utils/src/` to inventory current exports before splitting.
+- [x] Research Next.js 15 conventions for shared env-var access across server/client boundaries.
+- [x] Report findings before implementation.
 
 ### Subtasks
 
-- **T-002-1** | `AGENT` | `packages/web-core/` | Complete initial analysis of `@ydm-agency/utils` exports.
-- **T-002-2** | `AGENT` | `packages/web-core/src/format.test.ts` | Write tests for `formatDate`/`formatCurrency` (port existing behavior).
-- **T-002-3** | `AGENT` | `packages/web-core/src/format.ts` | Implement moved formatting helpers.
-- **T-002-4** | `AGENT` | `packages/web-core/src/env.ts` | Implement env-var config helper with safe defaults.
-- **T-002-5** | `AGENT` | `packages/web-core/` | Run validation command to confirm.
+- [x] **T-002-1** | `AGENT` | `packages/web-core/` | Complete initial analysis of `@ydm-agency/utils` exports.
+- [x] **T-002-2** | `AGENT` | `packages/web-core/package.json`, `tsconfig.json`, `vitest.config.ts` | Scaffold package config (subpath exports, no barrel `index.ts`).
+- [x] **T-002-3** | `AGENT` | `packages/web-core/src/format.test.ts` | Write tests for `formatDate`/`formatCurrency`.
+- [x] **T-002-4** | `AGENT` | `packages/web-core/src/format.ts` | Implement moved formatting helpers.
+- [x] **T-002-5** | `AGENT` | `packages/web-core/src/env.test.ts` | Write tests for `getEnv`.
+- [x] **T-002-6** | `AGENT` | `packages/web-core/src/env.ts` | Implement `getEnv` with safe defaults.
+- [x] **T-002-7** | `AGENT` | `packages/web-core/src/layout.test.tsx` | Write tests for `RootLayout`.
+- [x] **T-002-8** | `AGENT` | `packages/web-core/src/layout.tsx` | Implement generic `RootLayout` with skip-to-content link.
+- [x] **T-002-9** | `AGENT` | `packages/web-core/src/meta.test.ts` | Write tests for `createRootMetadata`.
+- [x] **T-002-10** | `AGENT` | `packages/web-core/src/meta.ts` | Implement `createRootMetadata` helper.
+- [x] **T-002-11** | `AGENT` | `packages/utils/src/` | Remove `formatDate`/`formatCurrency` from `@ydm-agency/utils`.
+- [x] **T-002-12** | `AGENT` | `packages/web-core/` | Run validation commands to confirm.
 
 ### Validation Commands
 
@@ -94,8 +101,8 @@ PR-only AI output), that is called out per task.
 
 ## T-003: Migrate @ydm-agency/ui to packages/design-system
 
-- [ ] **Task ID**: T-003
-- **Status**: `ready`
+- [x] **Task ID**: T-003
+- **Status**: `done`
 - **Related files**: `packages/ui/*` → `packages/design-system/*`, `packages/ui/src/components/Button.tsx`, `packages/ui/src/components/Features.tsx`, `packages/ui/src/components/Pricing.tsx`
 - **Definition of Done**:
   - All contents of `packages/ui` moved to `packages/design-system`, package renamed in `package.json`
@@ -113,19 +120,19 @@ PR-only AI output), that is called out per task.
 
 ### Initial Analysis
 
-- [ ] Read `packages/ui/src/components/Button.tsx`, `Features.tsx`, `Pricing.tsx` to locate the stale teal shadow and hard-coded colors.
-- [ ] Research current `packages/ui/__tests__` to understand coverage before the move.
-- [ ] Report findings before implementation.
+- [x] Read `packages/ui/src/components/Button.tsx`, `Features.tsx`, `Pricing.tsx` to locate the stale teal shadow and hard-coded colors.
+- [x] Research current `packages/ui/__tests__` to understand coverage before the move.
+- [x] Report findings before implementation.
 
 ### Subtasks
 
-- **T-003-1** | `AGENT` | `packages/ui/` | Complete initial analysis of components with hard-coded styling.
-- **T-003-2** | `AGENT` | `packages/design-system/__tests__/Button.test.tsx` | Update/extend existing Button test to assert no teal shadow class and token-based styling.
-- **T-003-3** | `AGENT` | `packages/design-system/` | Move directory contents from `packages/ui`, rename package, update `package.json`.
-- **T-003-4** | `AGENT` | `packages/design-system/src/components/Button.tsx` | Remove stale teal shadow.
-- **T-003-5** | `AGENT` | `packages/design-system/src/components/Features.tsx`, `Pricing.tsx` | Replace hard-coded colors with `@packages/branding` tokens.
-- **T-003-6** | `AGENT` | `packages/design-system/src/cn.ts` | Move `cn()` in from `@ydm-agency/utils`.
-- **T-003-7** | `AGENT` | `packages/design-system/` | Run validation command to confirm.
+- [x] **T-003-1** | `AGENT` | `packages/ui/` | Complete initial analysis of components with hard-coded styling.
+- [x] **T-003-2** | `AGENT` | `packages/design-system/__tests__/Button.test.tsx` | Update/extend existing Button test to assert no teal shadow class and token-based styling.
+- [x] **T-003-3** | `AGENT` | `packages/design-system/` | Move directory contents from `packages/ui`, rename package, update `package.json`.
+- [x] **T-003-4** | `AGENT` | `packages/design-system/src/components/Button.tsx` | Remove stale teal shadow.
+- [x] **T-003-5** | `AGENT` | `packages/design-system/src/components/Features.tsx`, `Pricing.tsx` | Replace hard-coded colors with `@packages/branding` tokens.
+- [x] **T-003-6** | `AGENT` | `packages/design-system/src/cn.ts` | Move `cn()` in from `@ydm-agency/utils`.
+- [x] **T-003-7** | `AGENT` | `packages/design-system/` | Run validation command to confirm.
 
 ### Validation Commands
 
