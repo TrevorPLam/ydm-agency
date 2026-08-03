@@ -1,0 +1,29 @@
+{
+  "name": "@packages/web-core",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./format": "./src/format.ts",
+    "./env": "./src/env.ts",
+    "./layout": "./src/layout.tsx",
+    "./meta": "./src/meta.ts"
+  },
+  "scripts": {
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "next": "catalog:",
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@ydm-agency/config": "workspace:*",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
