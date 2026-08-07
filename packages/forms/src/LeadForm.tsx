@@ -99,59 +99,73 @@ export function LeadForm({
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
             Full Name *
           </label>
           <input
+            id="fullName"
             type="text"
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
+            aria-invalid={errors.fullName ? 'true' : 'false'}
+            aria-describedby={errors.fullName ? 'fullName-error' : undefined}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300"
             placeholder="John Doe"
           />
           {errors.fullName && (
-            <p className="text-xs text-red-500 mt-1">{errors.fullName}</p>
+            <p id="fullName-error" className="text-xs text-red-500 mt-1" role="alert" aria-live="assertive">
+              {errors.fullName}
+            </p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
             Work Email *
           </label>
           <input
+            id="email"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            aria-invalid={errors.email ? 'true' : 'false'}
+            aria-describedby={errors.email ? 'email-error' : undefined}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300"
             placeholder="john@company.com"
           />
           {errors.email && (
-            <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+            <p id="email-error" className="text-xs text-red-500 mt-1" role="alert" aria-live="assertive">
+              {errors.email}
+            </p>
           )}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-1">
               Company Name
             </label>
             <input
+              id="companyName"
               type="text"
               name="companyName"
               value={formData.companyName}
               onChange={handleChange}
+              aria-invalid={errors.companyName ? 'true' : 'false'}
+              aria-describedby={errors.companyName ? 'companyName-error' : undefined}
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300"
               placeholder="Acme Inc."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">
               Estimated Budget
             </label>
             <select
+              id="budget"
               name="budget"
               value={formData.budget}
               onChange={handleChange}
@@ -166,19 +180,24 @@ export function LeadForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
             Project Goals / Details *
           </label>
           <textarea
+            id="message"
             name="message"
             rows={4}
             value={formData.message}
             onChange={handleChange}
+            aria-invalid={errors.message ? 'true' : 'false'}
+            aria-describedby={errors.message ? 'message-error' : undefined}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-gray-300"
             placeholder="Tell us about your project requirements or growth goals..."
           />
           {errors.message && (
-            <p className="text-xs text-red-500 mt-1">{errors.message}</p>
+            <p id="message-error" className="text-xs text-red-500 mt-1" role="alert" aria-live="assertive">
+              {errors.message}
+            </p>
           )}
         </div>
 
