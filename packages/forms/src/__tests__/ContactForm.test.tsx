@@ -1,7 +1,10 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
+import { axe, toHaveNoViolations } from 'jest-axe';
 import { ContactForm } from '../ContactForm';
+
+expect.extend(toHaveNoViolations);
 
 describe('ContactForm', () => {
   it('renders all visible fields', () => {
@@ -11,7 +14,7 @@ describe('ContactForm', () => {
     expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/project type/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/message/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/what do you need help with/i)).toBeInTheDocument();
   });
 
   it('shows validation errors when submitting empty form', async () => {
@@ -47,7 +50,7 @@ describe('ContactForm', () => {
 
     await userEvent.type(screen.getByLabelText(/name/i), 'John Doe');
     await userEvent.type(screen.getByLabelText(/email/i), 'john@example.com');
-    await userEvent.type(screen.getByLabelText(/message/i), 'This is a message that is at least twenty characters long.');
+    await userEvent.type(screen.getByLabelText(/what do you need help with/i), 'This is a message that is at least twenty characters long.');
 
     const submitButton = screen.getByRole('button', { name: /send/i });
     await userEvent.click(submitButton);
@@ -69,7 +72,7 @@ describe('ContactForm', () => {
 
     await userEvent.type(screen.getByLabelText(/name/i), 'John Doe');
     await userEvent.type(screen.getByLabelText(/email/i), 'john@example.com');
-    await userEvent.type(screen.getByLabelText(/message/i), 'This is a message that is at least twenty characters long.');
+    await userEvent.type(screen.getByLabelText(/what do you need help with/i), 'This is a message that is at least twenty characters long.');
 
     const submitButton = screen.getByRole('button', { name: /send/i });
     await userEvent.click(submitButton);
@@ -78,5 +81,18 @@ describe('ContactForm', () => {
       expect(screen.getByText(/message received/i)).toBeInTheDocument();
       expect(screen.getByText(/personal reply within 2 hours/i)).toBeInTheDocument();
     });
+  });
+
+  it('has no accessibility violations', async () => {
+    const mockOnSubmit = vi.fn().mockResolvedValue({ success: true });
+    const { container } = render(<ContactForm onSubmit={mockOnSubmit} />);
+
+    const results = await axe(container, {
+      rules: {
+        'color-contrast': { enabled: false },
+      },
+    });
+
+    expect(results).toHaveNoViolations();
   });
 });
