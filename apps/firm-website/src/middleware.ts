@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 const SECURITY_HEADERS: [string, string][] = [
   [
     'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://va.vercel-scripts.com; frame-src https://calendly.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://va.vercel-scripts.com; frame-src https://calendly.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'",
   ],
   ['X-Frame-Options', 'DENY'],
   ['X-Content-Type-Options', 'nosniff'],
