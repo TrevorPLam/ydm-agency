@@ -1,5 +1,17 @@
 export { Button, buttonVariants, type ButtonProps } from './Button';
 export { Card, type CardProps } from './Card';
+export {
+  CardHeader,
+  type CardHeaderProps,
+  CardTitle,
+  type CardTitleProps,
+  CardDescription,
+  type CardDescriptionProps,
+  CardContent,
+  type CardContentProps,
+  CardFooter,
+  type CardFooterProps,
+} from './Card';
 export { Container, type ContainerProps } from './Container';
 export { Badge, type BadgeProps } from './Badge';
 export { Hero, type HeroProps } from './Hero';
