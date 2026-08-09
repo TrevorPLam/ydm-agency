@@ -151,7 +151,11 @@ export function AuditForm() {
       />
 
       {errorMessage && (
-        <div className="bg-error/10 border border-error/20 rounded-lg p-4">
+        <div
+          className="bg-error/10 border border-error/20 rounded-lg p-4"
+          role="alert"
+          aria-live="assertive"
+        >
           <p className="text-error text-sm">{errorMessage}</p>
         </div>
       )}
