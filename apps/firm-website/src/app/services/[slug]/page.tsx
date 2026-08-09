@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@ydm-agency/ui';
 import { Container } from '@ydm-agency/ui';
-import { Badge } from '@ydm-agency/ui';
-import { constructMetadata } from '@ydm-agency/seo';
+import { constructMetadata, ServiceJsonLd } from '@ydm-agency/seo';
 import { ServiceSubnav } from '@/components/ServiceSubnav';
 import { SERVICES_CONFIG } from '@/lib/services-config';
+import { getContextualFaqs } from '@/lib/faq-utils';
+import { getEstimateHref } from '@/lib/pricing-estimator';
 
 export async function generateStaticParams() {
   return Object.keys(SERVICES_CONFIG).map((slug) => ({ slug }));
@@ -31,45 +32,44 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
     notFound();
   }
 
+  const overviewFaqs = getContextualFaqs(config.slug, 'overview');
+
   return (
     <main className="min-h-screen">
+      <ServiceJsonLd
+        name={config.h1}
+        description={config.subhead}
+        url={`https://ydm-agency.com/services/${config.slug}`}
+      />
       <ServiceSubnav slug={config.slug} active="overview" />
 
       {/* Hero */}
       <section className="py-24 md:py-32">
         <Container>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-6">
+          <nav className="mb-8 flex items-center gap-2 text-sm text-text-secondary" aria-label="Breadcrumb">
+            <Link href="/services" className="hover:text-text-primary">
+              Services
+            </Link>
+            <span>/</span>
+            <span className="text-text-primary">{config.h1}</span>
+          </nav>
+
+          <h1 className="mb-6 font-display text-4xl font-bold text-text-primary md:text-5xl lg:text-6xl">
             {config.h1}
           </h1>
-          <p className="text-xl text-text-secondary max-w-3xl">
-            {config.subhead}
-          </p>
+          <p className="max-w-3xl text-xl text-text-secondary">{config.subhead}</p>
         </Container>
       </section>
 
-      {/* Select client disclaimer */}
-      {config.selectClients && (
-        <section className="py-8 bg-surface border-y border-border">
-          <Container>
-            <div className="max-w-3xl">
-              <Badge variant="accent" className="mb-3">Available for select clients</Badge>
-              <p className="text-text-secondary text-sm">
-                {config.disclaimer || "This service is available for select clients. See the page below for details on requirements and how it's delivered."}
-              </p>
-            </div>
-          </Container>
-        </section>
-      )}
-
       {/* Problem/Solution */}
       {config.problemSolution && (
-        <section className="py-16 md:py-24 bg-surface border-y border-border">
+        <section className="border-y border-border bg-surface py-16 md:py-24">
           <Container>
             <div className="max-w-3xl">
-              <h2 className="text-2xl font-display font-semibold text-text-primary mb-4">
+              <h2 className="mb-4 font-display text-2xl font-semibold text-text-primary">
                 {config.problemSolution.split('\n\n')[0]}
               </h2>
-              <p className="text-text-secondary whitespace-pre-line">
+              <p className="whitespace-pre-line text-text-secondary">
                 {config.problemSolution.split('\n\n').slice(1).join('\n\n')}
               </p>
             </div>
@@ -80,13 +80,13 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
       {/* What's Included */}
       <section className="py-16 md:py-24">
         <Container>
-          <h2 className="text-3xl font-display font-bold text-text-primary mb-8">
+          <h2 className="mb-8 font-display text-3xl font-bold text-text-primary">
             What&apos;s Included
           </h2>
-          <ul className="space-y-4 max-w-3xl">
+          <ul className="max-w-3xl space-y-4">
             {config.included.map((item, index) => (
               <li key={index} className="flex items-start gap-4">
-                <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" />
+                <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-accent" />
                 <p className="text-text-secondary">{item}</p>
               </li>
             ))}
@@ -94,7 +94,7 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
           <div className="mt-8 max-w-3xl">
             <Link
               href={`/services/${config.slug}/deliverables`}
-              className="text-accent hover:text-accent-hover underline underline-offset-4"
+              className="text-accent underline underline-offset-4 hover:text-accent-hover"
             >
               See the full breakdown of what you get →
             </Link>
@@ -103,13 +103,13 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
       </section>
 
       {/* Who It's For */}
-      <section className="py-16 md:py-24 bg-surface border-y border-border">
+      <section className="border-y border-border bg-surface py-16 md:py-24">
         <Container>
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-display font-bold text-text-primary mb-6">
+            <h2 className="mb-6 font-display text-3xl font-bold text-text-primary">
               Who It&apos;s For
             </h2>
-            <p className="text-text-secondary text-lg">{config.whoItsFor}</p>
+            <p className="text-lg text-text-secondary">{config.whoItsFor}</p>
           </div>
         </Container>
       </section>
@@ -117,33 +117,39 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
       {/* How It Fits */}
       <section className="py-16 md:py-24">
         <Container>
-          <h2 className="text-3xl font-display font-bold text-text-primary mb-8">
-            How It Fits
-          </h2>
-          <ul className="space-y-4 max-w-3xl">
+          <h2 className="mb-8 font-display text-3xl font-bold text-text-primary">How It Fits</h2>
+          <ul className="max-w-3xl space-y-4">
             {config.howItFits.map((link, index) => (
               <li key={index} className="flex items-start gap-4">
-                <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" />
+                <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-accent" />
                 <Link
                   href={link.href}
-                  className="text-text-secondary hover:text-accent underline underline-offset-4"
+                  className="text-text-secondary underline underline-offset-4 hover:text-accent"
                 >
                   {link.label} →
                 </Link>
               </li>
             ))}
           </ul>
+          <p className="mt-8 max-w-3xl text-text-secondary">
+            <Link
+              href="/services/how-it-works"
+              className="text-accent underline underline-offset-4 hover:text-accent-hover"
+            >
+              All eight services work as one system – see how they connect.
+            </Link>
+          </p>
         </Container>
       </section>
 
       {/* What Working With YDM Agency Looks Like */}
-      <section className="py-16 md:py-24 bg-surface border-y border-border">
+      <section className="border-y border-border bg-surface py-16 md:py-24">
         <Container>
           <div className="max-w-3xl">
-            <h2 className="text-3xl font-display font-bold text-text-primary mb-6">
+            <h2 className="mb-6 font-display text-3xl font-bold text-text-primary">
               What Working With YDM Agency Looks Like
             </h2>
-            <p className="text-text-secondary text-lg whitespace-pre-line">
+            <p className="whitespace-pre-line text-lg text-text-secondary">
               {config.workingWithYdm}
             </p>
           </div>
@@ -153,18 +159,15 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
       {/* FAQs */}
       <section className="py-16 md:py-24">
         <Container>
-          <h2 className="text-3xl font-display font-bold text-text-primary mb-8">
-            FAQs
-          </h2>
+          <h2 className="mb-8 font-display text-3xl font-bold text-text-primary">FAQs</h2>
           <div className="max-w-3xl space-y-4">
-            {config.faqs.map((faq, index) => (
-              <details
-                key={index}
-                className="group border border-border rounded-lg bg-surface"
-              >
-                <summary className="cursor-pointer p-4 font-medium text-text-primary hover:bg-background transition-colors flex items-center justify-between">
+            {overviewFaqs.map((faq, index) => (
+              <details key={index} className="group rounded-lg border border-border bg-surface">
+                <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-text-primary transition-colors hover:bg-background">
                   {faq.q}
-                  <span className="ml-4 text-accent group-open:rotate-180 transition-transform">▼</span>
+                  <span className="ml-4 text-accent transition-transform group-open:rotate-180">
+                    ▼
+                  </span>
                 </summary>
                 <p className="px-4 pb-4 text-text-secondary">{faq.a}</p>
               </details>
@@ -173,7 +176,7 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
           <div className="mt-8 max-w-3xl">
             <Link
               href={`/services/${config.slug}/faq`}
-              className="text-accent hover:text-accent-hover underline underline-offset-4"
+              className="text-accent underline underline-offset-4 hover:text-accent-hover"
             >
               View all {config.h1} FAQs →
             </Link>
@@ -182,13 +185,13 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 md:py-32 bg-surface border-t border-border">
+      <section className="border-t border-border bg-surface py-24 md:py-32">
         <Container>
           <div className="max-w-2xl text-center">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-text-primary mb-6">
+            <h2 className="mb-6 font-display text-3xl font-bold text-text-primary md:text-4xl">
               {config.finalCtaText}
             </h2>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button variant="primary" size="lg" asChild>
                 <Link href="/contact">Get a Free Project Outline</Link>
               </Button>
@@ -196,12 +199,18 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
                 <Link href={`/services/${config.slug}/process`}>See the Process</Link>
               </Button>
             </div>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+              <Link
+                href={getEstimateHref(config.slug)}
+                className="text-accent underline underline-offset-4 hover:text-accent-hover"
+              >
+                Get a ballpark estimate for {config.h1} →
+              </Link>
               <Link
                 href="/services/pricing"
-                className="text-text-secondary hover:text-accent underline underline-offset-4 text-sm"
+                className="text-text-secondary underline underline-offset-4 hover:text-accent"
               >
-                See pricing factors for all services →
+                See all pricing factors →
               </Link>
             </div>
           </div>

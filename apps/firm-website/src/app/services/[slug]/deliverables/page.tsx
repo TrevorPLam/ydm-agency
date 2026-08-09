@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Container, Button, Card, Badge } from '@ydm-agency/ui';
+import { Container, Button, Card } from '@ydm-agency/ui';
 import { SERVICES_CONFIG } from '@/lib/services-config';
 import { constructMetadata } from '@ydm-agency/seo';
 import { ServiceSubnav } from '@/components/ServiceSubnav';
+import { getEstimateHref } from '@/lib/pricing-estimator';
 
 export async function generateStaticParams() {
   return Object.keys(SERVICES_CONFIG).map((slug) => ({ slug }));
@@ -32,6 +33,18 @@ export default async function ServiceDeliverablesPage({ params }: { params: Prom
       {/* Hero */}
       <section className="py-24 md:py-32">
         <Container>
+          <nav className="mb-8 flex items-center gap-2 text-sm text-text-secondary" aria-label="Breadcrumb">
+            <Link href="/services" className="hover:text-text-primary">
+              Services
+            </Link>
+            <span>/</span>
+            <Link href={`/services/${service.slug}`} className="hover:text-text-primary">
+              {service.h1}
+            </Link>
+            <span>/</span>
+            <span className="text-text-primary">What You Get</span>
+          </nav>
+
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-6">
             What You Get with {service.h1}
           </h1>
@@ -40,20 +53,6 @@ export default async function ServiceDeliverablesPage({ params }: { params: Prom
           </p>
         </Container>
       </section>
-
-      {/* Select client disclaimer */}
-      {service.selectClients && (
-        <section className="py-8 bg-surface border-y border-border">
-          <Container>
-            <div className="max-w-3xl">
-              <Badge variant="accent" className="mb-3">Available for select clients</Badge>
-              <p className="text-text-secondary text-sm">
-                {service.disclaimer || "This service is available for select clients. See the page below for details on requirements and how it is delivered."}
-              </p>
-            </div>
-          </Container>
-        </section>
-      )}
 
       {/* Intro */}
       <section className="py-16 md:py-24 bg-surface border-y border-border">
@@ -143,6 +142,12 @@ export default async function ServiceDeliverablesPage({ params }: { params: Prom
             </div>
             <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm">
               <Link
+                href={getEstimateHref(service.slug)}
+                className="text-accent hover:text-accent-hover underline underline-offset-4 font-medium"
+              >
+                Get a ballpark estimate →
+              </Link>
+              <Link
                 href={`/services/${service.slug}/faq`}
                 className="text-text-secondary hover:text-accent underline underline-offset-4"
               >
@@ -152,7 +157,7 @@ export default async function ServiceDeliverablesPage({ params }: { params: Prom
                 href="/services/pricing"
                 className="text-text-secondary hover:text-accent underline underline-offset-4"
               >
-                See pricing factors →
+                See all pricing factors →
               </Link>
             </div>
           </div>

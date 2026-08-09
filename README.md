@@ -24,10 +24,14 @@ ydm-agency/
 │   ├── analytics/            # Unified GA4, PostHog, Meta Pixel event tracking (@ydm-agency/analytics)
 │   ├── email/                # React Email templates, Resend sending (@ydm-agency/email)
 │   ├── config/               # Shared ESLint, TypeScript, Tailwind CSS, Prettier, Next.js configs
-│   └── utils/                # Class joiner (`cn`), date, and currency helpers
+│   ├── utils/                # Class joiner (`cn`), date, and currency helpers
+│   # Orphaned (not wired into the dependency graph):
+│   ├── branding/             # Design tokens (duplicates config/tailwind.js); has tests
+│   ├── design-system/        # Broken fork of packages/ui; excluded from pnpm workspace
+│   └── web-core/             # format/env/layout/meta helpers; unused
 ├── e2e/                      # Playwright end-to-end tests (currently empty)
 ├── docs/
-│   └── planning/             # Page specs and launch protocol
+│   └── archive/planning/     # Archived page specs and launch protocol
 ├── turbo/
 │   └── generators/           # App & package scaffolding generators
 ├── pnpm-workspace.yaml       # Workspace definition & catalog dependency alignment
@@ -55,6 +59,7 @@ Form components and Zod validation schemas:
 SEO meta tag generation and Schema.org structured data:
 - `constructMetadata()` - Universal Next.js Metadata helper
 - `<OrganizationJsonLd />` - Structured JSON-LD schema generator
+- `<ServiceJsonLd />` - Service schema generator for service pages
 - `<FaqPageJsonLd />` - FAQPage schema generator for service FAQ spokes
 
 ### `@ydm-agency/analytics`
@@ -67,7 +72,7 @@ Shared TypeScript helpers:
 - `cn()` - `clsx` + `tailwind-merge` class name utility
 - `formatCurrency()`, `formatDate()` (currently unused in routes)
 
-**Note**: No unit tests exist for this package yet.
+Unit tests exist for `cn`, `formatCurrency`, and `formatDate`.
 
 ### `@ydm-agency/email`
 React Email templates and Resend-based sending:
@@ -75,7 +80,7 @@ React Email templates and Resend-based sending:
 - `<NotificationEmail />` - Internal lead-notification template
 - `sendEmail()` - Resend wrapper for sending transactional emails
 
-**Note**: `sendEmail()` is consumed by the `/audit` Server Action. It is not yet wired to a `/contact` route.
+**Note**: `sendEmail()` is consumed by both the `/contact` and `/audit` Server Actions.
 
 ## Security Headers
 
@@ -99,13 +104,18 @@ Next.js Middleware in `apps/firm-website/src/middleware.ts` applies the followin
 - `/services/process` - Process hub
 - `/services/compare` - Service comparison / "Which service is right?"
 - `/services/pricing` - Pricing and investment factors
+- `/services/industries` - Industries hub
+- `/services/industries/[slug]` - Industry-specific landing pages
 - `/audit` - Free marketing audit request
+- `/contact` - Contact form with Server Action, Supabase storage, Resend emails, Upstash rate limiting, and Calendly integration
 - `/about` - Founder story
 - `/blog` - Opinion and news
 - `/blog/[slug]` - Individual blog posts
 - `/education` - Technical lesson hub
 - `/education/[topic]` - Topic-specific lesson listing
 - `/education/[topic]/[slug]` - Individual lesson pages
+- `/education/paths` - Learning paths hub
+- `/education/paths/[slug]` - Individual learning path detail pages
 - `/privacy` - Privacy policy
 - `/sitemap.xml` - Generated sitemap
 - `/robots.txt` - Robots directives
@@ -116,16 +126,23 @@ Content for services, education, and blog is managed in:
 - `apps/firm-website/src/lib/service-labels.ts` — short service names for comparison/pricing pages
 - `apps/firm-website/src/lib/service-comparison-config.ts` — `/services/compare` scenario and fit matrix data
 - `apps/firm-website/src/lib/pricing-config.ts` — `/services/pricing` starting ranges and extras
+- `apps/firm-website/src/lib/pricing-estimator.ts` — Pricing estimator logic for the `PricingEstimator` component
+- `apps/firm-website/src/lib/industries-config.ts` — `/services/industries` hub and industry-specific page data
 - `apps/firm-website/src/lib/audit-schema.ts` — Zod schema for the audit form
-- `apps/firm-website/src/lib/education-config.ts`
+- `apps/firm-website/src/lib/education-config.ts` — education configuration that imports from topic-specific files
+- `apps/firm-website/src/lib/education/` — topic-specific lesson files (seo-lessons.ts, conversion-lessons.ts, foundations-lessons.ts, strategy-lessons.ts, compliance-lessons.ts, learning-paths.ts, types.ts)
 - `apps/firm-website/src/lib/blog-config.ts`
 
+App-specific components:
+- `apps/firm-website/src/components/ServiceSubnav.tsx` — Navigation tabs for service spoke pages
+- `apps/firm-website/src/components/AuditForm.tsx` — Audit form component
+- `apps/firm-website/src/components/CalendlyWidget.tsx` — Calendly scheduling widget with lazy loading
+- `apps/firm-website/src/components/CalendlyEmbed.tsx` — Lazy-loaded Calendly embed used by `CalendlyWidget` and `CalendlySection`
+- `apps/firm-website/src/components/CalendlySection.tsx` — Page section wrapper around the Calendly embed
+- `apps/firm-website/src/components/PricingEstimator.tsx` — Multi-step pricing estimator with analytics tracking
+
 **Not Yet Implemented**:
-- `/contact` - Contact form (ContactForm exists in @ydm-agency/forms but no route or Server Action)
-- `/demos` - Referenced from /about but not implemented
-- Supabase `leads` table storage integration
-- Upstash Redis rate limiting (5/hr per IP)
-- GA4 `form_submission` event tracking
+- GA4 `form_submission` event tracking (trackEvent exists but GA4 provider IDs are not configured)
 - Analytics provider IDs (currently empty strings in `providers.tsx`)
 - CSP updates required for PostHog/Meta Pixel inline scripts
 - `next/image` optimization (no raster images in use)
@@ -133,26 +150,32 @@ Content for services, education, and blog is managed in:
 - Lighthouse CI
 
 **Testing**:
-- Unit tests exist for `@ydm-agency/ui` and `@ydm-agency/forms`
-- `@ydm-agency/utils`, `@ydm-agency/analytics`, `@ydm-agency/email`, and `@ydm-agency/seo` are untested
-- E2E tests not yet implemented (`e2e/` directory is empty)
+- Unit tests exist for `@ydm-agency/ui`, `@ydm-agency/forms`, and `@ydm-agency/utils` (`cn`, `formatCurrency`, `formatDate`)
+- `apps/firm-website/src/lib/` has Vitest suites for `audit-schema`, `contrast`, `industries-config`, and `pricing-estimator`
+- `@ydm-agency/analytics`, `@ydm-agency/email`, and `@ydm-agency/seo` are untested
+- E2E tests not yet implemented (`e2e/` directory is empty) - should include contact form, navigation, and cookie consent flows
 - Playwright config exists at the repo root
 
 ## Environment Variables
 
 Copy `.env.example` to `.env.local` and populate the required values:
 
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID`
-- `NEXT_PUBLIC_POSTHOG_KEY`
-- `NEXT_PUBLIC_META_PIXEL_ID`
-- `RESEND_API_KEY`
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `UPSTASH_REDIS_REST_URL`
-- `UPSTASH_REDIS_REST_TOKEN`
-- `NEXT_PUBLIC_CALENDLY_URL`
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` - GA4 measurement ID
+- `NEXT_PUBLIC_POSTHOG_KEY` - PostHog API key
+- `NEXT_PUBLIC_META_PIXEL_ID` - Meta Pixel ID
+- `RESEND_API_KEY` - Resend API key for email sending (used by `/contact` and `/audit`)
+- `SUPABASE_URL` - Supabase project URL for leads table storage
+- `SUPABASE_ANON_KEY` - Supabase anonymous key for leads table access
+- `UPSTASH_REDIS_REST_URL` - Upstash Redis REST URL for rate limiting
+- `UPSTASH_REDIS_REST_TOKEN` - Upstash Redis REST token for rate limiting
+- `NEXT_PUBLIC_CALENDLY_URL` - Calendly scheduling URL (optional, defaults to https://calendly.com/ydm-agency/project-consultation)
 
-`RESEND_API_KEY` is consumed by the `/audit` Server Action; analytics, Supabase, Upstash, and Calendly wiring are not yet implemented.
+**Current Usage**:
+- `RESEND_API_KEY` is consumed by the `/contact` and `/audit` Server Actions
+- `SUPABASE_URL` and `SUPABASE_ANON_KEY` are used by the `/contact` Server Action for leads table storage
+- `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` are used by the `/contact` Server Action for rate limiting
+- `NEXT_PUBLIC_CALENDLY_URL` is used by the `/contact` page for Calendly integration
+- Analytics provider IDs are not yet configured in `providers.tsx`
 
 ## CI / CD
 

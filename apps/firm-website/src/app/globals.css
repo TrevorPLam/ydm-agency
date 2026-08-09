@@ -12,7 +12,7 @@
   --color-text-primary: #F5F5F6;
   --color-text-secondary: #A1A1A9;
   --color-accent: #3B82F6;
-  --color-accent-hover: #2563EB;
+  --color-accent-hover: #4B8AF2;
   --color-border: #2A2A2E;
   --color-error: #F87171;
   --color-success: #3B82F6;
@@ -23,11 +23,11 @@
   --color-surface: #F5F5F6;
   --color-text-primary: #0A0A0B;
   --color-text-secondary: #4A4A52;
-  --color-accent: #3B82F6;
-  --color-accent-hover: #2563EB;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
   --color-border: #2A2A2E;
-  --color-error: #F87171;
-  --color-success: #3B82F6;
+  --color-error: #B91C1C;
+  --color-success: #2563EB;
 }
 
 html {

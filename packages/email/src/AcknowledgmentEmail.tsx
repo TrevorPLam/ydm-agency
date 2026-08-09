@@ -52,7 +52,7 @@ const text = {
 };
 
 const signature = {
-  color: '#4AE4A8',
+  color: '#3B82F6',
   fontSize: '16px',
   marginTop: '24px',
 };

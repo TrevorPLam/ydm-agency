@@ -12,25 +12,27 @@ export function NotificationEmail({ name, email, projectType, message }: Notific
     <Html>
       <Body style={main}>
         <Container style={container}>
-          <Heading style={heading}>New Contact: {name} — {projectType ?? 'General'}</Heading>
-          
+          <Heading style={heading}>
+            New Contact: {name} — {projectType ?? 'General'}
+          </Heading>
+
           <Section style={section}>
             <Text style={label}>Name:</Text>
             <Text style={value}>{name}</Text>
           </Section>
-          
+
           <Section style={section}>
             <Text style={label}>Email:</Text>
             <Text style={value}>{email}</Text>
           </Section>
-          
+
           {projectType && (
             <Section style={section}>
               <Text style={label}>Project Type:</Text>
               <Text style={value}>{projectType}</Text>
             </Section>
           )}
-          
+
           <Section style={section}>
             <Text style={label}>Message:</Text>
             <Text style={value}>{message}</Text>
@@ -66,7 +68,7 @@ const section = {
 };
 
 const label = {
-  color: '#4AE4A8',
+  color: '#3B82F6',
   fontSize: '14px',
   fontWeight: '600',
   marginBottom: '4px',

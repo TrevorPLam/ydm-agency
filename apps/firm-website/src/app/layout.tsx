@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import { OrganizationJsonLd, constructMetadata } from '@ydm-agency/seo';
 import { Header, Footer, CookieConsent } from '@ydm-agency/ui';
 import { AppProviders } from './providers';
+import { SERVICE_LABELS } from '@/lib/service-labels';
 import './globals.css';
 
 const inter = Inter({
@@ -22,6 +23,18 @@ export const metadata: Metadata = constructMetadata({
   title: 'YDM Agency | Custom Websites, Marketing Systems & Business Apps',
   description: 'Your business deserves a website and marketing that actually work. Custom websites, search visibility, and marketing systems — built by a modern, AI-augmented firm.',
 });
+
+const serviceLinks = Object.entries(SERVICE_LABELS).map(([slug, label]) => ({
+  label,
+  href: `/services/${slug}`,
+}));
+
+const serviceUtilityLinks = [
+  { label: 'Compare Services', href: '/services/compare' },
+  { label: 'Pricing', href: '/services/pricing' },
+  { label: 'Industries', href: '/services/industries' },
+  { label: 'Free Marketing Audit', href: '/audit' },
+];
 
 export default function RootLayout({
   children,
@@ -43,7 +56,7 @@ export default function RootLayout({
       </head>
       <body className="bg-background text-text-primary antialiased font-sans">
         <AppProviders>
-          <Header brandName="YDM Agency" />
+          <Header brandName="YDM Agency" serviceLinks={[...serviceLinks, ...serviceUtilityLinks]} />
           <main id="main-content">
             {children}
           </main>

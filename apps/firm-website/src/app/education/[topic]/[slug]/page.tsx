@@ -2,8 +2,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container, Badge, Button } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
-import { EDUCATION_LESSONS, getTopicBySlug, type EducationLesson } from '@/lib/education-config';
+import { EDUCATION_LESSONS, getTopicBySlug, getRelatedLessons, getAdjacentLessons, type EducationLesson } from '@/lib/education-config';
 import { ArrowLeft, GraduationCap } from 'lucide-react';
+import TableOfContents from '../../TableOfContents';
+import EducationAnalytics from '../../EducationAnalytics';
+import SocialShare from '../../SocialShare';
+import PrintButton from '../../PrintButton';
+import '../../print.css';
 
 // JSON-LD structured data for Article schema
 function ArticleJsonLd({ lesson, topic }: { lesson: EducationLesson; topic: string }) {
@@ -104,6 +109,7 @@ export default async function EducationLessonPage({ params }: { params: Promise<
 
   return (
     <main className="min-h-screen bg-background text-text-primary">
+      <EducationAnalytics eventType="lesson_view" lesson={lesson} />
       <ArticleJsonLd lesson={lesson} topic={topic} />
       
       {/* Breadcrumb */}
@@ -168,6 +174,12 @@ export default async function EducationLessonPage({ params }: { params: Promise<
               >
                 Compliance
               </Link>
+              <Link
+                href="/education/paths"
+                className="block py-2 px-3 rounded-md text-sm text-text-secondary hover:bg-surface hover:text-text-primary transition-colors"
+              >
+                Learning Paths
+              </Link>
             </nav>
           </div>
         </aside>
@@ -191,6 +203,13 @@ export default async function EducationLessonPage({ params }: { params: Promise<
                 <p className="text-lg text-text-secondary mb-4">
                   {lesson.summary}
                 </p>
+                <div className="flex items-start gap-3 p-4 mb-6 rounded-lg bg-surface border border-border">
+                  <GraduationCap className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                  <p className="text-sm text-text-primary">
+                    <span className="font-semibold">After this lesson, you&apos;ll be able to</span>{' '}
+                    {lesson.learningOutcome}
+                  </p>
+                </div>
                 <div className="flex items-center gap-4 text-sm text-text-secondary">
                   <span>{lesson.readTime} read</span>
                   {lesson.lastUpdated && (
@@ -199,10 +218,19 @@ export default async function EducationLessonPage({ params }: { params: Promise<
                       <span>Updated {lesson.lastUpdated}</span>
                     </>
                   )}
+                  <PrintButton />
                 </div>
-                <p className="text-sm text-text-secondary mt-4 italic">
-                  {lesson.attribution}
-                </p>
+                <div className="flex items-center justify-between mt-4">
+                  <p className="text-sm text-text-secondary italic">
+                    {lesson.attribution}
+                  </p>
+                  <div className="no-print">
+                    <SocialShare 
+                      title={lesson.title} 
+                      url={`https://ydm-agency.com/education/${topic}/${slug}`} 
+                    />
+                  </div>
+                </div>
               </div>
             </Container>
           </section>
@@ -225,6 +253,96 @@ export default async function EducationLessonPage({ params }: { params: Promise<
             </Container>
           </section>
 
+          {/* Related Lessons */}
+          {(() => {
+            const relatedLessons = getRelatedLessons(lesson);
+            if (relatedLessons.length === 0) return null;
+            return (
+              <section className="py-16 md:py-24 border-t border-border">
+                <Container>
+                  <div className="max-w-3xl">
+                    <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary mb-8">
+                      Related Lessons
+                    </h2>
+                    <div className="space-y-4">
+                      {relatedLessons.map((relatedLesson) => (
+                        <Link
+                          key={relatedLesson.slug}
+                          href={`/education/${relatedLesson.topic.toLowerCase()}/${relatedLesson.slug}`}
+                          className="block group"
+                        >
+                          <div className="p-6 border border-border rounded-lg hover:border-accent transition-colors">
+                            <div className="flex items-center gap-2 mb-3">
+                              <Badge variant="outline">{relatedLesson.topic}</Badge>
+                              <Badge variant="default">{relatedLesson.level}</Badge>
+                            </div>
+                            <h3 className="text-lg font-display font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors">
+                              {relatedLesson.title}
+                            </h3>
+                            <p className="text-text-secondary text-sm leading-relaxed">
+                              {relatedLesson.summary}
+                            </p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </Container>
+              </section>
+            );
+          })()}
+
+          {/* Next/Previous Navigation */}
+          {(() => {
+            const { previous, next } = getAdjacentLessons(lesson);
+            if (!previous && !next) return null;
+            return (
+              <section className="py-16 md:py-24 border-t border-border">
+                <Container>
+                  <div className="max-w-3xl">
+                    <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary mb-8">
+                      Continue Learning
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {previous && (
+                        <Link
+                          href={`/education/${previous.topic.toLowerCase()}/${previous.slug}`}
+                          className="block group"
+                        >
+                          <div className="p-6 border border-border rounded-lg hover:border-accent transition-colors h-full">
+                            <div className="text-sm text-text-secondary mb-2">Previous Lesson</div>
+                            <h3 className="text-lg font-display font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors">
+                              {previous.title}
+                            </h3>
+                            <p className="text-text-secondary text-sm leading-relaxed">
+                              {previous.summary}
+                            </p>
+                          </div>
+                        </Link>
+                      )}
+                      {next && (
+                        <Link
+                          href={`/education/${next.topic.toLowerCase()}/${next.slug}`}
+                          className="block group"
+                        >
+                          <div className="p-6 border border-border rounded-lg hover:border-accent transition-colors h-full">
+                            <div className="text-sm text-text-secondary mb-2">Next Lesson</div>
+                            <h3 className="text-lg font-display font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors">
+                              {next.title}
+                            </h3>
+                            <p className="text-text-secondary text-sm leading-relaxed">
+                              {next.summary}
+                            </p>
+                          </div>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </Container>
+              </section>
+            );
+          })()}
+
           {/* Back + CTA */}
           <section className="py-16 md:py-24 border-t border-border">
             <Container>
@@ -246,24 +364,7 @@ export default async function EducationLessonPage({ params }: { params: Promise<
         </div>
 
         {/* Right Sidebar - Table of Contents */}
-        <aside className="hidden xl:block w-64 border-l border-border p-8 sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto">
-          <div>
-            <h3 className="text-sm font-semibold text-text-primary uppercase tracking-wider mb-4">
-              On this page
-            </h3>
-            <nav className="space-y-2">
-              {lesson.sections.map((section, index) => (
-                <a
-                  key={index}
-                  href={`#section-${index}`}
-                  className="block py-2 px-3 rounded-md text-sm text-text-secondary hover:bg-surface hover:text-text-primary transition-colors"
-                >
-                  {section.heading}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </aside>
+        <TableOfContents sections={lesson.sections} />
       </div>
     </main>
   );

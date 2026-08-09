@@ -45,7 +45,8 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     pullQuote: 'A website is not a project you finish. It is a system you maintain.',
     metaTitle: 'Why Most Small Business Websites Fail Within Two Years | YDM Agency',
-    metaDescription: 'Most small business websites launch with momentum, then quietly drift out of date. The usual causes are preventable with the right system.',
+    metaDescription:
+      'Most small business websites launch with momentum, then quietly drift out of date. The usual causes are preventable with the right system.',
     sections: [
       {
         heading: 'The Launch Momentum Problem',
@@ -93,8 +94,10 @@ Most small businesses treat their website as a project to finish. The businesses
       name: 'Trevor Lam',
       role: 'Founder, YDM Agency',
     },
-    metaTitle: 'The End of Third-Party Cookies Changes Everything for Local Advertisers | YDM Agency',
-    metaDescription: 'Privacy-focused browsers and platform policy shifts are making third-party data harder to use. Local advertisers need first-party data strategies.',
+    metaTitle:
+      'The End of Third-Party Cookies Changes Everything for Local Advertisers | YDM Agency',
+    metaDescription:
+      'Privacy-focused browsers and platform policy shifts are making third-party data harder to use. Local advertisers need first-party data strategies.',
     sections: [
       {
         heading: 'The Privacy Shift',
@@ -114,10 +117,10 @@ Contextual targeting is the other winner. Targeting based on what people are rea
   },
   {
     slug: 'ai-search-what-it-means-for-business',
-    title: 'AI Search Is Here: What It Means for Your Business',
+    title: 'AI Search Is Here: What Actually Works for Your Business',
     summary:
-      'Generative search answers are rewriting how customers find products and services. Businesses that structure content for direct answers, entity clarity, and structured data will hold the advantage as search behavior shifts.',
-    category: 'News',
+      "Google's own guide is clear: the businesses that win in AI search are the ones with original, non-commodity content — not the ones chasing special markup or 'answer-engine' formatting.",
+    category: 'Analysis',
     contentType: 'analysis',
     publishedAt: '2026-07-14',
     readTime: '6 min',
@@ -125,22 +128,57 @@ Contextual targeting is the other winner. Targeting based on what people are rea
       name: 'Trevor Lam',
       role: 'Founder, YDM Agency',
     },
-    metaTitle: 'AI Search Is Here: What It Means for Your Business | YDM Agency',
-    metaDescription: 'Generative search answers are rewriting how customers find products and services. Structure content for direct answers and entity clarity.',
+    pullQuote:
+      'The businesses that win in the answer economy are the ones with something worth answering from.',
+    metaTitle: 'AI Search Is Here: What Actually Works for Your Business | YDM Agency',
+    metaDescription:
+      "Google's latest generative AI search guidance emphasizes unique, non-commodity content and debunks AEO myths like special markup and content chunking.",
     sections: [
       {
-        heading: 'The Answer Economy',
-        body: `Google is now answering questions directly. The ten blue links are becoming optional. For businesses, this means the goal is not just to rank — it is to be the source of the answer.
+        heading: 'Search Is Becoming a Conversation',
+        body: `Google is now answering questions directly. AI Overviews, AI Mode, and similar features pull from the existing search index, then synthesize an answer with links to the sources underneath. For businesses, the goal is not just to rank — it is to be worth citing.
 
-This changes everything about content strategy.`,
+This raises the bar for content. Generic explainers of familiar topics are easy to skip, because an AI can summarize them from hundreds of other pages. First-hand insight, original data, and a clear point of view are much harder to replace. The businesses that become sources are the ones that publish something genuinely useful, not the ones that add the most markup.`,
         type: 'narrative',
       },
       {
-        heading: 'The Structured Data Imperative',
-        body: `Businesses that structure their content with schema markup, clear entity relationships, and answer-focused formatting will be the ones AI search pulls from.
+        heading: 'What Google Actually Recommends',
+        body: `In its "Optimizing your website for generative AI features on Google Search" guide, updated in July 2026, Google distills the work into a few durable principles:
 
-The businesses that continue publishing generic blog posts without structure will find themselves invisible in the answer economy.`,
+Valuable, non-commodity content. Write about what the business actually knows, from direct experience. Rehashed explainers that already exist elsewhere do not add anything new to the index.
+
+A unique point of view. A distinct angle, methodology, or set of observations makes a page worth surfacing in an AI-generated answer.
+
+Helpful, reliable, people-first organization. Structure pages for human readers first: clear headings, scannable sections, and direct answers to real questions. Search systems can understand nuance and context; they do not need content broken into tiny "AI-ready" fragments.
+
+High-quality images and video. Relevant visuals, original photography, and concise video extend the same first-hand principle into other formats.
+
+A sound technical base. Meet Google's technical requirements, follow crawling and JavaScript best practices, reduce duplicate content, and provide a good page experience. Semantic HTML should be written for human readability, not as code for machines.
+
+Focus on user intent. Avoid over-optimizing for AI systems at the expense of the reader. The same signals that help traditional search also help generative AI features.`,
         type: 'analysis',
+      },
+      {
+        heading: 'What You Can Ignore',
+        body: `The same guide includes a "Mythbusting" section that lists tactics businesses do not need to chase:
+
+LLMS.txt files and other "special" markup. No new machine-readable files or AI-specific schema are required for Google Search.
+
+"Chunking" content. There is no need to break pages into tiny, single-idea fragments. Google can understand the nuance of multiple topics on a single page.
+
+Rewriting content for AI systems. AI can understand synonyms and general meaning. There is no special phrasing or keyword pattern to adopt.
+
+Inauthentic mentions. Attempts to appear in more AI-generated answers through fabricated or paid mentions are not a viable strategy.
+
+Overfocusing on structured data. Structured data is still useful for standard rich results — reviews, events, products, FAQs — but it is not a generative AI ranking lever. Google explicitly lists overfocusing on structured data as a myth.`,
+        type: 'analysis',
+      },
+      {
+        heading: 'What to Do Next',
+        body: `Start with a content audit, not a markup audit. Look for pages that state the obvious, repeat what competitors have already said, or answer common questions with no original angle. Consolidate or improve them. Then build pages that reflect real experience: how the business solves a specific problem, what the data shows, what the process actually looks like.
+
+Use structured data where it earns a real rich result, but treat it as a formatting layer, not an AI-search shortcut. The businesses that win in the answer economy are the ones with something worth answering from.`,
+        type: 'narrative',
       },
     ],
   },

@@ -15,22 +15,22 @@ const AUDIT_COVERAGE = [
   {
     title: 'Website health',
     description:
-      '[[PLACEHOLDER: Describe what the website health portion of the audit covers, e.g., speed, mobile experience, conversion points.]]',
+      'The website health check covers speed, mobile experience, broken links, accessibility, and how well the site guides visitors toward a conversion. It flags anything that makes the site slow, confusing, or untrustworthy.',
   },
   {
     title: 'Traffic and visibility',
     description:
-      '[[PLACEHOLDER: Describe what the traffic and visibility portion of the audit covers, e.g., search presence, local SEO, AI search signals.]]',
+      'The traffic and visibility review looks at where visitors come from, how the business shows up in search, and whether local SEO and AI search signals are in place. It identifies gaps that keep the site from being found.',
   },
   {
     title: 'Lead and conversion gaps',
     description:
-      '[[PLACEHOLDER: Describe what the conversion and lead-flow portion of the audit covers, e.g., forms, tracking, drop-off points.]]',
+      'The conversion and lead-flow review examines forms, calls-to-action, tracking, and where visitors drop off before becoming leads. It finds the leaks that cost inquiries and sales.',
   },
   {
     title: 'Next-step recommendations',
     description:
-      '[[PLACEHOLDER: Describe what recommendations the audit includes, e.g., prioritized actions and best-fit services.]]',
+      'The final output is a prioritized action list with the highest-impact fixes first, the best-fit YDM Agency services for each, and a realistic budget and timeline for next steps.',
   },
 ];
 
@@ -72,11 +72,12 @@ export default function AuditPage() {
                 What You Receive
               </h2>
               <p className="text-text-secondary mb-4">
-                [[PLACEHOLDER: Describe the audit deliverable, e.g., a short video walkthrough or written
-                report with prioritized actions.]]
+                A written audit report with prioritized actions, plus a short video walkthrough
+                explaining the findings and recommended next steps. The report is clear, jargon-free,
+                and ready to act on.
               </p>
               <p className="text-text-secondary">
-                Turnaround: [[PLACEHOLDER: Add audit turnaround, e.g., &quot;2 business days.&quot;]]
+                Turnaround: 2 business days after the request form is submitted.
               </p>
             </div>
           </div>

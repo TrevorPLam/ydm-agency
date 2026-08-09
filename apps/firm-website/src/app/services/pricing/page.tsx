@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { Container, Button, Card, Badge } from '@ydm-agency/ui';
+import { Container, Button, Card } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
 import { SERVICES_CONFIG } from '@/lib/services-config';
 import { SERVICE_LABELS } from '@/lib/service-labels';
 import { PRICING_DETAILS } from '@/lib/pricing-config';
+import { PricingEstimator } from '@/components/PricingEstimator';
 
 export async function generateMetadata() {
   return constructMetadata({
@@ -13,7 +14,26 @@ export async function generateMetadata() {
   });
 }
 
-export default function PricingPage() {
+function getSearchParam(params: Record<string, string | string[] | undefined>, key: string): string | undefined {
+  const value = params[key];
+  if (Array.isArray(value)) return value[0];
+  return value;
+}
+
+function parseServicesParam(value: string | undefined): string[] | undefined {
+  if (!value) return undefined;
+  return value.split(',').filter(Boolean);
+}
+
+export default async function PricingPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const params = await searchParams;
+  const initialSituation = getSearchParam(params, 'situation');
+  const initialServices = parseServicesParam(getSearchParam(params, 'services'));
+
   return (
     <main className="min-h-screen">
       {/* Hero */}
@@ -45,6 +65,11 @@ export default function PricingPage() {
         </Container>
       </section>
 
+      <PricingEstimator
+        initialSituation={initialSituation}
+        initialServices={initialServices}
+      />
+
       {/* Service pricing cards */}
       <section className="py-16 md:py-24">
         <Container>
@@ -55,8 +80,8 @@ export default function PricingPage() {
             {Object.keys(SERVICES_CONFIG).map((slug) => {
               const config = SERVICES_CONFIG[slug];
               const details = PRICING_DETAILS[slug] ?? {
-                startingRange: '[[PLACEHOLDER: Add starting range.]]',
-                extras: ['[[PLACEHOLDER: Add common extras.]]'],
+                startingRange: 'Starting range depends on scope; a free project outline provides a fixed-price estimate.',
+                extras: ['Scope-specific add-ons such as copywriting, photography, integrations, or ongoing support.'],
               };
 
               return (
@@ -65,19 +90,9 @@ export default function PricingPage() {
                     <h3 className="text-xl font-display font-semibold text-text-primary">
                       {SERVICE_LABELS[slug]}
                     </h3>
-                    {config.selectClients && <Badge variant="accent">Select clients</Badge>}
                   </div>
 
                   <div className="space-y-4 text-sm flex-1">
-                    <div>
-                      <p className="text-text-primary font-medium mb-2">What the investment depends on:</p>
-                      <ul className="space-y-1 text-text-secondary list-disc list-inside">
-                        {config.included.slice(0, 4).map((item, index) => (
-                          <li key={index}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-
                     <div>
                       <p className="text-text-primary font-medium mb-1">
                         Starting range / minimum budget signal:

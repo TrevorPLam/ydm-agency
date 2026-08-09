@@ -13,82 +13,97 @@ export const PRICING_DETAILS: Record<string, ServicePricingDetails> = {
     slug: 'web-design',
     title: SERVICE_LABELS['web-design'],
     startingRange:
-      '[[PLACEHOLDER: Add typical starting range for custom website design and development.]]',
+      'Most custom builds start at $5,000–$12,000, depending on page count, integrations, and content needs.',
     extras: [
-      '[[PLACEHOLDER: Add common extras for website design, e.g., professional copywriting, photography, advanced integrations, ecommerce functionality.]]',
+      'Professional copywriting and content editing',
+      'Original photography or image sourcing',
+      'Advanced integrations, booking, or ecommerce',
+      'Ongoing maintenance and performance tuning',
     ],
   },
   'seo': {
     slug: 'seo',
     title: SERVICE_LABELS['seo'],
     startingRange:
-      '[[PLACEHOLDER: Add typical monthly or project-based starting range for SEO and AI search optimization.]]',
+      'Ongoing SEO and AI search work typically starts at $1,000–$2,500/month, with project-based audits starting at $1,500.',
     extras: [
-      '[[PLACEHOLDER: Add common extras for SEO, e.g., content production, link-building campaigns, local citation services.]]',
-    ],
-  },
-  'maintenance': {
-    slug: 'maintenance',
-    title: SERVICE_LABELS['maintenance'],
-    startingRange:
-      '[[PLACEHOLDER: Add typical monthly starting range for website maintenance plans.]]',
-    extras: [
-      '[[PLACEHOLDER: Add common extras for maintenance, e.g., extra content update hours, emergency support, additional site monitoring.]]',
+      'Content production and blog writing',
+      'Targeted link-building and citation campaigns',
+      'Local SEO for multiple locations',
+      'Technical SEO remediation beyond standard scope',
     ],
   },
   'analytics': {
     slug: 'analytics',
     title: SERVICE_LABELS['analytics'],
     startingRange:
-      '[[PLACEHOLDER: Add typical starting range for analytics and attribution setup.]]',
+      'Analytics and attribution setup usually starts at $2,000–$4,000, with ongoing reporting from $500/month.',
     extras: [
-      '[[PLACEHOLDER: Add common extras for analytics, e.g., custom dashboards, additional platform integrations, monthly reporting.]]',
+      'Custom dashboards and executive reporting',
+      'Additional platform integrations (CRM, ads, email)',
+      'Monthly or weekly reporting cadence',
+      'Advanced attribution modeling and forecasting',
     ],
   },
   'paid-ads': {
     slug: 'paid-ads',
     title: SERVICE_LABELS['paid-ads'],
     startingRange:
-      '[[PLACEHOLDER: Add typical management-fee starting range for paid advertising.]]',
+      'Paid advertising management typically starts at $1,000–$2,500/month, separate from the ad spend paid directly to platforms.',
     extras: [
-      '[[PLACEHOLDER: Add common extras for paid ads, e.g., landing page design, creative production, additional ad platforms.]]',
+      'Landing page design and conversion copy',
+      'Creative production (images, video, ad copy)',
+      'Additional ad platforms (Meta, LinkedIn, YouTube)',
+      'Geo or multi-location campaign management',
     ],
-    minimumBudgetNote: 'A recommended minimum ad spend of $500/month is typical.',
+    minimumBudgetNote: 'A realistic starting ad spend is typically $1,500–$3,000/month, depending on cost per click, cost per lead, and how fast the campaign needs to gather optimization data.'
   },
   'branding': {
     slug: 'branding',
     title: SERVICE_LABELS['branding'],
     startingRange:
-      '[[PLACEHOLDER: Add typical starting range for branding and positioning.]]',
+      'Branding and positioning projects typically start at $3,000–$8,000, depending on research depth and deliverables.',
     extras: [
-      '[[PLACEHOLDER: Add common extras for branding, e.g., additional brand assets, stationery, brand guidelines expansion.]]',
+      'Additional brand assets and templates',
+      'Stationery, business cards, or collateral',
+      'Brand guidelines expansion and team training',
+      'Brand photography or illustration direction',
     ],
   },
   'content': {
     slug: 'content',
     title: SERVICE_LABELS['content'],
     startingRange:
-      '[[PLACEHOLDER: Add typical starting range for content and copywriting.]]',
+      'Website and marketing copywriting typically starts at $2,000–$5,000 per project, or $1,000–$2,500/month for ongoing content.',
     extras: [
-      '[[PLACEHOLDER: Add common extras for content, e.g., additional pages, ongoing blog retainers, SEO keyword research.]]',
+      'Additional pages, landing pages, or blog posts',
+      'Ongoing blog or newsletter retainer',
+      'SEO keyword research and topic mapping',
+      'Email sequences and lead-nurture copy',
     ],
   },
   'automation': {
     slug: 'automation',
     title: SERVICE_LABELS['automation'],
     startingRange:
-      '[[PLACEHOLDER: Add typical starting range for CRM setup and marketing automation.]]',
+      'CRM and marketing automation setup typically starts at $1,500–$3,500, with ongoing optimization from $500/month.',
     extras: [
-      '[[PLACEHOLDER: Add common extras for automation, e.g., additional workflows, integrations, advanced lead scoring.]]',
+      'Additional automation workflows and branches',
+      'Third-party integrations and API connections',
+      'Advanced lead scoring and segmentation',
+      'Monthly workflow optimization and reporting',
     ],
   },
   'reputation': {
     slug: 'reputation',
     title: SERVICE_LABELS['reputation'],
     startingRange:
-      '[[PLACEHOLDER: Add typical starting range for reputation and review management.]]',
+      'Reputation and review management typically starts at $500–$1,500/month, scaled to location count and review volume.',
     extras: [
-      '[[PLACEHOLDER: Add common extras for reputation, e.g., review-generation materials, additional profiles, crisis-response support.]]',
+      'Review-generation materials and campaigns',
+      'Additional profiles and location expansion',
+      'Crisis-response and negative-review support',
+      'Competitor review benchmarking and reporting',
     ],
   },
 };

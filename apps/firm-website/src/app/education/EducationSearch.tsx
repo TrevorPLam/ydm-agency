@@ -2,28 +2,51 @@
 
 import { Search, GraduationCap } from 'lucide-react';
 import { EDUCATION_LESSONS } from '@/lib/education-config';
-import { useState } from 'react';
+import { useState, useTransition, useEffect } from 'react';
 import Link from 'next/link';
 import { Card, Badge } from '@ydm-agency/ui';
+import { searchLessons } from './search-actions';
+import { trackEvent } from '@ydm-agency/analytics';
 
-export default function EducationSearch() {
+interface EducationSearchProps {
+  showResults?: boolean;
+  compact?: boolean;
+}
+
+export default function EducationSearch({ showResults = true, compact = false }: EducationSearchProps) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [filteredLessons, setFilteredLessons] = useState(EDUCATION_LESSONS);
+  const [isPending, startTransition] = useTransition();
+  const [hasSearched, setHasSearched] = useState(false);
 
-  const filteredLessons = EDUCATION_LESSONS.filter(lesson =>
-    lesson.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    lesson.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    lesson.topic.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    if (query.trim().length > 0 && !hasSearched) {
+      setHasSearched(true);
+      trackEvent({
+        eventName: 'education_search',
+        properties: {
+          event_category: 'education',
+          search_query: query,
+          search_length: query.length,
+        },
+      });
+    }
+    startTransition(async () => {
+      const results = await searchLessons(query);
+      setFilteredLessons(results);
+    });
+  };
 
   return (
     <>
-      <div className="relative max-w-2xl mx-auto">
+      <div className={`relative ${compact ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}>
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-text-secondary" />
         <input
           type="text"
           placeholder="Search lessons and topics..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => handleSearch(e.target.value)}
           className="w-full pl-12 pr-4 py-4 bg-surface border border-border rounded-lg text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-accent transition-colors"
         />
       </div>
@@ -40,7 +63,11 @@ export default function EducationSearch() {
             </p>
           </div>
           
-          {filteredLessons.length > 0 ? (
+          {isPending ? (
+            <div className="text-center py-12">
+              <p className="text-text-secondary text-lg">Searching...</p>
+            </div>
+          ) : filteredLessons.length > 0 ? (
             <div className="space-y-4">
               {filteredLessons.map((lesson) => (
                 <Link

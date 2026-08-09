@@ -4,6 +4,9 @@ import { Container, Card, Badge, Button } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
 import { EDUCATION_TOPICS, EDUCATION_LESSONS, getTopicBySlug, getLessonsByTopic, type EducationLesson } from '@/lib/education-config';
 import { ArrowLeft, GraduationCap } from 'lucide-react';
+import TopicContent from './TopicContent';
+import EducationAnalytics from '../EducationAnalytics';
+import EducationSearch from '../EducationSearch';
 
 export async function generateStaticParams() {
   return EDUCATION_TOPICS.map((topic) => ({ topic: topic.slug }));
@@ -28,32 +31,6 @@ function normalizeTopicName(topicName: string): string {
   return topicName.toLowerCase().replace(/\s+/g, '-');
 }
 
-function getSafetyBadgeVariant(safety: EducationLesson['safety']): 'default' | 'accent' | 'outline' {
-  switch (safety) {
-    case 'public-domain':
-      return 'accent';
-    case 'cite-creator':
-      return 'outline';
-    case 'extra-care':
-      return 'default';
-    default:
-      return 'default';
-  }
-}
-
-function getSafetyLabel(safety: EducationLesson['safety']): string {
-  switch (safety) {
-    case 'public-domain':
-      return 'Public Domain';
-    case 'cite-creator':
-      return 'Cite Creator';
-    case 'extra-care':
-      return 'Use Care';
-    default:
-      return 'Use Care';
-  }
-}
-
 export default async function EducationTopicPage({ params }: { params: Promise<{ topic: string }> }) {
   const { topic } = await params;
   const topicData = getTopicBySlug(topic);
@@ -71,6 +48,21 @@ export default async function EducationTopicPage({ params }: { params: Promise<{
 
   return (
     <main className="min-h-screen bg-background text-text-primary">
+      <EducationAnalytics eventType="topic_view" topic={topicData.name} />
+      
+      {/* Breadcrumb */}
+      <section className="py-8 border-b border-border">
+        <Container>
+          <nav className="flex items-center gap-2 text-sm text-text-secondary">
+            <Link href="/education" className="hover:text-accent transition-colors">
+              Education
+            </Link>
+            <span>/</span>
+            <span className="text-text-primary">{topicData.name}</span>
+          </nav>
+        </Container>
+      </section>
+
       {/* Header */}
       <section className="py-16 md:py-24 border-b border-border">
         <Container>
@@ -96,58 +88,15 @@ export default async function EducationTopicPage({ params }: { params: Promise<{
         </Container>
       </section>
 
-      {/* Lessons List */}
-      <section className="py-16 md:py-24">
+      {/* Search */}
+      <section className="py-8 border-b border-border">
         <Container>
-          <div className="max-w-4xl">
-            {lessons.length > 0 ? (
-              <div className="space-y-6">
-                {lessons.map((lesson) => (
-                  <Link
-                    key={lesson.slug}
-                    href={`/education/${lesson.topic.toLowerCase()}/${lesson.slug}`}
-                    className="block group"
-                  >
-                    <Card className="p-6 transition-colors group-hover:border-accent">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-3">
-                            <Badge variant="outline">{lesson.topic}</Badge>
-                            <Badge variant="default">{lesson.level}</Badge>
-                            <Badge variant={getSafetyBadgeVariant(lesson.safety)}>
-                              {getSafetyLabel(lesson.safety)}
-                            </Badge>
-                          </div>
-                          <h2 className="text-xl font-display font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors">
-                            {lesson.title}
-                          </h2>
-                          <p className="text-text-secondary text-sm leading-relaxed mb-4">
-                            {lesson.summary}
-                          </p>
-                          <div className="flex items-center gap-4 text-xs text-text-secondary">
-                            <span>{lesson.readTime} read</span>
-                            <span>•</span>
-                            <span className="italic">{lesson.attribution}</span>
-                          </div>
-                        </div>
-                        <div className="p-3 rounded-lg bg-accent/10 flex-shrink-0">
-                          <GraduationCap className="w-6 h-6 text-accent" />
-                        </div>
-                      </div>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-text-secondary text-lg">
-                  No lessons available in this topic yet. Check back soon!
-                </p>
-              </div>
-            )}
-          </div>
+          <EducationSearch showResults={false} compact={true} />
         </Container>
       </section>
+
+      {/* Lessons List with Filter */}
+      <TopicContent lessons={lessons} />
 
       {/* CTA */}
       <section className="py-16 md:py-24 bg-surface border-t border-border">

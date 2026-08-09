@@ -39,7 +39,6 @@ const PHASES = [
 const SERVICE_PROCESS_LINKS = [
   { label: 'Web Design Process', href: '/services/web-design/process' },
   { label: 'SEO & AI Search Process', href: '/services/seo/process' },
-  { label: 'Website Maintenance Process', href: '/services/maintenance/process' },
   { label: 'Analytics & Attribution Process', href: '/services/analytics/process' },
   { label: 'Paid Advertising Process', href: '/services/paid-ads/process' },
   { label: 'Branding & Positioning Process', href: '/services/branding/process' },

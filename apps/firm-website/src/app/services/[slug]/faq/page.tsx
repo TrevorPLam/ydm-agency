@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Container, Button, Badge } from '@ydm-agency/ui';
+import { Container, Button } from '@ydm-agency/ui';
 import { constructMetadata, FaqPageJsonLd } from '@ydm-agency/seo';
 import { ServiceSubnav } from '@/components/ServiceSubnav';
 import { SERVICES_CONFIG } from '@/lib/services-config';
 import { getAllServiceFaqs } from '@/lib/faq-utils';
+import { getEstimateHref } from '@/lib/pricing-estimator';
 
 export async function generateStaticParams() {
   return Object.keys(SERVICES_CONFIG).map((slug) => ({ slug }));
@@ -43,6 +44,18 @@ export default async function ServiceFaqPage({ params }: { params: Promise<{ slu
       {/* Hero */}
       <section className="py-24 md:py-32">
         <Container>
+          <nav className="mb-8 flex items-center gap-2 text-sm text-text-secondary" aria-label="Breadcrumb">
+            <Link href="/services" className="hover:text-text-primary">
+              Services
+            </Link>
+            <span>/</span>
+            <Link href={`/services/${service.slug}`} className="hover:text-text-primary">
+              {service.h1}
+            </Link>
+            <span>/</span>
+            <span className="text-text-primary">FAQ</span>
+          </nav>
+
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-6">
             {service.h1} — FAQ
           </h1>
@@ -52,20 +65,6 @@ export default async function ServiceFaqPage({ params }: { params: Promise<{ slu
           </p>
         </Container>
       </section>
-
-      {/* Select client disclaimer */}
-      {service.selectClients && (
-        <section className="py-8 bg-surface border-y border-border">
-          <Container>
-            <div className="max-w-3xl">
-              <Badge variant="accent" className="mb-3">
-                Available for select clients
-              </Badge>
-              <p className="text-text-secondary text-sm">{service.disclaimer}</p>
-            </div>
-          </Container>
-        </section>
-      )}
 
       {/* FAQ groups */}
       <section className="py-16 md:py-24">
@@ -112,6 +111,14 @@ export default async function ServiceFaqPage({ params }: { params: Promise<{ slu
               <Button variant="secondary" size="lg" asChild>
                 <Link href={`/services/${service.slug}`}>Back to Overview</Link>
               </Button>
+            </div>
+            <div className="mt-6">
+              <Link
+                href={getEstimateHref(service.slug)}
+                className="text-accent underline underline-offset-4 hover:text-accent-hover text-sm"
+              >
+                Get a ballpark estimate for {service.h1} →
+              </Link>
             </div>
           </div>
         </Container>

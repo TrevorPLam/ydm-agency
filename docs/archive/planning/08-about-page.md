@@ -14,7 +14,7 @@
 
 **What Sets It Apart:** AI‑augmented, human‑directed (ships in weeks not months) · direct access to the person doing the work · documented transparent process (every service has a process page → `/services/process`) · fair straightforward pricing (no management layers).
 
-**Proof of Capability** — new firm, but quality immediately visible via: live project demos (self‑initiated, client‑standard → `/demos`) · detailed service‑specific process pages (see delivery before contact) · commitment to transparency (dashboards, monthly reporting, open comms). As real client projects complete, case studies/testimonials will be added; until then, process + demos speak for themselves.
+**Proof of Capability** — new firm, but quality immediately visible via: detailed service‑specific process pages (see delivery before contact) · commitment to transparency (dashboards, monthly reporting, open comms) · clear service and deliverable definitions. As real client projects complete, case studies/testimonials will be added; until then, process and service detail speak for themselves.
 
 **Where Based:** Fully remote operation — keeps costs low, serves clients efficiently regardless of time zone.
 
@@ -22,6 +22,6 @@
 - Who will I work with? A dedicated professional, same person start to finish.
 - How big is the firm? Intentionally lean — direct collaboration, no account managers/handoffs.
 - What businesses does it work with? Small businesses, local service providers, startups, anyone needing a modern presence without a massive retainer.
-- Where can I see examples? Live demos (`/demos`) + service process pages.
+- Where can I see examples? Detailed service pages and the process hub.
 
 **Final CTA:** `[STD-CTA]` · Secondary: "Learn more about the process" → `/services/process`

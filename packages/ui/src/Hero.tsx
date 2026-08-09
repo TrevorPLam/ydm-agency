@@ -1,8 +1,8 @@
-import React from 'react';
-import Link from 'next/link';
-import { Button } from './Button';
-import { Badge } from './Badge';
-import { Container } from './Container';
+import React from "react";
+import Link from "next/link";
+import { Button } from "./Button";
+import { Badge } from "./Badge";
+import { Container } from "./Container";
 
 export interface HeroProps {
   badgeText?: string;
@@ -20,9 +20,9 @@ export const Hero: React.FC<HeroProps> = ({
   title,
   highlightedTitle,
   description,
-  primaryCtaText = 'Get Started',
+  primaryCtaText = "Get Started",
   primaryCtaHref,
-  secondaryCtaText = 'View Live Demos',
+  secondaryCtaText = "Explore Services",
   secondaryCtaHref,
 }) => {
   return (
@@ -34,11 +34,9 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
         )}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-4xl mx-auto leading-[1.15] font-display">
-          {title}{' '}
+          {title}{" "}
           {highlightedTitle && (
-            <span className="text-accent">
-              {highlightedTitle}
-            </span>
+            <span className="text-accent">{highlightedTitle}</span>
           )}
         </h1>
         <p className="mt-6 text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
@@ -47,7 +45,10 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           {primaryCtaHref && (
             <Link href={primaryCtaHref}>
-              <Button variant="primary" className="w-full sm:w-auto px-8 py-3 text-base">
+              <Button
+                variant="primary"
+                className="w-full sm:w-auto px-8 py-3 text-base"
+              >
                 {primaryCtaText}
               </Button>
             </Link>
@@ -55,7 +56,10 @@ export const Hero: React.FC<HeroProps> = ({
 
           {secondaryCtaHref && (
             <Link href={secondaryCtaHref}>
-              <Button variant="secondary" className="w-full sm:w-auto px-8 py-3 text-base">
+              <Button
+                variant="secondary"
+                className="w-full sm:w-auto px-8 py-3 text-base"
+              >
                 {secondaryCtaText}
               </Button>
             </Link>

@@ -27,7 +27,7 @@ describe('tokens', () => {
     });
     expect(colors.accentHover).toEqual({
       css: 'var(--color-accent-hover)',
-      hex: '#2563EB',
+      hex: '#4B8AF2',
     });
     expect(colors.border).toEqual({
       css: 'var(--color-border)',
@@ -56,5 +56,44 @@ describe('tokens', () => {
     expect(tokens.logos.mark).toBe('/logo-mark.svg');
     expect(tokens.logos.wordmark).toBe('/logo-wordmark.svg');
     expect(tokens.logos.favicon).toBe('/favicon.svg');
+  });
+
+  it('maintains WCAG AA contrast for default (dark) theme text states', () => {
+    const { colors } = tokens;
+
+    function hexToRgb(hex: string): [number, number, number] {
+      const value = parseInt(hex.slice(1), 16);
+      return [(value >> 16) & 255, (value >> 8) & 255, value & 255].map(
+        (v) => v / 255
+      ) as [number, number, number];
+    }
+
+    function luminance(rgb: [number, number, number]): number {
+      const [r, g, b] = rgb.map((c) =>
+        c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
+      );
+      return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    }
+
+    function contrast(fg: string, bg: string): number {
+      const l1 = luminance(hexToRgb(fg));
+      const l2 = luminance(hexToRgb(bg));
+      const lighter = Math.max(l1, l2);
+      const darker = Math.min(l1, l2);
+      return (lighter + 0.05) / (darker + 0.05);
+    }
+
+    const AA = 4.5;
+    expect(contrast(colors.textPrimary.hex, colors.background.hex)).toBeGreaterThanOrEqual(AA);
+    expect(contrast(colors.textPrimary.hex, colors.surface.hex)).toBeGreaterThanOrEqual(AA);
+    expect(contrast(colors.textSecondary.hex, colors.background.hex)).toBeGreaterThanOrEqual(AA);
+    expect(contrast(colors.textSecondary.hex, colors.surface.hex)).toBeGreaterThanOrEqual(AA);
+    expect(contrast(colors.accent.hex, colors.background.hex)).toBeGreaterThanOrEqual(AA);
+    expect(contrast(colors.accent.hex, colors.surface.hex)).toBeGreaterThanOrEqual(AA);
+    expect(contrast(colors.accentHover.hex, colors.background.hex)).toBeGreaterThanOrEqual(AA);
+    expect(contrast(colors.accentHover.hex, colors.surface.hex)).toBeGreaterThanOrEqual(AA);
+    // Primary button text uses `text-background`, which is the dark background color.
+    expect(contrast(colors.background.hex, colors.accent.hex)).toBeGreaterThanOrEqual(AA);
+    expect(contrast(colors.background.hex, colors.accentHover.hex)).toBeGreaterThanOrEqual(AA);
   });
 });

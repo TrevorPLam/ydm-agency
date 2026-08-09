@@ -1,20 +1,15 @@
 import type { MetadataRoute } from 'next';
+import { SERVICES_CONFIG } from '@/lib/services-config';
+import { INDUSTRIES_CONFIG } from '@/lib/industries-config';
 import { EDUCATION_LESSONS, EDUCATION_TOPICS } from '@/lib/education-config';
+import { LEARNING_PATHS } from '@/lib/education/learning-paths';
 import { BLOG_POSTS } from '@/lib/blog-config';
 
 const baseUrl = 'https://ydm-agency.com';
 
-const serviceSlugs = [
-  'web-design',
-  'seo',
-  'maintenance',
-  'analytics',
-  'paid-ads',
-  'branding',
-  'content',
-  'automation',
-  'reputation',
-];
+const serviceSlugs = Object.keys(SERVICES_CONFIG);
+
+const industrySlugs = Object.keys(INDUSTRIES_CONFIG);
 
 // Helper function to normalize topic names for URL matching
 function normalizeTopicName(topicName: string): string {
@@ -120,12 +115,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/services/industries`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/audit`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
   ];
+
+  // Industry vertical pages
+  const industryUrls: MetadataRoute.Sitemap = industrySlugs.map((slug) => ({
+    url: `${baseUrl}/services/industries/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
 
   // Blog post pages
   const blogUrls: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
@@ -151,6 +160,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  // Learning path hub + detail pages
+  const learningPathUrls: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/education/paths`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.6,
+    },
+    ...LEARNING_PATHS.map((path) => ({
+      url: `${baseUrl}/education/paths/${path.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
+  ];
+
   return [
     ...staticUrls,
     ...serviceUrls,
@@ -158,8 +183,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...deliverablesUrls,
     ...faqUrls,
     ...comparisonUrls,
+    ...industryUrls,
     ...blogUrls,
     ...educationTopicUrls,
     ...educationLessonUrls,
+    ...learningPathUrls,
   ];
 }

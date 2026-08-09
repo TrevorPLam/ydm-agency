@@ -23,13 +23,17 @@ packages/
   ui/                # shadcn/ui components (Button, Card, Header, Footer, CookieConsent, etc.)
   forms/             # ContactForm, LeadForm + Zod schemas
   analytics/         # AnalyticsProvider (GA4, PostHog, Meta Pixel), trackEvent
-  seo/               # constructMetadata(), OrganizationJsonLd, FaqPageJsonLd
+  seo/               # constructMetadata(), OrganizationJsonLd, ServiceJsonLd, FaqPageJsonLd
   email/             # React Email templates, Resend sending
   utils/             # cn(), formatCurrency(), formatDate()
   config/            # Shared ESLint, TS, Tailwind, Prettier configs
+  # Orphaned (not wired into the dependency graph):
+  branding/          # tokens object + tests (duplicates config/tailwind.js)
+  design-system/     # broken fork of packages/ui, excluded from pnpm workspace
+  web-core/          # format/env/layout/meta helpers, unused
 ```
 
-App-specific shared components (e.g., `ServiceSubnav`, `AuditForm`) live in `apps/firm-website/src/components/`. App-specific configuration helpers (e.g., `faq-utils.ts`, `service-labels.ts`, `service-comparison-config.ts`, `pricing-config.ts`, `audit-schema.ts`) live in `apps/firm-website/src/lib/`.
+App-specific shared components (e.g., `ServiceSubnav`, `AuditForm`, `CalendlyWidget`, `CalendlyEmbed`, `CalendlySection`, `PricingEstimator`) live in `apps/firm-website/src/components/`. App-specific configuration helpers (e.g., `faq-utils.ts`, `service-labels.ts`, `service-comparison-config.ts`, `pricing-config.ts`, `pricing-estimator.ts`, `industries-config.ts`, `audit-schema.ts`) live in `apps/firm-website/src/lib/`. Education-specific components (e.g., `TableOfContents`, `EducationAnalytics`, `SocialShare`, `PrintButton`) and education content files live in `apps/firm-website/src/app/education/` and `apps/firm-website/src/lib/education/`.
 
 ## Design System
 
@@ -37,7 +41,7 @@ App-specific shared components (e.g., `ServiceSubnav`, `AuditForm`) live in `app
 - **Background**: #0A0A0B
 - **Surface**: #161618
 - **Accent**: #3B82F6
-- **Accent Hover**: #2563EB
+- **Accent Hover**: #4B8AF2
 - **Border**: #2A2A2E
 - **Text Primary**: #F5F5F6
 - **Text Secondary**: #A1A1A9
@@ -94,26 +98,36 @@ App-specific shared components (e.g., `ServiceSubnav`, `AuditForm`) live in `app
 - `/services/[slug]/process` - Process spoke pages
 - `/services/compare` - Service comparison / "Which service is right?"
 - `/services/pricing` - Service pricing and investment factors
+- `/services/industries` - Industries hub
+- `/services/industries/[slug]` - Industry-specific landing pages
 - `/audit` - Free marketing audit request
+- `/contact` - Contact form with Server Action, Supabase storage, Resend emails, Upstash rate limiting
 - `/about` - Founder story
 - `/blog` - Opinion and news
 - `/blog/[slug]` - Individual blog posts
 - `/education` - Technical lesson hub
 - `/education/[topic]` - Topic-specific lesson listing
 - `/education/[topic]/[slug]` - Individual lesson pages
+- `/education/paths` - Learning paths hub
+- `/education/paths/[slug]` - Individual learning path detail pages
 - `/privacy` - Privacy policy
 
 **Implemented in latest update**:
 - `/services/[slug]/faq` - FAQ spoke pages for each service
 - `/services/compare` - Service comparison and starting-point guide
 - `/services/pricing` - Pricing and investment factors per service
+- `/services/industries` and `/services/industries/[slug]` - Industries hub and industry-specific landing pages
 - `/audit` - Free marketing audit request form and Server Action
+- `/contact` - Contact form with Server Action, Supabase leads table storage, Resend emails, Upstash rate limiting, and Calendly integration
+- `PricingEstimator` component with multi-step estimator and analytics tracking
+- Education content expansion: 47 lessons across 5 topics (SEO, Conversion, Foundations, Strategy, Compliance) with topic-specific content files
+- Learning paths feature: 4 cross-cutting learning paths with dedicated hub and detail pages
+- Education lesson schema update: Added `learningOutcome` field to explicitly state lesson outcomes
+- Education UI improvements: Table of contents, analytics tracking, social sharing, and print functionality
 
 **Not Yet Implemented**:
-- `/contact` - Contact form (ContactForm exists in @ydm-agency/forms but no route or Server Action)
-- `/demos` - Referenced from /about but not implemented
-- Supabase `leads` table storage, Upstash Redis rate limiting, and GA4 `form_submission` tracking
-- `next/image` optimization (no raster images currently in use), `next/dynamic` code splitting, and Lighthouse CI
+- GA4 `form_submission` tracking (trackEvent exists but GA4 provider IDs are not configured)
+- `next/image` optimization (no raster images currently in use) and Lighthouse CI
 
 ## Content Guidelines
 
@@ -142,9 +156,9 @@ Implement security headers in middleware:
 ### Contact Form Security
 - Honeypot field for bot detection (implemented in ContactForm)
 - Zod validation via `@ydm-agency/forms`
-- Upstash Redis rate limiting (5/hr per IP) - not yet implemented
-- Server Actions for form submission - not yet implemented
-- GA4 `form_submission` event tracking - not yet implemented
+- Upstash Redis rate limiting (5/hr per IP) - implemented in `/contact` Server Action
+- Server Actions for form submission - implemented in `/contact` and `/audit`
+- GA4 `form_submission` event tracking - implemented in ContactForm component but requires GA4 provider IDs
 
 ### Privacy
 - Cookie consent banner (gating analytics)
@@ -154,13 +168,21 @@ Implement security headers in middleware:
 
 ## Backend Integration
 
-### Contact Form (Not Yet Implemented)
-- Next.js Server Action
-- Supabase `leads` table storage
+### Contact Form (Implemented)
+- Next.js Server Action in `apps/firm-website/src/app/contact/actions.ts`
+- Supabase `leads` table storage (name, email, project_type, message, source, status, timestamp)
 - Resend transactional emails (auto-acknowledgment + internal notification)
 - Zod validation via @ydm-agency/forms
+- Upstash Redis rate limiting (5 submissions per hour per IP)
+- Calendly integration via react-calendly with lazy loading
 
-**Current State**: ContactForm component exists in `@ydm-agency/forms` with honeypot and Zod validation. `sendEmail` exists in `@ydm-agency/email` but no `/contact` route exists. The `/audit` page does have a Server Action that validates and calls `sendEmail`, which can serve as a reference for the future `/contact` implementation.
+**Current State**: ContactForm component exists in `@ydm-agency/forms` with honeypot and Zod validation. `sendEmail` exists in `@ydm-agency/email` and is used by both `/contact` and `/audit` Server Actions. The `/contact` route is fully implemented with form, Server Action, and Calendly integration.
+
+**Required Environment Variables**:
+- `SUPABASE_URL` and `SUPABASE_ANON_KEY` for Supabase leads table storage
+- `RESEND_API_KEY` for Resend email sending
+- `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` for Upstash rate limiting
+- `NEXT_PUBLIC_CALENDLY_URL` for custom Calendly scheduling URL (optional, has default)
 
 ### Analytics
 - GA4, PostHog, Meta Pixel via @ydm-agency/analytics
@@ -170,12 +192,12 @@ Implement security headers in middleware:
 **Current State**: AnalyticsProvider exists and is consent-gated, but provider IDs are empty strings in `apps/firm-website/src/app/providers.tsx`. The current CSP does not allow the inline `dangerouslySetInnerHTML` scripts or PostHog/Meta Pixel hosts, so scripts will be blocked even after IDs are configured.
 
 ## Testing Requirements
-- Unit tests for utility functions (`@ydm-agency/ui` and `@ydm-agency/forms` have tests; `@ydm-agency/utils` is untested)
+- Unit tests for utility functions (`@ydm-agency/ui`, `@ydm-agency/forms`, and `@ydm-agency/utils` have tests)
 - Integration tests for forms
-- E2E tests for critical user flows (contact form)
+- E2E tests for critical user flows (contact form, navigation, cookie consent)
 - Use Playwright for E2E
 
-**Current State**: Unit tests exist for `@ydm-agency/ui` and `@ydm-agency/forms`. `@ydm-agency/utils`, `@ydm-agency/analytics`, `@ydm-agency/email`, and `@ydm-agency/seo` are untested. E2E tests not yet implemented (`e2e/` directory is empty).
+**Current State**: Unit tests exist for `@ydm-agency/ui`, `@ydm-agency/forms`, and `@ydm-agency/utils` (`cn`, `formatCurrency`, `formatDate`). `apps/firm-website/src/lib/` has Vitest suites for `audit-schema`, `contrast`, `industries-config`, and `pricing-estimator`. `@ydm-agency/analytics`, `@ydm-agency/email`, and `@ydm-agency/seo` are untested. E2E tests not yet implemented (`e2e/` directory is empty). The `/contact` form is now implemented and should be included in E2E test coverage.
 
 ## Git Workflow
 - Feature branches from main
@@ -185,7 +207,7 @@ Implement security headers in middleware:
 
 ## Performance
 - Optimize images with Next.js Image component (currently no `next/image` or `<img>` usage in `apps/firm-website`)
-- Use dynamic imports for heavy components (currently no `next/dynamic` usage)
+- Use dynamic imports for heavy components (`next/dynamic` is used to lazy-load the Calendly embed in `CalendlyWidget.tsx` and `CalendlySection.tsx`)
 - Implement code splitting
 - Lighthouse score targets: 90+ Performance, 95+ Accessibility (no Lighthouse CI step configured)
 

@@ -42,7 +42,7 @@ Max width `max-w-6xl` (1152px) · section padding `py-24 md:py-32` (major) / `py
 - Perf: Framer Motion lazy‑loaded via `LazyMotion`; heavy bg animation capped 30fps mobile, loads after critical content.
 
 **Imagery**
-Founder photo: real, well‑lit, no stock. Demo mockups: static SVG/CSS device frames, no WebGL tilt unless reduced‑motion‑gated + desktop‑only. Background: CSS‑only noise texture over hero (not animated gradient); optional low‑frequency floating shapes, pure CSS, off‑main‑thread.
+Founder photo: real, well‑lit, no stock. Sample mockups: static SVG/CSS device frames, no WebGL tilt unless reduced‑motion‑gated + desktop‑only. Background: CSS‑only noise texture over hero (not animated gradient); optional low‑frequency floating shapes, pure CSS, off‑main‑thread.
 
 **Accessibility & Contrast**
 Text:background ≥4.5:1 (AA); large text (≥24px) ≥3:1 · `focus-visible` rings on every interactive element + skip‑to‑content link · color never sole conveyor of info (paired with icons/underlines) · OS high‑contrast mode auto‑replaces glass surfaces with solid `surface` · automated testing via axe‑core + Lighthouse, manual keyboard flow on critical pages.

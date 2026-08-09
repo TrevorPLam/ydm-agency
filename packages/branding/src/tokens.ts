@@ -45,7 +45,7 @@ export const tokens = {
     textPrimary: { css: 'var(--color-text-primary)', hex: '#F5F5F6' },
     textSecondary: { css: 'var(--color-text-secondary)', hex: '#A1A1A9' },
     accent: { css: 'var(--color-accent)', hex: '#3B82F6' },
-    accentHover: { css: 'var(--color-accent-hover)', hex: '#2563EB' },
+    accentHover: { css: 'var(--color-accent-hover)', hex: '#4B8AF2' },
     border: { css: 'var(--color-border)', hex: '#2A2A2E' },
     error: { css: 'var(--color-error)', hex: '#F87171' },
     success: { css: 'var(--color-success)', hex: '#3B82F6' },

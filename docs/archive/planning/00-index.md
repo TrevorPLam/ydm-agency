@@ -10,7 +10,6 @@ Modular replacement for the original single‑file `planning.md`. Same informati
 | `03-sitemap-ia-navigation.md` | Sitemap, nav design, footer, cross‑linking rules, user‑flow mapping, contact‑channel strategy, GA4 tracking |
 | `04-home-page.md` | Home page blueprint |
 | `05-services-copy.md` | Services hub + all 9 spoke pages (tabled) |
-| `06-demos-page.md` | Demos (portfolio) page spec |
 | `07-process-copy.md` | Process hub + all 9 service‑specific process pages (tabled) |
 | `08-about-page.md` | About page copy |
 | `09-contact-page.md` | Contact page spec + lead‑capture pipeline |
@@ -28,9 +27,6 @@ Modular replacement for the original single‑file `planning.md`. Same informati
 
 **`[VOICE]`** — Impersonal, firm‑level voice rule (applies to ALL copy sitewide):
 Use "YDM Agency" and passive constructions. Never "we / us / our team." E.g. "Work is handled directly by the professional assigned to your project," not "We handle your project."
-
-**`[SELECT-CLIENTS]`** — Disclaimer used on Paid Advertising, CRM & Automation, and Reputation Management (hub cards, spoke pages, process pages):
-"This service is available for select clients; the exact phases, tools, and timelines may be adapted based on the partnership approach used. Typically delivered in partnership with specialist tools/platforms to ensure quality and reliability."
 
 **`[CROSSLINK]`** — Cross‑linking rule (applies to every service spoke and process page):
 Links back to its hub, sideways to 2–3 complementary spokes/processes, and forward to `/contact`. Every page reachable within two clicks from any point. No dead ends.

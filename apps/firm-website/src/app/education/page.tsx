@@ -1,8 +1,9 @@
 import { Container, Card, Badge, Button } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
-import { Search, BookOpen, Target, Lightbulb, Shield } from 'lucide-react';
+import { Search, BookOpen, Target, Lightbulb, Shield, Route, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { EDUCATION_TOPICS, EDUCATION_LESSONS, type EducationTopic } from '@/lib/education-config';
+import { LEARNING_PATHS } from '@/lib/education/learning-paths';
 import EducationSearch from './EducationSearch';
 
 export const metadata = constructMetadata({
@@ -26,6 +27,15 @@ function getTopicIcon(iconName: string) {
 export default function EducationPage() {
   return (
     <main className="min-h-screen bg-background text-text-primary">
+      {/* Breadcrumb */}
+      <section className="py-8 border-b border-border">
+        <Container>
+          <nav className="flex items-center gap-2 text-sm text-text-secondary">
+            <span className="text-text-primary">Education</span>
+          </nav>
+        </Container>
+      </section>
+
       {/* Hero with Search */}
       <section className="py-24 md:py-32">
         <Container>
@@ -42,6 +52,8 @@ export default function EducationPage() {
           </div>
         </Container>
       </section>
+
+
 
       {/* Topics Grid */}
       <section className="pb-24 md:pb-32">
@@ -86,6 +98,37 @@ export default function EducationPage() {
               );
             })}
           </div>
+        </Container>
+      </section>
+
+      {/* Learning Paths */}
+      <section className="pb-24 md:pb-32">
+        <Container>
+          <Card className="p-8 md:p-10">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-lg bg-accent/10">
+                  <Route className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h2 className="text-xl md:text-2xl font-display font-bold text-text-primary mb-2">
+                    Prefer a guided sequence?
+                  </h2>
+                  <p className="text-text-secondary max-w-xl">
+                    Learning Paths string multiple lessons together into a curated, in-order mini-course built
+                    around a single outcome — like a 6-week SEO plan or an ethical marketing toolkit.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/education/paths"
+                className="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-semibold whitespace-nowrap"
+              >
+                View {LEARNING_PATHS.length} Learning Paths
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </Card>
         </Container>
       </section>
 

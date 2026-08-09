@@ -83,6 +83,14 @@ export default function ServiceComparisonPage() {
                     <span className="text-text-primary font-medium">Typical starting point:</span>{' '}
                     <span className="text-text-secondary">{scenario.startingPoint}</span>
                   </div>
+                  <div>
+                    <Link
+                      href={`/services/pricing?situation=${scenario.id}`}
+                      className="text-accent hover:text-accent-hover underline underline-offset-4 font-medium"
+                    >
+                      Get a ballpark estimate →
+                    </Link>
+                  </div>
                 </div>
               </Card>
             ))}

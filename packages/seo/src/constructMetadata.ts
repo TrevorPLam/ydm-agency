@@ -10,6 +10,11 @@ export interface MetadataOptions {
   siteName?: string;
 }
 
+const DEFAULT_SITE_URL =
+  typeof process !== 'undefined' && process.env.NEXT_PUBLIC_SITE_URL
+    ? process.env.NEXT_PUBLIC_SITE_URL
+    : 'https://ydm-agency.com';
+
 export function constructMetadata({
   title = 'YDM Agency | Digital Growth & Native Web Applications',
   description = 'Data-driven marketing, ultra-fast web development, and client conversion systems for ambitious businesses.',
@@ -40,7 +45,7 @@ export function constructMetadata({
       creator: '@ydmagency',
     },
     icons,
-    metadataBase: canonicalUrl ? new URL(canonicalUrl) : undefined,
+    metadataBase: new URL(canonicalUrl ?? DEFAULT_SITE_URL),
     ...(noIndex && {
       robots: {
         index: false,

@@ -34,12 +34,27 @@ description:
 
 - Read all files listed in the task’s `Related files` field. If any file does
   not exist, note it and ask me how to proceed.
+- Perform thorough analysis of targeted and related files:
+  - Understand current implementation and patterns used
+  - Identify dependencies and their versions
+  - Check for existing similar implementations in the codebase
+  - Verify file structure and organization
+- Conduct online research on the topic:
+  - Search for best practices and modern approaches for the technology/framework
+  - Research advanced coding patterns relevant to the task
+  - Identify common anti-patterns to avoid
+  - Verify proper implementation approaches for the specific use case
+  - Check for recent updates or deprecations in relevant libraries
 - Execute the steps under the task’s `### Initial Analysis` section, if present.
   This may involve:
-  - Researching best practices for the technology involved (perform targeted web
-    searches if needed).
   - Identifying the exact lines that need to change.
   - Verifying that any required dependencies are already installed.
+  - Cross-referencing project-specific rules and conventions.
+- Document findings:
+  - Summarize current state of related files
+  - Report research findings on best practices and patterns
+  - Note any advanced patterns or anti-patterns discovered
+  - Identify potential edge cases or considerations
 - If the analysis suggests the task description is wrong or incomplete, report
   the findings and suggest updates to `TODO.md` before proceeding.
 

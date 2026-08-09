@@ -1,13 +1,13 @@
+import type { ComponentType } from 'react';
 import Link from 'next/link';
 import { Card } from '@ydm-agency/ui';
-import { Badge } from '@ydm-agency/ui';
 import { Button } from '@ydm-agency/ui';
 import { Container } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
+import { SERVICE_LABELS, SERVICE_CARD_DESCRIPTIONS } from '@/lib/service-labels';
 import { 
   Monitor, 
   Search, 
-  Shield, 
   BarChart3, 
   Megaphone, 
   Sparkles, 
@@ -16,79 +16,18 @@ import {
   Star 
 } from 'lucide-react';
 
-interface ServiceCard {
-  slug: string;
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ className?: string }>;
-  selectClients: boolean;
-}
+const SERVICE_ICONS: Record<string, ComponentType<{ className?: string }>> = {
+  'web-design': Monitor,
+  'seo': Search,
+  'analytics': BarChart3,
+  'paid-ads': Megaphone,
+  'branding': Sparkles,
+  'content': PenTool,
+  'automation': Zap,
+  'reputation': Star,
+};
 
-const SERVICE_CARDS: ServiceCard[] = [
-  {
-    slug: 'web-design',
-    title: 'Website Design & Development',
-    description: 'Custom sites that turn visitors into customers — fast, mobile‑ready, and built around how you do business.',
-    icon: Monitor,
-    selectClients: false,
-  },
-  {
-    slug: 'seo',
-    title: 'SEO & AI Search Optimization',
-    description: 'Customers find you wherever they\'re searching — traditional search engines and AI‑powered tools.',
-    icon: Search,
-    selectClients: false,
-  },
-  {
-    slug: 'maintenance',
-    title: 'Website Maintenance',
-    description: 'Sites are kept secure, fast, and up‑to‑date so you never have to think about it.',
-    icon: Shield,
-    selectClients: false,
-  },
-  {
-    slug: 'analytics',
-    title: 'Analytics & Reporting',
-    description: 'Simple, honest tracking turns data into plain‑English reports — so guessing what\'s working stops and investing in what actually brings business begins.',
-    icon: BarChart3,
-    selectClients: false,
-  },
-  {
-    slug: 'paid-ads',
-    title: 'Paid Advertising',
-    description: 'Ads are built, managed, and optimized to turn clicks into customers — not just spend.',
-    icon: Megaphone,
-    selectClients: true,
-  },
-  {
-    slug: 'branding',
-    title: 'Branding & Messaging',
-    description: 'Messages are defined, identity is sharpened, and businesses are made unforgettable.',
-    icon: Sparkles,
-    selectClients: false,
-  },
-  {
-    slug: 'content',
-    title: 'Website & Marketing Copywriting',
-    description: 'Copy is written that sounds like you and sells like crazy — benefit‑driven, clear, and conversion‑focused.',
-    icon: PenTool,
-    selectClients: false,
-  },
-  {
-    slug: 'automation',
-    title: 'CRM & Marketing Automation',
-    description: 'Systems are set up that automatically follow up, remind who to call, and make sure every inquiry gets a response — personalized and on time, even while you sleep.',
-    icon: Zap,
-    selectClients: true,
-  },
-  {
-    slug: 'reputation',
-    title: 'Reputation & Review Management',
-    description: 'Profiles are optimized, a system for collecting genuine reviews is built, and responses are handled — so your reputation works for you around the clock.',
-    icon: Star,
-    selectClients: true,
-  },
-];
+const serviceSlugs = Object.keys(SERVICE_LABELS);
 
 export async function generateMetadata() {
   return constructMetadata({
@@ -116,22 +55,19 @@ export default function ServicesPage() {
       <section className="py-16 md:py-24">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {SERVICE_CARDS.map((service) => {
-              const Icon = service.icon;
+            {serviceSlugs.map((slug) => {
+              const Icon = SERVICE_ICONS[slug];
               return (
-                <Link key={service.slug} href={`/services/${service.slug}`}>
+                <Link key={slug} href={`/services/${slug}`}>
                   <Card className="h-full p-6 flex flex-col">
                     <div className="flex items-start justify-between mb-4">
-                      <Icon className="w-8 h-8 text-accent" />
-                      {service.selectClients && (
-                        <Badge variant="accent">Select clients</Badge>
-                      )}
+                      {Icon && <Icon className="w-8 h-8 text-accent" />}
                     </div>
                     <h3 className="text-xl font-display font-semibold text-text-primary mb-3">
-                      {service.title}
+                      {SERVICE_LABELS[slug]}
                     </h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
-                      {service.description}
+                      {SERVICE_CARD_DESCRIPTIONS[slug]}
                     </p>
                   </Card>
                 </Link>
@@ -192,6 +128,9 @@ export default function ServicesPage() {
               </Link>
               <Link href="/services/pricing" className="text-accent hover:text-accent-hover underline underline-offset-4">
                 Pricing factors →
+              </Link>
+              <Link href="/services/industries" className="text-accent hover:text-accent-hover underline underline-offset-4">
+                Industry solutions →
               </Link>
               <Link href="/audit" className="text-accent hover:text-accent-hover underline underline-offset-4">
                 Free marketing audit →

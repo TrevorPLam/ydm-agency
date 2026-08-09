@@ -77,14 +77,14 @@ All spoke pages share this structure: H1, Subhead, Problem/Solution, What's Incl
 **Final CTA:** "Ready to stop guessing and start knowing?" → `[STD-CTA]`
 
 ### 5. Paid Advertising (`/services/paid-ads`) `[SELECT-CLIENTS]`
-*Min. $500/month ad budget. Ad spend paid directly to platforms by client; management fee invoiced separately, transparent, no long‑term lock‑in.*
+*Min. $1,500–$3,000/month recommended ad budget. Ad spend paid directly to platforms by client; management fee invoiced separately, transparent, no long‑term lock‑in.*
 **H1:** Google & Meta Ads Management for Small Businesses
 **Subhead:** Whether starting your first campaign or rescuing a budget that's bleeding cash, ads are built, managed, and optimized to turn clicks into customers.
 **Includes:** Campaign strategy aligned to goals · keyword research/search ad structure (Google) · audience targeting/creative setup (Meta) · conversion tracking per click · ongoing optimization (weekly adjustments, A/B testing) · monthly plain‑English report + live dashboard.
-**Who For:** Wanting visibility while SEO builds, local providers needing steady leads, ≥$500/mo ad budget.
+**Who For:** Wanting visibility while SEO builds, local providers needing steady leads, $1,500–$3,000/mo recommended ad budget.
 **Fits with:** Web Design (dedicated landing pages) · Analytics (prove ROI) · SEO (long‑term organic)
 **Working with YDM:** Shared live dashboard, daily monitoring, weekly adjustments, monthly report explaining what happened + what's being done. Full visibility, no lock‑in.
-**FAQs:** $500/mo recommended minimum · Google (high‑intent search) vs Meta (interest/behavior) — many use both · Clicks start immediately, meaningful optimization takes 4–8 weeks · Dedicated landing pages strongly recommended, can build alongside.
+**FAQs:** $1,500–$3,000/mo recommended starting ad budget; smaller budgets possible but take longer to optimize · Google (high‑intent search) vs Meta (interest/behavior) — many use both · Clicks start immediately, meaningful optimization takes 4–8 weeks · Dedicated landing pages strongly recommended, can build alongside.
 **Final CTA:** "Ready to turn your ad budget into measurable growth?" → `[STD-CTA]`
 
 ### 6. Branding & Positioning (`/services/branding`)
