@@ -188,11 +188,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <p className="text-lg text-text-secondary mb-8">
               Describe what is not working — a clear path forward will be provided, free of charge.
             </p>
-            <Link href="/contact">
-              <Button variant="primary" size="lg">
-                Get a Free Project Outline
-              </Button>
-            </Link>
+            <Button asChild variant="primary" size="lg">
+              <Link href="/contact">Get a Free Project Outline</Link>
+            </Button>
           </div>
         </Container>
       </section>
