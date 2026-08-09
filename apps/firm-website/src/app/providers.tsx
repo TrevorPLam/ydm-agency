@@ -13,7 +13,11 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       storageKey="ydm-theme"
     >
       <CookieConsentProvider>
-        <AnalyticsProvider gaId="" posthogKey="" metaPixelId="" />
+        <AnalyticsProvider
+          gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}
+          posthogKey={process.env.NEXT_PUBLIC_POSTHOG_KEY}
+          metaPixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID}
+        />
         {children}
       </CookieConsentProvider>
     </ThemeProvider>
