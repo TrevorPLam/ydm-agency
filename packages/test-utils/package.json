@@ -1,0 +1,30 @@
+{
+  "name": "@ydm-agency/test-utils",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --coverage --passWithNoTests src --coverage.include \"src/**/*.{ts,tsx}\" --coverage.reportsDirectory coverage",
+    "test:watch": "vitest src",
+    "test:coverage": "vitest run --coverage --passWithNoTests src --coverage.include \"src/**/*.{ts,tsx}\" --coverage.reportsDirectory coverage"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "vitest": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@testing-library/jest-dom": "catalog:",
+    "@testing-library/user-event": "catalog:",
+    "jest-axe": "^9.0.0"
+  },
+  "devDependencies": {
+    "@ydm-agency/config": "workspace:*",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.6.0"
+  }
+}
