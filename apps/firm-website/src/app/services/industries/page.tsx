@@ -157,11 +157,9 @@ export default function IndustriesPage() {
             <h2 className="text-3xl md:text-4xl font-display font-bold text-text-primary mb-6">
               Describe your business and industry — a tailored approach will be provided.
             </h2>
-            <Link href="/contact">
-              <Button variant="primary" size="lg">
-                Get a Free Project Outline
-              </Button>
-            </Link>
+            <Button asChild variant="primary" size="lg">
+              <Link href="/contact">Get a Free Project Outline</Link>
+            </Button>
           </div>
         </Container>
       </section>

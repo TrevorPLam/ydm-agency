@@ -197,11 +197,9 @@ export default function Home() {
             Describe what is not working — a clear path forward will be provided, free of charge.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href="/contact">
-              <Button variant="primary" className="w-full sm:w-auto">
-                Get a Free Project Outline
-              </Button>
-            </Link>
+            <Button asChild variant="primary" className="w-full sm:w-auto">
+              <Link href="/contact">Get a Free Project Outline</Link>
+            </Button>
             <Link
               href="/services"
               className="font-medium text-text-secondary hover:text-text-primary"
