@@ -107,11 +107,9 @@ export default async function EducationTopicPage({ params }: { params: Promise<{
           <p className="text-lg text-text-secondary mb-8">
             Get a free project outline and see how the technical work fits into a larger plan.
           </p>
-          <Link href="/contact">
-            <Button variant="primary" size="lg">
-              Get a Free Project Outline
-            </Button>
-          </Link>
+          <Button asChild variant="primary" size="lg">
+            <Link href="/contact">Get a Free Project Outline</Link>
+          </Button>
         </Container>
       </section>
     </main>

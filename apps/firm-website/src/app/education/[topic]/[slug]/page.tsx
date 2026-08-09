@@ -353,11 +353,9 @@ export default async function EducationLessonPage({ params }: { params: Promise<
                 >
                   &larr; Back to {topicData.name}
                 </Link>
-                <Link href="/contact">
-                  <Button variant="primary" size="lg">
-                    Get a Free Project Outline
-                  </Button>
-                </Link>
+                <Button asChild variant="primary" size="lg">
+                  <Link href="/contact">Get a Free Project Outline</Link>
+                </Button>
               </div>
             </Container>
           </section>
