@@ -1,15 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ydm-agency/ui';
+import { trackEvent } from '@ydm-agency/analytics';
 import { auditFormSchema, type AuditFormInput } from '@/lib/audit-schema';
 import { submitAudit } from '@/app/audit/actions';
+
+const MARKETING_STATE_OPTIONS = [
+  { value: 'no-website', label: 'No website yet' },
+  { value: 'website-no-traffic', label: 'Website exists but gets little traffic' },
+  { value: 'traffic-no-leads', label: 'Traffic exists but few leads' },
+  { value: 'leads-now', label: 'Need leads quickly' },
+  { value: 'automation-mess', label: 'Leads slip through the cracks' },
+  { value: 'unsure', label: 'Not sure where to start' },
+] as const;
 
 export function AuditForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   const {
     register,
@@ -27,6 +39,14 @@ export function AuditForm() {
     },
   });
 
+  useEffect(() => {
+    if (submitStatus === 'error' && errorRef.current) {
+      errorRef.current.focus();
+    } else if (submitStatus === 'success' && successRef.current) {
+      successRef.current.focus();
+    }
+  }, [submitStatus]);
+
   const onSubmit = async (data: AuditFormInput) => {
     setSubmitStatus('loading');
     setErrorMessage(null);
@@ -36,11 +56,18 @@ export function AuditForm() {
 
       if (result.success) {
         setSubmitStatus('success');
+        trackEvent({
+          eventName: 'form_submission',
+          properties: {
+            form: 'audit',
+            marketingState: data.marketingState,
+          },
+        });
       } else {
         setSubmitStatus('error');
         setErrorMessage(result.error || 'Submission failed. Please try again.');
       }
-    } catch (error) {
+    } catch (_error) {
       setSubmitStatus('error');
       setErrorMessage('An unexpected error occurred. Please try again.');
     }
@@ -48,7 +75,13 @@ export function AuditForm() {
 
   if (submitStatus === 'success') {
     return (
-      <div className="bg-surface border border-border rounded-xl p-8 text-center">
+      <div
+        ref={successRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        className="bg-surface border border-border rounded-xl p-8 text-center"
+      >
         <div className="w-12 h-12 bg-accent/20 text-accent rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
           ✓
         </div>
@@ -72,10 +105,16 @@ export function AuditForm() {
           id="name"
           type="text"
           {...register('name')}
+          aria-invalid={errors.name ? 'true' : 'false'}
+          aria-describedby={errors.name ? 'name-error' : undefined}
           className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
           placeholder="Your name"
         />
-        {errors.name && <p className="text-error text-sm mt-1">{errors.name.message}</p>}
+        {errors.name && (
+          <p id="name-error" className="text-error text-sm mt-1" role="alert" aria-live="assertive">
+            {errors.name.message}
+          </p>
+        )}
       </div>
 
       <div>
@@ -86,10 +125,16 @@ export function AuditForm() {
           id="email"
           type="email"
           {...register('email')}
+          aria-invalid={errors.email ? 'true' : 'false'}
+          aria-describedby={errors.email ? 'email-error' : undefined}
           className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
           placeholder="you@example.com"
         />
-        {errors.email && <p className="text-error text-sm mt-1">{errors.email.message}</p>}
+        {errors.email && (
+          <p id="email-error" className="text-error text-sm mt-1" role="alert" aria-live="assertive">
+            {errors.email.message}
+          </p>
+        )}
       </div>
 
       <div>
@@ -100,10 +145,16 @@ export function AuditForm() {
           id="website"
           type="text"
           {...register('website')}
+          aria-invalid={errors.website ? 'true' : 'false'}
+          aria-describedby={errors.website ? 'website-error' : undefined}
           className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
           placeholder="example.com"
         />
-        {errors.website && <p className="text-error text-sm mt-1">{errors.website.message}</p>}
+        {errors.website && (
+          <p id="website-error" className="text-error text-sm mt-1" role="alert" aria-live="assertive">
+            {errors.website.message}
+          </p>
+        )}
       </div>
 
       <div>
@@ -114,10 +165,16 @@ export function AuditForm() {
           id="challenge"
           rows={4}
           {...register('challenge')}
+          aria-invalid={errors.challenge ? 'true' : 'false'}
+          aria-describedby={errors.challenge ? 'challenge-error' : undefined}
           className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none"
           placeholder="Describe the biggest marketing challenge the business is facing..."
         />
-        {errors.challenge && <p className="text-error text-sm mt-1">{errors.challenge.message}</p>}
+        {errors.challenge && (
+          <p id="challenge-error" className="text-error text-sm mt-1" role="alert" aria-live="assertive">
+            {errors.challenge.message}
+          </p>
+        )}
       </div>
 
       <div>
@@ -127,17 +184,20 @@ export function AuditForm() {
         <select
           id="marketingState"
           {...register('marketingState')}
+          aria-invalid={errors.marketingState ? 'true' : 'false'}
+          aria-describedby={errors.marketingState ? 'marketingState-error' : undefined}
           className="w-full px-4 py-3 bg-background border border-border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
         >
-          <option value="no-website">No website yet</option>
-          <option value="website-no-traffic">Website exists but gets little traffic</option>
-          <option value="traffic-no-leads">Traffic exists but few leads</option>
-          <option value="leads-now">Need leads quickly</option>
-          <option value="automation-mess">Leads slip through the cracks</option>
-          <option value="unsure">Not sure where to start</option>
+          {MARKETING_STATE_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
         {errors.marketingState && (
-          <p className="text-error text-sm mt-1">{errors.marketingState.message}</p>
+          <p id="marketingState-error" className="text-error text-sm mt-1" role="alert" aria-live="assertive">
+            {errors.marketingState.message}
+          </p>
         )}
       </div>
 
@@ -148,10 +208,13 @@ export function AuditForm() {
         className="hidden"
         tabIndex={-1}
         autoComplete="off"
+        aria-hidden="true"
       />
 
       {errorMessage && (
         <div
+          ref={errorRef}
+          tabIndex={-1}
           className="bg-error/10 border border-error/20 rounded-lg p-4"
           role="alert"
           aria-live="assertive"
