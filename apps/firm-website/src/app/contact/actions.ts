@@ -12,12 +12,12 @@ interface SubmitContactResult {
   error?: string;
 }
 
-// Initialize Supabase client
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+// Initialize Supabase client using the names documented in .env.example.
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const supabase = supabaseUrl && supabaseAnonKey 
-  ? createClient(supabaseUrl, supabaseAnonKey)
+const supabase = supabaseUrl && supabaseServiceRoleKey
+  ? createClient(supabaseUrl, supabaseServiceRoleKey)
   : null;
 
 // Initialize Upstash rate limiter
@@ -45,9 +45,9 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
     try {
       const headersList = await headers();
       const ip = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown';
-      
+
       const { success } = await ratelimit.limit(ip);
-      
+
       if (!success) {
         return {
           success: false,
@@ -60,38 +60,15 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
     }
   }
 
-  const { name, email, projectType, message } = parsed.data;
-
-  // Store lead in Supabase
-  if (supabase) {
-    try {
-      const { error: supabaseError } = await supabase
-        .from('leads')
-        .insert({
-          name,
-          email,
-          project_type: projectType || null,
-          message,
-          source: 'website',
-          status: 'new',
-          created_at: new Date().toISOString(),
-        });
-
-      if (supabaseError) {
-        console.error('Supabase error:', supabaseError);
-        return {
-          success: false,
-          error: 'Failed to store your information. Please try again.',
-        };
-      }
-    } catch (error) {
-      console.error('Supabase insertion error:', error);
-      return {
-        success: false,
-        error: 'Failed to store your information. Please try again.',
-      };
-    }
+  // Fail-closed for storage: if Supabase is not configured, do not silently no-op.
+  if (!supabase) {
+    return {
+      success: false,
+      error: 'Submission storage is not configured. Please try again later.',
+    };
   }
+
+  const { name, email, projectType, message } = parsed.data;
 
   // Map project type to label for email
   const projectTypeLabels: Record<string, string> = {
@@ -111,6 +88,30 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
     message,
   ].join('\n');
 
+  // Attempt to store the lead first, but do not block email on storage failure.
+  let storageError: string | null = null;
+  try {
+    const { error: supabaseError } = await supabase
+      .from('leads')
+      .insert({
+        name,
+        email,
+        project_type: projectType || null,
+        message,
+        source: 'website',
+        status: 'new',
+        created_at: new Date().toISOString(),
+      });
+
+    if (supabaseError) {
+      console.error('Supabase error:', supabaseError);
+      storageError = 'Failed to store your information. Please try again.';
+    }
+  } catch (error) {
+    console.error('Supabase insertion error:', error);
+    storageError = 'Failed to store your information. Please try again.';
+  }
+
   // Test seam for E2E runs: skip real Resend calls when RESEND_API_KEY is 'test'.
   if (process.env.RESEND_API_KEY === 'test') {
     return { success: true };
@@ -124,6 +125,9 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
   });
 
   if (result.success) {
+    if (storageError) {
+      console.warn('Contact submission stored with storage failure:', storageError);
+    }
     return { success: true };
   }
 

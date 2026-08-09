@@ -6,8 +6,8 @@ const sendEmailFn = vi.hoisted(() => vi.fn());
 const headersFn = vi.hoisted(() => vi.fn());
 
 vi.hoisted(() => {
-  process.env.SUPABASE_URL = 'https://example.supabase.co';
-  process.env.SUPABASE_ANON_KEY = 'test-anon-key';
+  process.env.NEXT_PUBLIC_SUPABASE_URL = 'https://example.supabase.co';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-service-role-key';
   process.env.UPSTASH_REDIS_REST_URL = 'https://example.upstash.io';
   process.env.UPSTASH_REDIS_REST_TOKEN = 'test-token';
 });
@@ -91,24 +91,45 @@ describe('submitContact', () => {
     expect(sendEmailFn).not.toHaveBeenCalled();
   });
 
-  it('returns storage error when Supabase insert fails', async () => {
+  it('returns error when Supabase is not configured', async () => {
+    const prevUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const prevKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    delete process.env.NEXT_PUBLIC_SUPABASE_URL;
+    delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    vi.resetModules();
+    const { submitContact: submitContactNoSupabase } = await import('./actions');
+
+    const result = await submitContactNoSupabase(validInput);
+
+    expect(result.success).toBe(false);
+    expect(result.error).toMatch(/not configured/i);
+    expect(insertFn).not.toHaveBeenCalled();
+    expect(sendEmailFn).not.toHaveBeenCalled();
+
+    process.env.NEXT_PUBLIC_SUPABASE_URL = prevUrl;
+    process.env.SUPABASE_SERVICE_ROLE_KEY = prevKey;
+  });
+
+  it('still sends email when Supabase insert fails', async () => {
     insertFn.mockResolvedValue({ error: { message: 'Database error' } });
 
     const result = await submitContact(validInput);
 
-    expect(result.success).toBe(false);
-    expect(result.error).toMatch(/failed to store/i);
-    expect(sendEmailFn).not.toHaveBeenCalled();
+    expect(result.success).toBe(true);
+    expect(insertFn).toHaveBeenCalled();
+    expect(sendEmailFn).toHaveBeenCalled();
   });
 
-  it('returns storage error when Supabase insert throws', async () => {
+  it('still sends email when Supabase insert throws', async () => {
     insertFn.mockRejectedValue(new Error('Connection refused'));
 
     const result = await submitContact(validInput);
 
-    expect(result.success).toBe(false);
-    expect(result.error).toMatch(/failed to store/i);
-    expect(sendEmailFn).not.toHaveBeenCalled();
+    expect(result.success).toBe(true);
+    expect(insertFn).toHaveBeenCalled();
+    expect(sendEmailFn).toHaveBeenCalled();
   });
 
   it('returns error when sendEmail fails', async () => {
