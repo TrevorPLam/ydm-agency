@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Container } from './Container';
 import { Card } from './Card';
 import { Button } from './Button';
@@ -84,16 +85,17 @@ export const Pricing: React.FC<PricingProps> = ({
               </ul>
 
               {plan.ctaHref ? (
-                <a href={plan.ctaHref}>
-                  <Button
-                    variant={plan.popular ? 'primary' : 'secondary'}
-                    className={`w-full py-2.5 font-semibold ${
-                      !plan.popular && 'bg-slate-800 hover:bg-slate-700 text-white'
-                    }`}
-                  >
+                <Button
+                  asChild
+                  variant={plan.popular ? 'primary' : 'secondary'}
+                  className={`w-full py-2.5 font-semibold ${
+                    !plan.popular && 'bg-slate-800 hover:bg-slate-700 text-white'
+                  }`}
+                >
+                  <Link href={plan.ctaHref}>
                     {plan.ctaText || 'Get Started'}
-                  </Button>
-                </a>
+                  </Link>
+                </Button>
               ) : (
                 <Button
                   variant={plan.popular ? 'primary' : 'secondary'}
