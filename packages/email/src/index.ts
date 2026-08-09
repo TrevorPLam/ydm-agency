@@ -1,4 +1,4 @@
-import { Resend } from 'resend';
+import { Resend, type CreateEmailResponse } from 'resend';
 import { render } from '@react-email/render';
 import { AcknowledgmentEmail } from './AcknowledgmentEmail';
 import { NotificationEmail } from './NotificationEmail';
@@ -42,7 +42,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
     const ackSubject = 'Got your message — YDM Agency';
     const notifSubject = `New Contact: ${options.name} — ${options.projectType ?? 'General'}`;
 
-    const results = await Promise.allSettled([
+    const results = await Promise.allSettled<CreateEmailResponse>([
       resend.emails.send({
         from: FROM_ADDRESS,
         to: options.email,
@@ -57,12 +57,26 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
       }),
     ]);
 
-    // Log any failures but don't block success
+    const failures: string[] = [];
+
     results.forEach((result, index) => {
+      const label = index === 0 ? 'acknowledgment' : 'notification';
+
       if (result.status === 'rejected') {
-        console.error(`Email ${index === 0 ? 'acknowledgment' : 'notification'} failed:`, result.reason);
+        const message = result.reason instanceof Error ? result.reason.message : String(result.reason);
+        console.error(`Email ${label} failed:`, message);
+        failures.push(label);
+      } else if (result.value.error) {
+        const resendError = result.value.error;
+        const message = typeof resendError === 'string' ? resendError : resendError.message;
+        console.error(`Email ${label} Resend error:`, message);
+        failures.push(label);
       }
     });
+
+    if (failures.length > 0) {
+      return { success: false, error: 'Failed to send emails. Please try again.' };
+    }
 
     return { success: true };
   } catch (error) {
