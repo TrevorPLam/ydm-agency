@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:coverage": "vitest run --coverage",
+    "test": "vitest run --coverage --passWithNoTests apps/firm-website/src --coverage.include \"apps/firm-website/src/**/*.{ts,tsx}\" --coverage.reportsDirectory apps/firm-website/coverage",
+    "test:watch": "vitest apps/firm-website/src",
+    "test:coverage": "vitest run --coverage --passWithNoTests apps/firm-website/src --coverage.include \"apps/firm-website/src/**/*.{ts,tsx}\" --coverage.reportsDirectory apps/firm-website/coverage",
     "clean": "rm -rf .next out"
   },
   "dependencies": {

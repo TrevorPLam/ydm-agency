@@ -11,6 +11,9 @@
     "tailwind.js",
     "tsconfig.base.json"
   ],
+  "scripts": {
+    "test": "vitest run --coverage --passWithNoTests packages/config --coverage.include \"packages/config/**/*.{ts,tsx}\" --coverage.reportsDirectory packages/config/coverage"
+  },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "eslint": "^9.0.0",
@@ -21,6 +24,7 @@
     "typescript-eslint": "^8.0.0",
     "tailwindcss": "catalog:",
     "prettier": "^3.3.0",
-    "prettier-plugin-tailwindcss": "^0.6.0"
+    "prettier-plugin-tailwindcss": "^0.6.0",
+    "vitest": "catalog:"
   }
 }

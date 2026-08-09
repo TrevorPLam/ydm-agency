@@ -7,8 +7,9 @@
   "scripts": {
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test": "vitest run --coverage --passWithNoTests src --coverage.include \"src/**/*.{ts,tsx}\" --coverage.reportsDirectory coverage",
+    "test:watch": "vitest src",
+    "test:coverage": "vitest run --coverage --passWithNoTests src --coverage.include \"src/**/*.{ts,tsx}\" --coverage.reportsDirectory coverage"
   },
   "dependencies": {
     "react": "catalog:",

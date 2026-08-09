@@ -18,8 +18,11 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
     },
     "e2e": {
       "dependsOn": ["^build"],

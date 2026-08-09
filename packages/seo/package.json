@@ -6,7 +6,8 @@
   "types": "./src/index.ts",
   "scripts": {
     "lint": "eslint src/",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --coverage --passWithNoTests packages/seo/src --coverage.include \"packages/seo/src/**/*.{ts,tsx}\" --coverage.reportsDirectory packages/seo/coverage"
   },
   "dependencies": {
     "next": "catalog:",
@@ -15,6 +16,7 @@
   "devDependencies": {
     "@ydm-agency/config": "workspace:*",
     "@types/react": "^19.0.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "vitest": "catalog:"
   }
 }

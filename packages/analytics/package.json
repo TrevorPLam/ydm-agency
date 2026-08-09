@@ -6,7 +6,8 @@
   "types": "./src/index.ts",
   "scripts": {
     "lint": "eslint src/",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --coverage --passWithNoTests packages/analytics/src --coverage.include \"packages/analytics/src/**/*.{ts,tsx}\" --coverage.reportsDirectory packages/analytics/coverage"
   },
   "dependencies": {
     "@ydm-agency/ui": "workspace:*",
@@ -17,6 +18,7 @@
     "@ydm-agency/config": "workspace:*",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "vitest": "catalog:"
   }
 }
