@@ -44,25 +44,23 @@ export const Hero: React.FC<HeroProps> = ({
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           {primaryCtaHref && (
-            <Link href={primaryCtaHref}>
-              <Button
-                variant="primary"
-                className="w-full sm:w-auto px-8 py-3 text-base"
-              >
-                {primaryCtaText}
-              </Button>
-            </Link>
+            <Button
+              asChild
+              variant="primary"
+              className="w-full sm:w-auto px-8 py-3 text-base"
+            >
+              <Link href={primaryCtaHref}>{primaryCtaText}</Link>
+            </Button>
           )}
 
           {secondaryCtaHref && (
-            <Link href={secondaryCtaHref}>
-              <Button
-                variant="secondary"
-                className="w-full sm:w-auto px-8 py-3 text-base"
-              >
-                {secondaryCtaText}
-              </Button>
-            </Link>
+            <Button
+              asChild
+              variant="secondary"
+              className="w-full sm:w-auto px-8 py-3 text-base"
+            >
+              <Link href={secondaryCtaHref}>{secondaryCtaText}</Link>
+            </Button>
           )}
         </div>
       </Container>
