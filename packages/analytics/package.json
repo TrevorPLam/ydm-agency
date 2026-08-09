@@ -7,7 +7,9 @@
   "scripts": {
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --coverage --passWithNoTests packages/analytics/src --coverage.include \"packages/analytics/src/**/*.{ts,tsx}\" --coverage.reportsDirectory packages/analytics/coverage"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@ydm-agency/ui": "workspace:*",

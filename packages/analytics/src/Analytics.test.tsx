@@ -12,6 +12,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { CookieConsentProvider, useConsent } from '@ydm-agency/ui';
 import { AnalyticsProvider } from './Analytics';
+import type { Gtag } from './types';
 
 const scriptRegistry = vi.hoisted(() => ({
   onLoadTriggers: new Map<string, (() => void) | undefined>(),
@@ -81,16 +82,16 @@ describe('AnalyticsProvider', () => {
     });
     scriptRegistry.onLoadTriggers.clear();
     scriptRegistry.scriptProps.clear();
-    delete (window as any).gtag;
+    window.gtag = undefined;
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
-    delete (window as any).gtag;
+    window.gtag = undefined;
   });
 
   it('sends granted consent update once the GA4 script loads after the user accepts', async () => {
-    const gtag = vi.fn();
+    const gtag = vi.fn<Gtag>();
     renderWithConsent();
 
     const acceptButton = screen.getByRole('button', { name: /accept/i });
@@ -100,7 +101,7 @@ describe('AnalyticsProvider', () => {
     expect(gtag).not.toHaveBeenCalled();
 
     // Simulate the external gtag.js script finishing load.
-    (window as any).gtag = gtag;
+    window.gtag = gtag;
     scriptRegistry.onLoadTriggers.get(GA_SRC)?.();
 
     await waitFor(() => {
@@ -110,7 +111,7 @@ describe('AnalyticsProvider', () => {
   });
 
   it('sends granted once gtag loads when the cookie is already accepted', async () => {
-    const gtag = vi.fn();
+    const gtag = vi.fn<Gtag>();
     Object.defineProperty(document, 'cookie', {
       writable: true,
       value: 'ydm-analytics-consent=accepted',
@@ -122,7 +123,7 @@ describe('AnalyticsProvider', () => {
     expect(gtag).not.toHaveBeenCalled();
 
     // Simulate the external gtag.js script finishing load.
-    (window as any).gtag = gtag;
+    window.gtag = gtag;
     scriptRegistry.onLoadTriggers.get(GA_SRC)?.();
 
     await waitFor(() => {
@@ -132,8 +133,8 @@ describe('AnalyticsProvider', () => {
   });
 
   it('updates from granted to denied when the user rejects after accepting', async () => {
-    const gtag = vi.fn();
-    (window as any).gtag = gtag;
+    const gtag = vi.fn<Gtag>();
+    window.gtag = gtag;
     renderWithConsent();
 
     const acceptButton = screen.getByRole('button', { name: /accept/i });
@@ -153,8 +154,8 @@ describe('AnalyticsProvider', () => {
   });
 
   it('queues a default denied consent call before gtag config in the inline init script', async () => {
-    const gtag = vi.fn();
-    (window as any).gtag = gtag;
+    const gtag = vi.fn<Gtag>();
+    window.gtag = gtag;
     renderWithConsent();
 
     const acceptButton = screen.getByRole('button', { name: /accept/i });

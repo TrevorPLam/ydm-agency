@@ -43,11 +43,11 @@ export function AnalyticsProvider({ gaId, posthogKey, metaPixelId }: AnalyticsPr
    * ASSUMES: consentRef is kept in sync by the parent effect; lastConsentRef is per-instance and starts at the initial analyticsConsent value.
    */
   const updateConsent = useCallback(() => {
-    if (typeof window === 'undefined' || !(window as any).gtag) return;
+    if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
     // WHY: Skip duplicate consent updates to prevent redundant gtag calls
     if (lastConsentRef.current === consentRef.current) return;
     lastConsentRef.current = consentRef.current;
-    (window as any).gtag('consent', 'update', {
+    window.gtag('consent', 'update', {
       analytics_storage: consentRef.current ? 'granted' : 'denied',
     });
   }, []);
