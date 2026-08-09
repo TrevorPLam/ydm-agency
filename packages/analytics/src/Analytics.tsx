@@ -1,7 +1,15 @@
+/**
+ * FILE: Analytics.tsx
+ * PURPOSE: Inject analytics providers (GA4, PostHog, Meta Pixel) with consent-gated loading and gtag consent updates.
+ * ARCHITECTURE: Client component that observes CookieConsentContext, conditionally renders third-party scripts, and defers gtag('consent','update') until the GA4 script has actually loaded.
+ * KEY RULES: Guard window access; never call gtag before window.gtag exists; avoid duplicate consent updates; keep default analytics_storage denied.
+ * DEPENDS ON: next/script, react, @ydm-agency/ui (CookieConsentContext/useConsent)
+ * LAST UPDATED: 2026-08-09 Fix gtag consent timing race
+ */
 'use client';
 
 /// <reference lib="dom" />
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import Script from 'next/script';
 import { useConsent } from '@ydm-agency/ui';
 
@@ -11,24 +19,56 @@ export interface AnalyticsProps {
   metaPixelId?: string;
 }
 
+/**
+ * WHAT IT DOES: Coordinates analytics script injection and gtag consent state.
+ * @param {AnalyticsProps} props - analytics provider IDs
+ * @return {JSX.Element | null} - script tags or fragment
+ * SIDE EFFECTS: Defines window.gtag and window.dataLayer, pushes consent and config commands to the GA4 dataLayer, loads PostHog and Meta Pixel when consent is granted.
+ * ASSUMES: Runs inside a CookieConsentProvider; window exists (client-only).
+ */
 export function AnalyticsProvider({ gaId, posthogKey, metaPixelId }: AnalyticsProps) {
   const { analyticsConsent } = useConsent();
+  const consentRef = useRef(analyticsConsent);
+  const lastConsentRef = useRef(analyticsConsent);
 
+  // WHY: Sync consentRef with current consent value for use in updateConsent callback
   useEffect(() => {
-    if (analyticsConsent && typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('consent', 'update', { analytics_storage: 'granted' });
-    }
+    consentRef.current = analyticsConsent;
   }, [analyticsConsent]);
+
+  /**
+   * WHAT IT DOES: Sends the current consent state to gtag when window.gtag is available, skipping duplicate or premature calls.
+   * @return {void}
+   * SIDE EFFECTS: Calls window.gtag('consent','update') when gtag exists and the consent value has changed since the last successful call.
+   * ASSUMES: consentRef is kept in sync by the parent effect; lastConsentRef is per-instance and starts at the initial analyticsConsent value.
+   */
+  const updateConsent = useCallback(() => {
+    if (typeof window === 'undefined' || !(window as any).gtag) return;
+    // WHY: Skip duplicate consent updates to prevent redundant gtag calls
+    if (lastConsentRef.current === consentRef.current) return;
+    lastConsentRef.current = consentRef.current;
+    (window as any).gtag('consent', 'update', {
+      analytics_storage: consentRef.current ? 'granted' : 'denied',
+    });
+  }, []);
+
+  // WHY: Trigger consent update whenever consent state changes
+  useEffect(() => {
+    updateConsent();
+  }, [analyticsConsent, updateConsent]);
 
   return (
     <>
       {analyticsConsent && gaId && (
         <>
+          {/* WHY: Load GA4 gtag.js script only when consent is granted, trigger consent update on load */}
           <Script
             id="ga-script"
             strategy="afterInteractive"
             src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            onLoad={updateConsent}
           />
+          {/* WHY: Initialize GA4 with default consent denied, then configure tracking */}
           <Script
             id="ga-init"
             strategy="afterInteractive"
@@ -36,6 +76,7 @@ export function AnalyticsProvider({ gaId, posthogKey, metaPixelId }: AnalyticsPr
               __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
+                gtag('consent', 'default', { analytics_storage: 'denied' });
                 gtag('js', new Date());
                 gtag('config', '${gaId}', { page_path: window.location.pathname });
               `,
@@ -44,6 +85,7 @@ export function AnalyticsProvider({ gaId, posthogKey, metaPixelId }: AnalyticsPr
         </>
       )}
 
+      {/* WHY: Load PostHog only when consent is granted */}
       {analyticsConsent && posthogKey && (
         <Script
           id="posthog-init"
@@ -57,6 +99,7 @@ export function AnalyticsProvider({ gaId, posthogKey, metaPixelId }: AnalyticsPr
         />
       )}
 
+      {/* WHY: Load Meta Pixel only when consent is granted */}
       {analyticsConsent && metaPixelId && (
         <Script
           id="meta-pixel-init"
