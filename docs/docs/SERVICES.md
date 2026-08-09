@@ -1,7 +1,3 @@
-I’ve synthesized the entire chat thread, the CSV landscape, and my broader knowledge of marketing services to produce this **enhanced master inventory**. It’s designed to be exhaustive—every service type, every alias, every pricing reference we’ve encountered or that I know exists—so we have a complete market map to benchmark our eight pillars against.
-
----
-
 ## MASTER INVENTORY OF MARKETING AGENCY SERVICES
 
 *Pricing reflects standalone project or retainer ranges drawn from our CSV, industry benchmarks, and known agency models. “Unknown” means no solid standalone price was found in the provided data or widespread public sources.*
