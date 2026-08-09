@@ -14,7 +14,7 @@ const validInput = {
   website: 'https://example.com',
   challenge: 'Traffic is low and conversions are even lower than expected.',
   marketingState: 'traffic-no-leads' as const,
-  _honeypot: '',
+  _honeypot: '' as const,
 };
 
 describe('submitAudit', () => {
@@ -31,7 +31,7 @@ describe('submitAudit', () => {
       website: 'invalid',
       challenge: 'short',
       marketingState: 'traffic-no-leads',
-      _honeypot: '',
+      _honeypot: '' as const,
     });
 
     expect(result.success).toBe(false);

@@ -22,10 +22,9 @@ vi.mock('@supabase/supabase-js', () => ({
 
 vi.mock('@upstash/ratelimit', () => {
   const slidingWindow = vi.fn();
-  const Ratelimit = vi.fn(() => ({
-    limit: ratelimitFn,
-  }));
-  Ratelimit.slidingWindow = slidingWindow;
+  const Ratelimit = Object.assign(vi.fn(() => ({ limit: ratelimitFn })), {
+    slidingWindow,
+  });
   return { Ratelimit, slidingWindow };
 });
 
@@ -48,7 +47,7 @@ const validInput = {
   email: 'john@example.com',
   projectType: 'website' as const,
   message: 'This is a detailed project message.',
-  _honeypot: '',
+  _honeypot: '' as const,
 };
 
 describe('submitContact', () => {
@@ -70,7 +69,7 @@ describe('submitContact', () => {
       email: 'not-an-email',
       projectType: 'website',
       message: 'short',
-      _honeypot: '',
+      _honeypot: '' as const,
     });
 
     expect(result.success).toBe(false);

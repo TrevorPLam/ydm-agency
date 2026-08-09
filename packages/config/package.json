@@ -25,6 +25,7 @@
     "tailwindcss": "catalog:",
     "prettier": "^3.3.0",
     "prettier-plugin-tailwindcss": "^0.6.0",
+    "@tailwindcss/typography": "catalog:",
     "vitest": "catalog:"
   }
 }
