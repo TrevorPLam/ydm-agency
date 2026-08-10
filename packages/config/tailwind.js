@@ -8,15 +8,20 @@
  */
 
 /** @type {import('tailwindcss').Config} */
+const path = require('path');
 const { fontFamily } = require('tailwindcss/defaultTheme');
+const typography = require('@tailwindcss/typography');
+
+// WHY: Resolve content globs from this shared config file so builds are not
+// dependent on the current working directory of the calling package.
+const contentPath = (relPath) =>
+  path.resolve(__dirname, relPath).replace(/\\/g, '/');
 
 module.exports = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
-    '../../packages/forms/src/**/*.{js,ts,jsx,tsx}',
-    '../../packages/analytics/src/**/*.{js,ts,jsx,tsx}',
-    '../../packages/seo/src/**/*.{js,ts,jsx,tsx}',
+    contentPath('../../apps/firm-website/src/**/*.{js,ts,jsx,tsx,mdx}'),
+    contentPath('../../packages/ui/src/**/*.{js,ts,jsx,tsx}'),
+    contentPath('../../packages/forms/src/**/*.{js,ts,jsx,tsx}'),
   ],
   theme: {
     extend: {
@@ -32,7 +37,7 @@ module.exports = {
         success: 'var(--color-success)',
       },
       fontFamily: {
-        display: ['var(--font-display)', ...fontFamily.serif],
+        display: ['var(--font-display)', ...fontFamily.sans],
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },
       boxShadow: {
@@ -40,5 +45,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [typography],
 };
