@@ -1,10 +1,10 @@
 /**
  * FILE: EducationSearch.tsx
- * PURPOSE: Provides a client-side education search box that calls the searchLessons Server Action and renders matching lessons as cards.
- * ARCHITECTURE: Client component using useState/useTransition; debounced via startTransition; tracks an education_search analytics event on first search; renders results via the searchLessons Server Action.
- * KEY RULES: Must only track the education_search event once per mount (hasSearched guard); must use startTransition for non-blocking search; must link results to /education/[topic]/[slug].
+ * PURPOSE: Provides a client-side education search box that debounces queries and calls the searchLessons Server Action.
+ * ARCHITECTURE: Client component using useState/useTransition and useEffect; debounces input by 300ms; tracks an education_search analytics event on each debounced non-empty query; renders matching lesson cards when showResults is true.
+ * KEY RULES: Must only call searchLessons after a 300ms debounce; must track education_search after debounce for non-empty queries; must provide a11y labels and semantic search role; must link results to /education/[topic]/[slug].
  * DEPENDS ON: react, next/link, lucide-react, @ydm-agency/ui (Card, Badge), @ydm-agency/analytics (trackEvent), @/lib/education-config, ./search-actions (searchLessons).
- * LAST UPDATED: 2026-08-09 Add code commentary headers
+ * LAST UPDATED: 2026-08-09 Fix prop usage, debounce, a11y, and analytics
  */
 'use client';
 
@@ -22,52 +22,62 @@ interface EducationSearchProps {
 }
 
 /**
- * WHAT IT DOES: Renders an education search input and (when showResults is true) a list of matching lesson cards, calling the searchLessons Server Action via useTransition.
+ * WHAT IT DOES: Renders a debounced education search input with optional results list, calling the searchLessons Server Action.
  * @param {EducationSearchProps} props - showResults (default true) and compact (default false) display options
- * @return {JSX.Element} - Rendered search box and optional results list
- * SIDE EFFECTS: Calls searchLessons Server Action on query change; tracks an education_search analytics event on first search.
+ * @return {JSX.Element} - Rendered search form and optional results list
+ * SIDE EFFECTS: Calls searchLessons Server Action after 300ms debounce; tracks an education_search analytics event on each non-empty debounced query.
  * ASSUMES: searchLessons returns EducationLesson[] matching the query.
  */
 export default function EducationSearch({ showResults = true, compact = false }: EducationSearchProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredLessons, setFilteredLessons] = useState(EDUCATION_LESSONS);
   const [isPending, startTransition] = useTransition();
-  const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    if (query.trim().length > 0 && !hasSearched) {
-      setHasSearched(true);
-      trackEvent({
-        eventName: 'education_search',
-        properties: {
-          event_category: 'education',
-          search_query: query,
-          search_length: query.length,
-        },
+  // WHY: Debounce the server action and analytics by 300ms so we don't search or track on every keystroke
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const trimmed = searchQuery.trim();
+      if (trimmed.length > 0) {
+        trackEvent({
+          eventName: 'education_search',
+          properties: {
+            event_category: 'education',
+            search_query: trimmed,
+            search_length: trimmed.length,
+          },
+        });
+      }
+
+      startTransition(async () => {
+        const results = await searchLessons(searchQuery);
+        setFilteredLessons(results);
       });
-    }
-    startTransition(async () => {
-      const results = await searchLessons(query);
-      setFilteredLessons(results);
-    });
-  };
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [searchQuery, startTransition]);
 
   return (
     <>
-      <div className={`relative ${compact ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}>
+      <form
+        role="search"
+        onSubmit={(e) => e.preventDefault()}
+        className={`relative ${compact ? 'max-w-lg' : 'max-w-2xl'} mx-auto`}
+      >
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-text-secondary" />
         <input
-          type="text"
+          id="education-search"
+          type="search"
+          aria-label="Search lessons and topics"
           placeholder="Search lessons and topics..."
           value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full pl-12 pr-4 py-4 bg-surface border border-border rounded-lg text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-accent transition-colors"
         />
-      </div>
+      </form>
 
       {/* Search Results */}
-      {searchQuery && (
+      {showResults && searchQuery && (
         <div className="mt-12">
           <div className="mb-8">
             <h2 className="text-2xl md:text-3xl font-display font-bold text-text-primary mb-2">
@@ -77,7 +87,7 @@ export default function EducationSearch({ showResults = true, compact = false }:
               Found {filteredLessons.length} lessons matching &quot;{searchQuery}&quot;
             </p>
           </div>
-          
+
           {isPending ? (
             <div className="text-center py-12">
               <p className="text-text-secondary text-lg">Searching...</p>
