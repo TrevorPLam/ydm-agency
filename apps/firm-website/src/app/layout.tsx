@@ -78,10 +78,10 @@ export default function RootLayout({
       <body className="bg-background text-text-primary antialiased font-sans">
         <AppProviders>
           <Header brandName="YDM Agency" serviceLinks={[...serviceLinks, ...serviceUtilityLinks]} />
-          {/* WHY: Main landmark for accessibility and semantic HTML structure */}
-          <main id="main-content">
+          {/* WHY: Page-level <main> landmarks live in each page; the root wrapper keeps the skip-to-content target */}
+          <div id="main-content">
             {children}
-          </main>
+          </div>
           <Footer />
           <CookieConsent />
         </AppProviders>

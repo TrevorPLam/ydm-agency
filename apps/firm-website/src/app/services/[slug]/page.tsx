@@ -63,13 +63,14 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
   const overviewFaqs = getContextualFaqs(config.slug, 'overview');
 
   return (
-    <main className="min-h-screen">
+    <>
       <ServiceJsonLd
         name={config.h1}
         description={config.subhead}
         url={`https://ydm-agency.com/services/${config.slug}`}
       />
-      <ServiceSubnav slug={config.slug} active="overview" />
+      <main className="min-h-screen">
+        <ServiceSubnav slug={config.slug} active="overview" />
 
       {/* Hero */}
       <section className="py-24 md:py-32">
@@ -245,5 +246,6 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
         </Container>
       </section>
     </main>
-  );
+  </>
+);
 }

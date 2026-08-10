@@ -8,6 +8,11 @@
  */
 import React from 'react';
 
+// WHY: Escape '<' so the JSON-LD string cannot prematurely close the script tag (XSS / HTML parser safety)
+function serializeJsonLd(value: object): string {
+  return JSON.stringify(value).replace(/</g, '\\u003c');
+}
+
 export interface OrganizationJsonLdProps {
   name: string;
   url: string;
@@ -52,7 +57,7 @@ export function OrganizationJsonLd({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }
@@ -96,7 +101,7 @@ export function ServiceJsonLd({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

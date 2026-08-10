@@ -64,10 +64,10 @@ export default async function ServiceFaqPage({ params }: { params: Promise<{ slu
   const allQuestions = faqGroups.flatMap((group) => group.items);
 
   return (
-    <main className="min-h-screen">
+    <>
       <FaqPageJsonLd mainEntity={allQuestions.map((item) => ({ question: item.q, answer: item.a }))} />
-
-      <ServiceSubnav slug={service.slug} active="faq" />
+      <main className="min-h-screen">
+        <ServiceSubnav slug={service.slug} active="faq" />
 
       {/* Hero */}
       <section className="py-24 md:py-32">
@@ -152,5 +152,6 @@ export default async function ServiceFaqPage({ params }: { params: Promise<{ slu
         </Container>
       </section>
     </main>
-  );
+  </>
+);
 }
