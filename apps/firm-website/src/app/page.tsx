@@ -128,7 +128,7 @@ export default function Home() {
               <div className="bg-accent/10 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full">
                 <span className="text-2xl font-bold text-accent">1</span>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-text-primary">We talk.</h3>
+              <h3 className="mb-3 text-xl font-semibold text-text-primary">Discovery.</h3>
               <p className="text-text-secondary">
                 A short call or questionnaire uncovers your goals and what success looks like.
               </p>
@@ -138,7 +138,7 @@ export default function Home() {
               <div className="bg-accent/10 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full">
                 <span className="text-2xl font-bold text-accent">2</span>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-text-primary">We build.</h3>
+              <h3 className="mb-3 text-xl font-semibold text-text-primary">Build.</h3>
               <p className="text-text-secondary">
                 AI‑augmented development accelerates the work; you see progress through regular
                 previews and dashboards.
@@ -149,7 +149,7 @@ export default function Home() {
               <div className="bg-accent/10 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full">
                 <span className="text-2xl font-bold text-accent">3</span>
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-text-primary">We deliver.</h3>
+              <h3 className="mb-3 text-xl font-semibold text-text-primary">Deliver.</h3>
               <p className="text-text-secondary">
                 Performance‑tested, designed to WCAG 2.1/2.2 AA standards, and fully deployed — with
                 ongoing support available.
