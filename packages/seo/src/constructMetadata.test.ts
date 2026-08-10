@@ -24,16 +24,16 @@ describe('constructMetadata', () => {
       title: meta.title,
       description: meta.description,
       siteName: 'YDM Agency',
-      images: [{ url: '/og-image.png' }],
+      images: [{ url: '/og-image.svg' }],
     });
     expect(meta.twitter).toMatchObject({
       card: 'summary_large_image',
       title: meta.title,
       description: meta.description,
-      images: ['/og-image.png'],
+      images: ['/og-image.svg'],
       creator: '@ydmagency',
     });
-    expect(meta.icons).toBe('/favicon.ico');
+    expect(meta.icons).toBe('/favicon.svg');
     expect(meta.metadataBase).toBeInstanceOf(URL);
     expect(meta.metadataBase?.protocol).toBe('https:');
     expect(meta.alternates).toBeUndefined();

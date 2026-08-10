@@ -33,8 +33,8 @@ const DEFAULT_SITE_URL =
 export function constructMetadata({
   title = 'YDM Agency | Digital Growth & Native Web Applications',
   description = 'Data-driven marketing, ultra-fast web development, and client conversion systems for ambitious businesses.',
-  image = '/og-image.png',
-  icons = '/favicon.ico',
+  image = '/og-image.svg',
+  icons = '/favicon.svg',
   canonicalUrl,
   siteName = 'YDM Agency',
 }: MetadataOptions = {}): Metadata {

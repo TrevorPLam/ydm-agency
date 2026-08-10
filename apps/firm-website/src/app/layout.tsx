@@ -68,7 +68,7 @@ export default function RootLayout({
         <OrganizationJsonLd
           name="YDM Agency"
           url="https://ydm-agency.com"
-          logo="https://ydm-agency.com/logo.png"
+          logo="https://ydm-agency.com/logo.svg"
           contactPoint={{
             email: 'contact@ydmagency.com',
             contactType: 'Customer Support',

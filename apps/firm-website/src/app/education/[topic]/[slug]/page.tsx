@@ -42,7 +42,7 @@ function ArticleJsonLd({ lesson, topic }: { lesson: EducationLesson; topic: stri
       name: 'YDM Agency',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://ydm-agency.com/logo.png',
+        url: 'https://ydm-agency.com/logo.svg',
       },
     },
     datePublished: lesson.lastUpdated || new Date().toISOString(),
