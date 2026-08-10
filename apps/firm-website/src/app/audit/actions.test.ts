@@ -156,6 +156,7 @@ describe('submitAudit', () => {
       email: 'jane@example.com',
       projectType: 'Free Marketing Audit',
       message: expect.stringContaining('Free marketing audit request from Jane Doe'),
+      type: 'audit',
     });
   });
 
@@ -177,6 +178,7 @@ describe('submitAudit', () => {
       email: 'jane@example.com',
       projectType: 'Free Marketing Audit',
       message: expect.stringContaining('Current marketing state: Traffic exists but few leads'),
+      type: 'audit',
     });
   });
 
@@ -190,6 +192,7 @@ describe('submitAudit', () => {
     expect(sendEmailFn).toHaveBeenCalledWith(
       expect.objectContaining({
         message: expect.stringContaining('Current marketing state: Leads slip through the cracks'),
+        type: 'audit',
       })
     );
   });

@@ -157,6 +157,11 @@ describe('submitContact', () => {
       status: 'new',
       created_at: expect.any(String),
     });
+    expect(sendEmailFn).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'contact',
+      })
+    );
   });
 
   it('returns success when storage and email succeed', async () => {
@@ -177,6 +182,7 @@ describe('submitContact', () => {
       email: 'john@example.com',
       projectType: 'Website & brand',
       message: expect.stringContaining('Contact form submission from John Doe'),
+      type: 'contact',
     });
   });
 
@@ -195,6 +201,7 @@ describe('submitContact', () => {
     expect(sendEmailFn).toHaveBeenCalledWith(
       expect.objectContaining({
         projectType: 'Not specified',
+        type: 'contact',
       })
     );
   });
