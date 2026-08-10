@@ -12,15 +12,16 @@
     "tsconfig.base.json"
   ],
   "scripts": {
-    "test": "vitest run --coverage --passWithNoTests packages/config --coverage.include \"packages/config/**/*.{ts,tsx}\" --coverage.reportsDirectory packages/config/coverage"
+    "test": "vitest run --coverage --passWithNoTests packages/config --coverage.include \"packages/config/**/*.{ts,tsx}\" --coverage.reportsDirectory packages/config/coverage",
+    "format": "prettier --check ."
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
-    "eslint": "^9.0.0",
+    "eslint": "catalog:",
     "eslint-config-next": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.34.0",
-    "typescript": "^5.6.0",
+    "typescript": "catalog:",
     "typescript-eslint": "^8.0.0",
     "tailwindcss": "catalog:",
     "prettier": "^3.3.0",

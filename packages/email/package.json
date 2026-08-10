@@ -10,21 +10,21 @@
     "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "format": "prettier --check ."
   },
   "dependencies": {
     "resend": "catalog:",
-    "@react-email/components": "catalog:",
-    "@react-email/render": "^0.0.12"
+    "react-email": "catalog:"
   },
   "peerDependencies": {
     "react": "^19.0.0"
   },
   "devDependencies": {
     "@ydm-agency/config": "workspace:*",
-    "@types/node": "^22.0.0",
-    "@types/react": "^19.0.0",
-    "typescript": "^5.6.0",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "typescript": "catalog:",
     "vitest": "catalog:"
   }
 }
