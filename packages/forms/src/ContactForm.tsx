@@ -8,7 +8,7 @@
  */
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ydm-agency/ui';
@@ -46,6 +46,13 @@ export function ContactForm({
 }: ContactFormProps) {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const successPanelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (submitStatus === 'success') {
+      successPanelRef.current?.focus();
+    }
+  }, [submitStatus]);
 
   const {
     register,
@@ -99,7 +106,14 @@ export function ContactForm({
 
   if (submitStatus === 'success') {
     return (
-      <div className="bg-surface border border-border rounded-xl p-8 text-center">
+      <div
+        ref={successPanelRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="bg-surface border border-border rounded-xl p-8 text-center focus:outline-none focus:ring-2 focus:ring-accent"
+      >
         <div className="w-12 h-12 bg-accent/20 text-accent rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
           ✓
         </div>

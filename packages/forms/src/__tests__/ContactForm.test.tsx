@@ -92,6 +92,27 @@ describe('ContactForm', () => {
     });
   });
 
+  it('announces the success panel and moves focus to it', async () => {
+    const mockOnSubmit = vi.fn().mockResolvedValue({ success: true });
+    render(<ContactForm onSubmit={mockOnSubmit} />);
+
+    await userEvent.type(screen.getByLabelText(/name/i), 'John Doe');
+    await userEvent.type(screen.getByLabelText(/email/i), 'john@example.com');
+    await userEvent.type(screen.getByLabelText(/what do you need help with/i), 'This is a message that is at least twenty characters long.');
+
+    const submitButton = screen.getByRole('button', { name: /send/i });
+    await userEvent.click(submitButton);
+
+    const successPanel = await screen.findByRole('status');
+    expect(successPanel).toHaveAttribute('aria-live', 'polite');
+    expect(successPanel).toHaveAttribute('aria-atomic', 'true');
+    expect(successPanel).toHaveAttribute('tabIndex', '-1');
+
+    await waitFor(() => {
+      expect(successPanel).toHaveFocus();
+    });
+  });
+
   it('has no accessibility violations', async () => {
     const mockOnSubmit = vi.fn().mockResolvedValue({ success: true });
     const { container } = render(<ContactForm onSubmit={mockOnSubmit} />);
