@@ -13,28 +13,28 @@
     "format": "prettier --check ."
   },
   "dependencies": {
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "next": "catalog:",
-    "lucide-react": "catalog:",
-
-    "class-variance-authority": "catalog:",
-    "@radix-ui/react-slot": "catalog:",
     "@radix-ui/react-dialog": "catalog:",
     "@radix-ui/react-dropdown-menu": "catalog:",
-    "@ydm-agency/utils": "workspace:*"
+    "@radix-ui/react-slot": "catalog:",
+    "@ydm-agency/utils": "workspace:*",
+    "class-variance-authority": "catalog:",
+    "lucide-react": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@ydm-agency/config": "workspace:*",
+    "@testing-library/jest-dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@testing-library/user-event": "catalog:",
+    "@types/jest-axe": "^3.5.9",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:",
-    "@testing-library/react": "catalog:",
-    "@testing-library/jest-dom": "catalog:",
-    "@testing-library/user-event": "catalog:",
     "@vitejs/plugin-react": "^4.3.0",
-    "jsdom": "^25.0.0"
+    "@ydm-agency/config": "workspace:*",
+    "jsdom": "^25.0.0",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }
