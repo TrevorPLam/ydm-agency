@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ydm-agency/ui';
 import { trackEvent } from '@ydm-agency/analytics';
-import { contactFormSchema, type ContactFormInput } from './schemas';
+import { contactFormSchema, type ContactFormInput } from './schemas/contact-schema';
 
 const PROJECT_TYPE_OPTIONS = [
   { value: '', label: 'Select a category (optional)' },
