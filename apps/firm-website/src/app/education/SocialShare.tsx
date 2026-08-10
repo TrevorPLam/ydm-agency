@@ -100,6 +100,15 @@ export default function SocialShare({ title, url }: SocialShareProps) {
           <Link2 className="w-4 h-4" />
         )}
       </button>
+
+      <span
+        className="sr-only"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {copied ? 'Link copied to clipboard' : ''}
+      </span>
     </div>
   );
 }
