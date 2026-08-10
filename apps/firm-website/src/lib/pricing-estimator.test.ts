@@ -138,7 +138,7 @@ describe('pricing-estimator', () => {
     expect(message).toContain('Website Design & Development');
     expect(message).toContain('Professional copywriting');
     expect(message).toContain('$5,500–$14,000');
-    expect(message).toContain('free project outline');
+    expect(message).toContain('get a more detailed outline');
   });
 
   it('includes ad spend disclaimer when ad spend is selected', () => {
@@ -149,7 +149,7 @@ describe('pricing-estimator', () => {
     };
     const result = calculateEstimate(inputs);
     const message = buildContactMessage(inputs, result);
-    expect(message).toContain('Ad spend is paid directly to the advertising platforms');
+    expect(message).toContain('Ad spend is paid directly to Google, Meta, or other ad platforms');
   });
 
   it('multipliers match option definitions', () => {
