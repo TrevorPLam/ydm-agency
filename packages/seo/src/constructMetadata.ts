@@ -1,8 +1,8 @@
 /**
  * FILE: constructMetadata.ts
  * PURPOSE: Utility function for constructing Next.js metadata objects with OpenGraph, Twitter cards, and SEO optimization.
- * ARCHITECTURE: Pure function that generates Metadata objects with consistent defaults, environment-aware URLs, and conditional no-index support.
- * KEY RULES: Must provide sensible defaults; must support environment variable configuration; must handle canonical URLs correctly; must support no-index for dev/staging.
+ * ARCHITECTURE: Pure function that generates Metadata objects with consistent defaults, environment-aware URLs, and conditional canonical support.
+ * KEY RULES: Must provide sensible defaults; must support environment variable configuration; must handle canonical URLs correctly; must emit alternates.canonical when a canonical URL is supplied.
  * DEPENDS ON: next (Metadata type).
  * LAST UPDATED: 2026-08-09 Add code commentary headers
  */
@@ -13,7 +13,6 @@ export interface MetadataOptions {
   description?: string;
   image?: string;
   icons?: string;
-  noIndex?: boolean;
   canonicalUrl?: string;
   siteName?: string;
 }
@@ -36,7 +35,6 @@ export function constructMetadata({
   description = 'Data-driven marketing, ultra-fast web development, and client conversion systems for ambitious businesses.',
   image = '/og-image.png',
   icons = '/favicon.ico',
-  noIndex = false,
   canonicalUrl,
   siteName = 'YDM Agency',
 }: MetadataOptions = {}): Metadata {
@@ -62,11 +60,10 @@ export function constructMetadata({
     },
     icons,
     metadataBase: new URL(canonicalUrl ?? DEFAULT_SITE_URL),
-    // WHY: Conditionally add robots meta for no-index (useful for dev/staging environments)
-    ...(noIndex && {
-      robots: {
-        index: false,
-        follow: false,
+    // WHY: Emit a canonical link only when an explicit canonical URL is supplied
+    ...(canonicalUrl && {
+      alternates: {
+        canonical: canonicalUrl,
       },
     }),
   };
