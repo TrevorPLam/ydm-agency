@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /services hub page with a hero, an eight-card services grid, a "why work with YDM Agency" section, a starting-point guide, and a final CTA.
+ * ARCHITECTURE: Server component generating metadata via constructMetadata and rendering a services grid from SERVICE_LABELS and SERVICE_CARD_DESCRIPTIONS with lucide-react icons.
+ * KEY RULES: Must use the firm-level impersonal voice; service cards must link to /services/[slug]; must include links to compare, pricing, industries, and audit pages.
+ * DEPENDS ON: react, next/link, @ydm-agency/ui (Card, Button, Container), @ydm-agency/seo (constructMetadata), @/lib/service-labels, lucide-react.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import type { ComponentType } from 'react';
 import Link from 'next/link';
 import { Card } from '@ydm-agency/ui';
@@ -5,15 +13,15 @@ import { Button } from '@ydm-agency/ui';
 import { Container } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
 import { SERVICE_LABELS, SERVICE_CARD_DESCRIPTIONS } from '@/lib/service-labels';
-import { 
-  Monitor, 
-  Search, 
-  BarChart3, 
-  Megaphone, 
-  Sparkles, 
-  PenTool, 
-  Zap, 
-  Star 
+import {
+  Monitor,
+  Search,
+  BarChart3,
+  Megaphone,
+  Sparkles,
+  PenTool,
+  Zap,
+  Star
 } from 'lucide-react';
 
 const SERVICE_ICONS: Record<string, ComponentType<{ className?: string }>> = {
@@ -29,6 +37,12 @@ const SERVICE_ICONS: Record<string, ComponentType<{ className?: string }>> = {
 
 const serviceSlugs = Object.keys(SERVICE_LABELS);
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for the services hub page via constructMetadata.
+ * @return {Promise<Metadata>} - Next.js metadata object for the services hub
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: constructMetadata provides sensible defaults.
+ */
 export async function generateMetadata() {
   return constructMetadata({
     title: 'Services | YDM Agency',
@@ -36,6 +50,12 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * WHAT IT DOES: Renders the services hub page with a hero, eight-card services grid, "why work with YDM Agency" section, starting-point links, and a final CTA.
+ * @return {JSX.Element} - Rendered services hub page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: SERVICE_LABELS and SERVICE_CARD_DESCRIPTIONS share the same slug keys.
+ */
 export default function ServicesPage() {
   return (
     <main className="min-h-screen">

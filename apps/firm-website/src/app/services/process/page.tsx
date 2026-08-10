@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /services/process hub page describing the five-phase client lifecycle, service-specific process links, what-to-expect, FAQs, and a final CTA.
+ * ARCHITECTURE: Server component generating metadata via constructMetadata; renders static PHASES, SERVICE_PROCESS_LINKS, and FAQS data inline.
+ * KEY RULES: Must use the firm-level impersonal voice; service process links must point to /services/[slug]/process; final CTA must point to /contact.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Button, Container), @ydm-agency/seo (constructMetadata).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Button } from '@ydm-agency/ui';
 import { Container } from '@ydm-agency/ui';
@@ -66,6 +74,12 @@ const FAQS = [
   },
 ];
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for the process hub page via constructMetadata.
+ * @return {Promise<Metadata>} - Next.js metadata object for the process hub
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: constructMetadata provides sensible defaults.
+ */
 export async function generateMetadata() {
   return constructMetadata({
     title: 'Our Process | YDM Agency',
@@ -73,6 +87,12 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * WHAT IT DOES: Renders the process hub page with the five-phase client lifecycle, service-specific process links, what-to-expect section, FAQs, and a final CTA.
+ * @return {JSX.Element} - Rendered process hub page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: SERVICE_PROCESS_LINKS hrefs point to existing service process spoke pages.
+ */
 export default function ProcessHubPage() {
   return (
     <main className="min-h-screen bg-background text-text-primary">

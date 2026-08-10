@@ -1,9 +1,24 @@
+/**
+ * FILE: AcknowledgmentEmail.tsx
+ * PURPOSE: React Email template for auto-acknowledgment email sent to users after form submission.
+ * ARCHITECTURE: React Email component with inline styles matching the agency's dark theme design system.
+ * KEY RULES: Match agency design system colors; maintain consistent branding; provide clear response time expectations.
+ * DEPENDS ON: @react-email/components.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { Html, Body, Container, Text, Heading } from '@react-email/components';
 
 interface AcknowledgmentEmailProps {
   name: string;
 }
 
+/**
+ * WHAT IT DOES: Renders an acknowledgment email template with personalized greeting and response time expectations.
+ * @param {AcknowledgmentEmailProps} props - User's name for personalization
+ * @return {JSX.Element} - React Email component
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: Rendered in server context for email sending; name is sanitized by caller.
+ */
 export function AcknowledgmentEmail({ name }: AcknowledgmentEmailProps) {
   return (
     <Html>
@@ -24,6 +39,7 @@ export function AcknowledgmentEmail({ name }: AcknowledgmentEmailProps) {
   );
 }
 
+// WHY: Inline styles match agency design system dark theme colors
 const main = {
   backgroundColor: '#0A0A0B',
   fontFamily: 'Inter, sans-serif',

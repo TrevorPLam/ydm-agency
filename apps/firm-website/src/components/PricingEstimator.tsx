@@ -1,3 +1,11 @@
+/**
+ * FILE: PricingEstimator.tsx
+ * PURPOSE: Provides the multi-step PricingEstimator client component that guides users through situation, services, business size, timeline, and extras selection to produce a ballpark investment estimate.
+ * ARCHITECTURE: Client component with step state and EstimatorInputs state; computes estimates via calculateEstimate (memoized); tracks analytics events per step; builds a prefilled /contact href from the result.
+ * KEY RULES: Must validate initialSituation/initialServices against known configs; must clear extras that no longer apply when services change; must track pricing_estimator_* analytics events; estimate must be presented as a ballpark range, not a binding quote.
+ * DEPENDS ON: react, next/link, lucide-react, @ydm-agency/ui (Container, Button), @ydm-agency/utils (cn), @ydm-agency/analytics (trackEvent), @/lib/pricing-estimator, @/lib/service-labels, @/lib/service-comparison-config.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
@@ -90,12 +98,26 @@ const STEPS: Step[] = [
   },
 ];
 
+/**
+ * WHAT IT DOES: Renders the lucide icon mapped to a service slug, or null if no icon is mapped.
+ * @param {{ slug: string; className?: string }} props - Service slug and optional className for the icon
+ * @return {JSX.Element | null} - Rendered icon, or null
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: SERVICE_ICONS maps known service slugs to lucide icon components.
+ */
 function ServiceIcon({ slug, className }: { slug: string; className?: string }) {
   const Icon = SERVICE_ICONS[slug];
   if (!Icon) return null;
   return <Icon className={className} aria-hidden="true" />;
 }
 
+/**
+ * WHAT IT DOES: Renders a progress bar showing the current step position out of the total steps.
+ * @param {{ current: number; total: number }} props - Zero-based current step index and total step count
+ * @return {JSX.Element} - Rendered progress bar (decorative, aria-hidden)
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: current is zero-based and less than total.
+ */
 function ProgressBar({ current, total }: { current: number; total: number }) {
   const progress = ((current + 1) / total) * 100;
   return (
@@ -113,6 +135,13 @@ export interface PricingEstimatorProps {
   initialServices?: string[];
 }
 
+/**
+ * WHAT IT DOES: Renders the multi-step pricing estimator wizard, managing step navigation, input state, estimate calculation, analytics tracking, and a prefilled contact CTA.
+ * @param {PricingEstimatorProps} props - Optional initialSituation and initialServices to prefill the wizard from query params
+ * @return {JSX.Element} - Rendered estimator wizard with step content, progress bar, and navigation controls
+ * SIDE EFFECTS: Tracks pricing_estimator_* analytics events on step changes and start; updates inputs state on user interaction; computes a memoized estimate and contact href.
+ * ASSUMES: initialSituation/initialServices (when provided) are validated against COMPARISON_SCENARIOS and ESTIMATOR_SERVICES; falls back to defaults otherwise.
+ */
 export const PricingEstimator: React.FC<PricingEstimatorProps> = ({
   initialSituation,
   initialServices,
@@ -234,7 +263,7 @@ export const PricingEstimator: React.FC<PricingEstimatorProps> = ({
     setInputs((prev) => {
       const has = prev.services.includes(slug);
       const services = has ? prev.services.filter((s) => s !== slug) : [...prev.services, slug];
-      // Clear extras that no longer apply.
+      // WHY: Clear extras that no longer apply when services change so the estimate only includes add-ons relevant to the selected services.
       const stillRelevant = new Set(getRelevantExtras(services).map((e) => e.id));
       const extras = prev.extras.filter((id) => stillRelevant.has(id));
       return { ...prev, services, extras };

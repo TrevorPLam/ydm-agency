@@ -1,3 +1,11 @@
+/**
+ * FILE: NotificationEmail.tsx
+ * PURPOSE: React Email template for internal notification email sent to the team when a contact form is submitted.
+ * ARCHITECTURE: React Email component with structured sections for contact details, matching agency dark theme design system.
+ * KEY RULES: Include all relevant contact information; conditionally show project type; maintain consistent branding; format message content clearly.
+ * DEPENDS ON: @react-email/components.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { Html, Body, Container, Text, Heading, Section } from '@react-email/components';
 
 interface NotificationEmailProps {
@@ -7,6 +15,13 @@ interface NotificationEmailProps {
   message: string;
 }
 
+/**
+ * WHAT IT DOES: Renders an internal notification email template with contact details and message content.
+ * @param {NotificationEmailProps} props - Contact form submission data
+ * @return {JSX.Element} - React Email component
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: Rendered in server context for email sending; data is validated by caller; project type is optional.
+ */
 export function NotificationEmail({ name, email, projectType, message }: NotificationEmailProps) {
   return (
     <Html>
@@ -26,6 +41,7 @@ export function NotificationEmail({ name, email, projectType, message }: Notific
             <Text style={value}>{email}</Text>
           </Section>
 
+          {/* WHY: Conditionally show project type only when provided to avoid clutter */}
           {projectType && (
             <Section style={section}>
               <Text style={label}>Project Type:</Text>
@@ -43,6 +59,7 @@ export function NotificationEmail({ name, email, projectType, message }: Notific
   );
 }
 
+// WHY: Inline styles match agency design system dark theme colors
 const main = {
   backgroundColor: '#0A0A0B',
   fontFamily: 'Inter, sans-serif',

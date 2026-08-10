@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /services/industries/[slug] industry-specific landing page with hero, problem/solution, common challenges, recommended services, who-it's-for, industry-specific section, FAQs, and a final CTA.
+ * ARCHITECTURE: Server component with generateStaticParams and generateMetadata; reads INDUSTRIES_CONFIG by slug and resolves recommended service labels via SERVICES_CONFIG/SERVICE_LABELS.
+ * KEY RULES: Must 404 for unknown slugs; must use the firm-level impersonal voice; recommended service slugs must link to /services/[slug]; final CTA must point to /contact.
+ * DEPENDS ON: next/link, next/navigation, @ydm-agency/ui (Button, Container), @ydm-agency/seo (constructMetadata), @/lib/industries-config, @/lib/services-config, @/lib/service-labels.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@ydm-agency/ui';
@@ -7,10 +15,23 @@ import { INDUSTRIES_CONFIG } from '@/lib/industries-config';
 import { SERVICES_CONFIG } from '@/lib/services-config';
 import { SERVICE_LABELS } from '@/lib/service-labels';
 
+/**
+ * WHAT IT DOES: Pre-generates static params for each industry slug in INDUSTRIES_CONFIG at build time.
+ * @return {Promise<{ slug: string }[]>} - Array of slug params for static generation
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: INDUSTRIES_CONFIG keys are valid industry slugs.
+ */
 export async function generateStaticParams() {
   return Object.keys(INDUSTRIES_CONFIG).map((slug) => ({ slug }));
 }
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for an industry landing page from the industry's configured metaTitle and metaDescription.
+ * @param {{ params: Promise<{ slug: string }> }} args - Route params containing the industry slug
+ * @return {Promise<Metadata>} - Next.js metadata object, or empty object for unknown slugs
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: params.slug is a potential key in INDUSTRIES_CONFIG.
+ */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const config = INDUSTRIES_CONFIG[slug];
@@ -23,6 +44,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
+/**
+ * WHAT IT DOES: Renders the industry-specific landing page for a given slug, including hero, problem/solution, common challenges, recommended services, who-it's-for, industry-specific section, FAQs, and a final CTA.
+ * @param {{ params: Promise<{ slug: string }> }} args - Route params containing the industry slug
+ * @return {Promise<JSX.Element>} - Rendered industry landing page
+ * SIDE EFFECTS: Calls notFound() for unknown slugs (renders the 404 page).
+ * ASSUMES: params.slug is a potential key in INDUSTRIES_CONFIG; recommendedServices slugs exist in SERVICES_CONFIG or SERVICE_LABELS.
+ */
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const config = INDUSTRIES_CONFIG[slug];

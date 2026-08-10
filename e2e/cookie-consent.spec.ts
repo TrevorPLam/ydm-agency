@@ -1,3 +1,12 @@
+/**
+ * FILE: cookie-consent.spec.ts
+ * PURPOSE: End-to-end Playwright tests for the cookie consent banner behavior.
+ * ARCHITECTURE: e2e / consent state, banner interactions, navigation persistence, and footer reopening.
+ * KEY RULES: Uses localhost cookies with Lax sameSite; banner resets only when the consent cookie is missing.
+ * DEPENDS ON: @playwright/test, the Next.js dev server, and the CookieConsent component.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { test, expect } from '@playwright/test';
 
 const CONSENT_COOKIE = 'ydm-analytics-consent';

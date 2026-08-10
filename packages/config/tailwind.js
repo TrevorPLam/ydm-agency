@@ -1,3 +1,12 @@
+/**
+ * FILE: tailwind.js
+ * PURPOSE: Provide the shared Tailwind CSS theme configuration for the monorepo.
+ * ARCHITECTURE: packages/config shared Tailwind preset, maps design tokens to CSS variables and font families.
+ * KEY RULES: Colors must reference CSS variables matching the branding tokens; content paths must include consuming packages.
+ * DEPENDS ON: tailwindcss, @tailwindcss/typography
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 /** @type {import('tailwindcss').Config} */
 const { fontFamily } = require('tailwindcss/defaultTheme');
 

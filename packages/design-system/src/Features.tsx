@@ -1,3 +1,12 @@
+/**
+ * FILE: Features.tsx
+ * PURPOSE: Renders a section grid of feature cards.
+ * ARCHITECTURE: Design-system marketing section using Card and Container with a responsive grid.
+ * KEY RULES: This package is an orphaned/broken fork of packages/ui and is excluded from the pnpm workspace; do not modify the duplicated blocks.
+ * DEPENDS ON: React, ./Card, ./Container.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import React from 'react';
 import { Container } from './Container';
 import { Card } from './Card';
@@ -14,6 +23,13 @@ export interface FeaturesProps {
   features: FeatureItem[];
 }
 
+/**
+ * WHAT IT DOES: Renders a marketing features section with a title and a grid of feature cards.
+ * @param {FeaturesProps} props – Section title, optional subtitle, and array of feature items.
+ * @return {React.ReactElement} – The rendered features section.
+ * SIDE EFFECTS: None.
+ * ASSUMES: Each feature item provides a title and description; icons are optional React nodes.
+ */
 export const Features: React.FC<FeaturesProps> = ({
   title,
   subtitle,
@@ -74,6 +90,13 @@ export interface FeaturesProps {
   features: FeatureItem[];
 }
 
+/**
+ * WHAT IT DOES: Renders a marketing features section with a title and a grid of feature cards.
+ * @param {FeaturesProps} props – Section title, optional subtitle, and array of feature items.
+ * @return {React.ReactElement} – The rendered features section.
+ * SIDE EFFECTS: None.
+ * ASSUMES: Each feature item provides a title and description; icons are optional React nodes.
+ */
 export const Features: React.FC<FeaturesProps> = ({
   title,
   subtitle,

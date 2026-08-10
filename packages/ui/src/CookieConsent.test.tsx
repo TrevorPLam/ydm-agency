@@ -1,3 +1,12 @@
+/**
+ * FILE: CookieConsent.test.tsx
+ * PURPOSE: Unit tests for the CookieConsent banner and its provider.
+ * ARCHITECTURE: packages/ui / banner rendering, accept/reject flow, persistence, keyboard dismissal, and a11y.
+ * KEY RULES: Mocks document.cookie before each test; color-contrast is disabled in the a11y check.
+ * DEPENDS ON: React, ./CookieConsent, ./CookieConsentContext, @testing-library/react, @testing-library/user-event, vitest, and jest-axe.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import * as React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -8,8 +17,16 @@ import { CookieConsentProvider } from './CookieConsentContext';
 
 expect.extend(toHaveNoViolations);
 
+/** WHAT IT DOES: Creates a configured userEvent instance for async interactions. */
 const setup = () => userEvent.setup();
 
+/**
+ * WHAT IT DOES: Renders a React element inside CookieConsentProvider for context-dependent tests.
+ * @param {React.ReactElement} ui – The element to render.
+ * @return {import('@testing-library/react').RenderResult} – The rendered component result.
+ * SIDE EFFECTS: Renders the supplied element into the jsdom test environment.
+ * ASSUMES: CookieConsentProvider is available and wraps the required context values.
+ */
 function renderWithProvider(ui: React.ReactElement) {
   return render(<CookieConsentProvider>{ui}</CookieConsentProvider>);
 }

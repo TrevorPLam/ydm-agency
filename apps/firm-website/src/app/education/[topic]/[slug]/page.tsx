@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /education/[topic]/[slug] individual lesson page with three-column layout (topic nav, main content, table of contents), Article JSON-LD, related lessons, prev/next navigation, and a CTA.
+ * ARCHITECTURE: Server component with generateStaticParams and generateMetadata; reads EDUCATION_LESSONS by slug, emits ArticleJsonLd and EducationAnalytics lesson_view events, and renders sections with TableOfContents, SocialShare, and PrintButton.
+ * KEY RULES: Must 404 for unknown lessons or topics; must emit Article JSON-LD for rich results; must use the firm-level impersonal voice; final CTA must point to /contact.
+ * DEPENDS ON: next/link, next/navigation, @ydm-agency/ui (Container, Badge, Button), @ydm-agency/seo (constructMetadata), @/lib/education-config, lucide-react, ../../TableOfContents, ../../EducationAnalytics, ../../SocialShare, ../../PrintButton, ../../print.css.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container, Badge, Button } from '@ydm-agency/ui';
@@ -10,7 +18,13 @@ import SocialShare from '../../SocialShare';
 import PrintButton from '../../PrintButton';
 import '../../print.css';
 
-// JSON-LD structured data for Article schema
+/**
+ * WHAT IT DOES: Renders Article JSON-LD structured data for a lesson, including headline, author/publisher (YDM Agency), dates, keywords, and educational metadata.
+ * @param {{ lesson: EducationLesson; topic: string }} props - Lesson data and topic slug
+ * @return {JSX.Element} - <script type="application/ld+json"> element with the Article schema
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: lesson has title, metaDescription, lastUpdated, topic, level, and sections fields.
+ */
 function ArticleJsonLd({ lesson, topic }: { lesson: EducationLesson; topic: string }) {
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -51,6 +65,12 @@ function ArticleJsonLd({ lesson, topic }: { lesson: EducationLesson; topic: stri
   );
 }
 
+/**
+ * WHAT IT DOES: Pre-generates static params for each lesson's topic/slug pair at build time.
+ * @return {Promise<{ topic: string; slug: string }[]>} - Array of topic/slug params for static generation
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: EDUCATION_LESSONS entries have unique slugs and topic names that lowercased match topic slugs.
+ */
 export async function generateStaticParams() {
   return EDUCATION_LESSONS.map((lesson) => ({
     topic: lesson.topic.toLowerCase(),
@@ -58,6 +78,13 @@ export async function generateStaticParams() {
   }));
 }
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for a lesson page from the lesson's configured metaTitle and metaDescription.
+ * @param {{ params: Promise<{ topic: string; slug: string }> }} args - Route params containing the topic and lesson slugs
+ * @return {Promise<Metadata>} - Next.js metadata object, or empty object for unknown lessons
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: params.slug is a potential slug in EDUCATION_LESSONS.
+ */
 export async function generateMetadata({ params }: { params: Promise<{ topic: string; slug: string }> }) {
   const { topic, slug } = await params;
   const lesson = EDUCATION_LESSONS.find((l) => l.slug === slug);
@@ -72,6 +99,13 @@ export async function generateMetadata({ params }: { params: Promise<{ topic: st
   });
 }
 
+/**
+ * WHAT IT DOES: Maps a lesson safety classification to a Badge variant for display.
+ * @param {EducationLesson['safety']} safety - Lesson safety classification
+ * @return {'default' | 'accent' | 'outline'} - Badge variant
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: safety is one of the configured safety values.
+ */
 function getSafetyBadgeVariant(safety: EducationLesson['safety']): 'default' | 'accent' | 'outline' {
   switch (safety) {
     case 'public-domain':
@@ -85,6 +119,13 @@ function getSafetyBadgeVariant(safety: EducationLesson['safety']): 'default' | '
   }
 }
 
+/**
+ * WHAT IT DOES: Maps a lesson safety classification to a human-readable label for display.
+ * @param {EducationLesson['safety']} safety - Lesson safety classification
+ * @return {string} - Display label
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: safety is one of the configured safety values.
+ */
 function getSafetyLabel(safety: EducationLesson['safety']): string {
   switch (safety) {
     case 'public-domain':
@@ -98,6 +139,13 @@ function getSafetyLabel(safety: EducationLesson['safety']): string {
   }
 }
 
+/**
+ * WHAT IT DOES: Renders an individual lesson page with three-column layout (topic nav, main content, table of contents), Article JSON-LD, related lessons, prev/next navigation, and a CTA.
+ * @param {{ params: Promise<{ topic: string; slug: string }> }} args - Route params containing the topic and lesson slugs
+ * @return {Promise<JSX.Element>} - Rendered lesson page
+ * SIDE EFFECTS: Calls notFound() for unknown lessons or topics; emits an EducationAnalytics lesson_view event.
+ * ASSUMES: params.slug is a potential slug in EDUCATION_LESSONS and params.topic is a potential slug in EDUCATION_TOPICS.
+ */
 export default async function EducationLessonPage({ params }: { params: Promise<{ topic: string; slug: string }> }) {
   const { topic, slug } = await params;
   const lesson = EDUCATION_LESSONS.find((l) => l.slug === slug);

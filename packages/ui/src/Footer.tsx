@@ -1,3 +1,11 @@
+/**
+ * FILE: Footer.tsx
+ * PURPOSE: Provides the site Footer component with brand, quick links, contact info, legal links, and a copyright bar.
+ * ARCHITECTURE: Server component rendering a four-column responsive grid inside a Container; composes CookieSettingsButton for the cookie preferences entry point.
+ * KEY RULES: Must use the firm email contact@ydmagency.com; must display the 2-hour response promise; must include a Cookie Settings control; must render a dynamic copyright year.
+ * DEPENDS ON: next/link, ./Container, ./CookieSettingsButton.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Container } from './Container';
 import { CookieSettingsButton } from './CookieSettingsButton';
@@ -6,6 +14,13 @@ export interface FooterProps {
   brandName?: string;
 }
 
+/**
+ * WHAT IT DOES: Renders the site footer with brand blurb, quick links, contact details, legal links, and a copyright bar showing the current year.
+ * @param {FooterProps} props - Optional brandName (defaults to 'YDM Agency')
+ * @return {JSX.Element} - Rendered footer element
+ * SIDE EFFECTS: Reads the current year via new Date() at render time.
+ * ASSUMES: Routes referenced in links exist in the app router.
+ */
 export const Footer = ({ brandName = 'YDM Agency' }: FooterProps) => {
   const year = new Date().getFullYear();
 

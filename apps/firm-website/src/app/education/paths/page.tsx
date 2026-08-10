@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /education/paths hub page listing all learning paths with lesson counts and descriptions.
+ * ARCHITECTURE: Server component with a static metadata export via constructMetadata; renders LEARNING_PATHS as cards, resolving lesson counts via getLessonBySlug.
+ * KEY RULES: Must use the firm-level impersonal voice; path cards must link to /education/paths/[slug]; final CTA must point to /contact.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Container, Card, Badge, Button), @ydm-agency/seo (constructMetadata), lucide-react, @/lib/education/learning-paths, @/lib/education-config.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Container, Card, Badge, Button } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
@@ -11,6 +19,12 @@ export const metadata = constructMetadata({
     'Curated, in-order lesson sequences ("mini-courses") that combine YDM Agency education lessons into a single learning path for a specific outcome.',
 });
 
+/**
+ * WHAT IT DOES: Renders the learning paths hub page with breadcrumb, hero, paths list (with lesson counts), and a CTA.
+ * @return {JSX.Element} - Rendered learning paths hub page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: LEARNING_PATHS is non-empty; lessonSlugs resolve to existing lessons via getLessonBySlug.
+ */
 export default function LearningPathsPage() {
   return (
     <main className="min-h-screen bg-background text-text-primary">

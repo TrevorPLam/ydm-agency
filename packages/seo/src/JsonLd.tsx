@@ -1,3 +1,11 @@
+/**
+ * FILE: JsonLd.tsx
+ * PURPOSE: React components for generating JSON-LD structured data for SEO (Organization and Service schemas).
+ * ARCHITECTURE: React components that generate schema.org JSON-LD scripts for search engine optimization and rich snippets.
+ * KEY RULES: Must generate valid schema.org JSON; must use dangerouslySetInnerHTML correctly; must provide sensible defaults; must handle optional fields.
+ * DEPENDS ON: react.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import React from 'react';
 
 export interface OrganizationJsonLdProps {
@@ -11,6 +19,13 @@ export interface OrganizationJsonLdProps {
   };
 }
 
+/**
+ * WHAT IT DOES: Generates JSON-LD structured data for Organization schema to improve search engine understanding.
+ * @param {OrganizationJsonLdProps} props - Organization details including name, URL, logo, social links, and contact info
+ * @return {JSX.Element} - JSON-LD script tag
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: Props are validated by caller; schema.org format is stable.
+ */
 export function OrganizationJsonLd({
   name,
   url,
@@ -52,6 +67,13 @@ export interface ServiceJsonLdProps {
   };
 }
 
+/**
+ * WHAT IT DOES: Generates JSON-LD structured data for Service schema to improve search engine understanding of service offerings.
+ * @param {ServiceJsonLdProps} props - Service details including name, description, URL, and provider information
+ * @return {JSX.Element} - JSON-LD script tag
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: Props are validated by caller; defaults to YDM Agency as provider if not specified.
+ */
 export function ServiceJsonLd({
   name,
   description,

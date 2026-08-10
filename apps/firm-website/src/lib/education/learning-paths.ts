@@ -1,3 +1,11 @@
+/**
+ * FILE: learning-paths.ts
+ * PURPOSE: Provides the LEARNING_PATHS data and LearningPath interface for cross-cutting learning paths in the /education/paths routes.
+ * ARCHITECTURE: Static typed data module exporting a LearningPath array; each path references an ordered list of EducationLesson slugs that span multiple topics.
+ * KEY RULES: Path slugs must be unique; lessonSlugs must reference existing EducationLesson slugs; content must use the firm-level impersonal voice.
+ * DEPENDS ON: None (pure data); lesson slugs resolved against EDUCATION_LESSONS at render time.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 export interface LearningPath {
   slug: string;
   title: string;

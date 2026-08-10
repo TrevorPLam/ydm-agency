@@ -1,3 +1,11 @@
+/**
+ * FILE: service-labels.ts
+ * PURPOSE: Provides the canonical slug-to-label and slug-to-card-description mappings for the eight services, used by navigation, headers, and service cards.
+ * ARCHITECTURE: Static const records keyed by service slug; consumed by the root layout (service nav links) and service hub/cards.
+ * KEY RULES: Slugs must match the keys in SERVICES_CONFIG; labels use the firm-level impersonal voice; card descriptions are benefit-focused and plain-English.
+ * DEPENDS ON: None (pure data); consumed by apps/firm-website/src/app/layout.tsx and service pages.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 export const SERVICE_LABELS: Record<string, string> = {
   'web-design': 'Website Design & Development',
   'seo': 'SEO & AI Search Optimization',

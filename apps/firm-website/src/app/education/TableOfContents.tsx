@@ -1,3 +1,11 @@
+/**
+ * FILE: TableOfContents.tsx
+ * PURPOSE: Provides a client-side sticky table of contents that tracks the active section via IntersectionObserver and supports smooth-scroll navigation.
+ * ARCHITECTURE: Client component using useState/useEffect; observes #section-<index> elements with an IntersectionObserver and highlights the active section; renders a sticky aside on xl+ screens.
+ * KEY RULES: Must clean up the IntersectionObserver on unmount; must use the section-${index} id convention to match the lesson page's section ids; must smooth-scroll on click.
+ * DEPENDS ON: react, lucide-react (List).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,6 +15,13 @@ interface TableOfContentsProps {
   sections: Array<{ heading: string }>;
 }
 
+/**
+ * WHAT IT DOES: Renders a sticky table of contents that highlights the active section via IntersectionObserver and smooth-scrolls to sections on click.
+ * @param {TableOfContentsProps} props - Array of lesson sections with headings
+ * @return {JSX.Element} - Rendered sticky table of contents (xl+ only)
+ * SIDE EFFECTS: Creates and disconnects an IntersectionObserver; calls scrollIntoView on click.
+ * ASSUMES: The lesson page renders section elements with id="section-<index>".
+ */
 export default function TableOfContents({ sections }: TableOfContentsProps) {
   const [activeSection, setActiveSection] = useState<string>('');
 

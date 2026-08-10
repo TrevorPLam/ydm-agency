@@ -1,3 +1,12 @@
+/**
+ * FILE: env.test.ts
+ * PURPOSE: Verify the getEnv utility handles set, missing, empty, and default environment variables.
+ * ARCHITECTURE: web-core unit tests using Vitest environment stubbing.
+ * KEY RULES: Each test must unstub envs in afterEach to avoid cross-test pollution.
+ * DEPENDS ON: ./env
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { getEnv } from './env';
 

@@ -1,3 +1,12 @@
+/**
+ * FILE: cn.test.ts
+ * PURPOSE: Unit tests for the cn className utility.
+ * ARCHITECTURE: packages/utils / clsx and tailwind-merge invariants covering conflict resolution, ordering, and input types.
+ * KEY RULES: Last conflicting Tailwind class wins; duplicates collapse to a single occurrence.
+ * DEPENDS ON: vitest and the cn utility exported from ./cn.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, expect, it } from 'vitest';
 import { cn } from './cn';
 

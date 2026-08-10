@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /services/pricing page with how-pricing-works, the PricingEstimator widget (prefillable via query params), per-service investment factor cards, and a final CTA.
+ * ARCHITECTURE: Server component generating metadata via constructMetadata; reads searchParams to prefill the PricingEstimator with situation/services; renders PRICING_DETAILS cards per service.
+ * KEY RULES: Must use the firm-level impersonal voice; must prefill the estimator from ?situation= and ?services= query params; must present pricing as scoped estimates, not a fixed menu.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Container, Button, Card), @ydm-agency/seo (constructMetadata), @/lib/services-config, @/lib/service-labels, @/lib/pricing-config, @/components/PricingEstimator.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Container, Button, Card } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
@@ -6,6 +14,12 @@ import { SERVICE_LABELS } from '@/lib/service-labels';
 import { PRICING_DETAILS } from '@/lib/pricing-config';
 import { PricingEstimator } from '@/components/PricingEstimator';
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for the pricing page via constructMetadata.
+ * @return {Promise<Metadata>} - Next.js metadata object for the pricing page
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: constructMetadata provides sensible defaults.
+ */
 export async function generateMetadata() {
   return constructMetadata({
     title: 'Pricing & Investment Factors | YDM Agency',
@@ -14,17 +28,39 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * WHAT IT DOES: Reads a single string value from a Next.js searchParams record, returning the first element when the value is an array.
+ * @param {Record<string, string | string[] | undefined>} params - Next.js searchParams record
+ * @param {string} key - Parameter key to read
+ * @return {string | undefined} - First string value for the key, or undefined
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 function getSearchParam(params: Record<string, string | string[] | undefined>, key: string): string | undefined {
   const value = params[key];
   if (Array.isArray(value)) return value[0];
   return value;
 }
 
+/**
+ * WHAT IT DOES: Parses a comma-separated services query parameter into an array of service slugs, filtering empty segments.
+ * @param {string | undefined} value - Comma-separated services parameter value
+ * @return {string[] | undefined} - Array of service slugs, or undefined when no value
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 function parseServicesParam(value: string | undefined): string[] | undefined {
   if (!value) return undefined;
   return value.split(',').filter(Boolean);
 }
 
+/**
+ * WHAT IT DOES: Renders the pricing page with how-pricing-works, a query-prefilled PricingEstimator, per-service investment factor cards, and a final CTA.
+ * @param {{ searchParams: Promise<Record<string, string | string[] | undefined>> }} args - Route search params for estimator prefill
+ * @return {Promise<JSX.Element>} - Rendered pricing page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: PRICING_DETAILS and SERVICES_CONFIG share compatible service slugs; missing PRICING_DETAILS entries fall back to default copy.
+ */
 export default async function PricingPage({
   searchParams,
 }: {

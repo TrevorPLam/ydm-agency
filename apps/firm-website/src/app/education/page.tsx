@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /education hub page with a hero, EducationSearch, topics grid, learning-paths teaser, and a final CTA.
+ * ARCHITECTURE: Server component with a static metadata export via constructMetadata; renders EDUCATION_TOPICS as cards (with lesson counts from EDUCATION_LESSONS) and a learning-paths teaser linking to /education/paths.
+ * KEY RULES: Must use the firm-level impersonal voice; topic cards must link to /education/[topic]; final CTA must point to /contact.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Container, Card, Badge, Button), @ydm-agency/seo (constructMetadata), lucide-react, @/lib/education-config, @/lib/education/learning-paths, ./EducationSearch.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { Container, Card, Badge, Button } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
 import { Search, BookOpen, Target, Lightbulb, Shield, Route, ArrowRight } from 'lucide-react';
@@ -19,11 +27,24 @@ const iconMap = {
   Shield,
 };
 
+/**
+ * WHAT IT DOES: Resolves a topic icon name to a lucide icon component, falling back to BookOpen for unknown names.
+ * @param {string} iconName - Icon name key from the topic config
+ * @return {React.ComponentType<{ className?: string }>} - Resolved lucide icon component
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: iconMap keys cover the configured topic icon names.
+ */
 function getTopicIcon(iconName: string) {
   const IconComponent = iconMap[iconName as keyof typeof iconMap] || BookOpen;
   return IconComponent;
 }
 
+/**
+ * WHAT IT DOES: Renders the education hub page with hero, search, topics grid, learning-paths teaser, and a final CTA.
+ * @return {JSX.Element} - Rendered education hub page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: EDUCATION_TOPICS and EDUCATION_LESSONS are non-empty; LEARNING_PATHS is non-empty.
+ */
 export default function EducationPage() {
   return (
     <main className="min-h-screen bg-background text-text-primary">

@@ -1,3 +1,11 @@
+/**
+ * FILE: Header.tsx
+ * PURPOSE: Provides the site Header component with a skip link, brand logo, desktop navigation (including a Services dropdown), and a mobile slide-out menu.
+ * ARCHITECTURE: Client component using usePathname for active-link highlighting, Radix DropdownMenu for the desktop Services menu, and Radix Dialog for the mobile menu; composes Container and ThemeToggle.
+ * KEY RULES: Must include a skip-to-content link for accessibility; must highlight active links via aria-current; must render the Services dropdown when serviceLinks is provided; must support a mobile menu via Radix Dialog.
+ * DEPENDS ON: react, next/link, next/navigation, @radix-ui/react-dialog, @radix-ui/react-dropdown-menu, lucide-react, ./Container, ./ThemeToggle.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import React, { useState } from 'react';
@@ -27,16 +35,38 @@ export interface HeaderProps {
   serviceLinks?: HeaderServiceLink[];
 }
 
+/**
+ * WHAT IT DOES: Determines whether a nav link is active by exact match or prefix match (excluding the home route).
+ * @param {string} pathname - Current route pathname
+ * @param {string} href - Link href to test
+ * @return {boolean} - True if the link should be marked active
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: pathname is a normalized absolute path.
+ */
 function isActiveLink(pathname: string, href: string): boolean {
   if (pathname === href) return true;
   if (href === '/') return false;
   return pathname.startsWith(`${href}/`);
 }
 
+/**
+ * WHAT IT DOES: Determines whether the current route is within the services section (exact /services or any /services/* sub-path).
+ * @param {string} pathname - Current route pathname
+ * @return {boolean} - True if the route is within the services section
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: pathname is a normalized absolute path.
+ */
 function isServiceActive(pathname: string): boolean {
   return pathname === '/services' || pathname.startsWith('/services/');
 }
 
+/**
+ * WHAT IT DOES: Renders the fixed site header with skip link, brand, desktop nav (with optional Services dropdown), theme toggle, and a mobile slide-out menu.
+ * @param {HeaderProps} props - Optional brandName and serviceLinks for the Services dropdown
+ * @return {JSX.Element} - Rendered header with desktop and mobile navigation
+ * SIDE EFFECTS: Reads current pathname via usePathname; manages mobile menu and mobile services accordion open state.
+ * ASSUMES: usePathname is available within a Next.js client component context.
+ */
 export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', serviceLinks }) => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

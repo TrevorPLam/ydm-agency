@@ -1,8 +1,24 @@
+/**
+ * FILE: Button.tsx
+ * PURPOSE: Renders a polymorphic button with size and variant classes.
+ * ARCHITECTURE: Design-system UI component using class-variance-authority and Radix Slot for the asChild pattern.
+ * KEY RULES: This package is an orphaned/broken fork of packages/ui and is excluded from the pnpm workspace; do not modify the duplicated blocks.
+ * DEPENDS ON: class-variance-authority, @radix-ui/react-slot, @ydm-agency/utils (cn), React.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@ydm-agency/utils';
 
+/**
+ * WHAT IT DOES: Generates the Tailwind class string for a button variant and size.
+ * @param {VariantProps<typeof buttonVariants>} props – Selected button variant and size.
+ * @return {string} – A merged Tailwind class string.
+ * SIDE EFFECTS: None.
+ * ASSUMES: Tailwind CSS classes referenced in the variant object are present.
+ */
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50',
   {
@@ -32,6 +48,13 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
+/**
+ * WHAT IT DOES: Renders a polymorphic button or slotted element with the selected variant and size.
+ * @param {ButtonProps} props – Button props including variant, size, asChild, className, and ref.
+ * @return {React.ReactElement | null} – The rendered button or child element.
+ * SIDE EFFECTS: None.
+ * ASSUMES: Used within a React client component tree; cn merges classes without conflicts.
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
@@ -53,6 +76,13 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from './cn';
 
+/**
+ * WHAT IT DOES: Generates the Tailwind class string for a button variant and size.
+ * @param {VariantProps<typeof buttonVariants>} props – Selected button variant and size.
+ * @return {string} – A merged Tailwind class string.
+ * SIDE EFFECTS: None.
+ * ASSUMES: Tailwind CSS classes referenced in the variant object are present.
+ */
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50',
   {
@@ -82,6 +112,13 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
+/**
+ * WHAT IT DOES: Renders a polymorphic button or slotted element with the selected variant and size.
+ * @param {ButtonProps} props – Button props including variant, size, asChild, className, and ref.
+ * @return {React.ReactElement | null} – The rendered button or child element.
+ * SIDE EFFECTS: None.
+ * ASSUMES: Used within a React client component tree; cn merges classes without conflicts.
+ */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';

@@ -1,3 +1,12 @@
+/**
+ * FILE: pricing-estimator.test.ts
+ * PURPOSE: Unit test the pricing estimator logic and output formatting.
+ * ARCHITECTURE: Vitest suite; exercises estimate calculations, modifiers, extras, formatting, and contact message generation.
+ * KEY RULES: One-time and monthly estimates must not mix; modifiers apply multiplicatively to service price ranges.
+ * DEPENDS ON: ./pricing-estimator, vitest
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect } from 'vitest';
 import {
   type EstimatorInputs,

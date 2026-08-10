@@ -1,3 +1,12 @@
+/**
+ * FILE: formatDate.test.ts
+ * PURPOSE: Unit tests for the formatDate utility.
+ * ARCHITECTURE: packages/utils / date formatting for Date instances and ISO strings across formats and time zones.
+ * KEY RULES: Invalid input returns "Invalid Date"; time zone shifts may change the displayed calendar day.
+ * DEPENDS ON: vitest and the formatDate utility exported from ./formatDate.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, expect, it } from 'vitest';
 import { formatDate } from './formatDate';
 

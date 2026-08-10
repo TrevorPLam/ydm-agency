@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /education/paths/[slug] learning path detail page with breadcrumb, header, ordered lesson list, and a CTA.
+ * ARCHITECTURE: Server component with generateStaticParams and generateMetadata; resolves the path via getLearningPathBySlug and renders its lessons in order, filtering out any missing lessons.
+ * KEY RULES: Must 404 for unknown paths; must use the firm-level impersonal voice; lesson links must point to /education/[topic]/[slug]; final CTA must point to /contact.
+ * DEPENDS ON: next/link, next/navigation, @ydm-agency/ui (Container, Card, Badge, Button), @ydm-agency/seo (constructMetadata), lucide-react, @/lib/education/learning-paths, @/lib/education-config.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container, Card, Badge, Button } from '@ydm-agency/ui';
@@ -6,10 +14,23 @@ import { ArrowLeft, GraduationCap } from 'lucide-react';
 import { LEARNING_PATHS, getLearningPathBySlug } from '@/lib/education/learning-paths';
 import { getLessonBySlug, type EducationLesson } from '@/lib/education-config';
 
+/**
+ * WHAT IT DOES: Pre-generates static params for each learning path slug at build time.
+ * @return {Promise<{ slug: string }[]>} - Array of slug params for static generation
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: LEARNING_PATHS entries have unique slugs.
+ */
 export async function generateStaticParams() {
   return LEARNING_PATHS.map((path) => ({ slug: path.slug }));
 }
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for a learning path detail page from the path's title and description.
+ * @param {{ params: Promise<{ slug: string }> }} args - Route params containing the path slug
+ * @return {Promise<Metadata>} - Next.js metadata object, or empty object for unknown paths
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: params.slug is a potential slug in LEARNING_PATHS.
+ */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const path = getLearningPathBySlug(slug);
@@ -24,6 +45,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
+/**
+ * WHAT IT DOES: Renders a learning path detail page with breadcrumb, header, ordered lesson list (numbered), and a CTA.
+ * @param {{ params: Promise<{ slug: string }> }} args - Route params containing the path slug
+ * @return {Promise<JSX.Element>} - Rendered learning path detail page
+ * SIDE EFFECTS: Calls notFound() for unknown paths.
+ * ASSUMES: params.slug is a potential slug in LEARNING_PATHS; lessonSlugs resolve to existing lessons via getLessonBySlug.
+ */
 export default async function LearningPathPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const path = getLearningPathBySlug(slug);

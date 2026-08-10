@@ -1,3 +1,11 @@
+/**
+ * FILE: services-config.ts
+ * PURPOSE: Provides the canonical SERVICES_CONFIG record containing full per-service content (headlines, problem/solution, included items, FAQs, deliverables, process phases, and meta) for all eight service spoke pages.
+ * ARCHITECTURE: Static typed data module exporting ServiceConfig interfaces and a slug-keyed record; consumed by service pages, deliverables pages, FAQ pages, and process pages.
+ * KEY RULES: Slugs must match SERVICE_LABELS keys; content must use the firm-level impersonal voice (no we/us/our); FAQs must be answerable for FAQPage JSON-LD; meta titles/descriptions must be SEO-optimized.
+ * DEPENDS ON: None (pure data); consumed by apps/firm-website/src/app/services/**, faq-utils.ts.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 export interface ProcessPhase {
   phase: number;
   title: string;

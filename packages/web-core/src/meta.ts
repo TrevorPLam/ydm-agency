@@ -1,3 +1,12 @@
+/**
+ * FILE: meta.ts
+ * PURPOSE: Build Next.js Metadata objects with title, Open Graph, Twitter, icons, canonical, and noIndex support.
+ * ARCHITECTURE: web-core SEO helper, assembles a Metadata object from a single config.
+ * KEY RULES: noIndex disables robots; canonicalUrl drives metadataBase and alternates; image/icons use sensible defaults.
+ * DEPENDS ON: next (Metadata type only)
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import type { Metadata } from 'next';
 
 export interface MetadataConfig {
@@ -10,6 +19,13 @@ export interface MetadataConfig {
   noIndex?: boolean;
 }
 
+/**
+ * WHAT IT DOES: Creates a Next.js Metadata object from a high-level configuration.
+ * @param {MetadataConfig} config – page metadata configuration including title, description, and optional fields
+ * @return {Metadata} – a fully populated Next.js Metadata object
+ * SIDE EFFECTS: None
+ * ASSUMES: canonicalUrl, when provided, is a valid absolute URL.
+ */
 export function createRootMetadata({
   title,
   description = '',

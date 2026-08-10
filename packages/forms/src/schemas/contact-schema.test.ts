@@ -1,3 +1,12 @@
+/**
+ * FILE: contact-schema.test.ts
+ * PURPOSE: Unit tests for the contact Zod schema exported by contact-schema.
+ * ARCHITECTURE: packages/forms / schema-level validation covering fields, preprocessing, and error messages.
+ * KEY RULES: Uses safeParse; asserts per-field and aggregate error paths through a test helper.
+ * DEPENDS ON: vitest and the contactSchema exported from ./contact-schema.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect } from 'vitest';
 import { contactSchema } from './contact-schema';
 
@@ -9,6 +18,14 @@ const validInput = {
   _honeypot: '',
 };
 
+/**
+ * WHAT IT DOES: Finds the first Zod validation issue matching a top-level field path.
+ * @param {Array<{path: (string | number)[], message: string}>} issues – Zod validation issues to search.
+ * @param {string} path – Top-level field name to match.
+ * @return {{path: (string | number)[], message: string} | undefined} – The matched issue, if any.
+ * SIDE EFFECTS: None
+ * ASSUMES: Issues are flat and the first segment of path is the field key.
+ */
 const getIssueForPath = (issues: { path: (string | number)[]; message: string }[], path: string) =>
   issues.find((issue) => issue.path[0] === path);
 

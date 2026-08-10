@@ -1,3 +1,11 @@
+/**
+ * FILE: industries-config.ts
+ * PURPOSE: Provides the INDUSTRIES_CONFIG record with per-industry landing page content (headlines, challenges, recommended services, FAQs, and meta) for the /services/industries routes.
+ * ARCHITECTURE: Static typed data module keyed by industry slug; consumed by the industries hub and industry-specific landing pages.
+ * KEY RULES: recommendedServices slugs must match SERVICE_LABELS keys; content must use the firm-level impersonal voice; FAQs must be answerable for FAQPage JSON-LD; meta titles/descriptions must be SEO-optimized.
+ * DEPENDS ON: None (pure data); consumed by apps/firm-website/src/app/services/industries/**.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 export interface IndustryConfig {
   slug: string;
   h1: string;

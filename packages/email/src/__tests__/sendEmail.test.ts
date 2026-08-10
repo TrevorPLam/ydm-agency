@@ -1,3 +1,12 @@
+/**
+ * FILE: sendEmail.test.ts
+ * PURPOSE: Unit tests for the sendEmail wrapper around Resend.
+ * ARCHITECTURE: packages/email / mocked Resend and @react-email/render to assert success and failure paths.
+ * KEY RULES: Tests must set RESEND_API_KEY; mocks are hoisted and cleared before each test.
+ * DEPENDS ON: vitest, resend (mocked), @react-email/render (mocked), and ../index.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { sendEmail } from '../index';
 

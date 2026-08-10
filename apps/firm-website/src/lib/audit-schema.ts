@@ -1,3 +1,11 @@
+/**
+ * FILE: audit-schema.ts
+ * PURPOSE: Provides the Zod validation schema for the free marketing audit form, including a honeypot field for bot detection.
+ * ARCHITECTURE: Zod object schema exporting auditFormSchema and the inferred AuditFormInput type; consumed by the /audit Server Action.
+ * KEY RULES: Must validate name, email, website (URL-like), challenge, and marketingState enum; must include a _honeypot field that rejects non-empty values for bot detection.
+ * DEPENDS ON: zod.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { z } from 'zod';
 
 export const auditFormSchema = z.object({

@@ -1,3 +1,11 @@
+/**
+ * FILE: seo-lessons.ts
+ * PURPOSE: Provides the original SEO_LESSONS array of EducationLesson objects for the SEO topic in the /education section.
+ * ARCHITECTURE: Static typed data module exporting an EducationLesson array; aggregated into EDUCATION_LESSONS by education-config.
+ * KEY RULES: Each lesson must conform to the EducationLesson interface; slugs must be unique; topic must be 'SEO'; attribution and safety fields must be set per the content sourcing policy.
+ * DEPENDS ON: ./types (EducationLesson).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import type { EducationLesson } from './types';
 
 export const SEO_LESSONS: EducationLesson[] = [

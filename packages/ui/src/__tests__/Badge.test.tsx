@@ -1,3 +1,12 @@
+/**
+ * FILE: Badge.test.tsx
+ * PURPOSE: Unit tests for the Badge component.
+ * ARCHITECTURE: packages/ui / React Testing Library checks for default, accent, outline variants and content.
+ * KEY RULES: Extends jest-dom matchers inline; class assertions depend on the design system token names.
+ * DEPENDS ON: React, ../Badge, @testing-library/react, @testing-library/jest-dom/matchers, and vitest.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import * as matchers from '@testing-library/jest-dom/matchers';

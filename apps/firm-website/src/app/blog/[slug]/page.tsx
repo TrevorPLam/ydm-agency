@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /blog/[slug] individual blog post page with editorial header, pull quote, content sections, author bio, and a related CTA.
+ * ARCHITECTURE: Server component with generateStaticParams and generateMetadata; reads BLOG_POSTS by slug and renders the post with category-colored badges and sectioned content.
+ * KEY RULES: Must 404 for unknown slugs; must use the firm-level impersonal voice; final CTA must point to /contact; category colors must fall back to the accent palette.
+ * DEPENDS ON: next/link, next/navigation, @ydm-agency/ui (Container, Badge, Button), @ydm-agency/seo (constructMetadata), @/lib/blog-config, lucide-react.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container, Badge, Button } from '@ydm-agency/ui';
@@ -5,10 +13,23 @@ import { constructMetadata } from '@ydm-agency/seo';
 import { BLOG_POSTS, type BlogPost } from '@/lib/blog-config';
 import { Calendar, Clock, User, ArrowLeft, Share2 } from 'lucide-react';
 
+/**
+ * WHAT IT DOES: Pre-generates static params for each blog post slug in BLOG_POSTS at build time.
+ * @return {Promise<{ slug: string }[]>} - Array of slug params for static generation
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: BLOG_POSTS entries have unique slugs.
+ */
 export async function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({ slug: post.slug }));
 }
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for a blog post from the post's configured metaTitle and metaDescription.
+ * @param {{ params: Promise<{ slug: string }> }} args - Route params containing the post slug
+ * @return {Promise<Metadata>} - Next.js metadata object, or empty object for unknown slugs
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: params.slug is a potential slug in BLOG_POSTS.
+ */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
@@ -23,6 +44,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
+/**
+ * WHAT IT DOES: Returns Tailwind classes for a category badge color, mapping known categories (Opinion, Analysis, News, Essay) to distinct palettes and falling back to the accent palette.
+ * @param {string} category - Blog post category
+ * @return {string} - Tailwind class string for the badge color
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 function getCategoryColor(category: string): string {
   switch (category) {
     case 'Opinion':
@@ -38,6 +66,13 @@ function getCategoryColor(category: string): string {
   }
 }
 
+/**
+ * WHAT IT DOES: Renders an individual blog post page with breadcrumb, editorial header, pull quote, content sections, author bio, share button, and a related CTA.
+ * @param {{ params: Promise<{ slug: string }> }} args - Route params containing the post slug
+ * @return {Promise<JSX.Element>} - Rendered blog post page
+ * SIDE EFFECTS: Calls notFound() for unknown slugs (renders the 404 page).
+ * ASSUMES: params.slug is a potential slug in BLOG_POSTS.
+ */
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);

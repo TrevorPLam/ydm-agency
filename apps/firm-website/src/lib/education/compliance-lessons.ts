@@ -1,3 +1,11 @@
+/**
+ * FILE: compliance-lessons.ts
+ * PURPOSE: Provides the original COMPLIANCE_LESSONS array of EducationLesson objects for the Compliance topic in the /education section.
+ * ARCHITECTURE: Static typed data module exporting an EducationLesson array; aggregated into EDUCATION_LESSONS by education-config.
+ * KEY RULES: Each lesson must conform to the EducationLesson interface; slugs must be unique; topic must be 'Compliance'; attribution and safety fields must be set per the content sourcing policy.
+ * DEPENDS ON: ./types (EducationLesson).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import type { EducationLesson } from './types';
 
 export const COMPLIANCE_LESSONS: EducationLesson[] = [

@@ -1,3 +1,11 @@
+/**
+ * FILE: vitest.setup.ts
+ * PURPOSE: Initialize the Vitest test environment with DOM matchers, a11y matchers, and Next.js API mocks.
+ * ARCHITECTURE: Setup file loaded before tests; extends expect and mocks next/headers, next/navigation, and next/cache for jsdom.
+ * KEY RULES: Must run before unit tests; keeps Next.js server-only APIs out of the jsdom environment.
+ * DEPENDS ON: @testing-library/jest-dom, @testing-library/react, jest-axe, vitest.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import * as jestDomMatchers from '@testing-library/jest-dom/matchers';
 import { cleanup } from '@testing-library/react';
 import { toHaveNoViolations } from 'jest-axe';

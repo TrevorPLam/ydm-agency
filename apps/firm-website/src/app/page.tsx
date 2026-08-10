@@ -1,7 +1,21 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the homepage with a hero, three-service snapshot, process teaser, trust banner, and final CTA.
+ * ARCHITECTURE: Server component composing Hero, Container, Card, and Button from @ydm-agency/ui with lucide-react icons; metadata is inherited from layout.tsx.
+ * KEY RULES: Must use the firm-level impersonal voice; primary CTA must point to /contact and secondary to /services; must not use we/us/our or fake social proof.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Hero, Container, Card, Button), lucide-react.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Hero, Container, Card, Button } from '@ydm-agency/ui';
 import { CheckCircle, Monitor, MessageSquare, Rocket } from 'lucide-react';
 
+/**
+ * WHAT IT DOES: Renders the homepage with hero, services snapshot, process teaser, trust banner, and final CTA sections.
+ * @return {JSX.Element} - Rendered homepage
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: Hero and shared UI components are available from @ydm-agency/ui.
+ */
 export default function Home() {
   return (
     <>

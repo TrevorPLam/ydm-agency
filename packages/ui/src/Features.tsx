@@ -1,3 +1,11 @@
+/**
+ * FILE: Features.tsx
+ * PURPOSE: Provides the Features component for rendering a responsive grid of feature cards with optional icons.
+ * ARCHITECTURE: Presentational server component composing Container and Card; maps a FeatureItem array into a 1/2/3-column responsive grid.
+ * KEY RULES: Must render optional icons when provided; must use a responsive grid (1 col mobile, 2 col tablet, 3 col desktop).
+ * DEPENDS ON: react, ./Container, ./Card.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import React from 'react';
 import { Container } from './Container';
 import { Card } from './Card';
@@ -14,6 +22,13 @@ export interface FeaturesProps {
   features: FeatureItem[];
 }
 
+/**
+ * WHAT IT DOES: Renders a features section with a centered heading/subtitle and a responsive grid of feature cards.
+ * @param {FeaturesProps} props - Section title, optional subtitle, and array of FeatureItem objects
+ * @return {JSX.Element} - Rendered features section
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: FeatureItem icons are valid React nodes when provided.
+ */
 export const Features: React.FC<FeaturesProps> = ({
   title,
   subtitle,

@@ -1,3 +1,11 @@
+/**
+ * FILE: education-config.ts
+ * PURPOSE: Provides the EDUCATION_TOPICS and EDUCATION_LESSONS aggregates plus helper functions for topic/lesson lookups used across the /education routes.
+ * ARCHITECTURE: Aggregates lesson arrays from per-topic content modules into a single EDUCATION_LESSONS array and exposes pure lookup helpers (by topic, by slug, related, adjacent); re-exports shared education types.
+ * KEY RULES: Topic slugs must match lesson.topic values; EDUCATION_LESSONS must include all per-topic lessons (original + new); helpers must be pure and case-insensitive where noted.
+ * DEPENDS ON: ./education/types, ./education/*-lessons and ./education/*-lessons-new modules.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import type { EducationLessonSection, EducationLesson } from './education/types';
 import { SEO_LESSONS } from './education/seo-lessons';
 import { NEW_SEO_LESSONS } from './education/seo-lessons-new';
@@ -71,28 +79,58 @@ export const EDUCATION_LESSONS: EducationLesson[] = [
   ...NEW_COMPLIANCE_LESSONS,
 ];
 
-// Helper function to get lessons by topic
+/**
+ * WHAT IT DOES: Returns all lessons belonging to a topic, matched case-insensitively by topic slug.
+ * @param {string} topicSlug - Topic slug to filter by
+ * @return {EducationLesson[]} - Lessons whose topic matches the slug
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: lesson.topic values correspond to known topic slugs.
+ */
 export function getLessonsByTopic(topicSlug: string): EducationLesson[] {
   return EDUCATION_LESSONS.filter((lesson) => lesson.topic.toLowerCase() === topicSlug.toLowerCase());
 }
 
-// Helper function to look up a single lesson by its slug
+/**
+ * WHAT IT DOES: Looks up a single lesson by its slug.
+ * @param {string} slug - Lesson slug to find
+ * @return {EducationLesson | undefined} - Matching lesson, or undefined if not found
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: Lesson slugs are unique across all topics.
+ */
 export function getLessonBySlug(slug: string): EducationLesson | undefined {
   return EDUCATION_LESSONS.find((lesson) => lesson.slug === slug);
 }
 
-// Helper function to get all unique topics from lessons
+/**
+ * WHAT IT DOES: Returns the sorted set of unique topic names derived from all lessons.
+ * @return {string[]} - Sorted unique topic names
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 export function getTopicsFromLessons(): string[] {
   const topics = new Set(EDUCATION_LESSONS.map((lesson) => lesson.topic));
   return Array.from(topics).sort();
 }
 
-// Helper function to get topic metadata
+/**
+ * WHAT IT DOES: Looks up topic metadata by its slug.
+ * @param {string} slug - Topic slug to find
+ * @return {EducationTopic | undefined} - Matching topic metadata, or undefined if not found
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: Topic slugs are unique in EDUCATION_TOPICS.
+ */
 export function getTopicBySlug(slug: string): EducationTopic | undefined {
   return EDUCATION_TOPICS.find((topic) => topic.slug === slug);
 }
 
-// Helper function to get related lessons (same topic, different lesson)
+/**
+ * WHAT IT DOES: Returns up to `limit` related lessons from the same topic, excluding the current lesson.
+ * @param {EducationLesson} currentLesson - Lesson to find related lessons for
+ * @param {number} limit - Maximum number of related lessons to return (defaults to 3)
+ * @return {EducationLesson[]} - Related lessons from the same topic
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: currentLesson.topic matches the topic field of other lessons.
+ */
 export function getRelatedLessons(currentLesson: EducationLesson, limit: number = 3): EducationLesson[] {
   const sameTopicLessons = EDUCATION_LESSONS.filter(
     (lesson) => lesson.topic === currentLesson.topic && lesson.slug !== currentLesson.slug
@@ -100,7 +138,13 @@ export function getRelatedLessons(currentLesson: EducationLesson, limit: number 
   return sameTopicLessons.slice(0, limit);
 }
 
-// Helper function to get next and previous lessons in the same topic
+/**
+ * WHAT IT DOES: Returns the previous and next lessons adjacent to the current lesson within the same topic, based on document order in EDUCATION_LESSONS.
+ * @param {EducationLesson} currentLesson - Lesson to find neighbors for
+ * @return {{ previous: EducationLesson | null; next: EducationLesson | null }} - Adjacent lessons, or null at the boundaries
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: currentLesson exists within EDUCATION_LESSONS for its topic.
+ */
 export function getAdjacentLessons(currentLesson: EducationLesson): {
   previous: EducationLesson | null;
   next: EducationLesson | null;

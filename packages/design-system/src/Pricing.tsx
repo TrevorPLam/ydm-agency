@@ -1,3 +1,12 @@
+/**
+ * FILE: Pricing.tsx
+ * PURPOSE: Renders a pricing section with selectable plans.
+ * ARCHITECTURE: Design-system marketing component rendering a grid of Card components with variant CTAs.
+ * KEY RULES: This package is an orphaned/broken fork of packages/ui and is excluded from the pnpm workspace; do not modify the duplicated blocks.
+ * DEPENDS ON: React, ./Badge, ./Button, ./Card, ./Container.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 'use client';
 
 import React from 'react';
@@ -24,6 +33,13 @@ export interface PricingProps {
   onSelectPlan?: (planName: string) => void;
 }
 
+/**
+ * WHAT IT DOES: Renders a pricing section with selectable plans and popular highlights.
+ * @param {PricingProps} props – Section title, optional subtitle, pricing plans, and optional selection handler.
+ * @return {React.ReactElement} – The rendered pricing section.
+ * SIDE EFFECTS: Calls `onSelectPlan` when a non-linked plan button is clicked.
+ * ASSUMES: Plans include name, price, description, and features; external hrefs take precedence over onSelectPlan.
+ */
 export const Pricing: React.FC<PricingProps> = ({
   title,
   subtitle,
@@ -139,6 +155,13 @@ export interface PricingProps {
   onSelectPlan?: (planName: string) => void;
 }
 
+/**
+ * WHAT IT DOES: Renders a pricing section with selectable plans and popular highlights.
+ * @param {PricingProps} props – Section title, optional subtitle, pricing plans, and optional selection handler.
+ * @return {React.ReactElement} – The rendered pricing section.
+ * SIDE EFFECTS: Calls `onSelectPlan` when a non-linked plan button is clicked.
+ * ASSUMES: Plans include name, price, description, and features; external hrefs take precedence over onSelectPlan.
+ */
 export const Pricing: React.FC<PricingProps> = ({
   title,
   subtitle,

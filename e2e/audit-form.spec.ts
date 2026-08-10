@@ -1,3 +1,12 @@
+/**
+ * FILE: audit-form.spec.ts
+ * PURPOSE: End-to-end Playwright tests for the free marketing audit request form.
+ * ARCHITECTURE: e2e / critical user flow suite exercising the /audit page and its Server Action.
+ * KEY RULES: Must run against a running local dev server; form labels and success copy must stay in sync with UI.
+ * DEPENDS ON: @playwright/test, the Next.js dev server, the /audit route, and the audit Server Action.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { test, expect } from '@playwright/test';
 
 test.describe('audit form', () => {
@@ -27,7 +36,7 @@ test.describe('audit form', () => {
   test('submits the form and shows a success message', async ({ page }) => {
     await page.goto('/audit');
 
-    // Focus the first field before filling to avoid a WebKit hydration race with react-hook-form.
+    // WHY: Focus the first field before filling to avoid a WebKit hydration race with react-hook-form.
     await page.getByLabel('Name *').click();
     await page.getByLabel('Name *').fill('E2E Test User');
 

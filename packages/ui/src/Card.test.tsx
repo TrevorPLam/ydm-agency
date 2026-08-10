@@ -1,3 +1,12 @@
+/**
+ * FILE: Card.test.tsx
+ * PURPOSE: Unit tests for the Card subcomponents.
+ * ARCHITECTURE: packages/ui / composable card structure, className merging, interactive children, and a11y.
+ * KEY RULES: color-contrast is disabled in the a11y check; custom classes are merged without replacing defaults.
+ * DEPENDS ON: React, ./Card, ./Button, @testing-library/react, @testing-library/user-event, vitest, and jest-axe.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';

@@ -1,3 +1,11 @@
+/**
+ * FILE: service-comparison-config.ts
+ * PURPOSE: Provides the COMPARISON_SCENARIOS data and getFitLevel helper that power the /services/compare "which service is right?" guide and the pricing estimator's situation prefill.
+ * ARCHITECTURE: Static typed array of scenario objects (id, title, primary service, also-consider services, starting point) plus a pure getFitLevel helper; consumed by the compare page and pricing-estimator.
+ * KEY RULES: primaryService and alsoConsider slugs must match SERVICE_LABELS keys; each scenario must have a unique id; content must use the firm-level impersonal voice.
+ * DEPENDS ON: None (pure data + helper); consumed by apps/firm-website/src/app/services/compare/page.tsx and ./pricing-estimator.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 export interface ServiceComparisonScenario {
   id: string;
   title: string;
@@ -84,6 +92,14 @@ export const COMPARISON_SCENARIOS: ServiceComparisonScenario[] = [
 
 export type FitLevel = 'Best fit' | 'Also consider' | '—';
 
+/**
+ * WHAT IT DOES: Returns how well a service fits a comparison scenario — 'Best fit' for the primary service, 'Also consider' for listed alternatives, or '—' otherwise.
+ * @param {ServiceComparisonScenario} scenario - Comparison scenario to evaluate against
+ * @param {string} slug - Service slug to classify
+ * @return {FitLevel} - 'Best fit', 'Also consider', or '—'
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: slug matches a known service slug.
+ */
 export function getFitLevel(scenario: ServiceComparisonScenario, slug: string): FitLevel {
   if (scenario.primaryService === slug) return 'Best fit';
   if (scenario.alsoConsider.includes(slug)) return 'Also consider';

@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /contact page with a query-prefillable ContactForm, response-promise copy, direct email alternative, and a CalendlyWidget for scheduling.
+ * ARCHITECTURE: Server component generating metadata via constructMetadata; reads searchParams to prefill projectType and message; renders the @ydm-agency/forms ContactForm wired to the submitContact Server Action.
+ * KEY RULES: Must validate projectType against VALID_PROJECT_TYPES before prefilling; must URL-decode the message param; must link to /privacy from the form; must use the firm-level impersonal voice.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Container), @ydm-agency/seo (constructMetadata), @ydm-agency/forms (ContactForm), ./actions (submitContact), @/components/CalendlyWidget.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Container } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
@@ -7,12 +15,26 @@ import { CalendlyWidget } from '@/components/CalendlyWidget';
 
 const VALID_PROJECT_TYPES = ['website', 'traffic-leads', 'other'] as const;
 
+/**
+ * WHAT IT DOES: Reads a single string value from a Next.js searchParams record, returning the first element when the value is an array.
+ * @param {Record<string, string | string[] | undefined>} params - Next.js searchParams record
+ * @param {string} key - Parameter key to read
+ * @return {string | undefined} - First string value for the key, or undefined
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 function getSearchParam(params: Record<string, string | string[] | undefined>, key: string): string | undefined {
   const value = params[key];
   if (Array.isArray(value)) return value[0];
   return value;
 }
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for the contact page via constructMetadata.
+ * @return {Promise<Metadata>} - Next.js metadata object for the contact page
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: constructMetadata provides sensible defaults.
+ */
 export async function generateMetadata() {
   return constructMetadata({
     title: 'Contact | YDM Agency',
@@ -21,6 +43,13 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * WHAT IT DOES: Renders the contact page with a query-prefilled ContactForm, response-promise copy, direct email alternative, and a CalendlyWidget scheduling section.
+ * @param {{ searchParams: Promise<Record<string, string | string[] | undefined>> }} args - Route search params for form prefill
+ * @return {Promise<JSX.Element>} - Rendered contact page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: submitContact Server Action handles validation, rate limiting, storage, and email; CalendlyWidget reads NEXT_PUBLIC_CALENDLY_URL.
+ */
 export default async function ContactPage({
   searchParams,
 }: {

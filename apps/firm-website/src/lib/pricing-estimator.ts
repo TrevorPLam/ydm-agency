@@ -1,3 +1,11 @@
+/**
+ * FILE: pricing-estimator.ts
+ * PURPOSE: Provides the pricing estimator data (services, extras, business-size and timeline multipliers) and pure calculation/lookup functions that power the PricingEstimator component and /services/pricing prefill.
+ * ARCHITECTURE: Static typed data plus pure helpers; calculateEstimate applies business-size and timeline multipliers to selected services and extras, splitting results into one-time and monthly buckets; buildContactMessage serializes the estimate into a contact-form message.
+ * KEY RULES: All functions must be pure; service slugs must match SERVICE_LABELS keys; extras only apply when an applicable service is selected; multipliers default to 1.0 when an option is not found.
+ * DEPENDS ON: ./service-labels (SERVICE_LABELS), ./service-comparison-config (COMPARISON_SCENARIOS).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { SERVICE_LABELS } from './service-labels';
 import { COMPARISON_SCENARIOS } from './service-comparison-config';
 
@@ -318,44 +326,108 @@ export const ESTIMATOR_EXTRAS: EstimatorExtra[] = [
   },
 ];
 
+/**
+ * WHAT IT DOES: Returns the default service slugs (primary plus also-consider) for a comparison scenario by its id.
+ * @param {string} situationId - Comparison scenario id
+ * @return {string[]} - Service slugs for the scenario, or an empty array if not found
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: situationId matches a COMPARISON_SCENARIOS entry id.
+ */
 export function getDefaultServicesForSituation(situationId: string): string[] {
   const scenario = COMPARISON_SCENARIOS.find((s) => s.id === situationId);
   if (!scenario) return [];
   return [scenario.primaryService, ...scenario.alsoConsider];
 }
 
+/**
+ * WHAT IT DOES: Finds the id of the comparison scenario whose primary service matches the given slug.
+ * @param {string} slug - Service slug
+ * @return {string | undefined} - Scenario id, or undefined if no scenario has this slug as its primary service
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 export function getPrimaryScenarioForService(slug: string): string | undefined {
   return COMPARISON_SCENARIOS.find((s) => s.primaryService === slug)?.id;
 }
 
+/**
+ * WHAT IT DOES: Builds a /services/pricing href prefilled with the scenario (if a primary scenario exists for the slug) or the service slug directly.
+ * @param {string} slug - Service slug
+ * @return {string} - Pricing page href with situation or services query parameter
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 export function getEstimateHref(slug: string): string {
   const scenarioId = getPrimaryScenarioForService(slug);
   if (scenarioId) return `/services/pricing?situation=${scenarioId}`;
   return `/services/pricing?services=${slug}`;
 }
 
+/**
+ * WHAT IT DOES: Looks up an estimator service by its slug.
+ * @param {string} slug - Service slug
+ * @return {EstimatorService | undefined} - Matching service, or undefined if not found
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 export function getServiceBySlug(slug: string): EstimatorService | undefined {
   return ESTIMATOR_SERVICES.find((s) => s.slug === slug);
 }
 
+/**
+ * WHAT IT DOES: Looks up an estimator extra by its id.
+ * @param {string} id - Extra id
+ * @return {EstimatorExtra | undefined} - Matching extra, or undefined if not found
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 export function getExtraById(id: string): EstimatorExtra | undefined {
   return ESTIMATOR_EXTRAS.find((e) => e.id === id);
 }
 
+/**
+ * WHAT IT DOES: Returns the extras that apply to at least one of the selected services.
+ * @param {string[]} services - Selected service slugs
+ * @return {EstimatorExtra[]} - Extras whose appliesTo list intersects the selected services
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 export function getRelevantExtras(services: string[]): EstimatorExtra[] {
   return ESTIMATOR_EXTRAS.filter((extra) =>
     extra.appliesTo.some((slug) => services.includes(slug))
   );
 }
 
+/**
+ * WHAT IT DOES: Returns the price multiplier for a business size, defaulting to 1.0 if the option is not found.
+ * @param {BusinessSize} size - Business size value
+ * @return {number} - Multiplier to apply to base price ranges
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 export function getBusinessSizeMultiplier(size: BusinessSize): number {
   return BUSINESS_SIZE_OPTIONS.find((o) => o.value === size)?.multiplier ?? 1.0;
 }
 
+/**
+ * WHAT IT DOES: Returns the price multiplier for a timeline option, defaulting to 1.0 if the option is not found.
+ * @param {Timeline} timeline - Timeline value
+ * @return {number} - Multiplier to apply to base price ranges
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 export function getTimelineMultiplier(timeline: Timeline): number {
   return TIMELINE_OPTIONS.find((o) => o.value === timeline)?.multiplier ?? 1.0;
 }
 
+/**
+ * WHAT IT DOES: Formats a low/high price pair as a USD currency range string with no fractional digits (e.g., "$5,000–$12,000").
+ * @param {number} low - Lower bound of the range
+ * @param {number} high - Upper bound of the range
+ * @return {string} - Formatted currency range string
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: low <= high.
+ */
 export function formatPriceRange(low: number, high: number): string {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -365,6 +437,13 @@ export function formatPriceRange(low: number, high: number): string {
   return `${formatter.format(low)}–${formatter.format(high)}`;
 }
 
+/**
+ * WHAT IT DOES: Calculates a pricing estimate by applying business-size and timeline multipliers to selected services and adding applicable extras, splitting results into one-time and monthly buckets.
+ * @param {EstimatorInputs} inputs - Selected situation, services, business size, timeline, and extras
+ * @return {EstimateResult} - One-time and monthly estimate buckets with the applied multipliers
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: Extras are only included when an applicable service is selected; unknown slugs/ids are skipped.
+ */
 export function calculateEstimate(inputs: EstimatorInputs): EstimateResult {
   const businessSizeMultiplier = getBusinessSizeMultiplier(inputs.businessSize);
   const timelineMultiplier = getTimelineMultiplier(inputs.timeline);
@@ -440,6 +519,13 @@ export function calculateEstimate(inputs: EstimatorInputs): EstimateResult {
   };
 }
 
+/**
+ * WHAT IT DOES: Maps a set of selected service slugs to a contact-form project type ('website', 'traffic-leads', or 'other'), or undefined when no services are selected.
+ * @param {string[]} services - Selected service slugs
+ * @return {'website' | 'traffic-leads' | 'other' | undefined} - Project type for the contact form
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: Service slugs fall into website or traffic service groups; mixed selections map to 'other'.
+ */
 export function getProjectTypeForContact(services: string[]): 'website' | 'traffic-leads' | 'other' | undefined {
   if (services.length === 0) return undefined;
 
@@ -454,6 +540,14 @@ export function getProjectTypeForContact(services: string[]): 'website' | 'traff
   return 'other';
 }
 
+/**
+ * WHAT IT DOES: Serializes the estimator inputs and result into a human-readable contact-form message describing the situation, services, business size, timeline, extras, and estimated investment ranges.
+ * @param {EstimatorInputs} inputs - Selected situation, services, business size, timeline, and extras
+ * @param {EstimateResult} result - Calculated estimate buckets
+ * @return {string} - Newline-joined contact message body
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: inputs and result are consistent (result derived from inputs via calculateEstimate).
+ */
 export function buildContactMessage(inputs: EstimatorInputs, result: EstimateResult): string {
   const scenario = COMPARISON_SCENARIOS.find((s) => s.id === inputs.situation);
   const sizeOption = BUSINESS_SIZE_OPTIONS.find((o) => o.value === inputs.businessSize);

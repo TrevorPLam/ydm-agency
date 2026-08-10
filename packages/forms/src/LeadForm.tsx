@@ -1,3 +1,11 @@
+/**
+ * FILE: LeadForm.tsx
+ * PURPOSE: React lead capture form component with validation, analytics tracking, and success states.
+ * ARCHITECTURE: Client component using controlled state with Zod validation, conditional success display, and ARIA accessibility.
+ * KEY RULES: Track analytics on successful submission; maintain accessibility compliance; validate before submission; show loading states.
+ * DEPENDS ON: react, @ydm-agency/ui (Button, Card), @ydm-agency/analytics (trackEvent), ./schemas (leadCaptureSchema).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import React, { useState } from 'react';
@@ -12,6 +20,13 @@ export interface LeadFormProps {
   onSubmitSuccess?: () => void;
 }
 
+/**
+ * WHAT IT DOES: Renders a lead capture form with validation, error handling, success states, and analytics tracking.
+ * @param {LeadFormProps} props - Form configuration including title, subtitle, source app tracking, and success callback
+ * @return {JSX.Element} - Form component or success message
+ * SIDE EFFECTS: Updates local state for form data, errors, and submission status; calls trackEvent on successful submission.
+ * ASSUMES: onSubmitSuccess is optional callback for parent component handling.
+ */
 export function LeadForm({
   title = 'Book Your Strategy Call',
   subtitle = 'Fill out the form below and we will get back to you within 24 hours.',
@@ -30,6 +45,13 @@ export function LeadForm({
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  /**
+   * WHAT IT DOES: Handles form field changes and clears errors for the changed field.
+   * @param {React.ChangeEvent} e - Change event from input, textarea, or select
+   * @return {void}
+   * SIDE EFFECTS: Updates formData state and clears field-specific error if present.
+   * ASSUMES: Event target has name and value properties.
+   */
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -41,6 +63,13 @@ export function LeadForm({
     }
   };
 
+  /**
+   * WHAT IT DOES: Validates form submission, tracks analytics event, and shows success state.
+   * @param {React.FormEvent} e - Form submit event
+   * @return {void}
+   * SIDE EFFECTS: Validates form data, updates error state, dispatches analytics event, shows success state.
+   * ASSUMES: leadCaptureSchema provides validation; trackEvent handles consent gating.
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -59,7 +88,7 @@ export function LeadForm({
       return;
     }
 
-    // Track analytics event
+    // WHY: Track analytics event for lead submission with source app and budget information
     trackEvent({
       eventName: 'lead_form_submitted',
       properties: {

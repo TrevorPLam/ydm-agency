@@ -1,3 +1,11 @@
+/**
+ * FILE: sitemap.ts
+ * PURPOSE: Provides the Next.js sitemap route handler that aggregates all public URLs (static pages, service spokes, industries, blog, education topics/lessons, and learning paths) into a single sitemap.
+ * ARCHITECTURE: Next.js MetadataRoute.Sitemap route exporting a default function that builds the URL list from config modules (services, industries, education, blog, learning paths) and merges static and dynamic URLs.
+ * KEY RULES: Must include all indexable public routes; must use the production base URL; must set appropriate changeFrequency and priority per route type; must normalize education topic names to URL slugs.
+ * DEPENDS ON: next (MetadataRoute), @/lib/services-config, @/lib/industries-config, @/lib/education-config, @/lib/education/learning-paths, @/lib/blog-config.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import type { MetadataRoute } from 'next';
 import { SERVICES_CONFIG } from '@/lib/services-config';
 import { INDUSTRIES_CONFIG } from '@/lib/industries-config';
@@ -11,11 +19,23 @@ const serviceSlugs = Object.keys(SERVICES_CONFIG);
 
 const industrySlugs = Object.keys(INDUSTRIES_CONFIG);
 
-// Helper function to normalize topic names for URL matching
+/**
+ * WHAT IT DOES: Normalizes an education topic name (e.g., "SEO") into a URL-safe slug (e.g., "seo") by lowercasing and replacing whitespace with hyphens.
+ * @param {string} topicName - Display topic name to normalize
+ * @return {string} - URL-safe topic slug
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: topic names map deterministically to slugs via lowercasing and hyphenation.
+ */
 function normalizeTopicName(topicName: string): string {
   return topicName.toLowerCase().replace(/\s+/g, '-');
 }
 
+/**
+ * WHAT IT DOES: Builds and returns the complete sitemap by merging static URLs with dynamically generated URLs for service spokes, process/deliverables/FAQ spokes, comparison/pricing/industries/audit pages, industry pages, blog posts, education topics and lessons, and learning paths.
+ * @return {MetadataRoute.Sitemap} - Array of sitemap URL entries
+ * SIDE EFFECTS: None (pure function; reads config modules at build/render time).
+ * ASSUMES: All referenced config modules export the expected slug-keyed records or arrays.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticUrls: MetadataRoute.Sitemap = [
     {
@@ -68,7 +88,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Service spoke pages
   const serviceUrls: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
     url: `${baseUrl}/services/${slug}`,
     lastModified: new Date(),
@@ -76,7 +95,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Process spoke pages
   const processUrls: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
     url: `${baseUrl}/services/${slug}/process`,
     lastModified: new Date(),
@@ -84,7 +102,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Deliverables spoke pages
   const deliverablesUrls: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
     url: `${baseUrl}/services/${slug}/deliverables`,
     lastModified: new Date(),
@@ -92,7 +109,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // FAQ spoke pages
   const faqUrls: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
     url: `${baseUrl}/services/${slug}/faq`,
     lastModified: new Date(),
@@ -100,7 +116,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Service comparison, pricing, and audit pages
   const comparisonUrls: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/services/compare`,
@@ -128,7 +143,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Industry vertical pages
   const industryUrls: MetadataRoute.Sitemap = industrySlugs.map((slug) => ({
     url: `${baseUrl}/services/industries/${slug}`,
     lastModified: new Date(),
@@ -136,7 +150,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Blog post pages
   const blogUrls: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.publishedAt),
@@ -144,7 +157,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Education topic pages
   const educationTopicUrls: MetadataRoute.Sitemap = EDUCATION_TOPICS.map((topic) => ({
     url: `${baseUrl}/education/${topic.slug}`,
     lastModified: new Date(),
@@ -152,7 +164,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Education lesson pages (with new topic-based URL structure)
   const educationLessonUrls: MetadataRoute.Sitemap = EDUCATION_LESSONS.map((lesson) => ({
     url: `${baseUrl}/education/${normalizeTopicName(lesson.topic)}/${lesson.slug}`,
     lastModified: lesson.lastUpdated ? new Date(lesson.lastUpdated) : new Date(),
@@ -160,7 +171,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  // Learning path hub + detail pages
   const learningPathUrls: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/education/paths`,

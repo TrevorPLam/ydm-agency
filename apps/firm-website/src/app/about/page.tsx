@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /about founder-story page describing YDM Agency, the founder, how the firm works, beliefs, differentiators, and location.
+ * ARCHITECTURE: Server component with a static metadata export via constructMetadata; renders long-form marketing copy with a founder photo placeholder and CTAs.
+ * KEY RULES: Must use the firm-level impersonal voice; must not use fake social proof; final CTA must point to /contact.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Button, Container), @ydm-agency/seo (constructMetadata).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Button } from '@ydm-agency/ui';
 import { Container } from '@ydm-agency/ui';
@@ -9,6 +17,12 @@ export const metadata = constructMetadata({
     'YDM Agency is a solo AI-augmented web and marketing firm. Learn how projects are built and delivered.',
 });
 
+/**
+ * WHAT IT DOES: Renders the about page with founder story, how-it-works, beliefs, differentiators, and location sections plus a final CTA.
+ * @return {JSX.Element} - Rendered about page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: None.
+ */
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-background text-text-primary">

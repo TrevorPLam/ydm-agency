@@ -1,3 +1,12 @@
+/**
+ * FILE: Header.test.tsx
+ * PURPOSE: Unit tests for the Header navigation component.
+ * ARCHITECTURE: packages/ui / mocked Next.js usePathname and responsive desktop/mobile menu assertions.
+ * KEY RULES: Resets mockedPathname before each test; service links must match the Header props contract.
+ * DEPENDS ON: React, ../Header, next/navigation (mocked), @testing-library/react, @testing-library/user-event, and vitest.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

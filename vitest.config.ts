@@ -1,3 +1,11 @@
+/**
+ * FILE: vitest.config.ts
+ * PURPOSE: Configure Vitest unit and integration tests with jsdom, the React plugin, and workspace path aliases.
+ * ARCHITECTURE: Root-level Vitest config that maps internal package aliases, enables globals, and collects v8 coverage across apps and packages.
+ * KEY RULES: Excludes e2e, dist, .next, and design-system; requires setupFiles; maps @ydm-agency/* and @ aliases.
+ * DEPENDS ON: vitest, @vitejs/plugin-react, internal workspace packages and apps.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { defineConfig } from 'vitest/config';

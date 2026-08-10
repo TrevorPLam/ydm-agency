@@ -1,3 +1,12 @@
+/**
+ * FILE: layout.tsx
+ * PURPOSE: Provide a reusable, accessible root layout shell for Next.js pages.
+ * ARCHITECTURE: web-core React component, server-safe static html/body with a skip-to-content link.
+ * KEY RULES: Defaults to lang='en'; className and skip link styles are optional and overridable.
+ * DEPENDS ON: react
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import type { ReactNode } from 'react';
 
 export interface RootLayoutProps {
@@ -8,6 +17,13 @@ export interface RootLayoutProps {
   skipLinkClassName?: string;
 }
 
+/**
+ * WHAT IT DOES: Renders the top-level html/body structure with a skip-to-content link.
+ * @param {RootLayoutProps} props – children, language, and optional class names
+ * @return {JSX.Element} – the rendered html/body shell
+ * SIDE EFFECTS: None
+ * ASSUMES: Rendered as the root layout of a Next.js page route.
+ */
 export function RootLayout({
   children,
   lang = 'en',

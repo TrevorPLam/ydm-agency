@@ -1,8 +1,22 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /audit page describing the free marketing audit coverage and embedding the AuditForm for submissions.
+ * ARCHITECTURE: Server component generating metadata via constructMetadata; renders AUDIT_COVERAGE copy and the client-side AuditForm component.
+ * KEY RULES: Must use the firm-level impersonal voice; must link to the privacy policy from the form; final CTA must point to /contact.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Container, Button), @ydm-agency/seo (constructMetadata), @/components/AuditForm.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Container, Button } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
 import { AuditForm } from '@/components/AuditForm';
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for the audit page via constructMetadata.
+ * @return {Promise<Metadata>} - Next.js metadata object for the audit page
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: constructMetadata provides sensible defaults.
+ */
 export async function generateMetadata() {
   return constructMetadata({
     title: 'Free Marketing Audit | YDM Agency',
@@ -34,6 +48,12 @@ const AUDIT_COVERAGE = [
   },
 ];
 
+/**
+ * WHAT IT DOES: Renders the audit page with hero, audit coverage and what-you-receive sections, the AuditForm, a privacy-policy link, and a final CTA.
+ * @return {JSX.Element} - Rendered audit page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: AuditForm handles its own submission, validation, and analytics tracking.
+ */
 export default function AuditPage() {
   return (
     <main className="min-h-screen">

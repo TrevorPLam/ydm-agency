@@ -1,3 +1,12 @@
+/**
+ * FILE: Footer.tsx
+ * PURPOSE: Renders the site footer with navigation, contact, legal links, and cookie settings.
+ * ARCHITECTURE: Design-system layout component using Next.js Link and Container.
+ * KEY RULES: This package is an orphaned/broken fork of packages/ui and is excluded from the pnpm workspace; do not modify logic.
+ * DEPENDS ON: React, next/link, ./Container, ./CookieSettingsButton.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import Link from 'next/link';
 import { Container } from './Container';
 import { CookieSettingsButton } from './CookieSettingsButton';
@@ -6,6 +15,13 @@ export interface FooterProps {
   brandName?: string;
 }
 
+/**
+ * WHAT IT DOES: Renders the site footer with navigation, contact, legal links, and cookie settings.
+ * @param {FooterProps} props – Optional brandName; defaults to "YDM Agency".
+ * @return {React.ReactElement} – The rendered footer element.
+ * SIDE EFFECTS: Computes the current year via `new Date().getFullYear()`.
+ * ASSUMES: Next.js Link and the YDM Agency route structure are available.
+ */
 export const Footer = ({ brandName = 'YDM Agency' }: FooterProps) => {
   const year = new Date().getFullYear();
 
@@ -13,7 +29,6 @@ export const Footer = ({ brandName = 'YDM Agency' }: FooterProps) => {
     <footer className="bg-surface border-t border-border py-12">
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {/* Column 1: Brand */}
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-text-primary font-semibold text-lg mb-3">{brandName}</h3>
             <p className="text-text-secondary text-sm leading-relaxed">
@@ -21,7 +36,6 @@ export const Footer = ({ brandName = 'YDM Agency' }: FooterProps) => {
             </p>
           </div>
 
-          {/* Column 2: Quick Links */}
           <div>
             <h4 className="text-text-primary font-semibold text-sm mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
@@ -73,7 +87,6 @@ export const Footer = ({ brandName = 'YDM Agency' }: FooterProps) => {
             </ul>
           </div>
 
-          {/* Column 3: Contact */}
           <div>
             <h4 className="text-text-primary font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
@@ -88,7 +101,6 @@ export const Footer = ({ brandName = 'YDM Agency' }: FooterProps) => {
             </ul>
           </div>
 
-          {/* Column 4: Legal */}
           <div>
             <h4 className="text-text-primary font-semibold text-sm mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
@@ -104,7 +116,6 @@ export const Footer = ({ brandName = 'YDM Agency' }: FooterProps) => {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div className="pt-8 border-t border-border text-xs text-text-secondary">
           <p>© {year} {brandName}. All rights reserved.</p>
         </div>

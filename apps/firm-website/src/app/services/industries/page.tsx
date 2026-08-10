@@ -1,12 +1,20 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /services/industries hub page with industry cards, a why-industry-specific section, a not-sure fallback, and a final CTA.
+ * ARCHITECTURE: Server component generating metadata via constructMetadata; renders a static INDUSTRY_CARDS grid with lucide-react icons linking to industry-specific landing pages.
+ * KEY RULES: Must use the firm-level impersonal voice; industry cards must link to /services/industries/[slug]; final CTA must point to /contact.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Card, Button, Container), @ydm-agency/seo (constructMetadata), lucide-react.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Card } from '@ydm-agency/ui';
 import { Button } from '@ydm-agency/ui';
 import { Container } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
-import { 
-  Briefcase, 
-  Wrench, 
-  User 
+import {
+  Briefcase,
+  Wrench,
+  User
 } from 'lucide-react';
 
 interface IndustryCard {
@@ -41,6 +49,12 @@ const INDUSTRY_CARDS: IndustryCard[] = [
   },
 ];
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for the industries hub page via constructMetadata.
+ * @return {Promise<Metadata>} - Next.js metadata object for the industries hub
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: constructMetadata provides sensible defaults.
+ */
 export async function generateMetadata() {
   return constructMetadata({
     title: 'Industry Solutions | YDM Agency',
@@ -48,6 +62,12 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * WHAT IT DOES: Renders the industries hub page with an industry card grid, why-industry-specific section, not-sure fallback, and a final CTA.
+ * @return {JSX.Element} - Rendered industries hub page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: INDUSTRY_CARDS slugs match keys in INDUSTRIES_CONFIG.
+ */
 export default function IndustriesPage() {
   return (
     <main className="min-h-screen">

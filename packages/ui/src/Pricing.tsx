@@ -1,3 +1,11 @@
+/**
+ * FILE: Pricing.tsx
+ * PURPOSE: Provides the Pricing component for rendering a responsive grid of pricing plan cards with optional "Most Popular" highlighting and CTA buttons.
+ * ARCHITECTURE: Client component composing Container, Card, Button (asChild with Link or onClick handler), and Badge; maps a PricingPlan array into a three-column grid.
+ * KEY RULES: Must highlight popular plans with a badge and ring; must render a Link CTA when ctaHref is provided, otherwise an onClick button; must call onSelectPlan for button CTAs.
+ * DEPENDS ON: react, next/link, ./Container, ./Card, ./Button, ./Badge.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import React from 'react';
@@ -25,6 +33,13 @@ export interface PricingProps {
   onSelectPlan?: (planName: string) => void;
 }
 
+/**
+ * WHAT IT DOES: Renders a pricing section with a centered heading/subtitle and a responsive grid of plan cards, each with optional popular highlighting and a CTA.
+ * @param {PricingProps} props - Section title, optional subtitle, plans array, and optional onSelectPlan callback for button CTAs
+ * @return {JSX.Element} - Rendered pricing section
+ * SIDE EFFECTS: Invokes onSelectPlan when a plan's button CTA is clicked (only when no ctaHref is provided).
+ * ASSUMES: onSelectPlan is provided when plans use button CTAs; ctaHref values are valid internal routes when provided.
+ */
 export const Pricing: React.FC<PricingProps> = ({
   title,
   subtitle,

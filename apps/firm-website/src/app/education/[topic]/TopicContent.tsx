@@ -1,3 +1,11 @@
+/**
+ * FILE: TopicContent.tsx
+ * PURPOSE: Provides a client-side topic content component that renders a LessonFilter and the filtered list of lesson cards for a topic.
+ * ARCHITECTURE: Client component using useState for the filtered lessons; renders LessonFilter and a list of lesson cards with safety/level badges; shows an empty state when no lessons match.
+ * KEY RULES: Must use the firm-level impersonal voice; lesson cards must link to /education/[topic]/[slug]; must show an empty state when the filtered list is empty.
+ * DEPENDS ON: react, next/link, @ydm-agency/ui (Card, Badge, Container), lucide-react, ../LessonFilter, @/lib/education-config (EducationLesson type).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import { useState } from 'react';
@@ -11,6 +19,13 @@ interface TopicContentProps {
   lessons: EducationLesson[];
 }
 
+/**
+ * WHAT IT DOES: Maps a lesson safety classification to a Badge variant for display.
+ * @param {EducationLesson['safety']} safety - Lesson safety classification
+ * @return {'default' | 'accent' | 'outline'} - Badge variant
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: safety is one of the configured safety values.
+ */
 function getSafetyBadgeVariant(safety: EducationLesson['safety']): 'default' | 'accent' | 'outline' {
   switch (safety) {
     case 'public-domain':
@@ -24,6 +39,13 @@ function getSafetyBadgeVariant(safety: EducationLesson['safety']): 'default' | '
   }
 }
 
+/**
+ * WHAT IT DOES: Maps a lesson safety classification to a human-readable label for display.
+ * @param {EducationLesson['safety']} safety - Lesson safety classification
+ * @return {string} - Display label
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: safety is one of the configured safety values.
+ */
 function getSafetyLabel(safety: EducationLesson['safety']): string {
   switch (safety) {
     case 'public-domain':
@@ -37,6 +59,13 @@ function getSafetyLabel(safety: EducationLesson['safety']): string {
   }
 }
 
+/**
+ * WHAT IT DOES: Renders a LessonFilter and the filtered list of lesson cards for a topic, with an empty state when no lessons match.
+ * @param {TopicContentProps} props - Full lessons list for the topic
+ * @return {JSX.Element} - Rendered filterable lesson list
+ * SIDE EFFECTS: Updates filteredLessons state when the filter changes.
+ * ASSUMES: lessons is the full list for the topic; LessonFilter calls back with the filtered subset.
+ */
 export default function TopicContent({ lessons }: TopicContentProps) {
   const [filteredLessons, setFilteredLessons] = useState(lessons);
 

@@ -1,3 +1,12 @@
+/**
+ * FILE: LeadForm.test.tsx
+ * PURPOSE: Unit tests for the LeadForm component.
+ * ARCHITECTURE: packages/forms / testing lead-capture fields, validation, budget selection, tracking event, and a11y.
+ * KEY RULES: Mocks @ydm-agency/analytics trackEvent; tests success and tracking payload.
+ * DEPENDS ON: React, @testing-library/react, @testing-library/user-event, vitest, jest-axe, ../LeadForm, and the analytics mock.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';

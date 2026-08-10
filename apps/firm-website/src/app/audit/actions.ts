@@ -1,3 +1,11 @@
+/**
+ * FILE: actions.ts
+ * PURPOSE: Provides the submitAudit Server Action that validates, rate-limits, stores, and emails free marketing audit form submissions.
+ * ARCHITECTURE: Next.js Server Action ('use server') that validates input via auditFormSchema, applies Upstash sliding-window rate limiting per IP, stores the lead in Supabase, and sends a notification email via @ydm-agency/email's sendEmail.
+ * KEY RULES: Must re-validate input server-side via auditFormSchema; must fail-closed when Supabase is not configured; must rate-limit per IP (5/hour) when Upstash is configured; must skip real Resend calls when RESEND_API_KEY === 'test' for E2E; must not block email on storage failure but must log the storage error.
+ * DEPENDS ON: next/headers, @ydm-agency/email (sendEmail), @/lib/audit-schema, @supabase/supabase-js, @upstash/ratelimit, @upstash/redis.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use server';
 
 import { headers } from 'next/headers';
@@ -22,7 +30,7 @@ const supabase = supabaseUrl && supabaseServiceRoleKey
 const ratelimit = process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
   ? new Ratelimit({
       redis: Redis.fromEnv(),
-      limiter: Ratelimit.slidingWindow(5, '1h'), // 5 submissions per hour
+      limiter: Ratelimit.slidingWindow(5, '1h'),
       analytics: true,
     })
   : null;
@@ -36,6 +44,13 @@ const marketingStateLabels: Record<string, string> = {
   'unsure': 'Not sure where to start',
 };
 
+/**
+ * WHAT IT DOES: Validates, rate-limits, stores, and emails a free marketing audit submission, returning a success/error result for the client.
+ * @param {AuditFormInput} data - Raw form input from the AuditForm client component
+ * @return {Promise<SubmitAuditResult>} - { success: boolean; error?: string }
+ * SIDE EFFECTS: Reads request headers for IP; calls Upstash rate limiter; inserts a row into the Supabase leads table; sends a notification email via Resend; logs errors to console.
+ * ASSUMES: Env vars (NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, UPSTASH_*, RESEND_API_KEY) are set in production; missing Supabase config results in a fail-closed error.
+ */
 export async function submitAudit(data: AuditFormInput): Promise<SubmitAuditResult> {
   const parsed = auditFormSchema.safeParse(data);
 
@@ -46,8 +61,7 @@ export async function submitAudit(data: AuditFormInput): Promise<SubmitAuditResu
     };
   }
 
-  // Rate limiting
-  if (ratelimit) {
+    if (ratelimit) {
     try {
       const headersList = await headers();
       const ip = headersList.get('x-forwarded-for') || headersList.get('x-real-ip') || 'unknown';
@@ -62,11 +76,11 @@ export async function submitAudit(data: AuditFormInput): Promise<SubmitAuditResu
       }
     } catch (error) {
       console.error('Rate limiting error:', error);
-      // Continue without rate limiting if there is an error
+      // WHY: Continue without rate limiting if there is an error to prevent service disruption when Redis is unavailable
     }
   }
 
-  // Fail-closed for storage: if Supabase is not configured, do not silently no-op.
+  // WHY: Fail-closed for storage: if Supabase is not configured, do not silently no-op, so missing storage config surfaces an error instead of dropping submissions.
   if (!supabase) {
     return {
       success: false,
@@ -85,7 +99,7 @@ export async function submitAudit(data: AuditFormInput): Promise<SubmitAuditResu
     'A structured audit will be delivered with findings and recommended next steps.',
   ].join('\n\n');
 
-  // Attempt to store the lead first, but do not block email on storage failure.
+  // WHY: Attempt to store the lead first, but do not block email on storage failure to ensure the user receives an acknowledgment even if the database write fails.
   let storageError: string | null = null;
   try {
     const { error: supabaseError } = await supabase
@@ -109,7 +123,7 @@ export async function submitAudit(data: AuditFormInput): Promise<SubmitAuditResu
     storageError = 'Failed to store your information. Please try again.';
   }
 
-  // Test seam for E2E runs: skip real Resend calls when RESEND_API_KEY is 'test'.
+  // WHY: Test seam for E2E runs - skip real Resend calls when RESEND_API_KEY is 'test' to avoid sending emails during testing.
   if (process.env.RESEND_API_KEY === 'test') {
     return { success: true };
   }

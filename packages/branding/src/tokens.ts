@@ -1,3 +1,12 @@
+/**
+ * FILE: tokens.ts
+ * PURPOSE: Define the canonical YDM Agency color, typography, and logo design tokens.
+ * ARCHITECTURE: branding package, type-safe token object with const assertion and satisfies.
+ * KEY RULES: Hex values must match the design system palette; success equals accent.
+ * DEPENDS ON: None
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 export interface ColorToken {
   css: string;
   hex: string;

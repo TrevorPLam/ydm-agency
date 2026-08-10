@@ -1,3 +1,12 @@
+/**
+ * FILE: Button.test.tsx
+ * PURPOSE: Unit tests for the Button component.
+ * ARCHITECTURE: packages/ui / React Testing Library + jest-axe covering render, variants, sizes, asChild, refs, and a11y.
+ * KEY RULES: color-contrast is disabled in the a11y check; onClick is verified with userEvent.
+ * DEPENDS ON: React, ./Button, @testing-library/react, @testing-library/user-event, vitest, and jest-axe.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';

@@ -1,3 +1,11 @@
+/**
+ * FILE: index.ts
+ * PURPOSE: Email sending service using Resend API for transactional emails (acknowledgment to user, notification to internal team).
+ * ARCHITECTURE: Async function that renders React Email templates, sends via Resend API in parallel, and handles partial failures gracefully.
+ * KEY RULES: Fail-closed if RESEND_API_KEY not configured; send both emails in parallel; handle partial failures; never expose email errors to end users.
+ * DEPENDS ON: resend, @react-email/render, ./AcknowledgmentEmail, ./NotificationEmail.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { Resend, type CreateEmailResponse } from 'resend';
 import { render } from '@react-email/render';
 import { AcknowledgmentEmail } from './AcknowledgmentEmail';
@@ -18,9 +26,17 @@ export interface SendEmailResult {
 const FROM_ADDRESS = 'YDM Agency <noreply@ydmagency.com>';
 const TO_ADDRESS = 'contact@ydmagency.com';
 
+/**
+ * WHAT IT DOES: Sends two transactional emails via Resend - acknowledgment to the user and notification to the internal team.
+ * @param {SendEmailOptions} options - Email details including recipient name, email, project type, and message
+ * @return {Promise<SendEmailResult>} - Success status with optional error message
+ * SIDE EFFECTS: Makes HTTP requests to Resend API, logs errors to console, renders React Email templates to HTML.
+ * ASSUMES: RESEND_API_KEY environment variable is set; React Email templates are valid; Resend API is accessible.
+ */
 export async function sendEmail(options: SendEmailOptions): Promise<SendEmailResult> {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
+  // WHY: Fail-closed if API key is not configured to prevent silent failures
   if (!process.env.RESEND_API_KEY) {
     return { success: false, error: 'RESEND_API_KEY not configured' };
   }
@@ -42,6 +58,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
     const ackSubject = 'Got your message — YDM Agency';
     const notifSubject = `New Contact: ${options.name} — ${options.projectType ?? 'General'}`;
 
+    // WHY: Send both emails in parallel for faster delivery, use allSettled to handle partial failures
     const results = await Promise.allSettled<CreateEmailResponse>([
       resend.emails.send({
         from: FROM_ADDRESS,
@@ -74,6 +91,7 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
       }
     });
 
+    // WHY: Return failure if any email failed to ensure both user and team receive notifications
     if (failures.length > 0) {
       return { success: false, error: 'Failed to send emails. Please try again.' };
     }

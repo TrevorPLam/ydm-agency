@@ -1,3 +1,12 @@
+/**
+ * FILE: forms.ts
+ * PURPOSE: Provide typed factory functions for contact, lead, and audit form inputs used in tests.
+ * ARCHITECTURE: test-utils factories, deterministic default values with optional overrides.
+ * KEY RULES: Defaults must be valid shapes; overrides are applied as a partial spread.
+ * DEPENDS ON: None
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 export interface ContactInput {
   name: string;
   email: string;
@@ -31,6 +40,13 @@ export interface AuditInput {
   _honeypot: string;
 }
 
+/**
+ * WHAT IT DOES: Builds a contact form input with sensible defaults.
+ * @param {Partial<ContactInput>} [overrides] – optional field overrides
+ * @return {ContactInput} – a complete contact form input object
+ * SIDE EFFECTS: None
+ * ASSUMES: None
+ */
 export function createContactInput(overrides?: Partial<ContactInput>): ContactInput {
   return {
     name: 'Jordan Doe',
@@ -43,6 +59,13 @@ export function createContactInput(overrides?: Partial<ContactInput>): ContactIn
   };
 }
 
+/**
+ * WHAT IT DOES: Builds a lead form input with sensible defaults.
+ * @param {Partial<LeadInput>} [overrides] – optional field overrides
+ * @return {LeadInput} – a complete lead form input object
+ * SIDE EFFECTS: None
+ * ASSUMES: None
+ */
 export function createLeadInput(overrides?: Partial<LeadInput>): LeadInput {
   return {
     fullName: 'Jordan Doe',
@@ -55,6 +78,13 @@ export function createLeadInput(overrides?: Partial<LeadInput>): LeadInput {
   };
 }
 
+/**
+ * WHAT IT DOES: Builds an audit request form input with sensible defaults.
+ * @param {Partial<AuditInput>} [overrides] – optional field overrides
+ * @return {AuditInput} – a complete audit form input object
+ * SIDE EFFECTS: None
+ * ASSUMES: None
+ */
 export function createAuditInput(overrides?: Partial<AuditInput>): AuditInput {
   return {
     name: 'Jordan Doe',

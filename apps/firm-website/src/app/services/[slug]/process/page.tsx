@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /services/[slug]/process spoke page showing the service's process phases, contextual process FAQs, and a final CTA.
+ * ARCHITECTURE: Server component with generateStaticParams and generateMetadata; reads SERVICES_CONFIG by slug, renders process phase cards, and includes contextual process FAQs via getContextualFaqs.
+ * KEY RULES: Must 404 for unknown slugs; must use the firm-level impersonal voice; CTAs must point to /contact, the service's deliverables/faq spokes, and the pricing estimator.
+ * DEPENDS ON: next/link, next/navigation, @ydm-agency/ui (Container, Button, Card, Badge), @ydm-agency/seo (constructMetadata), @/components/ServiceSubnav, @/lib/services-config, @/lib/faq-utils, @/lib/pricing-estimator.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container, Button, Card, Badge } from '@ydm-agency/ui';
@@ -7,10 +15,23 @@ import { ServiceSubnav } from '@/components/ServiceSubnav';
 import { getContextualFaqs } from '@/lib/faq-utils';
 import { getEstimateHref } from '@/lib/pricing-estimator';
 
+/**
+ * WHAT IT DOES: Pre-generates static params for each service slug in SERVICES_CONFIG at build time.
+ * @return {Promise<{ slug: string }[]>} - Array of slug params for static generation
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: SERVICES_CONFIG keys are valid service slugs.
+ */
 export async function generateStaticParams() {
   return Object.keys(SERVICES_CONFIG).map((slug) => ({ slug }));
 }
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for the process spoke page, with a not-found fallback for unknown slugs.
+ * @param {{ params: Promise<{ slug: string }> }} args - Route params containing the service slug
+ * @return {Promise<Metadata>} - Next.js metadata object for the process page
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: params.slug is a potential key in SERVICES_CONFIG.
+ */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = SERVICES_CONFIG[slug];
@@ -22,6 +43,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
+/**
+ * WHAT IT DOES: Renders the process spoke page for a service, showing subnav, breadcrumbs, process phase cards, contextual process FAQs, back links, and a final CTA with estimate link.
+ * @param {{ params: Promise<{ slug: string }> }} args - Route params containing the service slug
+ * @return {Promise<JSX.Element>} - Rendered process page
+ * SIDE EFFECTS: Calls notFound() for unknown slugs (renders the 404 page).
+ * ASSUMES: params.slug is a potential key in SERVICES_CONFIG.
+ */
 export default async function ServiceProcessPage({
   params,
 }: {

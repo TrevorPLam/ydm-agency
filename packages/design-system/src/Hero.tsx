@@ -1,3 +1,12 @@
+/**
+ * FILE: Hero.tsx
+ * PURPOSE: Renders the top-of-page hero section with CTAs.
+ * ARCHITECTURE: Design-system marketing component combining Badge, Button, Container, and Next.js Link.
+ * KEY RULES: This package is an orphaned/broken fork of packages/ui and is excluded from the pnpm workspace; do not modify logic.
+ * DEPENDS ON: React, next/link, ./Badge, ./Button, ./Container.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import React from "react";
 import Link from "next/link";
 import { Button } from "./Button";
@@ -15,6 +24,13 @@ export interface HeroProps {
   secondaryCtaHref?: string;
 }
 
+/**
+ * WHAT IT DOES: Renders the top-of-page hero section with an optional badge, title, description, and CTAs.
+ * @param {HeroProps} props – Hero text, highlighted title, CTA text/hrefs, and defaults.
+ * @return {React.ReactElement} – The rendered hero section.
+ * SIDE EFFECTS: None.
+ * ASSUMES: CTA buttons render only when their hrefs are provided; default text is used otherwise.
+ */
 export const Hero: React.FC<HeroProps> = ({
   badgeText,
   title,

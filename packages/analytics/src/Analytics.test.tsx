@@ -97,10 +97,9 @@ describe('AnalyticsProvider', () => {
     const acceptButton = screen.getByRole('button', { name: /accept/i });
     await userEvent.click(acceptButton);
 
-    // gtag is not defined yet, so no call should happen.
+    // WHY: gtag is not defined at click time, so the consent update is deferred until the GA script onLoad fires.
     expect(gtag).not.toHaveBeenCalled();
 
-    // Simulate the external gtag.js script finishing load.
     window.gtag = gtag;
     scriptRegistry.onLoadTriggers.get(GA_SRC)?.();
 
@@ -119,10 +118,9 @@ describe('AnalyticsProvider', () => {
     });
     renderWithConsent();
 
-    // gtag not defined yet, so no call should happen on mount.
+    // WHY: gtag is not defined on mount, so no call should happen until the GA script onLoad fires.
     expect(gtag).not.toHaveBeenCalled();
 
-    // Simulate the external gtag.js script finishing load.
     window.gtag = gtag;
     scriptRegistry.onLoadTriggers.get(GA_SRC)?.();
 

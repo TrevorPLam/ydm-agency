@@ -1,3 +1,12 @@
+/**
+ * FILE: audit-schema.test.ts
+ * PURPOSE: Unit test the audit form Zod schema validation rules.
+ * ARCHITECTURE: Vitest suite for audit-schema.ts; exercises field presence, formats, marketingState enum, and honeypot behavior.
+ * KEY RULES: Tests must match the schema's exact error messages; every required and optional field must be covered.
+ * DEPENDS ON: ./audit-schema, vitest
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect } from 'vitest';
 import { auditFormSchema } from './audit-schema';
 
@@ -10,6 +19,14 @@ const validInput = {
   _honeypot: '',
 };
 
+/**
+ * WHAT IT DOES: Finds the first Zod issue whose path starts with the given top-level field name.
+ * @param {Array<{ path: (string | number)[]; message: string }>} issues – Zod validation issues
+ * @param {string} path – Top-level field name to search for
+ * @return {{ path: (string | number)[]; message: string } | undefined} – Matching issue, if any
+ * SIDE EFFECTS: None
+ * ASSUMES: Issues are flattened and `path[0]` identifies the field name.
+ */
 const getIssueForPath = (issues: { path: (string | number)[]; message: string }[], path: string) =>
   issues.find((issue) => issue.path[0] === path);
 

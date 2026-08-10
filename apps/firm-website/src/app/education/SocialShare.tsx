@@ -1,3 +1,11 @@
+/**
+ * FILE: SocialShare.tsx
+ * PURPOSE: Provides a client-side social share component with Twitter, LinkedIn, and copy-link actions, tracking lesson_share and lesson_share_link_copy analytics events.
+ * ARCHITECTURE: Client component using useState for the copied state; builds Twitter/LinkedIn share URLs from the title and url; copies the link to the clipboard and tracks analytics events.
+ * KEY RULES: Must open share links in a new tab with rel="noopener noreferrer"; must track lesson_share on platform clicks and lesson_share_link_copy on copy; must reset the copied state after 2 seconds.
+ * DEPENDS ON: react, lucide-react, @ydm-agency/analytics (trackEvent).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import { useState } from 'react';
@@ -9,6 +17,13 @@ interface SocialShareProps {
   url: string;
 }
 
+/**
+ * WHAT IT DOES: Renders social share buttons (Twitter, LinkedIn, copy link) and tracks share analytics events on interaction.
+ * @param {SocialShareProps} props - Lesson title and canonical URL to share
+ * @return {JSX.Element} - Rendered social share bar
+ * SIDE EFFECTS: Opens share URLs in new tabs; copies the URL to the clipboard on copy; tracks lesson_share and lesson_share_link_copy analytics events.
+ * ASSUMES: navigator.clipboard is available in the user's browser.
+ */
 export default function SocialShare({ title, url }: SocialShareProps) {
   const [copied, setCopied] = useState(false);
 

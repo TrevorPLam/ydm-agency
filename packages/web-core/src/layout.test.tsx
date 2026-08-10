@@ -1,3 +1,12 @@
+/**
+ * FILE: layout.test.tsx
+ * PURPOSE: Verify the RootLayout component renders accessible HTML and supports custom lang/classes.
+ * ARCHITECTURE: web-core component tests using react-dom/server and Vitest.
+ * KEY RULES: html and body className must be applied; skip-to-content link and main content must render.
+ * DEPENDS ON: ./layout
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { RootLayout } from './layout';

@@ -1,3 +1,12 @@
+/**
+ * FILE: formatCurrency.test.ts
+ * PURPOSE: Unit tests for the formatCurrency utility.
+ * ARCHITECTURE: packages/utils / Intl.NumberFormat assertions for USD and additional currency codes.
+ * KEY RULES: Defaults to USD; rounds to two decimal places; JPY formatting has no fractional digits.
+ * DEPENDS ON: vitest and the formatCurrency utility exported from ./formatCurrency.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, expect, it } from 'vitest';
 import { formatCurrency } from './formatCurrency';
 

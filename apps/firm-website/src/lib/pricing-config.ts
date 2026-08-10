@@ -1,3 +1,11 @@
+/**
+ * FILE: pricing-config.ts
+ * PURPOSE: Provides the PRICING_DETAILS record with per-service starting ranges, extras, and minimum budget notes for the /services/pricing page.
+ * ARCHITECTURE: Static typed data module keyed by service slug; titles are derived from SERVICE_LABELS to stay in sync with the canonical labels.
+ * KEY RULES: Slugs must match SERVICE_LABELS keys; ranges must be consistent with faq-utils SERVICE_ANSWERS; content must use the firm-level impersonal voice.
+ * DEPENDS ON: ./service-labels (SERVICE_LABELS).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { SERVICE_LABELS } from './service-labels';
 
 export interface ServicePricingDetails {

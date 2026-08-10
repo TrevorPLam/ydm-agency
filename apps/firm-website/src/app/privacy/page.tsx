@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /privacy privacy policy page describing data collection, usage, third-party services, cookies, user rights, retention, security, and contact details.
+ * ARCHITECTURE: Server component with a static metadata export via constructMetadata; renders long-form legal copy in a prose-styled article.
+ * KEY RULES: Must reflect actual data flows (Vercel, Resend, Calendly, Supabase); must describe the single essential consent cookie and analytics opt-in; must provide a contact email for privacy requests.
+ * DEPENDS ON: @ydm-agency/seo (constructMetadata).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { constructMetadata } from '@ydm-agency/seo';
 
 export const metadata = constructMetadata({
@@ -5,6 +13,12 @@ export const metadata = constructMetadata({
   description: 'How YDM Agency collects, uses, and protects your information.',
 });
 
+/**
+ * WHAT IT DOES: Renders the privacy policy page with sections for introduction, data collection, usage, third-party services, cookies, user rights, retention, security, changes, and contact.
+ * @return {JSX.Element} - Rendered privacy policy page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: The listed third-party services match the actual production stack.
+ */
 export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-background text-text-primary">

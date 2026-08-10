@@ -1,3 +1,12 @@
+/**
+ * FILE: contact-form.spec.ts
+ * PURPOSE: End-to-end Playwright tests for the contact form.
+ * ARCHITECTURE: e2e / critical user flow suite exercising the /contact page and its Server Action.
+ * KEY RULES: Must run against a running local dev server; form labels and success copy must stay in sync with UI.
+ * DEPENDS ON: @playwright/test, the Next.js dev server, the /contact route, and the contact Server Action.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { test, expect } from '@playwright/test';
 
 test.describe('contact form', () => {
@@ -21,7 +30,7 @@ test.describe('contact form', () => {
   test('submits the form and shows a success message', async ({ page }) => {
     await page.goto('/contact');
 
-    // Focus the first field before filling to avoid a WebKit hydration race with react-hook-form.
+    // WHY: Focus the first field before filling to avoid a WebKit hydration race with react-hook-form.
     await page.getByLabel('Full Name *').click();
     await page.getByLabel('Full Name *').fill('E2E Test User');
 

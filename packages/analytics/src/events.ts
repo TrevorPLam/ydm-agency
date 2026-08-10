@@ -35,17 +35,14 @@ export function trackEvent({ eventName, properties = {} }: TrackEventOptions) {
   });
   window.dispatchEvent(event);
 
-  // Google Analytics
   if (typeof window.gtag === 'function') {
     window.gtag('event', eventName, properties);
   }
 
-  // PostHog
   if (typeof window.posthog?.capture === 'function') {
     window.posthog.capture(eventName, properties);
   }
 
-  // Meta Pixel
   if (typeof window.fbq === 'function') {
     window.fbq('trackCustom', eventName, properties);
   }

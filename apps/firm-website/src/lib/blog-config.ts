@@ -1,3 +1,11 @@
+/**
+ * FILE: blog-config.ts
+ * PURPOSE: Provides the BLOG_POSTS data and BlogPost/BlogAuthor/BlogPostSection types for the /blog hub and /blog/[slug] post pages.
+ * ARCHITECTURE: Static typed data module exporting a BlogPost array with sections, authors, pull quotes, and SEO meta; consumed by blog pages and sitemap.
+ * KEY RULES: Slugs must be unique; content must use the firm-level impersonal voice; metaTitle/metaDescription must be SEO-optimized; publishedAt must be ISO date strings.
+ * DEPENDS ON: None (pure data); consumed by apps/firm-website/src/app/blog/** and sitemap.ts.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 export interface BlogPostSection {
   heading: string;
   body: string;

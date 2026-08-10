@@ -1,3 +1,12 @@
+/**
+ * FILE: Button.test.tsx
+ * PURPOSE: Unit tests for the Button component rendering and variants.
+ * ARCHITECTURE: Vitest + Testing Library tests covering variants, asChild, and disabled state.
+ * KEY RULES: This package is an orphaned/broken fork of packages/ui and is excluded from the pnpm workspace; do not modify the duplicated blocks.
+ * DEPENDS ON: vitest, @testing-library/react, @testing-library/jest-dom, ../Button.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import * as matchers from '@testing-library/jest-dom/matchers';

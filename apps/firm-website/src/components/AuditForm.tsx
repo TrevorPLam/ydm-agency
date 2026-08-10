@@ -1,3 +1,11 @@
+/**
+ * FILE: AuditForm.tsx
+ * PURPOSE: Provides the AuditForm client component for the free marketing audit request, with react-hook-form validation, a honeypot, Server Action submission, and accessible success/error states.
+ * ARCHITECTURE: Client component using react-hook-form with a zodResolver backed by auditFormSchema; submits via the submitAudit Server Action; tracks a form_submission analytics event on success; manages idle/loading/success/error status with focus management.
+ * KEY RULES: Must validate via auditFormSchema (Zod); must include a hidden honeypot field for bot detection; must track form_submission on success; must move focus to the success/error region for accessibility.
+ * DEPENDS ON: react, react-hook-form, @hookform/resolvers/zod, @ydm-agency/ui (Button), @ydm-agency/analytics (trackEvent), @/lib/audit-schema, @/app/audit/actions (submitAudit).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -17,6 +25,12 @@ const MARKETING_STATE_OPTIONS = [
   { value: 'unsure', label: 'Not sure where to start' },
 ] as const;
 
+/**
+ * WHAT IT DOES: Renders the audit request form with validated fields (name, email, website, challenge, marketing state) and a honeypot, submitting via the submitAudit Server Action and showing accessible success/error states.
+ * @return {JSX.Element} - Rendered audit form or success confirmation
+ * SIDE EFFECTS: Submits form data via submitAudit Server Action; tracks a form_submission analytics event on success; manages submit status and focus on status change.
+ * ASSUMES: submitAudit returns { success: boolean; error?: string }; trackEvent is consent-gated by the analytics provider.
+ */
 export function AuditForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

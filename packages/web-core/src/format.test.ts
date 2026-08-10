@@ -1,3 +1,12 @@
+/**
+ * FILE: format.test.ts
+ * PURPOSE: Verify date and currency formatting helpers produce expected en-US output.
+ * ARCHITECTURE: web-core unit tests using Vitest.
+ * KEY RULES: formatDate must support ISO strings and Date instances; formatCurrency must default to USD and accept other currencies.
+ * DEPENDS ON: ./format
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect } from 'vitest';
 import { formatDate, formatCurrency } from './format';
 

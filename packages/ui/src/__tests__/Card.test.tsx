@@ -1,3 +1,12 @@
+/**
+ * FILE: Card.test.tsx
+ * PURPOSE: Unit tests for the Card component.
+ * ARCHITECTURE: packages/ui / React Testing Library checks for children, base classes, and className merging.
+ * KEY RULES: Extends jest-dom matchers inline; base class assertions depend on the design system tokens.
+ * DEPENDS ON: React, ../Card, @testing-library/react, @testing-library/jest-dom/matchers, and vitest.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import * as matchers from '@testing-library/jest-dom/matchers';

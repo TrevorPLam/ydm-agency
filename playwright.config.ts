@@ -1,12 +1,13 @@
+/**
+ * FILE: playwright.config.ts
+ * PURPOSE: Configure Playwright E2E tests for the firm-website Next.js app.
+ * ARCHITECTURE: Root-level test configuration that runs against a production build with multi-browser projects and CI-tuned retries/workers.
+ * KEY RULES: Runs against the built app via pnpm build/start; uses a single worker and retries in CI.
+ * DEPENDS ON: @playwright/test, @ydm-agency/firm-website build/start scripts.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { defineConfig, devices } from '@playwright/test';
 
-/**
- * Playwright E2E configuration for the firm-website Next.js app.
- *
- * Runs against a production build (`next build && next start`) to match
- * the deployed environment. Multi-browser projects cover Chromium, Firefox,
- * and WebKit. Retries and workers are tuned for CI.
- */
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,

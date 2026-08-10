@@ -1,3 +1,11 @@
+/**
+ * FILE: ContactForm.tsx
+ * PURPOSE: React contact form component with validation, honeypot bot detection, accessibility features, and analytics integration.
+ * ARCHITECTURE: Client component using react-hook-form with Zod validation, conditional success/error states, and ARIA attributes for accessibility.
+ * KEY RULES: Honeypot field must remain hidden from users; track analytics on successful submission; maintain accessibility compliance; never expose internal errors to users.
+ * DEPENDS ON: react, react-hook-form, @hookform/resolvers/zod, @ydm-agency/ui (Button), @ydm-agency/analytics (trackEvent), ./schemas (contactFormSchema).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import React, { useState } from 'react';
@@ -22,6 +30,13 @@ export interface ContactFormProps {
   defaultValues?: Partial<ContactFormInput>;
 }
 
+/**
+ * WHAT IT DOES: Renders a contact form with validation, error handling, success states, and analytics tracking.
+ * @param {ContactFormProps} props - Form configuration including submit handler, labels, and default values
+ * @return {JSX.Element} - Form component or success message
+ * SIDE EFFECTS: Updates local state for submit status and error messages; calls trackEvent on successful submission.
+ * ASSUMES: onSubmit function returns Promise with success/error structure; analytics consent is handled by trackEvent.
+ */
 export function ContactForm({
   onSubmit,
   submitLabel = 'Send Message',
@@ -47,6 +62,13 @@ export function ContactForm({
     },
   });
 
+  /**
+   * WHAT IT DOES: Handles form submission with loading states, error handling, and analytics tracking.
+   * @param {ContactFormInput} data - Validated form data from react-hook-form
+   * @return {Promise<void>}
+   * SIDE EFFECTS: Updates submitStatus state, calls onSubmit handler, dispatches analytics event on success.
+   * ASSUMES: onSubmit is an async function that returns success/error structure.
+   */
   const handleFormSubmit = async (data: ContactFormInput) => {
     setSubmitStatus('loading');
     setErrorMessage(null);
@@ -56,6 +78,7 @@ export function ContactForm({
 
       if (result.success) {
         setSubmitStatus('success');
+        // WHY: Track successful form submission for analytics with form type and project type
         trackEvent({
           eventName: 'form_submission',
           properties: {
@@ -68,6 +91,7 @@ export function ContactForm({
         setErrorMessage(result.error || 'Submission failed. Please try again.');
       }
     } catch (_error) {
+      // WHY: Catch unexpected errors to prevent form from hanging, show user-friendly error message
       setSubmitStatus('error');
       setErrorMessage('An unexpected error occurred. Please try again.');
     }
@@ -173,7 +197,7 @@ export function ContactForm({
         )}
       </div>
 
-      {/* Honeypot field - hidden from users but visible to bots */}
+      {/* WHY: Honeypot field - hidden from users but visible to bots to detect automated submissions */}
       <input
         type="text"
         {...register('_honeypot')}

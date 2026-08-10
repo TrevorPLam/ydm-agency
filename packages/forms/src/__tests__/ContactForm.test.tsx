@@ -1,3 +1,12 @@
+/**
+ * FILE: ContactForm.test.tsx
+ * PURPOSE: Unit tests for the ContactForm component.
+ * ARCHITECTURE: packages/forms / React Testing Library + jest-axe covering rendering, validation, honeypot, submission, and a11y.
+ * KEY RULES: Uses an onSubmit mock; color-contrast is disabled in the a11y check.
+ * DEPENDS ON: React, @testing-library/react, @testing-library/user-event, vitest, jest-axe, and ../ContactForm.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';

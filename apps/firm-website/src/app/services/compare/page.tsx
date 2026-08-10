@@ -1,9 +1,23 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /services/compare page with scenario cards and a service fit matrix that helps visitors choose the right starting service.
+ * ARCHITECTURE: Server component generating metadata via constructMetadata; renders COMPARISON_SCENARIOS as cards and a fit matrix using getFitLevel and SERVICE_LABELS.
+ * KEY RULES: Must use the firm-level impersonal voice; scenario estimate links must prefill the pricing estimator via ?situation=; final CTA must point to /contact.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Container, Button, Card, Badge), @ydm-agency/seo (constructMetadata), @/lib/service-labels, @/lib/service-comparison-config.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { Container, Button, Card, Badge } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
 import { SERVICE_LABELS } from '@/lib/service-labels';
 import { COMPARISON_SCENARIOS, getFitLevel, type FitLevel } from '@/lib/service-comparison-config';
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for the compare page via constructMetadata.
+ * @return {Promise<Metadata>} - Next.js metadata object for the compare page
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: constructMetadata provides sensible defaults.
+ */
 export async function generateMetadata() {
   return constructMetadata({
     title: 'Compare Services | YDM Agency',
@@ -12,6 +26,13 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * WHAT IT DOES: Renders a single fit-matrix cell, displaying 'Best fit' as an accent Badge, 'Also consider' as secondary text, and '—' as muted text.
+ * @param {{ level: FitLevel }} props - Fit level to render
+ * @return {JSX.Element} - Rendered fit cell
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: level is one of the FitLevel union values.
+ */
 function FitCell({ level }: { level: FitLevel }) {
   if (level === 'Best fit') {
     return <Badge variant="accent">{level}</Badge>;
@@ -24,6 +45,12 @@ function FitCell({ level }: { level: FitLevel }) {
 
 const serviceSlugs = Object.keys(SERVICE_LABELS);
 
+/**
+ * WHAT IT DOES: Renders the service comparison page with scenario cards, a service fit matrix, and a final CTA.
+ * @return {JSX.Element} - Rendered compare page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: COMPARISON_SCENARIOS and SERVICE_LABELS share compatible service slugs.
+ */
 export default function ServiceComparisonPage() {
   return (
     <main className="min-h-screen">

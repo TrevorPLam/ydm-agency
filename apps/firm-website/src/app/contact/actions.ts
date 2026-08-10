@@ -1,3 +1,11 @@
+/**
+ * FILE: actions.ts
+ * PURPOSE: Server action for handling contact form submissions with validation, rate limiting, Supabase storage, and Resend email integration.
+ * ARCHITECTURE: Next.js Server Action that validates input, enforces rate limits, stores leads in Supabase, and sends transactional emails via Resend.
+ * KEY RULES: Fail-closed for Supabase configuration; rate limit 5 submissions/hour per IP; non-blocking storage failure; test seam for E2E with RESEND_API_KEY='test'.
+ * DEPENDS ON: @ydm-agency/forms (validation schema), @ydm-agency/email (Resend integration), @supabase/supabase-js (lead storage), @upstash/ratelimit (rate limiting).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use server';
 
 import { headers } from 'next/headers';
@@ -12,7 +20,6 @@ interface SubmitContactResult {
   error?: string;
 }
 
-// Initialize Supabase client using the names documented in .env.example.
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -20,17 +27,22 @@ const supabase = supabaseUrl && supabaseServiceRoleKey
   ? createClient(supabaseUrl, supabaseServiceRoleKey)
   : null;
 
-// Initialize Upstash rate limiter
 const ratelimit = process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
   ? new Ratelimit({
       redis: Redis.fromEnv(),
-      limiter: Ratelimit.slidingWindow(5, '1h'), // 5 submissions per hour
+      limiter: Ratelimit.slidingWindow(5, '1h'),
       analytics: true,
     })
   : null;
 
+/**
+ * WHAT IT DOES: Validates contact form input, enforces rate limits, stores lead data in Supabase, and sends acknowledgment/notification emails via Resend.
+ * @param {ContactFormInput} data - Form submission data with name, email, projectType, message, and honeypot field
+ * @return {SubmitContactResult} - Success status with optional error message
+ * SIDE EFFECTS: Inserts record into Supabase 'leads' table, sends two emails via Resend API, logs errors to console.
+ * ASSUMES: Supabase client is initialized (fail-closed if not), Upstash Redis is available for rate limiting (degraded if not).
+ */
 export async function submitContact(data: ContactFormInput): Promise<SubmitContactResult> {
-  // Server-side validation
   const parsed = contactFormSchema.safeParse(data);
 
   if (!parsed.success) {
@@ -40,7 +52,6 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
     };
   }
 
-  // Rate limiting
   if (ratelimit) {
     try {
       const headersList = await headers();
@@ -56,11 +67,11 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
       }
     } catch (error) {
       console.error('Rate limiting error:', error);
-      // Continue without rate limiting if there's an error
+      // WHY: Continue without rate limiting if there's an error to prevent service disruption when Redis is unavailable
     }
   }
 
-  // Fail-closed for storage: if Supabase is not configured, do not silently no-op.
+  // WHY: Fail-closed for storage - if Supabase is not configured, do not silently no-op to prevent data loss
   if (!supabase) {
     return {
       success: false,
@@ -70,7 +81,7 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
 
   const { name, email, projectType, message } = parsed.data;
 
-  // Map project type to label for email
+  // WHY: Map project type to human-readable label for email content
   const projectTypeLabels: Record<string, string> = {
     'website': 'Website & brand',
     'traffic-leads': 'Traffic & leads',
@@ -79,7 +90,6 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
 
   const projectTypeLabel = projectType ? projectTypeLabels[projectType] : 'Not specified';
 
-  // Send emails via Resend
   const emailMessage = [
     `Contact form submission from ${name} (${email}).`,
     `Project Type: ${projectTypeLabel}`,
@@ -88,7 +98,7 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
     message,
   ].join('\n');
 
-  // Attempt to store the lead first, but do not block email on storage failure.
+  // WHY: Attempt to store the lead first, but do not block email on storage failure to ensure user receives acknowledgment even if database is down
   let storageError: string | null = null;
   try {
     const { error: supabaseError } = await supabase
@@ -112,7 +122,7 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
     storageError = 'Failed to store your information. Please try again.';
   }
 
-  // Test seam for E2E runs: skip real Resend calls when RESEND_API_KEY is 'test'.
+  // WHY: Test seam for E2E runs - skip real Resend calls when RESEND_API_KEY is 'test' to avoid sending emails during testing
   if (process.env.RESEND_API_KEY === 'test') {
     return { success: true };
   }

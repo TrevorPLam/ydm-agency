@@ -1,3 +1,12 @@
+/**
+ * FILE: tokens.test.ts
+ * PURPOSE: Verify design token color, typography, logo, and contrast invariants.
+ * ARCHITECTURE: branding package unit tests using Vitest with local contrast helpers.
+ * KEY RULES: Tokens must match the canonical YDM dark theme values and meet WCAG AA contrast.
+ * DEPENDS ON: ../tokens
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect } from 'vitest';
 import { tokens } from '../tokens';
 
@@ -61,6 +70,13 @@ describe('tokens', () => {
   it('maintains WCAG AA contrast for default (dark) theme text states', () => {
     const { colors } = tokens;
 
+    /**
+     * WHAT IT DOES: Parses a hex color string into normalized RGB components.
+     * @param {string} hex – a hex color string such as '#0A0A0B'
+     * @return {[number, number, number]} – the red, green, and blue components in the range [0, 1]
+     * SIDE EFFECTS: None
+     * ASSUMES: hex starts with '#' and is six characters long.
+     */
     function hexToRgb(hex: string): [number, number, number] {
       const value = parseInt(hex.slice(1), 16);
       return [(value >> 16) & 255, (value >> 8) & 255, value & 255].map(
@@ -68,6 +84,13 @@ describe('tokens', () => {
       ) as [number, number, number];
     }
 
+    /**
+     * WHAT IT DOES: Computes the relative luminance of an RGB color using the sRGB coefficients.
+     * @param {[number, number, number]} rgb – normalized red, green, and blue components
+     * @return {number} – the relative luminance value
+     * SIDE EFFECTS: None
+     * ASSUMES: Each channel is in the range [0, 1].
+     */
     function luminance(rgb: [number, number, number]): number {
       const [r, g, b] = rgb.map((c) =>
         c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
@@ -75,6 +98,14 @@ describe('tokens', () => {
       return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
 
+    /**
+     * WHAT IT DOES: Calculates the WCAG contrast ratio between two hex colors.
+     * @param {string} fg – the foreground hex color
+     * @param {string} bg – the background hex color
+     * @return {number} – the contrast ratio
+     * SIDE EFFECTS: None
+     * ASSUMES: Both arguments are valid hex color strings.
+     */
     function contrast(fg: string, bg: string): number {
       const l1 = luminance(hexToRgb(fg));
       const l2 = luminance(hexToRgb(bg));
@@ -92,7 +123,7 @@ describe('tokens', () => {
     expect(contrast(colors.accent.hex, colors.surface.hex)).toBeGreaterThanOrEqual(AA);
     expect(contrast(colors.accentHover.hex, colors.background.hex)).toBeGreaterThanOrEqual(AA);
     expect(contrast(colors.accentHover.hex, colors.surface.hex)).toBeGreaterThanOrEqual(AA);
-    // Primary button text uses `text-background`, which is the dark background color.
+    // WHY: Primary button text is rendered with the dark background color against an accent fill.
     expect(contrast(colors.background.hex, colors.accent.hex)).toBeGreaterThanOrEqual(AA);
     expect(contrast(colors.background.hex, colors.accentHover.hex)).toBeGreaterThanOrEqual(AA);
   });

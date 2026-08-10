@@ -1,3 +1,12 @@
+/**
+ * FILE: actions.test.ts
+ * PURPOSE: Unit test the audit form Server Action.
+ * ARCHITECTURE: Vitest test suite in the audit route; mocks Supabase, Upstash rate limiting, Redis, email sending, and Next.js headers.
+ * KEY RULES: Keep mock environment variables consistent with actions.ts; do not rely on real network calls.
+ * DEPENDS ON: ./actions, vitest, @supabase/supabase-js, @upstash/ratelimit, @upstash/redis, @ydm-agency/email, next/headers
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 const insertFn = vi.hoisted(() => vi.fn());

@@ -1,3 +1,11 @@
+/**
+ * FILE: CalendlySection.tsx
+ * PURPOSE: Provides the CalendlySection client component that wraps the lazily-imported CalendlyEmbed with a heading and intro copy.
+ * ARCHITECTURE: Client component using next/dynamic to lazy-load CalendlyEmbed (ssr: false) with a pulse placeholder; renders a heading, description, and the embedded scheduling widget.
+ * KEY RULES: Must lazy-load CalendlyEmbed (ssr: false) to keep the Calendly script out of the initial bundle; must provide a loading placeholder matching the embed height.
+ * DEPENDS ON: next/dynamic, @/components/CalendlyEmbed.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import dynamic from 'next/dynamic';
@@ -12,6 +20,12 @@ const CalendlyEmbed = dynamic(
   }
 );
 
+/**
+ * WHAT IT DOES: Renders a section with a heading, intro copy, and the lazily-loaded Calendly embed.
+ * @return {JSX.Element} - Rendered Calendly scheduling section
+ * SIDE EFFECTS: Triggers dynamic import of CalendlyEmbed on the client.
+ * ASSUMES: CalendlyEmbed handles its own URL configuration and lazy mounting.
+ */
 export function CalendlySection() {
   return (
     <div>

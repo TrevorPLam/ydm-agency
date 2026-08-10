@@ -1,3 +1,11 @@
+/**
+ * FILE: CalendlyEmbed.tsx
+ * PURPOSE: Provides the CalendlyEmbed client component that lazily renders the Calendly inline scheduling widget only when it scrolls into view.
+ * ARCHITECTURE: Client component using an IntersectionObserver to defer mounting the react-calendly InlineWidget until the container is near the viewport, showing a pulse placeholder until then; reads the Calendly URL from NEXT_PUBLIC_CALENDLY_URL.
+ * KEY RULES: Must not render the widget when NEXT_PUBLIC_CALENDLY_URL is unset (returns null); must defer widget mount until intersection to protect initial page performance; must disconnect the observer after first intersection.
+ * DEPENDS ON: react, react-calendly (InlineWidget), NEXT_PUBLIC_CALENDLY_URL env var.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -5,6 +13,12 @@ import { InlineWidget } from 'react-calendly';
 
 const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL;
 
+/**
+ * WHAT IT DOES: Renders the Calendly inline widget lazily once the container scrolls into view, or null when no Calendly URL is configured.
+ * @return {JSX.Element | null} - Calendly inline widget, a pulse placeholder, or null
+ * SIDE EFFECTS: Creates and disconnects an IntersectionObserver; sets visible state on intersection.
+ * ASSUMES: NEXT_PUBLIC_CALENDLY_URL, when set, is a valid Calendly scheduling URL.
+ */
 export function CalendlyEmbed() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);

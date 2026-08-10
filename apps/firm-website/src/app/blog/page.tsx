@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /blog hub page with an editorial header, a featured post, and a regular-posts grid using BLOG_POSTS.
+ * ARCHITECTURE: Server component with a static metadata export via constructMetadata; selects the featured post (or first post) and renders the rest in an editorial grid with category-colored badges.
+ * KEY RULES: Must use the firm-level impersonal voice; post cards must link to /blog/[slug]; category colors must fall back to the accent palette for unknown categories.
+ * DEPENDS ON: next/link, @ydm-agency/ui (Container, Badge, Button), @ydm-agency/seo (constructMetadata), lucide-react, @/lib/blog-config.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import { Container, Badge, Button } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
 import { Calendar, Clock, User, ArrowRight } from 'lucide-react';
@@ -9,6 +17,13 @@ export const metadata = constructMetadata({
   description: 'Opinion, news, and market perspective from YDM Agency on web design, search, and marketing.',
 });
 
+/**
+ * WHAT IT DOES: Returns Tailwind classes for a category badge color, mapping known categories (Opinion, Analysis, News, Essay) to distinct palettes and falling back to the accent palette.
+ * @param {string} category - Blog post category
+ * @return {string} - Tailwind class string for the badge color
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: None.
+ */
 function getCategoryColor(category: string): string {
   switch (category) {
     case 'Opinion':
@@ -24,6 +39,12 @@ function getCategoryColor(category: string): string {
   }
 }
 
+/**
+ * WHAT IT DOES: Renders the blog hub page with an editorial header, a featured post, and a regular-posts grid.
+ * @return {JSX.Element} - Rendered blog hub page
+ * SIDE EFFECTS: None (server-side rendering).
+ * ASSUMES: BLOG_POSTS is non-empty; the featured post is the one flagged `featured` or the first post.
+ */
 export default function BlogPage() {
   const featuredPost = BLOG_POSTS.find(post => post.featured) || BLOG_POSTS[0];
   const regularPosts = BLOG_POSTS.filter(post => post.slug !== featuredPost.slug);

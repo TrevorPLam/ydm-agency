@@ -1,3 +1,11 @@
+/**
+ * FILE: Hero.tsx
+ * PURPOSE: Provides the Hero component for prominent above-the-fold headline sections with optional badge, highlighted title, and primary/secondary CTAs.
+ * ARCHITECTURE: Presentational server component composing Badge, Button (asChild with Link), and Container; renders a centered headline layout with display font.
+ * KEY RULES: Must render CTAs only when their href is provided; must apply the Clash Display font to the h1; must highlight the optional highlightedTitle segment in accent color.
+ * DEPENDS ON: react, next/link, ./Button, ./Badge, ./Container.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import React from "react";
 import Link from "next/link";
 import { Button } from "./Button";
@@ -15,6 +23,13 @@ export interface HeroProps {
   secondaryCtaHref?: string;
 }
 
+/**
+ * WHAT IT DOES: Renders a centered hero section with optional badge, headline (with optional accent-highlighted segment), description, and up to two CTA buttons.
+ * @param {HeroProps} props - Badge text, title, highlighted title, description, and optional primary/secondary CTA text and hrefs
+ * @return {JSX.Element} - Rendered hero section
+ * SIDE EFFECTS: None (pure rendering component).
+ * ASSUMES: CTA hrefs point to valid internal routes when provided.
+ */
 export const Hero: React.FC<HeroProps> = ({
   badgeText,
   title,

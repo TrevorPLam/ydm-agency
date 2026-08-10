@@ -1,3 +1,12 @@
+/**
+ * FILE: schemas.test.ts
+ * PURPOSE: Unit tests for the shared contact form Zod schema.
+ * ARCHITECTURE: packages/forms / Zod validation suite covering valid, invalid, and edge inputs.
+ * KEY RULES: Uses safeParse; asserts required, email, length, honeypot, and enum rules.
+ * DEPENDS ON: vitest and the contactFormSchema exported from ../schemas.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { describe, it, expect } from 'vitest';
 import { contactFormSchema } from '../schemas';
 

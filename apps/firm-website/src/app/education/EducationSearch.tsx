@@ -1,3 +1,11 @@
+/**
+ * FILE: EducationSearch.tsx
+ * PURPOSE: Provides a client-side education search box that calls the searchLessons Server Action and renders matching lessons as cards.
+ * ARCHITECTURE: Client component using useState/useTransition; debounced via startTransition; tracks an education_search analytics event on first search; renders results via the searchLessons Server Action.
+ * KEY RULES: Must only track the education_search event once per mount (hasSearched guard); must use startTransition for non-blocking search; must link results to /education/[topic]/[slug].
+ * DEPENDS ON: react, next/link, lucide-react, @ydm-agency/ui (Card, Badge), @ydm-agency/analytics (trackEvent), @/lib/education-config, ./search-actions (searchLessons).
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 'use client';
 
 import { Search, GraduationCap } from 'lucide-react';
@@ -13,6 +21,13 @@ interface EducationSearchProps {
   compact?: boolean;
 }
 
+/**
+ * WHAT IT DOES: Renders an education search input and (when showResults is true) a list of matching lesson cards, calling the searchLessons Server Action via useTransition.
+ * @param {EducationSearchProps} props - showResults (default true) and compact (default false) display options
+ * @return {JSX.Element} - Rendered search box and optional results list
+ * SIDE EFFECTS: Calls searchLessons Server Action on query change; tracks an education_search analytics event on first search.
+ * ASSUMES: searchLessons returns EducationLesson[] matching the query.
+ */
 export default function EducationSearch({ showResults = true, compact = false }: EducationSearchProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredLessons, setFilteredLessons] = useState(EDUCATION_LESSONS);

@@ -1,3 +1,12 @@
+/**
+ * FILE: Card.test.tsx
+ * PURPOSE: Unit tests for the Card component rendering and class merging.
+ * ARCHITECTURE: Vitest + Testing Library tests asserting base classes and custom className merge.
+ * KEY RULES: This package is an orphaned/broken fork of packages/ui and is excluded from the pnpm workspace; do not modify logic.
+ * DEPENDS ON: vitest, @testing-library/react, @testing-library/jest-dom, ../Card.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
+
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import * as matchers from '@testing-library/jest-dom/matchers';

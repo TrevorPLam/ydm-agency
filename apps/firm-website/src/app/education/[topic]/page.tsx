@@ -1,3 +1,11 @@
+/**
+ * FILE: page.tsx
+ * PURPOSE: Renders the /education/[topic] topic listing page with breadcrumb, header, search, lesson list (with filter via TopicContent), and a CTA.
+ * ARCHITECTURE: Server component with generateStaticParams and generateMetadata; resolves the topic via getTopicBySlug, filters EDUCATION_LESSONS by normalized topic name, and emits an EducationAnalytics topic_view event.
+ * KEY RULES: Must 404 for unknown topics; must use the firm-level impersonal voice; final CTA must point to /contact.
+ * DEPENDS ON: next/link, next/navigation, @ydm-agency/ui (Container, Card, Badge, Button), @ydm-agency/seo (constructMetadata), @/lib/education-config, lucide-react, ./TopicContent, ../EducationAnalytics, ../EducationSearch.
+ * LAST UPDATED: 2026-08-09 Add code commentary headers
+ */
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container, Card, Badge, Button } from '@ydm-agency/ui';
@@ -8,10 +16,23 @@ import TopicContent from './TopicContent';
 import EducationAnalytics from '../EducationAnalytics';
 import EducationSearch from '../EducationSearch';
 
+/**
+ * WHAT IT DOES: Pre-generates static params for each education topic slug at build time.
+ * @return {Promise<{ topic: string }[]>} - Array of topic params for static generation
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: EDUCATION_TOPICS entries have unique slugs.
+ */
 export async function generateStaticParams() {
   return EDUCATION_TOPICS.map((topic) => ({ topic: topic.slug }));
 }
 
+/**
+ * WHAT IT DOES: Generates the SEO metadata for a topic listing page from the topic's name and description.
+ * @param {{ params: Promise<{ topic: string }> }} args - Route params containing the topic slug
+ * @return {Promise<Metadata>} - Next.js metadata object, or empty object for unknown topics
+ * SIDE EFFECTS: None (pure async function).
+ * ASSUMES: params.topic is a potential slug in EDUCATION_TOPICS.
+ */
 export async function generateMetadata({ params }: { params: Promise<{ topic: string }> }) {
   const { topic } = await params;
   const topicData = getTopicBySlug(topic);
@@ -26,16 +47,28 @@ export async function generateMetadata({ params }: { params: Promise<{ topic: st
   });
 }
 
-// Helper function to normalize topic names for URL matching
+/**
+ * WHAT IT DOES: Normalizes an education topic name (e.g., "SEO") into a URL-safe slug (e.g., "seo") by lowercasing and replacing whitespace with hyphens.
+ * @param {string} topicName - Display topic name to normalize
+ * @return {string} - URL-safe topic slug
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: topic names map deterministically to slugs via lowercasing and hyphenation.
+ */
 function normalizeTopicName(topicName: string): string {
   return topicName.toLowerCase().replace(/\s+/g, '-');
 }
 
+/**
+ * WHAT IT DOES: Renders the topic listing page for a given topic slug, including breadcrumb, header, search, lesson list (via TopicContent), and a CTA.
+ * @param {{ params: Promise<{ topic: string }> }} args - Route params containing the topic slug
+ * @return {Promise<JSX.Element>} - Rendered topic listing page
+ * SIDE EFFECTS: Calls notFound() for unknown topics; emits an EducationAnalytics topic_view event.
+ * ASSUMES: params.topic is a potential slug in EDUCATION_TOPICS; lessons are matched by normalized topic name.
+ */
 export default async function EducationTopicPage({ params }: { params: Promise<{ topic: string }> }) {
   const { topic } = await params;
   const topicData = getTopicBySlug(topic);
   
-  // Get lessons by matching the topic name (case-insensitive)
   const lessons = topicData 
     ? EDUCATION_LESSONS.filter((lesson) => 
         normalizeTopicName(lesson.topic) === topic
