@@ -162,7 +162,7 @@ export default async function ServiceSpokePage({ params }: { params: Promise<{ s
           </ul>
           <p className="mt-8 max-w-3xl text-text-secondary">
             <Link
-              href="/services/how-it-works"
+              href="/services/process"
               className="text-accent underline underline-offset-4 hover:text-accent-hover"
             >
               All eight services work as one system – see how they connect.
