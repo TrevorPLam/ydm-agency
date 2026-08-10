@@ -51,7 +51,7 @@ describe('events', () => {
 
       trackEvent({ eventName: 'test_event', properties: { foo: 'bar' } });
 
-      // @ts-expect-error - restoring window
+      // Restore window for other tests
       global.window = originalWindow;
     });
 
