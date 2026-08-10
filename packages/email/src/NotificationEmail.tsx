@@ -3,16 +3,17 @@
  * PURPOSE: React Email template for internal notification email sent to the team when a contact form is submitted.
  * ARCHITECTURE: React Email component with structured sections for contact details, matching agency dark theme design system.
  * KEY RULES: Include all relevant contact information; conditionally show project type; maintain consistent branding; format message content clearly.
- * DEPENDS ON: @react-email/components.
+ * DEPENDS ON: react-email.
  * LAST UPDATED: 2026-08-09 Add code commentary headers
  */
-import { Html, Body, Container, Text, Heading, Section } from '@react-email/components';
+import { Html, Body, Container, Text, Heading, Section } from 'react-email';
 
 interface NotificationEmailProps {
   name: string;
   email: string;
   projectType?: string;
   message: string;
+  type?: 'contact' | 'audit';
 }
 
 /**
@@ -22,13 +23,15 @@ interface NotificationEmailProps {
  * SIDE EFFECTS: None (pure rendering component).
  * ASSUMES: Rendered in server context for email sending; data is validated by caller; project type is optional.
  */
-export function NotificationEmail({ name, email, projectType, message }: NotificationEmailProps) {
+export function NotificationEmail({ name, email, projectType, message, type = 'contact' }: NotificationEmailProps) {
+  const headingText = type === 'audit' ? 'New Audit' : 'New Contact';
+  
   return (
     <Html>
       <Body style={main}>
         <Container style={container}>
           <Heading style={heading}>
-            New Contact: {name} — {projectType ?? 'General'}
+            {headingText}: {name} — {projectType ?? 'General'}
           </Heading>
 
           <Section style={section}>

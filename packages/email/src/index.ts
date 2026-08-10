@@ -3,11 +3,11 @@
  * PURPOSE: Email sending service using Resend API for transactional emails (acknowledgment to user, notification to internal team).
  * ARCHITECTURE: Async function that renders React Email templates, sends via Resend API in parallel, and handles partial failures gracefully.
  * KEY RULES: Fail-closed if RESEND_API_KEY not configured; send both emails in parallel; handle partial failures; never expose email errors to end users.
- * DEPENDS ON: resend, @react-email/render, ./AcknowledgmentEmail, ./NotificationEmail.
+ * DEPENDS ON: resend, react-email, ./AcknowledgmentEmail, ./NotificationEmail.
  * LAST UPDATED: 2026-08-09 Add code commentary headers
  */
 import { Resend, type CreateEmailResponse } from 'resend';
-import { render } from '@react-email/render';
+import { render } from 'react-email';
 import { AcknowledgmentEmail } from './AcknowledgmentEmail';
 import { NotificationEmail } from './NotificationEmail';
 
@@ -16,6 +16,7 @@ export interface SendEmailOptions {
   email: string;
   projectType?: string;
   message: string;
+  type?: 'contact' | 'audit';
 }
 
 export interface SendEmailResult {
@@ -52,11 +53,13 @@ export async function sendEmail(options: SendEmailOptions): Promise<SendEmailRes
         email: options.email,
         projectType: options.projectType,
         message: options.message,
+        type: options.type,
       })
     );
 
     const ackSubject = 'Got your message — YDM Agency';
-    const notifSubject = `New Contact: ${options.name} — ${options.projectType ?? 'General'}`;
+    const headingText = options.type === 'audit' ? 'New Audit' : 'New Contact';
+    const notifSubject = `${headingText}: ${options.name} — ${options.projectType ?? 'General'}`;
 
     // WHY: Send both emails in parallel for faster delivery, use allSettled to handle partial failures
     const results = await Promise.allSettled<CreateEmailResponse>([

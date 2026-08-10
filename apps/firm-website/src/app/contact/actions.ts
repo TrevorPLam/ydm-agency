@@ -132,6 +132,7 @@ export async function submitContact(data: ContactFormInput): Promise<SubmitConta
     email,
     projectType: projectTypeLabel,
     message: emailMessage,
+    type: 'contact',
   });
 
   if (result.success) {

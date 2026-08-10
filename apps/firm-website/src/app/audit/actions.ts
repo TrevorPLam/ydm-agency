@@ -133,6 +133,7 @@ export async function submitAudit(data: AuditFormInput): Promise<SubmitAuditResu
     email,
     projectType: 'Free Marketing Audit',
     message,
+    type: 'audit',
   });
 
   if (result.success) {
