@@ -16,6 +16,7 @@ import TableOfContents from '../../TableOfContents';
 import EducationAnalytics from '../../EducationAnalytics';
 import SocialShare from '../../SocialShare';
 import PrintButton from '../../PrintButton';
+import { getSafetyBadgeVariant, getSafetyLabel } from '@/lib/education/safety-helpers';
 import '../../print.css';
 
 /**
@@ -97,46 +98,6 @@ export async function generateMetadata({ params }: { params: Promise<{ topic: st
     title: lesson.metaTitle,
     description: lesson.metaDescription,
   });
-}
-
-/**
- * WHAT IT DOES: Maps a lesson safety classification to a Badge variant for display.
- * @param {EducationLesson['safety']} safety - Lesson safety classification
- * @return {'default' | 'accent' | 'outline'} - Badge variant
- * SIDE EFFECTS: None (pure function).
- * ASSUMES: safety is one of the configured safety values.
- */
-function getSafetyBadgeVariant(safety: EducationLesson['safety']): 'default' | 'accent' | 'outline' {
-  switch (safety) {
-    case 'public-domain':
-      return 'accent';
-    case 'cite-creator':
-      return 'outline';
-    case 'extra-care':
-      return 'default';
-    default:
-      return 'default';
-  }
-}
-
-/**
- * WHAT IT DOES: Maps a lesson safety classification to a human-readable label for display.
- * @param {EducationLesson['safety']} safety - Lesson safety classification
- * @return {string} - Display label
- * SIDE EFFECTS: None (pure function).
- * ASSUMES: safety is one of the configured safety values.
- */
-function getSafetyLabel(safety: EducationLesson['safety']): string {
-  switch (safety) {
-    case 'public-domain':
-      return 'Public Domain';
-    case 'cite-creator':
-      return 'Cite Creator';
-    case 'extra-care':
-      return 'Use Care';
-    default:
-      return 'Use Care';
-  }
 }
 
 /**
