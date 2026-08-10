@@ -1,19 +1,17 @@
 /**
  * FILE: Hero.tsx
- * PURPOSE: Provides the Hero component for prominent above-the-fold headline sections with optional badge, highlighted title, and primary/secondary CTAs.
- * ARCHITECTURE: Presentational server component composing Badge, Button (asChild with Link), and Container; renders a centered headline layout with display font.
+ * PURPOSE: Provides the Hero component for prominent above-the-fold headline sections with highlighted title and primary/secondary CTAs.
+ * ARCHITECTURE: Presentational server component composing Button (asChild with Link) and Container; renders a centered headline layout with display font.
  * KEY RULES: Must render CTAs only when their href is provided; must apply the Clash Display font to the h1; must highlight the optional highlightedTitle segment in accent color.
- * DEPENDS ON: react, next/link, ./Button, ./Badge, ./Container.
+ * DEPENDS ON: react, next/link, ./Button, ./Container.
  * LAST UPDATED: 2026-08-09 Add code commentary headers
  */
 import React from "react";
 import Link from "next/link";
 import { Button } from "./Button";
-import { Badge } from "./Badge";
 import { Container } from "./Container";
 
 export interface HeroProps {
-  badgeText?: string;
   title: string;
   highlightedTitle?: string;
   description: string;
@@ -24,14 +22,13 @@ export interface HeroProps {
 }
 
 /**
- * WHAT IT DOES: Renders a centered hero section with optional badge, headline (with optional accent-highlighted segment), description, and up to two CTA buttons.
- * @param {HeroProps} props - Badge text, title, highlighted title, description, and optional primary/secondary CTA text and hrefs
+ * WHAT IT DOES: Renders a centered hero section with headline (with optional accent-highlighted segment), description, and up to two CTA buttons.
+ * @param {HeroProps} props - Title, highlighted title, description, and optional primary/secondary CTA text and hrefs
  * @return {JSX.Element} - Rendered hero section
  * SIDE EFFECTS: None (pure rendering component).
  * ASSUMES: CTA hrefs point to valid internal routes when provided.
  */
 export const Hero: React.FC<HeroProps> = ({
-  badgeText,
   title,
   highlightedTitle,
   description,
@@ -43,11 +40,6 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section className="relative overflow-hidden pt-24 pb-20 md:pt-32 md:pb-28 bg-background text-text-primary">
       <Container className="relative z-10 text-center">
-        {badgeText && (
-          <div className="flex justify-center mb-6">
-            <Badge variant="accent">{badgeText}</Badge>
-          </div>
-        )}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight max-w-4xl mx-auto leading-[1.15] font-display">
           {title}{" "}
           {highlightedTitle && (
