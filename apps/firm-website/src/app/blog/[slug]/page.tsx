@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation';
 import { Container, Badge, Button } from '@ydm-agency/ui';
 import { constructMetadata } from '@ydm-agency/seo';
 import { BLOG_POSTS, type BlogPost } from '@/lib/blog-config';
-import { Calendar, Clock, User, ArrowLeft, Share2 } from 'lucide-react';
+import { Calendar, Clock, User, ArrowLeft } from 'lucide-react';
 
 /**
  * WHAT IT DOES: Pre-generates static params for each blog post slug in BLOG_POSTS at build time.
@@ -54,13 +54,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 function getCategoryColor(category: string): string {
   switch (category) {
     case 'Opinion':
-      return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
+      return 'bg-accent/10 text-accent border-accent/20';
     case 'Analysis':
-      return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+      return 'bg-error/10 text-error border-error/20';
     case 'News':
-      return 'bg-green-500/10 text-green-500 border-green-500/20';
+      return 'bg-success/10 text-success border-success/20';
     case 'Essay':
-      return 'bg-purple-500/10 text-purple-500 border-purple-500/20';
+      return 'bg-text-secondary/10 text-text-secondary border-text-secondary/20';
     default:
       return 'bg-accent/10 text-accent border-accent/20';
   }
@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {/* Pull Quote if exists */}
             {post.pullQuote && (
-              <blockquote className="border-l-4 border-amber-500 pl-8 my-12 py-6 bg-amber-500/5">
+              <blockquote className="border-l-4 border-accent pl-8 my-12 py-6 bg-accent/5">
                 <p className="text-2xl md:text-3xl font-display font-medium text-text-primary italic leading-relaxed">
                   {post.pullQuote}
                 </p>
@@ -182,12 +182,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <span>Back to Blog</span>
                 </Link>
                 
-                <div className="flex items-center gap-4">
-                  <Button variant="ghost" size="sm" className="gap-2">
-                    <Share2 className="w-4 h-4" />
-                    Share
-                  </Button>
-                </div>
+
               </div>
 
               {/* Author Bio */}

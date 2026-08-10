@@ -27,13 +27,13 @@ export const metadata = constructMetadata({
 function getCategoryColor(category: string): string {
   switch (category) {
     case 'Opinion':
-      return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
+      return 'bg-accent/10 text-accent border-accent/20';
     case 'Analysis':
-      return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+      return 'bg-error/10 text-error border-error/20';
     case 'News':
-      return 'bg-green-500/10 text-green-500 border-green-500/20';
+      return 'bg-success/10 text-success border-success/20';
     case 'Essay':
-      return 'bg-purple-500/10 text-purple-500 border-purple-500/20';
+      return 'bg-text-secondary/10 text-text-secondary border-text-secondary/20';
     default:
       return 'bg-accent/10 text-accent border-accent/20';
   }
@@ -100,7 +100,7 @@ export default function BlogPage() {
 
                   {/* Pull Quote if exists */}
                   {featuredPost.pullQuote && (
-                    <blockquote className="border-l-4 border-amber-500 pl-6 my-8 py-4 bg-amber-500/5">
+                    <blockquote className="border-l-4 border-accent pl-6 my-8 py-4 bg-accent/5">
                       <p className="text-xl md:text-2xl font-display font-medium text-text-primary italic leading-relaxed">
                         {featuredPost.pullQuote}
                       </p>
