@@ -38,15 +38,9 @@ export default function AboutPage() {
           </p>
         </section>
 
-        {/* Founder Photo Block */}
-        <section className="mb-24 flex flex-col items-center gap-12 md:flex-row">
-          <div className="relative flex aspect-square w-full max-w-md items-center justify-center rounded-xl border border-border bg-surface">
-            <div className="text-center">
-              <div className="mb-4 text-6xl">👤</div>
-              <p className="text-sm text-text-secondary">Founder Photo Placeholder</p>
-            </div>
-          </div>
-          <div className="flex-1">
+        {/* Founder Story */}
+        <section className="mb-24">
+          <div className="max-w-3xl">
             <h2 className="mb-4 font-display text-2xl font-bold md:text-3xl">
               The Person Behind the Work
             </h2>
