@@ -52,7 +52,6 @@ export default defineConfig({
       '@ydm-agency/email': path.resolve(__dirname, './packages/email/src'),
       '@ydm-agency/seo': path.resolve(__dirname, './packages/seo/src'),
       '@ydm-agency/config': path.resolve(__dirname, './packages/config'),
-      '@ydm-agency/branding': path.resolve(__dirname, './packages/branding/src'),
       '@ydm-agency/firm-website': path.resolve(__dirname, './apps/firm-website/src'),
       '@ydm-agency/test-utils': path.resolve(__dirname, './packages/test-utils/src'),
       '@': path.resolve(__dirname, './apps/firm-website/src'),
