@@ -35,6 +35,9 @@ module.exports = {
         display: ['var(--font-display)', ...fontFamily.serif],
         sans: ['var(--font-sans)', ...fontFamily.sans],
       },
+      boxShadow: {
+        glow: '0 0 20px color-mix(in srgb, var(--color-accent) 30%, transparent)',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],

@@ -12,7 +12,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import { Button } from './Button';
+import { Button, buttonVariants } from './Button';
 
 expect.extend(toHaveNoViolations);
 
@@ -97,6 +97,14 @@ describe('Button', () => {
     render(<Button className="custom-extra-class">Styled</Button>);
     const button = screen.getByRole('button', { name: 'Styled' });
     expect(button).toHaveClass('custom-extra-class');
+  });
+
+  it('uses the accent token for the focus ring and hover shadow', () => {
+    const primaryClasses = buttonVariants({ variant: 'primary' });
+    expect(primaryClasses).toMatch(/focus-visible:ring-accent/);
+    expect(primaryClasses).toMatch(/hover:shadow-glow/);
+    expect(primaryClasses).not.toMatch(/focus-visible:ring-text-primary/);
+    expect(primaryClasses).not.toMatch(/rgba\(59,130,246/);
   });
 
   it('forwards refs and extra HTML attributes', () => {

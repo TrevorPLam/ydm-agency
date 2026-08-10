@@ -18,11 +18,11 @@ import { cn } from '@ydm-agency/utils';
  * ASSUMES: Tailwind design-system tokens (accent, background, border, surface, text-primary, text-secondary) are configured.
  */
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-text-primary disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-accent disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        primary: 'bg-accent text-background hover:bg-accent-hover hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]',
+        primary: 'bg-accent text-background hover:bg-accent-hover hover:shadow-glow',
         secondary: 'border border-border text-text-primary hover:bg-surface hover:border-accent',
         ghost: 'text-text-secondary hover:text-text-primary hover:bg-surface',
       },
