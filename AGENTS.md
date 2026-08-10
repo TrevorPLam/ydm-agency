@@ -21,7 +21,7 @@ apps/
 
 packages/
   ui/                # shadcn/ui components (Button, Card, Header, Footer, CookieConsent, etc.)
-  forms/             # ContactForm, LeadForm + Zod schemas
+  forms/             # ContactForm and Zod schemas
   analytics/         # AnalyticsProvider (GA4, PostHog, Meta Pixel), trackEvent
   seo/               # constructMetadata(), OrganizationJsonLd, ServiceJsonLd, FaqPageJsonLd
   email/             # React Email templates, Resend sending

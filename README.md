@@ -19,7 +19,7 @@ ydm-agency/
 │   └── firm-website/         # Primary agency site (ydm-agency.com)
 ├── packages/
 │   ├── ui/                   # Shared React components (Hero, Header, Footer, Card, Button, Badge, Container, CookieConsent)
-│   ├── forms/                # Zod schemas, ContactForm, LeadForm (@ydm-agency/forms)
+│   ├── forms/                # Zod schemas and ContactForm (@ydm-agency/forms)
 │   ├── seo/                  # OpenGraph generators, JSON-LD Schema.org, metadata helpers (@ydm-agency/seo)
 │   ├── analytics/            # Unified GA4, PostHog, Meta Pixel event tracking (@ydm-agency/analytics)
 │   ├── email/                # React Email templates, Resend sending (@ydm-agency/email)
@@ -51,9 +51,7 @@ Shared React component library built on shadcn/ui patterns:
 ### `@ydm-agency/forms`
 Form components and Zod validation schemas:
 - `<ContactForm />` - Contact form with honeypot bot detection and Zod validation
-- `<LeadForm />` - Lead capture form with instant validation & analytics tracking
 - `contactFormSchema` - Zod schema for contact submissions
-- `leadCaptureSchema` - Zod schema for lead capture
 
 ### `@ydm-agency/seo`
 SEO meta tag generation and Schema.org structured data:
