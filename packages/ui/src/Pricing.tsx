@@ -47,14 +47,14 @@ export const Pricing: React.FC<PricingProps> = ({
   onSelectPlan,
 }) => {
   return (
-    <section id="pricing" className="py-20 bg-slate-950 text-white border-t border-slate-800">
+    <section id="pricing" className="py-20 bg-background text-text-primary border-t border-border">
       <Container>
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
             {title}
           </h2>
           {subtitle && (
-            <p className="mt-4 text-lg text-slate-400">
+            <p className="mt-4 text-lg text-text-secondary">
               {subtitle}
             </p>
           )}
@@ -64,10 +64,10 @@ export const Pricing: React.FC<PricingProps> = ({
           {plans.map((plan, idx) => (
             <Card
               key={idx}
-              className={`relative flex flex-col p-8 bg-slate-900 border ${
+              className={`relative flex flex-col p-8 bg-surface border ${
                 plan.popular
-                  ? 'border-blue-500 ring-2 ring-blue-500/20 shadow-2xl scale-[1.02]'
-                  : 'border-slate-800'
+                  ? 'border-accent ring-2 ring-accent/20 shadow-2xl scale-[1.02]'
+                  : 'border-border'
               }`}
             >
               {plan.popular && (
@@ -77,23 +77,23 @@ export const Pricing: React.FC<PricingProps> = ({
               )}
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
-                <p className="text-sm text-slate-400">{plan.description}</p>
+                <h3 className="text-xl font-bold text-text-primary mb-2">{plan.name}</h3>
+                <p className="text-sm text-text-secondary">{plan.description}</p>
               </div>
 
               <div className="flex items-baseline mb-6">
-                <span className="text-4xl font-extrabold text-white tracking-tight">
+                <span className="text-4xl font-extrabold text-text-primary tracking-tight">
                   {plan.price}
                 </span>
                 {plan.period && (
-                  <span className="ml-1 text-slate-400 text-sm">{plan.period}</span>
+                  <span className="ml-1 text-text-secondary text-sm">{plan.period}</span>
                 )}
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1 text-sm text-slate-300">
+              <ul className="space-y-3 mb-8 flex-1 text-sm text-text-secondary">
                 {plan.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-2">
-                    <span className="text-blue-400 font-bold">✓</span>
+                    <span className="text-accent font-bold">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -103,9 +103,7 @@ export const Pricing: React.FC<PricingProps> = ({
                 <Button
                   asChild
                   variant={plan.popular ? 'primary' : 'secondary'}
-                  className={`w-full py-2.5 font-semibold ${
-                    !plan.popular && 'bg-slate-800 hover:bg-slate-700 text-white'
-                  }`}
+                  className="w-full py-2.5 font-semibold"
                 >
                   <Link href={plan.ctaHref}>
                     {plan.ctaText || 'Get Started'}
@@ -115,9 +113,7 @@ export const Pricing: React.FC<PricingProps> = ({
                 <Button
                   variant={plan.popular ? 'primary' : 'secondary'}
                   onClick={() => onSelectPlan && onSelectPlan(plan.name)}
-                  className={`w-full py-2.5 font-semibold ${
-                    !plan.popular && 'bg-slate-800 hover:bg-slate-700 text-white'
-                  }`}
+                  className="w-full py-2.5 font-semibold"
                 >
                   {plan.ctaText || 'Get Started'}
                 </Button>
