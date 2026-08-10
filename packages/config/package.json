@@ -4,7 +4,6 @@
   "private": true,
   "files": [
     "eslint-next.js",
-    "eslint-react.js",
     "eslint-ui.config.mjs",
     "nextjs.js",
     "prettier.js",
