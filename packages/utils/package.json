@@ -7,9 +7,9 @@
   "scripts": {
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --coverage --passWithNoTests packages/utils/src --coverage.include \"packages/utils/src/**/*.{ts,tsx}\" --coverage.reportsDirectory packages/utils/coverage",
-    "test:watch": "vitest packages/utils/src",
-    "test:coverage": "vitest run --coverage --passWithNoTests packages/utils/src --coverage.include \"packages/utils/src/**/*.{ts,tsx}\" --coverage.reportsDirectory packages/utils/coverage"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "clsx": "catalog:",
