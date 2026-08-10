@@ -194,7 +194,7 @@ export default async function EducationLessonPage({ params }: { params: Promise<
         </aside>
 
         {/* Main Content */}
-        <div className="flex-1 min-w-0">
+        <article className="flex-1 min-w-0">
           {/* Hero */}
           <section className="py-12 md:py-16">
             <Container>
@@ -368,7 +368,7 @@ export default async function EducationLessonPage({ params }: { params: Promise<
               </div>
             </Container>
           </section>
-        </div>
+        </article>
 
         {/* Right Sidebar - Table of Contents */}
         <TableOfContents sections={lesson.sections} />
