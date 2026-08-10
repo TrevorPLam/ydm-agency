@@ -43,6 +43,7 @@ export function AuditForm() {
     formState: { errors, isSubmitting },
   } = useForm<AuditFormInput>({
     resolver: zodResolver(auditFormSchema),
+    shouldFocusError: true,
     defaultValues: {
       name: '',
       email: '',
@@ -94,7 +95,8 @@ export function AuditForm() {
         tabIndex={-1}
         role="status"
         aria-live="polite"
-        className="bg-surface border border-border rounded-xl p-8 text-center"
+        aria-atomic="true"
+        className="bg-surface border border-border rounded-xl p-8 text-center focus:outline-none focus:ring-2 focus:ring-accent"
       >
         <div className="w-12 h-12 bg-accent/20 text-accent rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">
           ✓
@@ -222,6 +224,7 @@ export function AuditForm() {
         className="hidden"
         tabIndex={-1}
         autoComplete="off"
+        role="presentation"
         aria-hidden="true"
       />
 
@@ -229,9 +232,10 @@ export function AuditForm() {
         <div
           ref={errorRef}
           tabIndex={-1}
-          className="bg-error/10 border border-error/20 rounded-lg p-4"
+          className="bg-error/10 border border-error/20 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-error"
           role="alert"
           aria-live="assertive"
+          aria-atomic="true"
         >
           <p className="text-error text-sm">{errorMessage}</p>
         </div>
