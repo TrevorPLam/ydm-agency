@@ -1,0 +1,56 @@
+/**
+ * FILE: SituationStep.tsx
+ * PURPOSE: Renders the situation selection step of the pricing estimator.
+ */
+'use client';
+
+import React from 'react';
+import { cn } from '@ydm-agency/utils';
+import { COMPARISON_SCENARIOS } from '@/lib/service-comparison-config';
+
+interface SituationStepProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+/**
+ * WHAT IT DOES: Renders a radio grid for selecting the current business situation.
+ * @param {SituationStepProps} props - Current value and change handler
+ * @return {JSX.Element} - Rendered situation step
+ * SIDE EFFECTS: None.
+ */
+export function SituationStep({ value, onChange }: SituationStepProps): React.JSX.Element {
+  return (
+    <fieldset className="space-y-4">
+      <legend className="sr-only">Select your current situation</legend>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {COMPARISON_SCENARIOS.map((scenario) => (
+          <label
+            key={scenario.id}
+            className={cn(
+              'block rounded-xl border p-5 cursor-pointer transition-all focus-within:ring-2 focus-within:ring-accent',
+              value === scenario.id
+                ? 'border-accent ring-2 ring-accent bg-surface'
+                : 'border-border bg-surface hover:border-text-secondary'
+            )}
+          >
+            <input
+              type="radio"
+              name="situation"
+              value={scenario.id}
+              checked={value === scenario.id}
+              onChange={() => onChange(scenario.id)}
+              className="sr-only"
+            />
+            <span className="block font-display font-semibold text-text-primary mb-2">
+              {scenario.title}
+            </span>
+            <span className="block text-sm text-text-secondary leading-relaxed">
+              {scenario.description}
+            </span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
