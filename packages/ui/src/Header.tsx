@@ -3,8 +3,8 @@
  * PURPOSE: Provides the site Header component with a skip link, brand logo, desktop navigation (including a Services dropdown), and a mobile slide-out menu.
  * ARCHITECTURE: Client component using usePathname for active-link highlighting, Radix DropdownMenu for the desktop Services menu, and Radix Dialog for the mobile menu; composes Container and ThemeToggle.
  * KEY RULES: Must include a skip-to-content link for accessibility; must highlight active links via aria-current; must render the Services dropdown when serviceLinks is provided; must support a mobile menu via Radix Dialog.
- * DEPENDS ON: react, next/link, next/navigation, @radix-ui/react-dialog, @radix-ui/react-dropdown-menu, lucide-react, ./Container, ./ThemeToggle.
- * LAST UPDATED: 2026-08-09 Add code commentary headers
+ * DEPENDS ON: react, next/link, next/navigation, @radix-ui/react-dialog, @radix-ui/react-dropdown-menu, class-variance-authority, lucide-react, @ydm-agency/utils (cn), ./Container, ./ThemeToggle.
+ * LAST UPDATED: 2026-08-10 Refactor class variants and explicit menu grouping
  */
 'use client';
 
@@ -13,7 +13,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { cva } from 'class-variance-authority';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { cn } from '@ydm-agency/utils';
 import { Container } from './Container';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -25,6 +27,8 @@ const NAV_LINKS = [
   { label: 'Contact', href: '/contact' },
 ] as const;
 
+const PROMOTED_SERVICE_HREF = '/services/industries';
+
 export interface HeaderServiceLink {
   label: string;
   href: string;
@@ -34,6 +38,56 @@ export interface HeaderProps {
   brandName?: string;
   serviceLinks?: HeaderServiceLink[];
 }
+
+const desktopNavLinkVariants = cva(
+  'text-sm font-medium transition-colors relative focus-visible:ring-2 focus-visible:ring-accent rounded',
+  {
+    variants: {
+      active: {
+        true: 'text-accent',
+        false: 'text-text-secondary hover:text-text-primary',
+      },
+    },
+    defaultVariants: {
+      active: false,
+    },
+  }
+);
+
+const dropdownItemVariants = cva(
+  'block px-3 py-2 text-sm font-medium rounded outline-none focus-visible:ring-2 focus-visible:ring-accent data-[highlighted]:bg-accent/10',
+  {
+    variants: {
+      active: {
+        true: 'text-accent bg-accent/10',
+        false: 'text-text-secondary',
+      },
+    },
+    defaultVariants: {
+      active: false,
+    },
+  }
+);
+
+const mobileNavLinkVariants = cva(
+  'font-medium transition-colors min-h-[44px] flex items-center pl-3 border-l-2',
+  {
+    variants: {
+      size: {
+        default: 'text-2xl',
+        sub: 'text-lg',
+      },
+      active: {
+        true: 'text-accent border-accent',
+        false: 'text-text-secondary border-transparent hover:text-text-primary',
+      },
+    },
+    defaultVariants: {
+      size: 'default',
+      active: false,
+    },
+  }
+);
 
 /**
  * WHAT IT DOES: Determines whether a nav link is active by exact match or prefix match (excluding the home route).
@@ -61,6 +115,33 @@ function isServiceActive(pathname: string): boolean {
 }
 
 /**
+ * WHAT IT DOES: Partitions service links into a promoted group and the remaining group.
+ * @param {HeaderServiceLink[] | undefined} links - Service links passed to the header
+ * @return {{ promoted: HeaderServiceLink[]; main: HeaderServiceLink[] }} - Promoted and main service link arrays
+ * SIDE EFFECTS: None (pure function).
+ * ASSUMES: PROMOTED_SERVICE_HREF defines the link that should be highlighted separately.
+ */
+function groupServiceLinks(links: HeaderServiceLink[] | undefined): { promoted: HeaderServiceLink[]; main: HeaderServiceLink[] } {
+  const promoted: HeaderServiceLink[] = [];
+  const main: HeaderServiceLink[] = [];
+  if (!links) return { promoted, main };
+
+  for (const link of links) {
+    if (link.href === PROMOTED_SERVICE_HREF) {
+      promoted.push(link);
+    } else {
+      main.push(link);
+    }
+  }
+
+  return { promoted, main };
+}
+
+function DesktopActiveIndicator(): React.ReactNode {
+  return <span className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-accent" aria-hidden="true" />;
+}
+
+/**
  * WHAT IT DOES: Renders the fixed site header with skip link, brand, desktop nav (with optional Services dropdown), theme toggle, and a mobile slide-out menu.
  * @param {HeaderProps} props - Optional brandName and serviceLinks for the Services dropdown
  * @return {JSX.Element} - Rendered header with desktop and mobile navigation
@@ -71,9 +152,7 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(isServiceActive(pathname));
-
-  const desktopLinkBase =
-    'text-sm font-medium transition-colors relative focus-visible:ring-2 focus-visible:ring-accent rounded';
+  const { promoted, main } = groupServiceLinks(serviceLinks);
 
   return (
     <>
@@ -97,33 +176,26 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
           <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
             <Link
               href="/"
-              className={`${desktopLinkBase} ${
-                isActiveLink(pathname, '/') ? 'text-accent' : 'text-text-secondary hover:text-text-primary'
-              }`}
+              className={cn(desktopNavLinkVariants({ active: isActiveLink(pathname, '/') }))}
               aria-current={isActiveLink(pathname, '/') ? 'page' : undefined}
             >
               Home
-              {isActiveLink(pathname, '/') && (
-                <span className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-accent" aria-hidden="true" />
-              )}
+              {isActiveLink(pathname, '/') && <DesktopActiveIndicator />}
             </Link>
 
             {serviceLinks ? (
               <DropdownMenu.Root>
                 <DropdownMenu.Trigger asChild>
                   <button
-                    className={`${desktopLinkBase} inline-flex items-center gap-1 ${
-                      isServiceActive(pathname)
-                        ? 'text-accent'
-                        : 'text-text-secondary hover:text-text-primary'
-                    }`}
+                    className={cn(
+                      desktopNavLinkVariants({ active: isServiceActive(pathname) }),
+                      'inline-flex items-center gap-1'
+                    )}
                     aria-haspopup="menu"
                   >
                     Services
                     <ChevronDown className="h-4 w-4" aria-hidden="true" />
-                    {isServiceActive(pathname) && (
-                      <span className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-accent" aria-hidden="true" />
-                    )}
+                    {isServiceActive(pathname) && <DesktopActiveIndicator />}
                   </button>
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Portal>
@@ -136,65 +208,57 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
                     <DropdownMenu.Item asChild>
                       <Link
                         href="/services"
-                        className={`block px-3 py-2 text-sm font-medium rounded outline-none focus-visible:ring-2 focus-visible:ring-accent data-[highlighted]:bg-accent/10 ${
-                          isActiveLink(pathname, '/services')
-                            ? 'text-accent bg-accent/10'
-                            : 'text-text-secondary'
-                        }`}
+                        className={cn(dropdownItemVariants({ active: isActiveLink(pathname, '/services') }))}
                         aria-current={isActiveLink(pathname, '/services') ? 'page' : undefined}
                       >
                         Services overview
                       </Link>
                     </DropdownMenu.Item>
-                    <div className="border-t border-border my-1" role="separator" aria-orientation="horizontal" />
-                    {serviceLinks.filter(link => link.href === '/services/industries').map((link) => (
-                      <DropdownMenu.Item key={link.href} asChild>
-                        <Link
-                          href={link.href}
-                          className={`block px-3 py-2 text-sm font-medium rounded outline-none focus-visible:ring-2 focus-visible:ring-accent data-[highlighted]:bg-accent/10 ${
-                            isActiveLink(pathname, link.href)
-                              ? 'text-accent bg-accent/10'
-                              : 'text-text-secondary'
-                          }`}
-                          aria-current={isActiveLink(pathname, link.href) ? 'page' : undefined}
-                        >
-                          {link.label}
-                        </Link>
-                      </DropdownMenu.Item>
-                    ))}
-                    <div className="border-t border-border my-1" role="separator" aria-orientation="horizontal" />
-                    {serviceLinks.filter(link => link.href !== '/services/industries').map((link) => (
-                      <DropdownMenu.Item key={link.href} asChild>
-                        <Link
-                          href={link.href}
-                          className={`block px-3 py-2 text-sm font-medium rounded outline-none focus-visible:ring-2 focus-visible:ring-accent data-[highlighted]:bg-accent/10 ${
-                            isActiveLink(pathname, link.href)
-                              ? 'text-accent bg-accent/10'
-                              : 'text-text-secondary'
-                          }`}
-                          aria-current={isActiveLink(pathname, link.href) ? 'page' : undefined}
-                        >
-                          {link.label}
-                        </Link>
-                      </DropdownMenu.Item>
-                    ))}
+                    {promoted.length > 0 && (
+                      <>
+                        <div className="border-t border-border my-1" role="separator" aria-orientation="horizontal" />
+                        {promoted.map((link) => (
+                          <DropdownMenu.Item key={link.href} asChild>
+                            <Link
+                              href={link.href}
+                              className={cn(dropdownItemVariants({ active: isActiveLink(pathname, link.href) }))}
+                              aria-current={isActiveLink(pathname, link.href) ? 'page' : undefined}
+                            >
+                              {link.label}
+                            </Link>
+                          </DropdownMenu.Item>
+                        ))}
+                      </>
+                    )}
+                    {main.length > 0 && (
+                      <>
+                        {promoted.length > 0 && (
+                          <div className="border-t border-border my-1" role="separator" aria-orientation="horizontal" />
+                        )}
+                        {main.map((link) => (
+                          <DropdownMenu.Item key={link.href} asChild>
+                            <Link
+                              href={link.href}
+                              className={cn(dropdownItemVariants({ active: isActiveLink(pathname, link.href) }))}
+                              aria-current={isActiveLink(pathname, link.href) ? 'page' : undefined}
+                            >
+                              {link.label}
+                            </Link>
+                          </DropdownMenu.Item>
+                        ))}
+                      </>
+                    )}
                   </DropdownMenu.Content>
                 </DropdownMenu.Portal>
               </DropdownMenu.Root>
             ) : (
               <Link
                 href="/services"
-                className={`${desktopLinkBase} ${
-                  isActiveLink(pathname, '/services')
-                    ? 'text-accent'
-                    : 'text-text-secondary hover:text-text-primary'
-                }`}
+                className={cn(desktopNavLinkVariants({ active: isActiveLink(pathname, '/services') }))}
                 aria-current={isActiveLink(pathname, '/services') ? 'page' : undefined}
               >
                 Services
-                {isActiveLink(pathname, '/services') && (
-                  <span className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-accent" aria-hidden="true" />
-                )}
+                {isActiveLink(pathname, '/services') && <DesktopActiveIndicator />}
               </Link>
             )}
 
@@ -204,15 +268,11 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`${desktopLinkBase} ${
-                    isActive ? 'text-accent' : 'text-text-secondary hover:text-text-primary'
-                  }`}
+                  className={cn(desktopNavLinkVariants({ active: isActive }))}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   {link.label}
-                  {isActive && (
-                    <span className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-accent" aria-hidden="true" />
-                  )}
+                  {isActive && <DesktopActiveIndicator />}
                 </Link>
               );
             })}
@@ -233,9 +293,7 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
                 <Dialog.Overlay className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm" />
                 <Dialog.Content className="fixed inset-0 z-50 bg-background p-6 flex flex-col">
                   <div className="flex items-center justify-between mb-8">
-                    <span className="text-xl font-bold text-text-primary font-display">
-                      {brandName}
-                    </span>
+                    <span className="text-xl font-bold text-text-primary font-display">{brandName}</span>
                     <Dialog.Close asChild>
                       <button
                         className="p-2 text-text-secondary hover:text-text-primary focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
@@ -249,11 +307,7 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
                     <Dialog.Close asChild>
                       <Link
                         href="/"
-                        className={`text-2xl font-medium transition-colors min-h-[44px] flex items-center pl-3 border-l-2 ${
-                          isActiveLink(pathname, '/')
-                            ? 'text-accent border-accent'
-                            : 'text-text-secondary border-transparent hover:text-text-primary'
-                        }`}
+                        className={cn(mobileNavLinkVariants({ active: isActiveLink(pathname, '/') }))}
                         aria-current={isActiveLink(pathname, '/') ? 'page' : undefined}
                       >
                         Home
@@ -264,17 +318,16 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
                       <div className="flex flex-col gap-3">
                         <button
                           onClick={() => setMobileServicesOpen((open) => !open)}
-                          className={`text-2xl font-medium transition-colors min-h-[44px] flex items-center justify-between w-full pl-3 border-l-2 text-left ${
-                            isServiceActive(pathname)
-                              ? 'text-accent border-accent'
-                              : 'text-text-secondary border-transparent hover:text-text-primary'
-                          }`}
+                          className={cn(
+                            mobileNavLinkVariants({ active: isServiceActive(pathname) }),
+                            'justify-between w-full text-left'
+                          )}
                           aria-expanded={mobileServicesOpen}
                           aria-controls="mobile-services-list"
                         >
                           <span>Services</span>
                           <ChevronDown
-                            className={`h-6 w-6 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                            className={cn('h-6 w-6 transition-transform', mobileServicesOpen && 'rotate-180')}
                             aria-hidden="true"
                           />
                         </button>
@@ -283,47 +336,43 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
                             <Dialog.Close asChild>
                               <Link
                                 href="/services"
-                                className={`text-lg font-medium transition-colors min-h-[44px] flex items-center pl-3 border-l-2 ${
-                                  isActiveLink(pathname, '/services')
-                                    ? 'text-accent border-accent'
-                                    : 'text-text-secondary border-transparent hover:text-text-primary'
-                                }`}
+                                className={cn(mobileNavLinkVariants({ size: 'sub', active: isActiveLink(pathname, '/services') }))}
                                 aria-current={isActiveLink(pathname, '/services') ? 'page' : undefined}
                               >
                                 Services overview
                               </Link>
                             </Dialog.Close>
-                            {serviceLinks.filter(link => link.href === '/services/industries').map((link) => (
-                              <Dialog.Close asChild key={link.href}>
-                                <Link
-                                  href={link.href}
-                                  className={`text-lg font-medium transition-colors min-h-[44px] flex items-center pl-3 border-l-2 ${
-                                    isActiveLink(pathname, link.href)
-                                      ? 'text-accent border-accent'
-                                      : 'text-text-secondary border-transparent hover:text-text-primary'
-                                  }`}
-                                  aria-current={isActiveLink(pathname, link.href) ? 'page' : undefined}
-                                >
-                                  {link.label}
-                                </Link>
-                              </Dialog.Close>
-                            ))}
-                            <div className="border-l-2 border-border my-1" role="separator" aria-orientation="horizontal" />
-                            {serviceLinks.filter(link => link.href !== '/services/industries').map((link) => (
-                              <Dialog.Close asChild key={link.href}>
-                                <Link
-                                  href={link.href}
-                                  className={`text-lg font-medium transition-colors min-h-[44px] flex items-center pl-3 border-l-2 ${
-                                    isActiveLink(pathname, link.href)
-                                      ? 'text-accent border-accent'
-                                      : 'text-text-secondary border-transparent hover:text-text-primary'
-                                  }`}
-                                  aria-current={isActiveLink(pathname, link.href) ? 'page' : undefined}
-                                >
-                                  {link.label}
-                                </Link>
-                              </Dialog.Close>
-                            ))}
+                            {promoted.length > 0 &&
+                              promoted.map((link) => (
+                                <Dialog.Close asChild key={link.href}>
+                                  <Link
+                                    href={link.href}
+                                    className={cn(
+                                      mobileNavLinkVariants({ size: 'sub', active: isActiveLink(pathname, link.href) })
+                                    )}
+                                    aria-current={isActiveLink(pathname, link.href) ? 'page' : undefined}
+                                  >
+                                    {link.label}
+                                  </Link>
+                                </Dialog.Close>
+                              ))}
+                            {main.length > 0 && promoted.length > 0 && (
+                              <div className="border-l-2 border-border my-1" role="separator" aria-orientation="horizontal" />
+                            )}
+                            {main.length > 0 &&
+                              main.map((link) => (
+                                <Dialog.Close asChild key={link.href}>
+                                  <Link
+                                    href={link.href}
+                                    className={cn(
+                                      mobileNavLinkVariants({ size: 'sub', active: isActiveLink(pathname, link.href) })
+                                    )}
+                                    aria-current={isActiveLink(pathname, link.href) ? 'page' : undefined}
+                                  >
+                                    {link.label}
+                                  </Link>
+                                </Dialog.Close>
+                              ))}
                           </div>
                         )}
                       </div>
@@ -331,11 +380,7 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
                       <Dialog.Close asChild>
                         <Link
                           href="/services"
-                          className={`text-2xl font-medium transition-colors min-h-[44px] flex items-center pl-3 border-l-2 ${
-                            isActiveLink(pathname, '/services')
-                              ? 'text-accent border-accent'
-                              : 'text-text-secondary border-transparent hover:text-text-primary'
-                          }`}
+                          className={cn(mobileNavLinkVariants({ active: isActiveLink(pathname, '/services') }))}
                           aria-current={isActiveLink(pathname, '/services') ? 'page' : undefined}
                         >
                           Services
@@ -349,11 +394,7 @@ export const Header: React.FC<HeaderProps> = ({ brandName = 'YDM Agency', servic
                         <Dialog.Close asChild key={link.href}>
                           <Link
                             href={link.href}
-                            className={`text-2xl font-medium transition-colors min-h-[44px] flex items-center pl-3 border-l-2 ${
-                              isActive
-                                ? 'text-accent border-accent'
-                                : 'text-text-secondary border-transparent hover:text-text-primary'
-                            }`}
+                            className={cn(mobileNavLinkVariants({ active: isActive }))}
                             aria-current={isActive ? 'page' : undefined}
                           >
                             {link.label}
