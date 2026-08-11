@@ -3,20 +3,15 @@
  * PURPOSE: Provides the EDUCATION_TOPICS and EDUCATION_LESSONS aggregates plus helper functions for topic/lesson lookups used across the /education routes.
  * ARCHITECTURE: Aggregates lesson arrays from per-topic content modules into a single EDUCATION_LESSONS array and exposes pure lookup helpers (by topic, by slug, related, adjacent); re-exports shared education types.
  * KEY RULES: Topic slugs must match lesson.topic values; EDUCATION_LESSONS must include all per-topic lessons (original + new); helpers must be pure and case-insensitive where noted.
- * DEPENDS ON: ./education/types, ./education/*-lessons and ./education/*-lessons-new modules.
+ * DEPENDS ON: ./education/types and ./education/*-lessons modules.
  * LAST UPDATED: 2026-08-09 Add code commentary headers
  */
 import type { EducationLessonSection, EducationLesson } from './education/types';
 import { SEO_LESSONS } from './education/seo-lessons';
-import { NEW_SEO_LESSONS } from './education/seo-lessons-new';
 import { CONVERSION_LESSONS } from './education/conversion-lessons';
-import { NEW_CONVERSION_LESSONS } from './education/conversion-lessons-new';
 import { FOUNDATIONS_LESSONS } from './education/foundations-lessons';
-import { NEW_FOUNDATIONS_LESSONS } from './education/foundations-lessons-new';
 import { STRATEGY_LESSONS } from './education/strategy-lessons';
-import { NEW_STRATEGY_LESSONS } from './education/strategy-lessons-new';
 import { COMPLIANCE_LESSONS } from './education/compliance-lessons';
-import { NEW_COMPLIANCE_LESSONS } from './education/compliance-lessons-new';
 
 export type { EducationLessonSection, EducationLesson };
 
@@ -68,15 +63,10 @@ export const EDUCATION_TOPICS: EducationTopic[] = [
 
 export const EDUCATION_LESSONS: EducationLesson[] = [
   ...SEO_LESSONS,
-  ...NEW_SEO_LESSONS,
   ...CONVERSION_LESSONS,
-  ...NEW_CONVERSION_LESSONS,
   ...FOUNDATIONS_LESSONS,
-  ...NEW_FOUNDATIONS_LESSONS,
   ...STRATEGY_LESSONS,
-  ...NEW_STRATEGY_LESSONS,
   ...COMPLIANCE_LESSONS,
-  ...NEW_COMPLIANCE_LESSONS,
 ];
 
 /**
