@@ -1,45 +1,75 @@
 /**
  * FILE: CalendlyWidget.tsx
- * PURPOSE: Provides the CalendlyWidget client component that dynamically imports and renders the Calendly inline scheduling widget with a loading fallback.
- * ARCHITECTURE: Client component using next/dynamic to lazy-load react-calendly's InlineWidget with ssr disabled and a loading placeholder; reads the Calendly URL from NEXT_PUBLIC_CALENDLY_URL with a default fallback.
- * KEY RULES: Must lazy-load the Calendly widget (ssr: false) to avoid bundling it in the initial client bundle; must provide a loading placeholder; must fall back to a default Calendly URL when the env var is unset.
- * DEPENDS ON: next/dynamic, react-calendly (InlineWidget), NEXT_PUBLIC_CALENDLY_URL env var.
- * LAST UPDATED: 2026-08-09 Add code commentary headers
+ * PURPOSE: Provides a single, lazy-loaded Calendly scheduling widget that only mounts when it nears the viewport.
+ * ARCHITECTURE: Client component using next/dynamic to lazy-load react-calendly's InlineWidget with ssr disabled, and an IntersectionObserver to defer mounting until the container is near the viewport; reads the Calendly URL from NEXT_PUBLIC_CALENDLY_URL.
+ * KEY RULES: Must not render the widget when NEXT_PUBLIC_CALENDLY_URL is unset (returns null); must use a dynamic import (no top-level InlineWidget import); must defer widget mount until intersection to protect initial page performance; must disconnect the observer after first intersection; must use a consistent 630px height.
+ * DEPENDS ON: next/dynamic, react, react-calendly (InlineWidget), NEXT_PUBLIC_CALENDLY_URL env var.
+ * LAST UPDATED: 2026-08-10 T-073 consolidate Calendly wrappers
  */
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { InlineWidget } from 'react-calendly';
 
-// WHY: Lazy load the actual Calendly widget so it is not included in the initial client bundle
+const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL;
+
+// WHY: Lazy load the Calendly widget so it is not included in the initial client bundle
 const CalendlyInlineWidget = dynamic(
   () => import('react-calendly').then((mod) => ({ default: mod.InlineWidget })),
   {
     ssr: false,
     loading: () => (
-      <div className="bg-surface border border-border rounded-xl p-8 text-center">
-        <p className="text-text-secondary">Loading calendar...</p>
-      </div>
+      <div className="w-full h-[630px] bg-surface border border-border rounded-xl animate-pulse" />
     ),
   }
 );
 
 /**
- * WHAT IT DOES: Renders the dynamically-loaded Calendly inline widget using the configured or default scheduling URL.
- * @return {JSX.Element} - Calendly inline widget wrapped in a min-height container
- * SIDE EFFECTS: Triggers dynamic import of react-calendly on the client.
+ * WHAT IT DOES: Renders the Calendly inline widget lazily once the container nears the viewport, using the configured scheduling URL.
+ * @return {JSX.Element | null} - Calendly inline widget, a pulse placeholder, or null when no URL is configured
+ * SIDE EFFECTS: Creates and disconnects an IntersectionObserver; triggers a dynamic import of react-calendly when the widget becomes visible.
  * ASSUMES: NEXT_PUBLIC_CALENDLY_URL, when set, is a valid Calendly scheduling URL.
  */
 export function CalendlyWidget() {
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/ydm-agency/project-consultation';
-  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '100px', threshold: 0 }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  if (!CALENDLY_URL) {
+    return null;
+  }
+
   return (
-    <div className="min-h-[700px]">
-      <CalendlyInlineWidget
-        url={calendlyUrl}
-        styles={{ height: '700px' }}
-        prefill={{}}
-      />
+    <div
+      ref={containerRef}
+      className="min-h-[630px]"
+      role="region"
+      aria-label="Calendly scheduling"
+    >
+      {isVisible ? (
+        <CalendlyInlineWidget
+          url={CALENDLY_URL}
+          styles={{ minWidth: '100%', height: '630px' }}
+        />
+      ) : (
+        <div className="w-full h-[630px] bg-surface border border-border rounded-xl animate-pulse" />
+      )}
     </div>
   );
 }
