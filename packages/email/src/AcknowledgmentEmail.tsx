@@ -3,10 +3,10 @@
  * PURPOSE: React Email template for auto-acknowledgment email sent to users after form submission.
  * ARCHITECTURE: React Email component with inline styles matching the agency's dark theme design system.
  * KEY RULES: Match agency design system colors; maintain consistent branding; provide clear response time expectations.
- * DEPENDS ON: @react-email/components.
+ * DEPENDS ON: react-email.
  * LAST UPDATED: 2026-08-09 Add code commentary headers
  */
-import { Html, Body, Container, Text, Heading } from '@react-email/components';
+import { Html, Body, Container, Text, Heading } from 'react-email';
 
 interface AcknowledgmentEmailProps {
   name: string;
