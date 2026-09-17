@@ -1,14 +1,14 @@
 /**
  * FILE: providers.tsx
  * PURPOSE: Root application provider composition that sets up theme, cookie consent, and analytics contexts for the entire app.
- * ARCHITECTURE: Client component that composes next-themes ThemeProvider, custom CookieConsentProvider, and AnalyticsProvider in nested hierarchy.
+ * ARCHITECTURE: Client component that composes custom ThemeProvider from @ydm-agency/ui, CookieConsentProvider, and AnalyticsProvider in nested hierarchy.
  * KEY RULES: Analytics must be nested inside consent provider for consent gating; theme provider must be outermost for CSS variable scope; environment variables must be validated.
- * DEPENDS ON: next-themes, @ydm-agency/ui (CookieConsentProvider), @ydm-agency/analytics (AnalyticsProvider).
+ * DEPENDS ON: @ydm-agency/ui (ThemeProvider, CookieConsentProvider), @ydm-agency/analytics (AnalyticsProvider).
  * LAST UPDATED: 2026-08-09 Add code commentary headers
  */
 'use client';
 
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from '@ydm-agency/ui';
 import { CookieConsentProvider } from '@ydm-agency/ui';
 import { AnalyticsProvider } from '@ydm-agency/analytics';
 
@@ -21,12 +21,7 @@ import { AnalyticsProvider } from '@ydm-agency/analytics';
  */
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      storageKey="ydm-theme"
-    >
+    <ThemeProvider defaultTheme="dark" storageKey="ydm-theme">
       <CookieConsentProvider>
         {/* WHY: Analytics nested inside consent provider to enable consent-gated script loading */}
         <AnalyticsProvider

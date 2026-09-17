@@ -11,7 +11,7 @@ Monorepo for YDM Agency marketing firm website. Solo developer (Trevor Lam) usin
 - **Language**: TypeScript 5.9.3 (strict mode enabled)
 - **Styling**: Tailwind CSS 3.4.19
 - **Components**: shadcn/ui (Radix primitives)
-- **Theming**: next-themes (default dark mode)
+- **Theming**: Custom ThemeProvider in @ydm-agency/ui (default dark mode)
 - **Fonts**: Clash Display Variable via next/font/local (headings), Inter Variable via next/font/google (body)
 
 ## Project Structure

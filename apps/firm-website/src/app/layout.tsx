@@ -64,6 +64,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${clashDisplay.variable} dark scroll-smooth`}>
       <head>
+        {/* WHY: FOUC prevention script - sets theme before first paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('ydm-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+              })();
+            `,
+          }}
+        />
         {/* WHY: Organization JSON-LD for search engine understanding and rich snippets */}
         <OrganizationJsonLd
           name="YDM Agency"

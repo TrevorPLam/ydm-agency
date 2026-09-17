@@ -27,6 +27,7 @@ export { Header, type HeaderProps } from './Header';
 export { Footer, type FooterProps } from './Footer';
 export { Pricing, type PricingProps, type PricingPlan } from './Pricing';
 export { ThemeToggle } from './ThemeToggle';
+export { ThemeProvider, useTheme } from './ThemeProvider';
 export { CookieSettingsButton } from './CookieSettingsButton';
 export { CookieConsent } from './CookieConsent';
 export { CookieConsentProvider } from './CookieConsentContext';
